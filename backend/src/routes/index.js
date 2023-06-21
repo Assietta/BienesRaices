@@ -3,13 +3,14 @@ const getPropertyIdHandler = require('../handlers/getPropertyIdHandler');
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 const {getRealState }= require('../controllers/contrealState.js');
-const {postRealState }= require('../controllers/contpostrealState.js');
+const { realStateHandler }= require('../handlers/getAll');
+
 
 const router = Router();
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
-router.get('/realState', getRealState);
+router.get('/realState', realStateHandler);
 router.get('/realState/:id', getPropertyIdHandler)
 router.post('/realStatePost', postRealState);
 router.post('/user');
