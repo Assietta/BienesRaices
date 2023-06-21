@@ -1,6 +1,4 @@
 const axios = require('axios');
-const { Router } = require('express');
-const router = Router();
 const { cleanData } = require('../Helpers/cleanData');
 
 const getRealState = async (name) => {

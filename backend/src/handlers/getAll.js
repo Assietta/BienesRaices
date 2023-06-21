@@ -1,4 +1,3 @@
-const axios = require('axios');
 const { getRealState } = require('../controllers/contrealState.js');
 
 const realStateHandler = async (req, res) => {
