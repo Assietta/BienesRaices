@@ -13,7 +13,7 @@ const cleanData = (data) => {
   const ubicacion = data.short_location || '';
   const operacion = data.operations || '';
   const orientacion = data.orientation || '';
-  const estacionamiento = data.arking_lot_amount || '';
+  const estacionamiento = data.parking_lot_amount || '';
   const fotos = data.photos || '';
   const direccionreal= data.real_address || '';
   const condiciondelinmueble= data.roperty_condition || '';
