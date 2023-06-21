@@ -2,6 +2,7 @@ const { Router } = require('express');
 const router = Router();
 const getPropertyIdHandler = require('../handlers/getPropertyIdHandler');
 const { realStateHandler }= require('../handlers/getAll');
+const { postRealState }= require('../handlers/postRealState');
 
 
 router.get('/realState', realStateHandler);
