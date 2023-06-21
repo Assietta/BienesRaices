@@ -2,7 +2,7 @@ const { Router } = require('express');
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 const {getRealState }= require('../controllers/contrealState.js');
-
+const {postRealState }= require('../controllers/contpostrealState.js');
 
 const router = Router();
 
@@ -10,14 +10,18 @@ const router = Router();
 // Ejemplo: router.use('/auth', authRouter);
 router.get('/realState', getRealState);
 router.get('/realState/:id');
-router.post('/realState/');
+router.post('/realStatePost', postRealState);
 router.post('/user');
 
 module.exports = router;
 
 
+//- LO QUE REALMENTE NECESITAMOS-
+//PG MODELS, USUARIO, INMUEBLE ->NICO ALONSO
 
-//MODELS, USUARIO, INMUEBLE .NICO ALONSO
-//GETSTATE, GETSTATE/:ID, 
+//GETSTATE, GETSTATE/:ID, jere lu fran
+
 //POSTSTATE, POSTUSER
+
 //GETUSERS${NAME}
+
