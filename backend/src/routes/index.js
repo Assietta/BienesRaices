@@ -4,6 +4,7 @@ const getPropertyIdHandler = require('../handlers/getPropertyIdHandler');
 // Ejemplo: const authRouter = require('./auth.js');
 const {getRealState }= require('../controllers/contrealState.js');
 const {postRealState }= require('../controllers/contpostrealState.js');
+const postUserHandler = require('../handlers/postUserHandler');
 
 const router = Router();
 
@@ -12,7 +13,7 @@ const router = Router();
 router.get('/realState', getRealState);
 router.get('/realState/:id', getPropertyIdHandler)
 router.post('/realStatePost', postRealState);
-router.post('/user');
+router.post('/user', postUserHandler);
 
 module.exports = router;
 
