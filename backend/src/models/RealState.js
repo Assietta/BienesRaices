@@ -9,24 +9,112 @@ module.exports = (sequelize) => {
       primaryKey: true,
       autoIncrement: true
     },
-    mail: {
+    adress: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    age: {
+    baños: {
+      type: DataTypes.NUMBER,
+      allowNull: false,
+    },
+    años: {
+      type: DataTypes.NUMBER,
+      allowNull: false,
+    },
+    descripcion: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    mail: {
+    disposicion: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    expensas: {
+      type: DataTypes.NUMBER,
+      allowNull: false,
+    },
+    plantas: {
+      type: DataTypes.NUMBER,
+      allowNull: false,
+    },
+    alquilertemporal: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+    },
+    ubicacion: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    password: {
+    operacion: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    rol: {
+    orientacion: {
       type: DataTypes.STRING,
+      allowNull: false,
+    },
+    estacionamiento: {
+      type: DataTypes.NUMBER,
+      allowNull: false,
+    },
+    fotos: {
+      type: DataTypes.ARRAY,
+      allowNull: false,
+    },
+    direccionreal: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    condiciondelinmueble: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    superficiecubierta: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    habitaciones: {
+      type: DataTypes.NUMBER,
+      allowNull: false,
+    },
+    superficiesemicubierta: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    situacion: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    dormitorios: {
+      type: DataTypes.NUMBER,
+      allowNull: false,
+    },
+    superficie: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    etiquetas: {
+      type: DataTypes.ARRAY,
+      allowNull: false,
+    },
+    Toilettes: {
+      type: DataTypes.NUMBER,
+      allowNull: false,
+    },
+    superficietotal: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    tipo: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    descubierto: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    videos: {
+      type: DataTypes.ARRAY,
       allowNull: true,
     }
   });
