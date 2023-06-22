@@ -1,4 +1,4 @@
-const { getRealState } = require('../controllers/contrealState.js');
+const { getRealState } = require('../controllers/getAllController.js');
 
 const realStateHandler = async (req, res) => {
   const page = req.query.page || 1;
