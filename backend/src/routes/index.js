@@ -8,8 +8,7 @@ const { getUsersHandler } = require('../handlers/getUsers')
 const postUserHandler = require('../handlers/postUserHandler');
 
 
-// Configurar los routers
-// Ejemplo: router.use('/auth', authRouter);
+
 router.get('/realState', realStateHandler);
 router.get('/realState/:id', getPropertyIdHandler)
 router.post('/realStatePost', postRealStateHandler);
