@@ -59,7 +59,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     fotos: {
-      type: DataTypes.ARRAY(DataTypes.JSON),
+      type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false,
     },
     direccionreal: {
