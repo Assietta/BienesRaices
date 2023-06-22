@@ -13,12 +13,5 @@ router.post('/user');
 module.exports = router;
 
 
-//- LO QUE REALMENTE NECESITAMOS-
-//PG MODELS, USUARIO, INMUEBLE ->NICO ALONSO
 
-//GETSTATE, GETSTATE/:ID, jere lu fran
-
-//POSTSTATE, POSTUSER
-
-//GETUSERS${NAME}
 
