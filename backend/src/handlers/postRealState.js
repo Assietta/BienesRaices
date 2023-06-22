@@ -26,7 +26,10 @@ const postRealStateHandler=async (req, res)=>{
            estacionamiento: estacionamiento, 
            fotos: fotos,
            direccionreal: direccionreal,  
-           condiciondelinmueble: condiciondelinmueble, superficiecubierta: superficiecubierta, habitaciones: habitaciones, superficiesemicubierta: superficiesemicubierta , situacion: situacion, dormitorios: dormitorios, superficie: superficie, etiquetas: etiquetas, toilettes: toilettes, superficietotal: superficietotal,  tipo: tipo, descubierto: descubierto , videos: videos
+           condiciondelinmueble: condiciondelinmueble, 
+           superficiecubierta: superficiecubierta, 
+           habitaciones: habitaciones, 
+           superficiesemicubierta: superficiesemicubierta , situacion: situacion, dormitorios: dormitorios, superficie: superficie, etiquetas: etiquetas, toilettes: toilettes, superficietotal: superficietotal,  tipo: tipo, descubierto: descubierto , videos: videos
           });
           res.status(200).send("publicated!");
           //.json(newPubication); // esto no hace falta por eso lo comento 
