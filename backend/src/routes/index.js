@@ -1,24 +1,22 @@
 const { Router } = require('express');
 const router = Router();
 const getPropertyIdHandler = require('../handlers/getPropertyIdHandler');
+
 const { realStateHandler }= require('../handlers/getAll');
 const { postRealStateHandler }= require('../handlers/postRealState');
+const { getUsersHandler } = require('../handlers/getUsers')
+const postUserHandler = require('../handlers/postUserHandler');
+
 
 
 router.get('/realState', realStateHandler);
-router.get('/realState/:id', getPropertyIdHandler)//
+router.get('/realState/:id', getPropertyIdHandler)
 router.post('/realStatePost', postRealStateHandler);
-router.post('/user');
+router.post('/users', postUserHandler);
+router.get('/users', getUsersHandler)
 
 module.exports = router;
 
 
-//- LO QUE REALMENTE NECESITAMOS-
-//PG MODELS, USUARIO, INMUEBLE ->NICO ALONSO
 
-//GETSTATE, GETSTATE/:ID, jere lu fran
-
-//POSTSTATE, POSTUSER
-
-//GETUSERS${NAME}
 
