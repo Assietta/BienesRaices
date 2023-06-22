@@ -1,29 +1,23 @@
 const { Router } = require('express');
+const router = Router();
 const getPropertyIdHandler = require('../handlers/getPropertyIdHandler');
-// Importar todos los routers;
-// Ejemplo: const authRouter = require('./auth.js');
-const {getRealState }= require('../controllers/contrealState.js');
-const {postRealState }= require('../controllers/contpostrealState.js');
+
+const { realStateHandler }= require('../handlers/getAll');
+const { postRealStateHandler }= require('../handlers/postRealState');
+const { getUsersHandler } = require('../handlers/getUsers')
 const postUserHandler = require('../handlers/postUserHandler');
 
-const router = Router();
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
-router.get('/realState', getRealState);
+router.get('/realState', realStateHandler);
 router.get('/realState/:id', getPropertyIdHandler)
-router.post('/realStatePost', postRealState);
-router.post('/user', postUserHandler);
+router.post('/realStatePost', postRealStateHandler);
+router.post('/users', postUserHandler);
+router.get('/users', getUsersHandler)
 
 module.exports = router;
 
 
-//- LO QUE REALMENTE NECESITAMOS-
-//PG MODELS, USUARIO, INMUEBLE ->NICO ALONSO
 
-//GETSTATE, GETSTATE/:ID, jere lu fran
-
-//POSTSTATE, POSTUSER
-
-//GETUSERS${NAME}
 

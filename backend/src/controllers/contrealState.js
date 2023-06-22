@@ -1,23 +1,27 @@
-const { Router } = require('express');
-const router = Router();
 const axios = require('axios');
+const { cleanData } = require('../Helpers/cleanData');
+
+const getRealState = async (req, page, limit) => {
+  try {
+    const offset = (page - 1) * limit;
+    const realStateApi = await axios.get(
+      `https://www.tokkobroker.com/api/v1/property/?format=json&offset=${offset}&limit=${limit}&key=b5ecdd05e6bffe9338822491fb3406d32dda03af&lang=es_ar`
+    );
+    const apiRaw = [realStateApi.data];
 
 
-const getRealState = async (name) => {
-    try {
-        const realStateApi = await axios(
-            "https://www.tokkobroker.com/api/v1/development/?lang=es_ar&format=json&limit=1&offset=1&key=b5ecdd05e6bffe9338822491fb3406d32dda03af"
-          );
-        
-          
-          return realStateApi
-        }
+    const apiCleaned = await Promise.all(apiRaw.map(async (p) => {
+      return cleanData(p);
+    }));
 
-        catch (error) {
-            console.log(error);
-          }
-        };
+    return apiCleaned;
 
-        module.exports={
-            getRealState
-        }
+    // return apiRaw
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = {
+  getRealState
+};

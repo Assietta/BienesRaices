@@ -1,66 +1,76 @@
 
 
 const cleanData = (data) => {
-  const id = data.id || '';
-  const address = data.fake_address || '';
-  const baños = data.bathroom_amount || '';
-  const años = data.age || '';
-  const descripcion = data.description || '';
-  const disposicion = data.disposition || '';
-  const expensas = data.expenses || '';
-  const plantas = data.floors_amount || '';
-  const alquilertemporal= data.has_temporary_rent || '';
-  const ubicacion = data.short_location || '';
-  const operacion = data.operations || '';
-  const orientacion = data.orientation || '';
-  const estacionamiento = data.parking_lot_amount || '';
-  const fotos = data.photos || '';
-  const direccionreal= data.real_address || '';
-  const condiciondelinmueble= data.roperty_condition || '';
-  const superficiecubierta= data.roofed_surface || '';
-  const habitaciones = data.room_amount || '';
-  const superficiesemicubierta = data.semiroofed_surface || '';
-  const situacion = data.situation || '';
-  const dormitorios = data.suite_amount || '';
-  const superficie = data.surface || '';
-  const etiquetas = data.tags || '';
-  const Toilettes = data.toilet_amount || '';
-  const superficietotal = data.total_surface || '';
-  const tipo = data.type || '';
-  const descubierto = data.unroofed_surface || '';
-  const videos = data.videos || '';
+  const objects = data.objects;
+  const cleanedData = [];
 
+  for (let i = 0; i < objects.length; i++) {
+    const object = objects[i];
 
-  return {
-    id,
-    address,
-    baños,
-    años,
-    descripcion,
-    disposicion,
-    expensas,
-    plantas,
-    alquilertemporal,
-    ubicacion,
-    operacion,
-    orientacion,
-    estacionamiento,
-    fotos,
-    direccionreal,
-    condiciondelinmueble,
-    superficiecubierta,
-    habitaciones,
-    superficiesemicubierta,
-    situacion,
-    dormitorios,
-    superficie,
-    etiquetas,
-    Toilettes,
-    superficietotal,
-    tipo,
-    descubierto,
-    videos,
-  };
+    const id = object.id || '';
+    const address = object.fake_address || '';
+    const baños = object.bathroom_amount || '';
+    const años = object.age || '';
+    const descripcion = object.description || '';
+    const disposicion = object.disposition || '';
+    const expensas = object.expenses || '';
+    const plantas = object.floors_amount || '';
+    const alquilertemporal = object.has_temporary_rent || '';
+    const ubicacion = object.short_location || '';
+    const operacion = object.operations || '';
+    const orientacion = object.orientation || '';
+    const estacionamiento = object.parking_lot_amount || '';
+    const fotos = object.photos || '';
+    const direccionreal = object.real_address || '';
+    const condiciondelinmueble = object.property_condition || '';
+    const superficiecubierta = object.roofed_surface || '';
+    const habitaciones = object.room_amount || '';
+    const superficiesemicubierta = object.semiroofed_surface || '';
+    const situacion = object.situation || '';
+    const dormitorios = object.suite_amount || '';
+    const superficie = object.surface || '';
+    const etiquetas = object.tags || '';
+    const Toilettes = object.toilet_amount || '';
+    const superficietotal = object.total_surface || '';
+    const tipo = object.type || '';
+    const descubierto = object.unroofed_surface || '';
+    const videos = object.videos || '';
+    
+    const cleanedObject = {
+      id,
+      address,
+      direccionreal,
+      situacion,
+      años,
+      condiciondelinmueble,
+      disposicion,
+      orientacion,
+      ubicacion,
+      operacion,
+      tipo,
+      expensas,
+      habitaciones,
+      plantas,
+      baños,
+      Toilettes,
+      dormitorios,
+      estacionamiento,
+      superficie,
+      superficiecubierta,
+      superficiesemicubierta,
+      superficietotal,
+      descubierto,
+      alquilertemporal,
+      descripcion,
+      videos,
+      fotos,
+      etiquetas,
+    };
+    
+    cleanedData.push(cleanedObject);
+  }
+  
+  return cleanedData;
 };
 
 module.exports = {
