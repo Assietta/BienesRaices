@@ -3,30 +3,31 @@ const { DataTypes } = require('sequelize');
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
   // defino el modelo
-  sequelize.define('realstate', {
-    name: {
+  sequelize.define('RealState', {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    mail: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    name: {
+    age: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    name: {
+    mail: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    name: {
+    password: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    name: {
+    rol: {
       type: DataTypes.STRING,
-      allowNull: false,
-    },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
+      allowNull: true,
+    }
   });
 };

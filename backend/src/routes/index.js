@@ -2,12 +2,12 @@ const { Router } = require('express');
 const router = Router();
 const getPropertyIdHandler = require('../handlers/getPropertyIdHandler');
 const { realStateHandler }= require('../handlers/getAll');
-const { postRealState }= require('../handlers/postRealState');
+const { postRealStateHandler }= require('../handlers/postRealState');
 
 
 router.get('/realState', realStateHandler);
-router.get('/realState/:id', getPropertyIdHandler)
-router.post('/realStatePost', postRealState);
+router.get('/realState/:id', getPropertyIdHandler)//
+router.post('/realStatePost', postRealStateHandler);
 router.post('/user');
 
 module.exports = router;
