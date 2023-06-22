@@ -1,9 +1,9 @@
-const { DataTypes } = require('sequelize');
+const {Sequelize, DataTypes } = require('sequelize');
 // Exportamos una funcion que define el modelo
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
   // defino el modelo
-  sequelize.define('RealState', {
+  const RealState = sequelize.define('RealState', {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
@@ -14,109 +14,118 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    banios: {
+    bathroom_amount: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    anios: {
+    age: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    descripcion: {
+    description: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    disposicion: {
+    disposition: {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    expensas: {
+    expenses: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    plantas: {
+    floors_amount: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    alquilertemporal: {
+    has_temporary_rent: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
     },
-    ubicacion: {
+    location: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    operacion: {
+    operations: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    orientacion: {
+    orientation: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    estacionamiento: {
+    parking_lot_amount: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    fotos: {
+    photos: {
       type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false,
     },
-    direccionreal: {
+    real_address: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    condiciondelinmueble: {
+    property_condition: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    superficiecubierta: {
+    roofed_surface: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    habitaciones: {
+    room_amount: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    superficiesemicubierta: {
+    semiroofed_surface: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    situacion: {
+    situation: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    dormitorios: {
+    suite_amount: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    superficie: {
+    surface: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    etiquetas: {
+    tags: {
       type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false,
     },
-    toilettes: {
+    toilet_amount: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    superficietotal: {
+    total_surface: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    tipo: {
+    type: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    descubierto: {
+    unroofed_surface: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     videos: {
       type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: true,
+    },
+    isVisible:{
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+    },
+    isReserved:{
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
     }
   });
+  return RealState;
 };
