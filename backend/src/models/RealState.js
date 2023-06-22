@@ -5,20 +5,21 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('RealState', {
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      allowNull: false,
       primaryKey: true,
-      autoIncrement: true
     },
     adress: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    baños: {
-      type: DataTypes.NUMBER,
+    banios: {
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
-    años: {
-      type: DataTypes.NUMBER,
+    anios: {
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     descripcion: {
@@ -30,11 +31,11 @@ module.exports = (sequelize) => {
       allowNull: true,
     },
     expensas: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     plantas: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     alquilertemporal: {
@@ -54,11 +55,11 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     estacionamiento: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     fotos: {
-      type: DataTypes.ARRAY,
+      type: DataTypes.ARRAY(DataTypes.JSON),
       allowNull: false,
     },
     direccionreal: {
@@ -74,7 +75,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     habitaciones: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     superficiesemicubierta: {
@@ -86,7 +87,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     dormitorios: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     superficie: {
@@ -94,11 +95,11 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     etiquetas: {
-      type: DataTypes.ARRAY,
+      type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false,
     },
-    Toilettes: {
-      type: DataTypes.NUMBER,
+    toilettes: {
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     superficietotal: {
@@ -114,7 +115,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     videos: {
-      type: DataTypes.ARRAY,
+      type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: true,
     }
   });
