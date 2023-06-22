@@ -1,12 +1,22 @@
 const { Router } = require('express');
-// Importar todos los routers;
-// Ejemplo: const authRouter = require('./auth.js');
-
-
 const router = Router();
+const getPropertyIdHandler = require('../handlers/getPropertyIdHandler');
 
-// Configurar los routers
-// Ejemplo: router.use('/auth', authRouter);
+const { realStateHandler }= require('../handlers/getAll');
+const { postRealStateHandler }= require('../handlers/postRealState');
+const { getUsersHandler } = require('../handlers/getUsers')
+const postUserHandler = require('../handlers/postUserHandler');
 
+
+
+router.get('/realState', realStateHandler);
+router.get('/realState/:id', getPropertyIdHandler)
+router.post('/realStatePost', postRealStateHandler);
+router.post('/users', postUserHandler);
+router.get('/users', getUsersHandler)
 
 module.exports = router;
+
+
+
+
