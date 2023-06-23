@@ -20,7 +20,7 @@ const cleanData = (data) => {
     const operations = object.operations || {};
     const orientation = object.orientation || '';
     const parking_lot_amount = object.parking_lot_amount || 0;
-    const photos = object.photos || [{}];
+    const photos = object.photos?.map(photo => photo.image) || [''];
     const real_address = object.real_address || '';
     const property_condition = object.property_condition || '';
     const roofed_surface = object.roofed_surface || '';
@@ -32,9 +32,9 @@ const cleanData = (data) => {
     const tags = object.tags || [{}];
     const toilet_amount = object.toilet_amount || 0;
     const total_surface = object.total_surface || '';
-    const type = object.type || {};
+    const type = object.type?.name || '';
     const unroofed_surface = object.unroofed_surface || '';
-    const videos = object.videos || [{}];
+    const videos = object.videos?.map(video => video.url) || [{}];
     
     const cleanedObject = {
       id,

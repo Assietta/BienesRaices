@@ -58,7 +58,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     photos: {
-      type: DataTypes.ARRAY(DataTypes.JSONB),
+      type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false,
     },
     real_address: {
@@ -106,7 +106,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     type: {
-      type: DataTypes.JSONB,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     unroofed_surface: {
@@ -114,7 +114,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     videos: {
-      type: DataTypes.ARRAY(DataTypes.JSONB),
+      type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: true,
     },
     isVisible:{
