@@ -1,16 +1,15 @@
 const { getRealState } = require('../controllers/getAllController.js');
 
+
 const realStateHandler = async (req, res) => {
-  const page = req.query.page || 1;
-  const limit = req.query.limit || 10;
   try {
-    const apiResponse = await getRealState(req, page, limit);
-    res.json(apiResponse);
+    const allRealEstate = await getRealState()
+
+    return res.status(200).json(allRealEstate)
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    return res.status(500).json({ error: 'Internal Server Error' });
   }
-};
+}
 
 module.exports = {
   realStateHandler
