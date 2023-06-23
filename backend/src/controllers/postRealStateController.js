@@ -2,8 +2,8 @@ const { RealState } = require("../db.js");
 
 const postRealState= async( address, bathroom_amount, age, description, disposition, expenses, floors_amount, has_temporary_rent, location, operations, orientation, parking_lot_amount, photos, real_address,  property_condition, roofed_surface, room_amount, semiroofed_surface , situation, suite_amount, surface, tags, toilet_amount, total_surface,  type, unroofed_surface , videos)=>{
     const findInmueble = await RealState.findOne({
-        where: { address: address.toLowerCase() }//ver esto de lowerCase
-      });//Solo se fija si existe entre los creados
+        where: { address: address.toLowerCase() }
+      });
       if (findInmueble) {
         return "Property already publicated"
       } else {
