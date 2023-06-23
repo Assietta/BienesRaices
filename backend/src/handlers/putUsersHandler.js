@@ -6,7 +6,7 @@ const putUsersHandler = async (req, res) => {
 
   try {
     const updatedUser = await putUsersController(id, username, email, password, rol);
-    res.send('Registro modificado correctamente');
+    res.send(updatedUser);
   } catch (error) {
     console.error(error);
     res.status(500).send('Error al modificar el registro');

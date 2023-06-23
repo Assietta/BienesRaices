@@ -13,11 +13,11 @@ const { putRealStateHandler } = require('../handlers/putRealStateHandler');
 
 router.get('/realState', realStateHandler);
 router.get('/realState/:id', getPropertyIdHandler);
-router.post('/realStatePost', postRealStateHandler);
-router.post('/users', postUserHandler);
 router.get('/users', getUsersHandler);
-router.put('/usersPut/:id', putUsersHandler);
-router.put('/realStatePut/:id', putRealStateHandler);
+router.post('/realState', postRealStateHandler);
+router.post('/users', postUserHandler);
+router.put('/users/:id', putUsersHandler);
+router.put('/realState/:id', putRealStateHandler);
 
 module.exports = router;
 
