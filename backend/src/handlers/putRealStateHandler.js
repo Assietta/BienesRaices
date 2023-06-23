@@ -2,9 +2,9 @@ const { putRealStateController } = require('../controllers/putRealStateControlle
 
 const putRealStateHandler=async(req, res) => {
     const id = req.params.id;
-    const {adress, banios, anios, descripcion, disposicion, expensas, plantas, alquilertemporal, ubicacion, operacion,orientacion, estacionamiento, fotos, direccionreal,  condiciondelinmueble, superficiecubierta, habitaciones, superficiesemicubierta , situacion, dormitorios, superficie, etiquetas, toilettes, superficietotal,  tipo, descubierto , videos}=req.body;
+    const {address, bathroom_amount, age, description, disposition, expenses, floors_amount, has_temporary_rent, location, operations, orientation, parking_lot_amount, photos, real_address,  property_condition, roofed_surface, room_amount, semiroofed_surface , situation, suite_amount, surface, tags, toilet_amount, total_surface,  type, unroofed_surface , videos}=req.body;
    try {
-    const updatedRealState = await putRealStateController(id, adress, banios, anios, descripcion, disposicion, expensas, plantas, alquilertemporal, ubicacion, operacion,orientacion, estacionamiento, fotos, direccionreal,  condiciondelinmueble, superficiecubierta, habitaciones, superficiesemicubierta , situacion, dormitorios, superficie, etiquetas, toilettes, superficietotal,  tipo, descubierto , videos);
+    const updatedRealState = await putRealStateController(id, address, bathroom_amount, age, description, disposition, expenses, floors_amount, has_temporary_rent, location, operations, orientation, parking_lot_amount, photos, real_address,  property_condition, roofed_surface, room_amount, semiroofed_surface , situation, suite_amount, surface, tags, toilet_amount, total_surface,  type, unroofed_surface , videos);
     res.send(updatedRealState);
    } catch (error) {
     
