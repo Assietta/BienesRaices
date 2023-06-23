@@ -3,7 +3,7 @@ const {Sequelize, DataTypes } = require('sequelize');
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
   // defino el modelo
-  const RealState = sequelize.define('RealState', {
+  sequelize.define('RealState', {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
@@ -127,5 +127,4 @@ module.exports = (sequelize) => {
       defaultValue: false,
     }
   });
-  return RealState;
 };
