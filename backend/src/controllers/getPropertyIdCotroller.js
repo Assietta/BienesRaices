@@ -1,9 +1,13 @@
-const axios = require('axios')
+const axios = require('axios');
+const { RealState } = require('../db');
 
-const getPropertyIdController = async(id) => {
-    const { data } = await axios(`https://www.tokkobroker.com/api/v1/property/${id}/?lang=es_ar&format=json&key=b5ecdd05e6bffe9338822491fb3406d32dda03af`)
+const getPropertyByIdController = async (id) => {
+  try {
+    const data = await RealState.findOne({ where: { id: id } });
+    return data;
+  } catch (error) {
+    throw new Error('Error al buscar la propiedad por ID');
+  }
+};
 
-    return data
-}
-
-module.exports = getPropertyIdController
+module.exports = getPropertyByIdController;

@@ -3,14 +3,14 @@ const {Sequelize, DataTypes } = require('sequelize');
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
   // defino el modelo
- RealState = sequelize.define('RealState', {
+ sequelize.define('RealState', {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       allowNull: false,
       primaryKey: true,
     },
-    adress: {
+    address: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -23,7 +23,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     description: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(3000),
       allowNull: false,
     },
     disposition: {
@@ -47,7 +47,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     operations: {
-      type: DataTypes.JSON,
+      type: DataTypes.JSONB,
       allowNull: false,
     },
     orientation: {
@@ -95,7 +95,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     tags: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
+      type: DataTypes.ARRAY(DataTypes.JSONB),
       allowNull: false,
     },
     toilet_amount: {
