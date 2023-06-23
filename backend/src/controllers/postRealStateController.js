@@ -1,14 +1,14 @@
 const { RealState } = require("../db.js");
 
-const postRealState= async( adress, bathroom_amount, age, description, disposition, expenses, floors_amount, has_temporary_rent, location, operations, orientation, parking_lot_amount, photos, real_address,  property_condition, roofed_surface, room_amount, semiroofed_surface , situation, suite_amount, surface, tags, toilet_amount, total_surface,  type, unroofed_surface , videos)=>{
+const postRealState= async( address, bathroom_amount, age, description, disposition, expenses, floors_amount, has_temporary_rent, location, operations, orientation, parking_lot_amount, photos, real_address,  property_condition, roofed_surface, room_amount, semiroofed_surface , situation, suite_amount, surface, tags, toilet_amount, total_surface,  type, unroofed_surface , videos)=>{
     const findInmueble = await RealState.findOne({
-        where: { adress: adress.toLowerCase() }//ver esto de lowerCase
+        where: { address: address.toLowerCase() }//ver esto de lowerCase
       });//Solo se fija si existe entre los creados
       if (findInmueble) {
         return "Property already publicated"
       } else {
         let newPublication = await RealState.create({
-         adress: adress,
+         address: address,
          bathroom_amount: bathroom_amount,
          age: age,
          description: description,

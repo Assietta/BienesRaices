@@ -12,4 +12,6 @@ const getPropertyIdHandler = async(req, res) => {
     }
 }
 
-module.exports = getPropertyIdHandler
+module.exports = {
+    getPropertyIdHandler
+};
