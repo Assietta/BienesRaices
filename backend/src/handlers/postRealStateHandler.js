@@ -1,4 +1,4 @@
-const { postRealState } = require('../controllers/contpostrealState.js');
+const { postRealState } = require('../controllers/postRealStateController.js');
 
 const postRealStateHandler=async (req, res)=>{
     try {
