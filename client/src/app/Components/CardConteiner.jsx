@@ -1,65 +1,35 @@
-
-// const CardsConteiner = () => {
-
-// return (
-//     <div className={style.divPadre}>
-//      <div className ={style.filters}>
-//         <input className={style.conteiner} onChange={handleChange} />
-
-//         <select className={style.SortOption} value={state.origin} onChange={(e) => handleFilterApiDb(e)} name="" id="">
-//           <option hidden>Filter by origin:</option>
-//           <option value="bdd">bdd</option>
-//           <option value="api">api</option>
-//           <option value="all">all</option>
-//         </select>
+// @useClient
+import React from 'react';
+import { useSelector } from 'react-redux';
+import Card from './Card'
 
 
-//         <div>
-//         <select className={style.SortOption} onChange={(e) => handleSortByName(e)} >
-//           <option value="-">Alphabetic</option>
-//           <option value="A-Z">A-Z</option>
-//           <option value="Z-A">Z-A</option>
-//         </select>
-//         <select className={style.SortOption} onChange={(e) => handleSortByRating(e)}>
-//           <option value="-">Rating</option>
-//           <option value="Ascendente">Ascendente</option>
-//           <option value="Descendente">Descendente</option>
-//         </select>
-//         <select className={style.SortOption} onChange={(e) => handleFilterByGenre(e)}>
-//           <option value="All">Genres</option>
-//           {genres.map((g) => (
-//             <option key={g.id} value={g.name}>
-//               {g.name}
-//             </option>
-//           ))}
-//         </select>
-//       </div>
-//       </div>
-//       <div className={style.conteiner}>
-//         {videogames.map((videogame) => {
-//           return (
-//             <Link className={style.link} key={videogame.id} to={`/videogames/${videogame.id}`}>
-//               <Card
-//                 id={videogame.id}
-//                 key={videogame.id}
-//                 name={videogame.name}
-//                 genres={videogame.genres}
-//                 image={videogame.image}
-//               />
-//             </Link>
-//           );
-//         })}
-//       </div>
-//       <div className={style.button}>
-//         <button onClick={goToPreviousPage} disabled={currentPage === 1}>
-//           {"<<Prev"}
-//         </button>
-//         <button onClick={goToNextPage} disabled={currentPage === totalPages}>
-//           {"Next>>"}
-//         </button>
-//       </div>
-//     </div>
-//   );
-// };
+function Cardcontainer() {
+  const allProps = useSelector(state => state.allProps);
 
-// export default CardsConteiner;
+  return (
+    <div className="flex justify-center">
+      <div>
+      {allProps.map(({ id, address, bathroom_amount, operations,parking_lot_amount, photos, real_address,room_amount, suite_amount,total_surface, type}) => (
+            <Card
+            key={id}
+            id={id}
+            address={address}
+            real_address={real_address}
+            operations={operations}
+            photos={photos}
+            type={type}
+            parking_lot_amount={parking_lot_amount}
+            bathroom_amount={bathroom_amount}
+            suite_amount={suite_amount}
+            room_amount={room_amount}
+            total_surface= {total_surface}
+            />
+         ))
+      }
+   </div>
+    </div>
+  );
+}
+
+export default Cardcontainer;

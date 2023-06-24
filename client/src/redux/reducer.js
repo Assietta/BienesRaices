@@ -1,12 +1,12 @@
 import { GET_PROP, GET_PROP_BY_ID, POST_PROP_BY_ID  } from "./actions"
 
-const initialState{
+const initialState = {
     allProps:[],
     allPropsCopy: [],
-    propId:[]
+    propId:[],
 }
 
-
+console.log(allProps);
 export default function reducer(state = initialState, action){
     switch (action.type){
         case GET_PROP: return{
@@ -26,6 +26,4 @@ export default function reducer(state = initialState, action){
 
         default:
             return state
-        
-        
         }}

@@ -1,8 +1,7 @@
 import Image from 'next/image'
 import Carousel from "./Components/carrousel"
+import Cardcontainer from "./Components/CardConteiner"
 
-
-  
 export default function Home() {
   const images = [
     'https://st.depositphotos.com/1041088/1389/i/600/depositphotos_13894671-stock-photo-american-beige-luxury-large-house.jpg',
@@ -14,6 +13,7 @@ export default function Home() {
   return (
     <div>
     <Carousel images={images}/>
+    <Cardcontainer/>
     </div>
   )
 }
