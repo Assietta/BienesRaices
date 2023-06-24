@@ -3,6 +3,8 @@ import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import Image from 'next/image'
+
 
 const navigation = [
   {
@@ -12,17 +14,17 @@ const navigation = [
   },
   {
     label: "About",
-    route: "/about",
+    route: "/About",
     current: false,
   },
   {
-    label: "Tasaciones",
-    route: "/tasaciones",
+    label: "Appraisals",
+    route: "/Appraisals",
     current: false,
   },
   {
-    label: "Contactanos",
-    route: "/contacto",
+    label: "Contact",
+    route: "/Contact",
     current: false,
   },
   {
@@ -59,15 +61,19 @@ export default function Example() {
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
-                  <img
+                  <Image
                     className="block h-8 w-auto lg:hidden"
                     src="https://static.tokkobroker.com/tfw_images/5859_MR%20Propiedades/MR-LogoMRCUCICBA-003.png"
                     alt="Your Company"
+                    width={10}
+                    height={10}
                   />
-                  <img
+                  <Image
                     className="hidden h-8 w-auto lg:block"
                     src="https://static.tokkobroker.com/tfw_images/5859_MR%20Propiedades/MR-LogoMRCUCICBA-003.png"
                     alt="Your Company"
+                    width={10}
+                    height={10}
                   />
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
