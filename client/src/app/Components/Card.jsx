@@ -1,18 +1,12 @@
 
 
-// const Card =(props) =>{
-//     return(
-//         <div>
+function Card() {
+  return (
+    <div>
+      <h1>Welcome to My Component</h1>
+      <p>This is a basic Next.js component.</p>
+    </div>
+  );
+}
 
-//             <img src= {props.photos} alt="imagen" />
-//             <p>Direccion:{props.address}</p>
-//             <p>Situacion:{props.situation}</p>
-//             <p>Valor:{props.genres}</p>
-//             <p>Etiquetas:{props.tags}</p>
-
-            
-//         </div>
-//     )
-
-// }
-// export default Card
+export default Card;
