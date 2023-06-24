@@ -1,11 +1,11 @@
 // @useClient
 import React from 'react';
-import { useSelector } from 'react-redux';
+
 import Card from './Card'
 
 
-function Cardcontainer() {
-  const allProps = useSelector(state => state.allProps);
+function Cardcontainer({ allProps }) {
+
 
   return (
     <div className="flex justify-center">
