@@ -1,16 +1,17 @@
-// @useClient
+"use client";
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import Card from './Card'
 
 
-function Cardcontainer({ allProps }) {
-
+function Cardcontainer() {
+  const allProps = useSelector((state) => state.allProps);
 
   return (
     <div className="flex justify-center">
       <div>
-      {allProps.map(({ id, address, bathroom_amount, operations,parking_lot_amount, photos, real_address,room_amount, suite_amount,total_surface, type}) => (
+      {/* {allProps.map(({ id, address, bathroom_amount, operations,parking_lot_amount, photos, real_address,room_amount, suite_amount,total_surface, type}) => (
             <Card
             key={id}
             id={id}
@@ -26,7 +27,7 @@ function Cardcontainer({ allProps }) {
             total_surface= {total_surface}
             />
          ))
-      }
+      } */}
    </div>
     </div>
   );
