@@ -3,4 +3,5 @@ module.exports = {
     tailwindcss: {},
     autoprefixer: {},
   },
+  presets: ['next/babel'],
 }
