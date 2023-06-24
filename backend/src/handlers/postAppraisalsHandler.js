@@ -1,11 +1,11 @@
 const {postAppraisalsController} = require('../controllers/postAppraisalsController');
 
 
-const postAppraisalHandler = async(req, res) => {
+const postAppraisalsHandler = async(req, res) => {
     try {
         const { name, lastName, email, phone, mobile, comment, address, callTime} = req.body
 
-        const AppraisalPosted = await postAppraisalController(name, lastName, email, phone, mobile, comment, address, callTime)
+        const AppraisalPosted = await postAppraisalsController(name, lastName, email, phone, mobile, comment, address, callTime)
 
         return res.status(200).json(AppraisalPosted)
     } catch (error) {
@@ -14,5 +14,5 @@ const postAppraisalHandler = async(req, res) => {
 }
 
 module.exports = {
-    postAppraisalHandler
+    postAppraisalsHandler
 };
