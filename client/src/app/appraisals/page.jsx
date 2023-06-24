@@ -15,16 +15,7 @@ export default function Appraisals() {
     timeSlot: '',
   });
 
-  const [errors, setErrors] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    mobile: '',
-    comment: '',
-    address: '',
-    timeSlot: '',
-  });
+  const [errors, setErrors] = useState({});
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -32,20 +23,12 @@ export default function Appraisals() {
       ...formData,
       [name]: value,
     });
-    validateForm(
-      {
-        ...formData,
-        [name]: value,
-      },
-      setErrors,
-      errors
-    );
+    setErrors(validateForm({ ...formData, [name]: value }));
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const validationErrors = validateForm(formData, setErrors, errors); // Asegúrate de pasar setErrors correctamente
-    setErrors(validationErrors);
+    const validationErrors = validateForm(formData, setErrors, errors);
 
     if (Object.keys(validationErrors).length === 0) {
       console.log(formData);

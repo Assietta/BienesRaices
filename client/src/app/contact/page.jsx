@@ -11,27 +11,18 @@ export default function Contact() {
     phone: '',
     mobile: '',
     comment: '',
-    address: '',
-    timeSlot: '',
   });
 
   const [errors, setErrors] = useState({});
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-    validateForm(
-      {
+    const handleInputChange = (event) => {
+      const { name, value } = event.target;
+      setFormData({
         ...formData,
         [name]: value,
-      },
-      setErrors,
-      errors
-    );
-  };
+      });
+      setErrors(validateForm({ ...formData, [name]: value }));
+    };
 
   const handleSubmit = (event) => {
     event.preventDefault();
