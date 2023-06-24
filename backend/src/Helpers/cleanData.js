@@ -33,7 +33,7 @@ const cleanData = (data) => {
     const total_surface = object.total_surface || '';
     const type = object.type?.name || '';
     const unroofed_surface = object.unroofed_surface || '';
-    const videos = object.videos?.map(video => video.url) || [{}];
+    const videos = object.videos?.map(video => video.url) || [''];
     
     const cleanedObject = {
       address,
