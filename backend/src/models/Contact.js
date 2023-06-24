@@ -10,7 +10,11 @@ module.exports = (sequelize) => {
       allowNull: false,
       primaryKey: true
     },
-    username: {
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    lastName: {
       type: DataTypes.STRING,
       allowNull: false
     },
@@ -19,13 +23,17 @@ module.exports = (sequelize) => {
       allowNull: false,
       unique: true
     },
-    password: {
+    phone: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    rol: {
+    mobile: {
         type: DataTypes.STRING,
         allowNull: false
-    }
+    },
+    comment: {
+      type: DataTypes.STRING,
+      allowNull: false
+  }
   });
 };
