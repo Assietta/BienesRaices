@@ -25,6 +25,7 @@
 .form-container textarea,
 .form-container select {
   display: block;
+  color: black;
   width: 100%;
   box-sizing: border-box;
   margin-bottom: 10px;
