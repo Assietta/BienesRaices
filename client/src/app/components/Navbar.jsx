@@ -30,6 +30,11 @@ const navigation = [
     route: "/emprendimientos",
     current: false,
   },
+  {
+    label: "Detail",
+    route: "/detail",
+    current: false,
+  },
 ];
 
 function classNames(...classes) {
