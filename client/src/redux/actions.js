@@ -1,3 +1,5 @@
+import axios from "axios"
+
 export const GET_PROP = "GET_PROP"
 export const GET_PROP_BY_ID = "GET_PROP_BY_ID"
 export const POST_PROP_BY_ID ="POST_PROP_BY_ID"
@@ -5,7 +7,7 @@ export const POST_PROP_BY_ID ="POST_PROP_BY_ID"
 export function getAllProperties(){
     return async function (dispatch){
         try {
-            const response = await axios.get("/realState");
+            const response = await axios.get("http://localhost:3001/realState");
             
             dispatch({
                 type: GET_PROP,

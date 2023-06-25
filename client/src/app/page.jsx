@@ -1,5 +1,9 @@
-import Image from 'next/image'
+'use client'
 import Carousel from "./Components/carrousel"
+import CardContainer from "./Components/CardContainer"
+import { Provider } from 'react-redux';
+import store from "../redux/store";
+import axios from "axios";
 
 
   
@@ -10,10 +14,14 @@ export default function Home() {
     ,
     // Agrega más imágenes según sea necesario
   ];
+
   
   return (
     <div>
+    <Provider store={store}>
     <Carousel images={images}/>
+    <CardContainer/>
+    </Provider>
     </div>
   )
 }

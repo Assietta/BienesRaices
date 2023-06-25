@@ -11,6 +11,7 @@
   "dependencies": {
     "@headlessui/react": "^1.7.15",
     "@heroicons/react": "^2.0.18",
+    "@reduxjs/toolkit": "^1.9.5",
     "@types/node": "20.3.1",
     "@types/react": "18.2.13",
     "@types/react-dom": "18.2.6",
@@ -18,11 +19,13 @@
     "eslint": "8.43.0",
     "eslint-config-next": "13.4.6",
     "next": "13.4.6",
+    "next-redux-wrapper": "^8.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-redux": "^7.2.9",
-    "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0",
+    "redux": "^4.2.1",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.4.2",
     "thunk": "^0.0.1",
     "typescript": "5.1.3"
   },
