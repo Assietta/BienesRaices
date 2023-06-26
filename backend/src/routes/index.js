@@ -12,7 +12,7 @@ const {postContactHandler} = require('../handlers/postContactHandler');
 const {postAppraisalsHandler} = require('../handlers/postAppraisalsHandler');
 const { mailHandler } = require('../handlers/postMailHandler');
 const {createOrderHandler}= require('../handlers/postCreateOrderHandler');
-
+const { deleteRealStateHandler } = require('../handlers/deleteRealStateHandler')
 router.get('/realState', realStateHandler);
 router.get('/realState/:id', getPropertyIdHandler);
 router.get('/users', getUsersHandler);
@@ -25,7 +25,7 @@ router.post('/sendMail', mailHandler);
 router.post('/createOrder', createOrderHandler);
 
 router.delete('/users/:id', deleteUserHandler);
-
+router.delete('/realState/:id', deleteRealStateHandler)
 router.put('/users/:id', putUsersHandler);
 router.put('/realState/:id', putRealStateHandler);
 
