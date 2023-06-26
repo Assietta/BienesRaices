@@ -16,7 +16,7 @@ const CardsConteiner = () => {
   const propsGlobal = useSelector((state) => state.allProps);
   const filterProps = useSelector((state) => state.allPropsCopy);
 
- 
+ console.log(propsGlobal);
 
 
 
