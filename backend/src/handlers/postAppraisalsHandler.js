@@ -1,4 +1,4 @@
-const {postAppraisalsController} = require('../controllers/postAppraisalsController');
+const postAppraisalsController = require('../controllers/postAppraisalsController');
 
 
 const postAppraisalsHandler = async(req, res) => {

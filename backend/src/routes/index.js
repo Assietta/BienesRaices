@@ -22,7 +22,7 @@ router.post('/users', postUserHandler);
 router.post('/contact', postContactHandler);
 router.post('/appraisals', postAppraisalsHandler);
 router.post('/sendMail', mailHandler);
-router.post('/createOrder', createOrderHandler);
+router.get('/createOrder', createOrderHandler);
 
 router.delete('/users/:id', deleteUserHandler);
 router.delete('/realState/:id', deleteRealStateHandler)

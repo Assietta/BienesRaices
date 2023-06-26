@@ -19,16 +19,8 @@ const result = await mercadopago.preferences.create({
       ]
 
 })
-
-    try {
-        const { name, lastName, email, phone, mobile, comment } = req.body
-
-        const orderPosted = await postCreateOrderController(name, lastName, email, phone, mobile, comment)
-
-        return res.status(200).json(orderPosted)
-    } catch (error) {
-        return res.status(500).json({error: error.message})
-    }
+console.log(result);
+res.send('creando orden');
 }
 
 module.exports = {
