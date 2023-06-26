@@ -18,9 +18,12 @@ const result = await mercadopago.preferences.create({
         }
       ]
 
-})
+});
+const preferenceId = result.response.id;
+const redirectUrl = `https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=${preferenceId}`;
+
 console.log(result);
-res.send('creando orden');
+res.redirect(redirectUrl);
 }
 
 module.exports = {

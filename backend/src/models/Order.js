@@ -9,24 +9,24 @@ module.exports = (sequelize) => {
       allowNull: false,
       primaryKey: true,
     },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    lastName: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    email: {
+    client_id: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
     },
-    mobile: {
+    date_created: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    payment: {
+    quantity: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    chain: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    unit_price: {
       type: DataTypes.STRING,
       allowNull: false,
     },
