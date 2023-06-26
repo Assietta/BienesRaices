@@ -1,7 +1,7 @@
 export const validateForm = (formData) => {
   let errors = {};
 
-  if (!formData.firstName) {
+  if (!formData.name) {
     errors.firstName = 'Nombre vacío';
   } else if (!/^[a-zA-Z\s]+$/.test(formData.firstName)) {
     errors.firstName = 'Nombre inválido';

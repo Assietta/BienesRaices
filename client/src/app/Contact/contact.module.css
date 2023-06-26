@@ -17,12 +17,14 @@
 }
 
 .form-container label {
+  color:black;
   font-weight: bold;
   margin-bottom: 5px;
 }
 
 .form-container input,
 .form-container textarea {
+  color: black;
   display: block;
   width: 100%; 
   box-sizing: border-box;
