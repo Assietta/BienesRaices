@@ -168,7 +168,7 @@ const CardsConteiner = () => {
           {/* Paginación */}
 <div className={style.pagination}>
   {/* Botón de retroceso */}
-  <li>
+  <li className={style.il}>
     <button
       onClick={goToPreviousPage}
       disabled={currentPage === 1}
@@ -184,24 +184,16 @@ const CardsConteiner = () => {
   </li>
 
   {/* Número de página actual */}
-  <li>
-    <button className="h-10 px-5 text-green-600 transition-colors duration-150 focus:shadow-outline hover:bg-green-100">
-      {currentPage - 1}
-    </button>
-  </li>
-  <li>
+ 
+  <li className={style.il}>
     <button className="h-10 px-5 text-white transition-colors duration-150 bg-green-600 border border-r-0 border-green-600 focus:shadow-outline">
       {currentPage}
     </button>
   </li>
-  <li>
-    <button className="h-10 px-5 text-green-600 transition-colors duration-150 focus:shadow-outline hover:bg-green-100">
-      {currentPage + 1}
-    </button>
-  </li>
+ 
 
   {/* Botón de avance */}
-  <li>
+  <li className={style.il}>
     <button
       onClick={goToNextPage}
       disabled={currentPage === Math.ceil(allProps.length / itemsPerPage)}
