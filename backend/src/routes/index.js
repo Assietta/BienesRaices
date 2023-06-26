@@ -20,7 +20,7 @@ router.post('/realState', postRealStateHandler);
 router.post('/users', postUserHandler);
 router.post('/contact', postContactHandler);
 router.post('/appraisals', postAppraisalsHandler);
-router.post('/enviar-correo', mailHandler);
+router.post('/sendMail', mailHandler);
 
 router.delete('/users/:id', deleteUserHandler);
 
