@@ -1,7 +1,6 @@
 export const GET_PROP = 'GET_PROP';
 export const GET_PROP_BY_ID = 'GET_PROP_BY_ID';
 export const POST_PROP_BY_ID = 'POST_PROP_BY_ID';
-// Filtros
 export const BY_ORIENTATION = 'BY_ORIENTATION';
 export const BY_OPERATION = 'BY_OPERATION';
 export const BY_FLOOR = 'BY_FLOOR';

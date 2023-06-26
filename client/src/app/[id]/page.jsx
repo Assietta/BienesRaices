@@ -1,31 +1,11 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    theme: {
-      extend: {
-        gridTemplateRows: {
-          '[auto,auto,1fr]': 'auto auto 1fr',
-        },
-      },
-    },
-    plugins: [
-      // ...
-      require('@tailwindcss/aspect-ratio'),
-    ],
-  }
-  ```
-*/
-// import { useState } from "react";
+
+
 'use client'
 import { StarIcon } from "@heroicons/react/20/solid";
-import { useEffect } from "react";
-import { useDispatch } from 'react-redux';;
 import { getPropById } from '../../redux/actions'
-// import { RadioGroup } from "@headlessui/react";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 
 const product = {
   name: "Basic Tee 6-Pack",
@@ -86,32 +66,35 @@ function classNames(...classes) {
 }
 
 export default function Example({params}) {
-  // const dispatch = useDispatch();
+const dispatch = useDispatch();
   // const [selectedColor, setSelectedColor] = useState(product.colors[0]);
   // const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
   const { id } = params
-  // useEffect(() => {
-  //   dispatch(getPropById(id));//ej 55
-  // }, [dispatch, id]);
+  useEffect(() => {
+    dispatch(getPropById(id));//ej 55
+  }, [dispatch, id]);
   console.log(params);
   // const propId = useSelector((state) => state.propId);
   // console.log(propId);
 
   return (
+
+
+   
     <div className="bg-white">
       <div className="pt-6">
         <nav aria-label="Breadcrumb">
           <ol
             role="list"
             className="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8"
-          >
+            >
             {product.breadcrumbs.map((breadcrumb) => (
               <li key={breadcrumb.id}>
                 <div className="flex items-center">
                   <a
                     href={breadcrumb.href}
                     className="mr-2 text-sm font-medium text-gray-900"
-                  >
+                    >
                     {breadcrumb.name}
                   </a>
                   <svg
@@ -121,7 +104,7 @@ export default function Example({params}) {
                     fill="currentColor"
                     aria-hidden="true"
                     className="h-5 w-4 text-gray-300"
-                  >
+                    >
                     <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
                   </svg>
                 </div>
@@ -132,7 +115,7 @@ export default function Example({params}) {
                 href={product.href}
                 aria-current="page"
                 className="font-medium text-gray-500 hover:text-gray-600"
-              >
+                >
                 {product.name}
               </a>
             </li>
@@ -146,7 +129,7 @@ export default function Example({params}) {
               src={product.images[0].src}
               alt={product.images[0].alt}
               className="h-full w-full object-cover object-center"
-            />
+              />
           </div>
           <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
             <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
@@ -154,14 +137,14 @@ export default function Example({params}) {
                 src={product.images[1].src}
                 alt={product.images[1].alt}
                 className="h-full w-full object-cover object-center"
-              />
+                />
             </div>
             <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
               <img
                 src={product.images[2].src}
                 alt={product.images[2].alt}
                 className="h-full w-full object-cover object-center"
-              />
+                />
             </div>
           </div>
           <div className="aspect-h-5 aspect-w-4 lg:aspect-h-4 lg:aspect-w-3 sm:overflow-hidden sm:rounded-lg">
@@ -169,7 +152,7 @@ export default function Example({params}) {
               src={product.images[3].src}
               alt={product.images[3].alt}
               className="h-full w-full object-cover object-center"
-            />
+              />
           </div>
         </div>
 
@@ -384,6 +367,7 @@ export default function Example({params}) {
         </div>
       </div>
     </div>
+
   );
 
 
