@@ -8,6 +8,9 @@ const { getUsersHandler } = require('../handlers/getUsersHandler')
 const { postUserHandler } = require('../handlers/postUserHandler');
 const { deleteUserHandler } = require('../handlers/deleteUserHandler')
 const { putRealStateHandler } = require('../handlers/putRealStateHandler');
+const {postContactHandler} = require('../handlers/postContactHandler');
+const {postAppraisalsHandler} = require('../handlers/postAppraisalsHandler');
+
 
 
 router.get('/realState', realStateHandler);
@@ -16,6 +19,8 @@ router.get('/users', getUsersHandler);
 
 router.post('/realState', postRealStateHandler);
 router.post('/users', postUserHandler);
+router.post('/contact', postContactHandler);
+router.post('/appraisals', postAppraisalsHandler);
 
 router.delete('/users/:id', deleteUserHandler);
 
