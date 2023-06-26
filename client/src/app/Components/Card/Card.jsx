@@ -23,6 +23,7 @@ const Card = (props) => {
   return (
     <>
       <div className={styles.card}>
+      <Link href={`/${id}`}>
         {Image && (
           <div style={{ position: 'relative', display: 'flex', justifyContent: 'center'}}>
             <img
@@ -90,6 +91,7 @@ const Card = (props) => {
               </span>
               </p>
             </div>
+            </Link>
       </div>
     </>
   );

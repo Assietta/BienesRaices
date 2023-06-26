@@ -84,6 +84,8 @@ function classNames(...classes) {
 export default function Example({params}) {
   // const [selectedColor, setSelectedColor] = useState(product.colors[0]);
   // const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
+  const { id } = params
+  console.log(id);
 
   return (
     <div className="bg-white">
