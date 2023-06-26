@@ -156,7 +156,7 @@ const CardsConteiner = () => {
             parking_lot_amount={prop.parking_lot_amount}
             bathroom_amount={prop.bathroom_amount}
             real_address={prop.real_address}
-            operation_type={prop.operation_type}
+            operation_type={prop.operations[0]?.operation_type}
             total_surface={prop.total_surface}
             type={prop.type}
             price={prop.operations[0]?.prices[0]?.price}

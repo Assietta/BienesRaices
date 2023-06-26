@@ -2,10 +2,29 @@
   background-color: white;
   color: black;
   box-shadow: 10px 9px 12px 5px rgb(0 0 0 / 50%);
-  width: 400x;
+  width: 400px;
   height: 500px;
   margin: 20px 70px;
   border-radius: 15px;
+}
+
+/* Transición */
+.card.transition-transform {
+  transition: transform 0.3s ease;
+}
+
+/* Transformación */
+.card.transform-default {
+  transform: translateY(0);
+}
+
+/* Efecto hover */
+.card.hovered {
+  transform: translateY(-2px);
+}
+
+.card:hover {
+  transform: translateY(-2px);
 }
 
 

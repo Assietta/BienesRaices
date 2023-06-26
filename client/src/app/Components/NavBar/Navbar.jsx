@@ -27,11 +27,6 @@ const navigation = [
     route: "/Contact",
     current: false,
   },
-  {
-    label: "Emprendimientos",
-    route: "/emprendimientos",
-    current: false,
-  },
 ];
 
 function classNames(...classes) {
@@ -65,15 +60,15 @@ export default function Example() {
                     className="block h-8 w-auto lg:hidden"
                     src="https://static.tokkobroker.com/tfw_images/5859_MR%20Propiedades/MR-LogoMRCUCICBA-003.png"
                     alt="Your Company"
-                    width={10}
-                    height={10}
+                    width={50}
+                    height={50}
                   />
                   <Image
                     className="hidden h-8 w-auto lg:block"
                     src="https://static.tokkobroker.com/tfw_images/5859_MR%20Propiedades/MR-LogoMRCUCICBA-003.png"
                     alt="Your Company"
-                    width={10}
-                    height={10}
+                    width={50}
+                    height={50}
                   />
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
@@ -105,21 +100,7 @@ export default function Example() {
                     <label htmlFor="email-address" className="sr-only">
                       Searchbar
                     </label>
-                    <input
-                      id="email-address"
-                      name="email"
-                      type="email"
-                      autoComplete="email"
-                      required
-                      className="min-w-0 flex-auto rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
-                      placeholder="Buscar propiedades"
-                    />
-                    <button
-                      type="submit"
-                      className="flex-none rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-                    >
-                      Buscar
-                    </button>
+                    
                   </div>
                 </div>
               </div>
