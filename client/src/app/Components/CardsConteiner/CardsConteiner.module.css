@@ -1,12 +1,11 @@
 .container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: flex-start;
-  margin: 10px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background-color: beige;
+
   min-height: calc(100vh - 40px);
   position: relative;
-  padding-bottom: 50px; 
+
 }
 
 .pagination {

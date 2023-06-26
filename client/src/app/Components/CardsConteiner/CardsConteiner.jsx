@@ -16,7 +16,11 @@ const CardsConteiner = () => {
   const propsGlobal = useSelector((state) => state.allProps);
   const filterProps = useSelector((state) => state.allPropsCopy);
 
-  const itemsPerPage = 12;
+ 
+
+
+
+  const itemsPerPage = 8;
   const [currentPage, setCurrentPage] = useState(1);
 
   const [allProps, setProps] = useState([]);
@@ -81,7 +85,7 @@ const CardsConteiner = () => {
       }
       e.target.value = '';
     };
-
+ console.log(viewProps);
   return (
     <>
       <div className={style.filtersContainer}>
@@ -139,12 +143,17 @@ const CardsConteiner = () => {
       <div className={style.container}>
         {/* Card */}
         {viewProps.map((prop) => (
+          
           <Card
             key={prop.id}
             id={prop.id}
             address={prop.address}
             bathrooms={prop.bathroom_amount}
             Image={prop.photos[0]}
+            suite_amount={prop.suite_amount}
+            room_amount={prop.room_amount}
+            parking_lot_amount={prop.parking_lot_amount}
+            bathroom_amount={prop.bathroom_amount}
           />
         ))}
 
