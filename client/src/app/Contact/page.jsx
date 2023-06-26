@@ -2,10 +2,11 @@
 import { useState } from 'react';
 import styles from './contact.module.css';
 import { validateForm } from './validates';
+import axios from 'axios';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
-    firstName: '',
+    name: '',
     lastName: '',
     email: '',
     phone: '',
@@ -15,24 +16,36 @@ export default function Contact() {
 
   const [errors, setErrors] = useState({});
 
-    const handleInputChange = (event) => {
-      const { name, value } = event.target;
-      setFormData({
-        ...formData,
-        [name]: value,
-      });
-      setErrors(validateForm({ ...formData, [name]: value }));
-    };
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+    setErrors(validateForm({ ...formData, [name]: value }));
+  };
 
-  const handleSubmit = (event) => {
+  const clearForm = () => {
+    setFormData({
+      name: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      mobile: '',
+      comment: '',
+    });
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const validationErrors = validateForm(formData);
-    setErrors(validationErrors);
-
+    const validationErrors = validateForm(formData, setErrors, errors);
+    console.log('formData');
     if (Object.keys(validationErrors).length === 0) {
       console.log(formData);
-      // Aquí puedes realizar el envío del formulario o cualquier acción adicional
+      await axios.post('http://localhost:3001/Contact', formData);
+      console.log('Contact successfully send');
     }
+    clearForm();
   };
 
   return (
@@ -43,12 +56,12 @@ export default function Contact() {
           <label>Nombre</label>
           <input
             type="text"
-            name="firstName"
+            name="name"
             placeholder="Ingrese su nombre"
-            value={formData.firstName}
+            value={formData.name}
             onChange={handleInputChange}
           />
-          {errors.firstName && <p>{errors.firstName}</p>}
+          {errors.name && <p>{errors.name}</p>}
         </div>
         <div>
           <label>Apellido</label>

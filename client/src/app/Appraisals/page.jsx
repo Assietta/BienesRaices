@@ -2,17 +2,18 @@
 import { useState } from 'react';
 import styles from './appraisals.module.css';
 import { validateForm } from './validates';
+import axios from 'axios';
 
 export default function Appraisals() {
   const [formData, setFormData] = useState({
-    firstName: '',
+    name: '',
     lastName: '',
     email: '',
     phone: '',
     mobile: '',
     comment: '',
     address: '',
-    timeSlot: '',
+    callTime: '',
   });
 
   const [errors, setErrors] = useState({});
@@ -26,14 +27,29 @@ export default function Appraisals() {
     setErrors(validateForm({ ...formData, [name]: value }));
   };
 
-  const handleSubmit = (event) => {
+  const clearForm = () => {
+    setFormData({
+      name: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      mobile: '',
+      comment: '',
+      address: '',
+      callTime: '',
+    });
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const validationErrors = validateForm(formData, setErrors, errors);
 
     if (Object.keys(validationErrors).length === 0) {
       console.log(formData);
-      // Aquí puedes realizar el envío del formulario o cualquier acción adicional
+      await axios.post('http://localhost:3001/appraisals', formData);
+      console.log('Appraisals successfully send');
     }
+    clearForm();
   };
 
   return (
@@ -44,9 +60,9 @@ export default function Appraisals() {
           <label>Nombre</label>
           <input
             type="text"
-            name="firstName"
+            name="name"
             placeholder="Ingrese su nombre"
-            value={formData.firstName}
+            value={formData.name}
             onChange={handleInputChange}
           />
           {errors.firstName && <p>{errors.firstName}</p>}
@@ -118,12 +134,12 @@ export default function Appraisals() {
           <label>Franja Horaria</label>
           <input
             type="text"
-            name="timeSlot"
+            name="callTime"
             placeholder="Ingrese la franja horaria"
-            value={formData.timeSlot}
+            value={formData.callTime}
             onChange={handleInputChange}
           />
-          {errors.timeSlot && <p>{errors.timeSlot}</p>}
+          {errors.callTime && <p>{errors.callTime}</p>}
         </div>
         <button type="submit">Enviar</button>
       </form>
