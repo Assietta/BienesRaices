@@ -6,8 +6,6 @@ import { Provider } from 'react-redux';
 import store from '../redux/store';
 import axios from "axios"
 
-axios.default.baseURL = "http://localhost:3001"
-
 export default function Home() {
   const images = [
     'https://st.depositphotos.com/1041088/1389/i/600/depositphotos_13894671-stock-photo-american-beige-luxury-large-house.jpg',

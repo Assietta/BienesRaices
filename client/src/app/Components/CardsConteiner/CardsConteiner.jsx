@@ -4,20 +4,26 @@ import style from './CardsConteiner.module.css';
 import SearchBar from '../SearchBar/SearchBar';
 import Card from '../Card/Card';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllProperties } from '../../../redux/actions';
+import {
+  getAllProperties,
+  orderByOperation,
+  orderByOrientation,
+  orderByFloor,
+  OrderByPrice
+} from '../../../redux/actions';
 
 const CardsConteiner = () => {
   const propsGlobal = useSelector((state) => state.allProps);
+  const filterProps = useSelector((state) => state.allPropsCopy);
 
-  const itemsPerPage = 10;
+  const itemsPerPage = 12;
   const [currentPage, setCurrentPage] = useState(1);
 
   const [allProps, setProps] = useState([]);
 
   const indexOfLastCountry = currentPage * itemsPerPage;
   const indexOfFirstCountry = indexOfLastCountry - itemsPerPage;
-  const viewProps = allProps.slice();
-  indexOfFirstCountry, indexOfLastCountry;
+  const viewProps = allProps.slice(indexOfFirstCountry, indexOfLastCountry);
 
   const goToPreviousPage = () => {
     setCurrentPage((prevPage) => prevPage - 1);
@@ -32,10 +38,49 @@ const CardsConteiner = () => {
   useEffect(() => {
     if (propsGlobal.length < 1) {
       dispatch(getAllProperties());
+    } else {
+      setProps(propsGlobal);
     }
-  }, []);
+  }, [propsGlobal]);
 
-  console.log(propsGlobal);
+  const filterByOrientation = (e) => {
+    dispatch(orderByOrientation(e.target.value));
+
+    if (e.target.value === 'All') {
+      setProps([...allProps]);
+    } else {
+      setProps([...filterProps]);
+    }
+    e.target.value = '';
+  };
+
+  const filterByOperation = (e) => {
+    dispatch(orderByOperation(e.target.value));
+
+    if (e.target.value === 'All') {
+      setProps([...allProps]);
+    } else {
+      setProps([...filterProps]);
+    }
+    e.target.value = '';
+  };
+
+  const filterByFloor = (e) => {
+    dispatch(orderByFloor(e.target.value));
+    setProps([...filterProps]);
+    e.target.value = '';
+  };
+
+    const filterByPrice = (e) => {
+      dispatch(OrderByPrice(e.target.value));
+
+      if (e.target.value === 'All') {
+        setProps([...allProps]);
+      } else {
+        setProps([...filterProps]);
+      }
+      e.target.value = '';
+    };
 
   return (
     <>
@@ -44,54 +89,49 @@ const CardsConteiner = () => {
           <SearchBar searchCountry={searchCountry} />
         </div> */}
         <div className={style.filters}>
-          <select className={style.selects}>
+          <select className={style.selects} onChange={filterByOrientation}>
             <option value="" hidden>
-              Continent
+              Orientation
             </option>
             <option value="All">All</option>
-            <option value="Africa">Africa</option>
-            <option value="North America">North America</option>
-            <option value="South America">South America</option>
-            <option value="Asia">Asia</option>
-            <option value="Europe">Europe</option>
-            <option value="Oceania">Oceania</option>
+            <option value="Noreste">Noreste</option>
+            <option value="Noroeste">Noroeste</option>
+            <option value="Este">Este</option>
+            <option value="Oeste">Oeste</option>
+            <option value="Sur">Sur</option>
+            <option value="Suroeste">Suroeste</option>
+            <option value="Sureste">Sureste</option>
           </select>
 
-          <select className={style.selects}>
+          <select className={style.selects} onChange={filterByOperation}>
             <option value="" hidden>
-              Order
-            </option>
-            <option value="Ascendente">A - Z</option>
-            <option value="Descendente">Z - A</option>
-          </select>
-
-          <select className={style.selects}>
-            <option value="" hidden>
-              Population
-            </option>
-            <option value="Ascendente">More population</option>
-            <option value="Descendente">Less population</option>
-          </select>
-
-          <select className={style.selects} name="activity">
-            <option value="" hidden>
-              Activity
+              Operation
             </option>
             <option value="All">All</option>
+            <option value="Venta">Venta</option>
+            <option value="Alquiler">Alquiler</option>
+          </select>
 
-            {/* {Array.isArray(newAcitivities) ? (
-              newAcitivities.map((activity) => {
-                return (
-                  <option key={activity.id} value={activity.Nombre}>
-                    {activity.Nombre}
-                  </option>
-                );
-              })
-            ) : (
-              <option value="" disabled>
-                Create a new activity
-              </option>
-            )} */}
+          <select className={style.selects} onChange={filterByFloor}>
+            <option value="" hidden>
+              Floors
+            </option>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+
+          <select className={style.selects} onChange={filterByPrice}>
+            <option value="" hidden>
+              Price
+            </option>
+            <option value="All">All</option>
+            <option value="150000000">150.000.000</option>
+            <option value="100000000">100.000.000</option>
+            <option value="50000000">50.000.000</option>
+            <option value="10000000">10.000.000</option>
+            <option value="1000000">1.000.000</option>
           </select>
         </div>
       </div>

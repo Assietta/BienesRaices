@@ -1,22 +1,24 @@
-
 import styles from './Card.module.css';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const Card = (props) => {
-  const { id, nombre, Imagendelabandera, continente } = props;
+  const { id, address, bathrooms, Image } = props;
   return (
     <>
-      <Link className={styles.navlink} to={`/countries/${id}`}>
-        <div className={styles.card}>
+      <div className={styles.card}>
+        {Image && (
           <img
             className={styles.cardImg}
-            src={Imagendelabandera}
-            alt={`bandera de ${nombre}`}
+            src={Image}
+            width={500}
+            height={300}
+            alt="Property"
           />
-          <h2 className={styles.cardName}>{nombre}</h2>
-          <h3 className={styles.cardContinent}>{continente}</h3>
-        </div>
-      </Link>
+        )}
+        <h2 className={styles.cardName}>{address}</h2>
+        <h3 className={styles.cardContinent}>{bathrooms}</h3>
+      </div>
     </>
   );
 };
