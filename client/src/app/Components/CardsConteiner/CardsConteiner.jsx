@@ -86,6 +86,7 @@ const CardsConteiner = () => {
       e.target.value = '';
     };
  console.log(viewProps);
+ const randomImageIndex = Math.floor(Math.random() * 5);
   return (
     <>
       <div className={style.filtersContainer}>
@@ -149,36 +150,77 @@ const CardsConteiner = () => {
             id={prop.id}
             address={prop.address}
             bathrooms={prop.bathroom_amount}
-            Image={prop.photos[0]}
+            Image={prop.photos[randomImageIndex]}
             suite_amount={prop.suite_amount}
             room_amount={prop.room_amount}
             parking_lot_amount={prop.parking_lot_amount}
             bathroom_amount={prop.bathroom_amount}
+            real_address={prop.real_address}
+            operation_type={prop.operation_type}
+            total_surface={prop.total_surface}
+            type={prop.type}
+            price={prop.operations[0]?.prices[0]?.price}
+            currency={prop.operations[0]?.prices[0]?.currency}
+            
           />
         ))}
 
-        {/* Paginación */}
-        <div className={style.pagination}>
-          {/* Botón de retroceso */}
-          <button
-            onClick={goToPreviousPage}
-            disabled={currentPage === 1}
-            className={style.paginationbutton}
-          >
-            Retroceder
-          </button>
+          {/* Paginación */}
+<div className={style.pagination}>
+  {/* Botón de retroceso */}
+  <li>
+    <button
+      onClick={goToPreviousPage}
+      disabled={currentPage === 1}
+      className={`h-10 px-5 text-green-600 transition-colors duration-150 rounded-l-lg focus:shadow-outline hover:bg-green-100 ${currentPage === 1 ? 'hidden' : ''}`}
+    >
+      <svg
+        className="w-4 h-4 fill-current"
+        viewBox="0 0 20 20"
+      >
+        <path d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" fillRule="evenodd" />
+      </svg>
+    </button>
+  </li>
 
-          {/* Número de página actual */}
-          <span className={style.pageNumber}>{currentPage}</span>
+  {/* Número de página actual */}
+  <li>
+    <button className="h-10 px-5 text-green-600 transition-colors duration-150 focus:shadow-outline hover:bg-green-100">
+      {currentPage - 1}
+    </button>
+  </li>
+  <li>
+    <button className="h-10 px-5 text-white transition-colors duration-150 bg-green-600 border border-r-0 border-green-600 focus:shadow-outline">
+      {currentPage}
+    </button>
+  </li>
+  <li>
+    <button className="h-10 px-5 text-green-600 transition-colors duration-150 focus:shadow-outline hover:bg-green-100">
+      {currentPage + 1}
+    </button>
+  </li>
 
-          {/* Botón de avance */}
-          <button
-            onClick={goToNextPage}
-            disabled={currentPage === Math.ceil(allProps.length / itemsPerPage)}
-            className={style.paginationButton}
-          >
-            Avanzar
-          </button>
+  {/* Botón de avance */}
+  <li>
+    <button
+      onClick={goToNextPage}
+      disabled={currentPage === Math.ceil(allProps.length / itemsPerPage)}
+      className={`h-10 px-5 text-green-600 transition-colors duration-150 rounded-r-lg focus:shadow-outline hover:bg-green-100 ${currentPage === Math.ceil(allProps.length / itemsPerPage) ? 'hidden' : ''}`}
+    >
+      <svg
+        className="w-4 h-4 fill-current"
+        viewBox="0 0 20 20"
+      >
+        <path d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" fillRule="evenodd" />
+      </svg>
+    </button>
+  </li>
+</div>
+
+
+
+        
+        <div class=" p-12 flex items-center flex-wrap">
         </div>
       </div>
     </>
