@@ -20,7 +20,11 @@
   ```
 */
 // import { useState } from "react";
+'use client'
 import { StarIcon } from "@heroicons/react/20/solid";
+import { useEffect } from "react";
+import { useDispatch } from 'react-redux';;
+import { getPropById } from '../../redux/actions'
 // import { RadioGroup } from "@headlessui/react";
 
 const product = {
@@ -82,10 +86,16 @@ function classNames(...classes) {
 }
 
 export default function Example({params}) {
+  // const dispatch = useDispatch();
   // const [selectedColor, setSelectedColor] = useState(product.colors[0]);
   // const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
   const { id } = params
-  console.log(id);
+  // useEffect(() => {
+  //   dispatch(getPropById(id));//ej 55
+  // }, [dispatch, id]);
+  console.log(params);
+  // const propId = useSelector((state) => state.propId);
+  // console.log(propId);
 
   return (
     <div className="bg-white">
@@ -375,4 +385,8 @@ export default function Example({params}) {
       </div>
     </div>
   );
+
+
+
+  
 }

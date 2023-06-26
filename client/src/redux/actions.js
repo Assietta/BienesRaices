@@ -28,7 +28,7 @@ export function getAllProperties() {
 export function getPropById(id) {
   return async function (dispatch) {
     try {
-      const response = await axios.get(`/realState/${id}`);
+      const response = await axios.get(`http://localhost:3001/realState/${id}`);
       return dispatch({
         type: GET_PROP_BY_ID,
         payload: response.data,
