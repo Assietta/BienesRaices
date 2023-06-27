@@ -24,10 +24,7 @@ const createOrderHandler = async (req, res) => {
       ],
 
     });
-console.log(property);
-console.log(property?.operations);
 
-console.log(typeof property?.operations[0]?.prices[0]?.price);
     const preferenceId = result.response.id;
     const redirectUrl = `https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=${preferenceId}`;
 
