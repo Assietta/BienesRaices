@@ -26,10 +26,23 @@ const createOrderHandler = async (req, res) => {
     });
 
     const preferenceId = result.response.id;
-    const redirectUrl = `https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=${preferenceId}`;
+   
+
+    // const handleReservarClick = async () => {
+    //   try {
+    //     const response = await axios.get('http://localhost:3001/createOrder/:id');
+    //     const preferenceId = response.data;
+    //     const redirectUrl = `https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=${preferenceId}`;
+    //     window.location.href = redirectUrl;
+    //   } catch (error) {
+    //     console.error(error);
+    //     // Manejar el error de acuerdo a tus necesidades
+    //   }
+    // };
+  
 
     
-    res.send(redirectUrl);
+    res.send(preferenceId);
     // res.redirect(redirectUrl);
   } catch (error) {
     console.error(error);
