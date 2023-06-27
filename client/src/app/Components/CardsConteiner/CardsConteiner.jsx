@@ -1,16 +1,16 @@
-'use client';
-import React, { useEffect, useState } from 'react';
-import style from './CardsConteiner.module.css';
-import SearchBar from '../SearchBar/SearchBar';
-import Card from '../Card/Card';
-import { useDispatch, useSelector } from 'react-redux';
+"use client";
+import React, { useEffect, useState } from "react";
+import style from "./CardsConteiner.module.css";
+import SearchBar from "../SearchBar/SearchBar";
+import Card from "../Card/Card";
+import { useDispatch, useSelector } from "react-redux";
 import {
   getAllProperties,
   orderByOperation,
   orderByOrientation,
   orderByFloor,
-  OrderByPrice
-} from '../../../redux/actions';
+  OrderByPrice,
+} from "../../../redux/actions";
 
 const CardsConteiner = () => {
   const propsGlobal = useSelector((state) => state.allProps);
@@ -43,44 +43,86 @@ const CardsConteiner = () => {
     }
   }, [propsGlobal]);
 
-  const filterByOrientation = (e) => {
-    dispatch(orderByOrientation(e.target.value));
+  // const filterByOrientation = (e) => {
+  //   dispatch(orderByOrientation(e.target.value));
 
-    if (e.target.value === 'All') {
+  //   if (e.target.value === "All") {
+  //     setProps([...allProps]);
+  //   } else {
+  //     setProps([...filterProps]);
+  //   }
+  //   e.target.value = "";
+  // };
+
+  // const filterByOperation = (e) => {
+  //   dispatch(orderByOperation(e.target.value));
+
+  //   if (e.target.value === "All") {
+  //     setProps([...allProps]);
+  //   } else {
+  //     setProps([...filterProps]);
+  //   }
+  //   e.target.value = "";
+  // };
+
+  // const filterByFloor = (e) => {
+  //   dispatch(orderByFloor(e.target.value));
+  //   setProps([...filterProps]);
+  //   e.target.value = "";
+  // };
+
+  const filterByPrice = (e) => {
+    dispatch(OrderByPrice(e.target.value));
+
+    if (e.target.value === "All") {
       setProps([...allProps]);
     } else {
       setProps([...filterProps]);
     }
-    e.target.value = '';
+    e.target.value = "";
+  };
+
+  const filterByOrientation = (e) => {
+    dispatch(orderByOrientation(e.target.value));
+
+    if (e.target.value === "All") {
+      setProps([...propsGlobal]);
+    } else {
+      const filteredProps = propsGlobal.filter(
+        (prop) => prop.orientation === e.target.value
+      );
+      setProps([...filteredProps]);
+    }
+    setCurrentPage(1); // Reinicia la página actual después de aplicar el filtro
   };
 
   const filterByOperation = (e) => {
     dispatch(orderByOperation(e.target.value));
 
-    if (e.target.value === 'All') {
-      setProps([...allProps]);
+    if (e.target.value === "All") {
+      setProps([...propsGlobal]);
     } else {
-      setProps([...filterProps]);
+      const filteredProps = propsGlobal.filter(
+        (prop) => prop.operations[0]?.operation_type === e.target.value
+      );
+      setProps([...filteredProps]);
     }
-    e.target.value = '';
+    setCurrentPage(1); // Reinicia la página actual después de aplicar el filtro
   };
 
   const filterByFloor = (e) => {
     dispatch(orderByFloor(e.target.value));
-    setProps([...filterProps]);
-    e.target.value = '';
+
+    if (e.target.value === "") {
+      setProps([...propsGlobal]);
+    } else {
+      const filteredProps = propsGlobal.filter(
+        (prop) => prop.floors_amount === Number(e.target.value)
+      );
+      setProps([...filteredProps]);
+    }
+    setCurrentPage(1); // Reinicia la página actual después de aplicar el filtro
   };
-
-    const filterByPrice = (e) => {
-      dispatch(OrderByPrice(e.target.value));
-
-      if (e.target.value === 'All') {
-        setProps([...allProps]);
-      } else {
-        setProps([...filterProps]);
-      }
-      e.target.value = '';
-    };
 
   return (
     <>

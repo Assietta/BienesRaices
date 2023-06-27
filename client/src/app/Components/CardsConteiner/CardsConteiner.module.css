@@ -1,12 +1,10 @@
 .container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: flex-start;
-  margin: 10px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background-color: #f8f8f8;
+  background-image: linear-gradient(132deg, #F4D03F 0%, #16A085 100%);
   min-height: calc(100vh - 40px);
   position: relative;
-  padding-bottom: 50px; 
 }
 
 .pagination {
@@ -27,9 +25,8 @@
   padding: 10px 15px;
   margin: 0 5px;
   border: none;
-  background-color:rgba(255, 255, 255, 0.20);
-  color: white;
-  border-radius: 25px;
+  background-color:white;
+  color: black;
   font-size: 14px;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -48,7 +45,7 @@
   margin: 0 5px;
   border-radius: 25px;
   background-color: rgba(255, 255, 255, 0.20);
-  color: white;
+  color: black;
   font-size: 14px;
 }
 .filtersContainer{
@@ -59,28 +56,29 @@
     margin: 20px;
     flex-direction: row;
     flex-wrap: wrap;
-    
 }
 
 .filters {
     display: flex;
-    grid-gap: 7px;
-    gap: 7px;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    
- 
+    border: 2px solid black;
 }
 
 .selects {
     font-size: 18px;
-     border-radius: 25px;
-     background-color: rgba(255, 255, 255, 0.20);
-     color: white
+    padding: 5px;
+     background-color: white;
+     color: black
 }
+
 .selects option {
 background-color: rgba(255, 255, 255, 0.20);
   color:black
+}
+
+.il {
+  list-style-type: none;
 }
 
