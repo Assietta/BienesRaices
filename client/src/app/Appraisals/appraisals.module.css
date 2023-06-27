@@ -19,6 +19,7 @@
 .form-container label {
   font-weight: bold;
   margin-bottom: 5px;
+  color:black
 }
 
 .form-container input,
