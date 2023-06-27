@@ -29,7 +29,7 @@ const createOrderHandler = async (req, res) => {
     const redirectUrl = `https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=${preferenceId}`;
 
     
-    res.redirect(redirectUrl);
+    res.send(redirectUrl);
     // res.redirect(redirectUrl);
   } catch (error) {
     console.error(error);
