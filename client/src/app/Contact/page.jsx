@@ -1,4 +1,4 @@
-'use client';
+"use client"
 import { useState } from 'react';
 import styles from './contact.module.css';
 import { validateForm } from './validates';
@@ -12,19 +12,16 @@ export default function Example() {
     phone: '',
     mobile: '',
     comment: '',
-    address: '',
-    callTime: '',
   });
 
   const [errors, setErrors] = useState({});
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setFormData({
-      ...formData,
+    setFormData((prevFormData) => ({
+      ...prevFormData,
       [name]: value,
-    });
-    setErrors(validateForm({ ...formData, [name]: value }));
+    }));
   };
 
   const clearForm = () => {
@@ -35,25 +32,25 @@ export default function Example() {
       phone: '',
       mobile: '',
       comment: '',
-      address: '',
-      callTime: '',
     });
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const validationErrors = validateForm(formData, setErrors, errors);
+    const validationErrors = validateForm(formData);
+    setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
       console.log(formData);
       await axios.post('http://localhost:3001/contact', formData);
       console.log('Appraisals successfully send');
+      clearForm();
     }
-    clearForm();
   };
+
   return (
-    <div class=" min-h-screen flex items-center justify-center bg-center py-12 px-4 sm:px-6 lg:px-8 bg-black bg-no-repeat bg-cover ">
-      <div className=" mx-auto md:max-w-35rem h-50 space-y-8 p-10 bg-white rounded-xl shadow-lg z-10">
+    <div className="min-h-screen flex items-center justify-center bg-center py-12 px-4 sm:px-6 lg:px-8 bg-black bg-no-repeat bg-cover">
+      <div className="mx-auto md:max-w-35rem h-50 space-y-8 p-10 bg-white rounded-xl shadow-lg z-10">
         <div className="mx-auto max-w-2xl lg:text-center">
           <h2 className="text-base font-semibold leading-7 text-indigo-600">
             Nosotros
@@ -63,20 +60,18 @@ export default function Example() {
           </p>
           <p className="mt-6 text-lg leading-8 text-gray-600">
             Puedes dejar tu consulta, junto a los datos requeridos, a la
-            brevedad nos comunicaremos contigo .
+            brevedad nos comunicaremos contigo.
           </p>
         </div>
         <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
-          <dl className=" max-w-xl mr-12 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
+          <dl className="max-w-xl mr-12 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
             <div className="relative pl-16">
               <dt className="text-base font-semibold leading-7 text-gray-900"></dt>
               <dd className="mt-2 text-base leading-7 text-gray-600">
                 <form onSubmit={handleSubmit}>
                   {/* input Name */}
-
                   <div className="mb-3 space-y-2 w-full text-xs">
                     <label className="font-semibold text-gray-600 py-2">
-                      {' '}
                       Nombre <abbr title="required">*</abbr>
                     </label>
                     <input
@@ -87,14 +82,12 @@ export default function Example() {
                       value={formData.name}
                       onChange={handleInputChange}
                     />
-                    {errors.Name && <p>{errors.Name}</p>}
+                    {errors.name && <p>{errors.name}</p>}
                   </div>
 
                   {/* input apellido */}
-
                   <div className="mb-3 space-y-2 w-full text-xs">
                     <label className="font-semibold text-gray-600 py-2">
-                      {' '}
                       Apellido <abbr title="required">*</abbr>
                     </label>
                     <input
@@ -109,15 +102,13 @@ export default function Example() {
                   </div>
 
                   {/* input mail */}
-
                   <div className="mb-3 space-y-2 w-full text-xs">
                     <label className="font-semibold text-gray-600 py-2">
-                      {' '}
                       Mail <abbr title="required">*</abbr>
                     </label>
                     <input
                       placeholder="nombre@dominio.com"
-                      class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
+                      className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
                       required="required"
                       type="text"
                       name="email"
@@ -128,15 +119,14 @@ export default function Example() {
                     {errors.email && <p>{errors.email}</p>}
                   </div>
 
-                  {/* input telefono        */}
-
+                  {/* input telefono */}
                   <div className="mb-3 space-y-2 w-full text-xs">
                     <label className="font-semibold text-gray-600 py-2">
                       Telefono <abbr title="required">*</abbr>
                     </label>
                     <input
                       placeholder="ingrese su numero de telefono"
-                      class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
+                      className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
                       required="required"
                       type="text"
                       name="phone"
@@ -147,10 +137,8 @@ export default function Example() {
                   </div>
 
                   {/* input celular */}
-
                   <div className="mb-3 space-y-2 w-full text-xs">
                     <label className="font-semibold text-gray-600 py-2">
-                      {' '}
                       Celular <abbr title="required">*</abbr>
                     </label>
                     <input
@@ -166,18 +154,17 @@ export default function Example() {
                   </div>
 
                   {/* comentario input */}
-
-                  <div class="flex-auto w-full mb-1 text-xs space-y-2">
-                    <label class="font-semibold text-gray-600 py-2">
+                  <div className="flex-auto w-full mb-1 text-xs space-y-2">
+                    <label className="font-semibold text-gray-600 py-2">
                       Mensaje
                     </label>
                     <textarea
                       required=""
                       name="comment"
                       id=""
-                      class=" min-h-[100px] max-h-[300px] h-28 appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg  py-4 px-4"
-                      placeholder="Ingrese su mensaje aqui"
-                      spellcheck="false"
+                      className="min-h-[100px] max-h-[300px] h-28 appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg py-4 px-4"
+                      placeholder="Ingrese su mensaje aquí"
+                      spellCheck="false"
                       value={formData.comment}
                       onChange={handleInputChange}
                     />
@@ -185,10 +172,10 @@ export default function Example() {
                   </div>
 
                   <button
-                    class="mb-2 md:mb-0 bg-green-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500"
+                    className="mb-2 md:mb-0 bg-green-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500"
                     type="submit"
                   >
-                    Enviar{' '}
+                    Enviar
                   </button>
                 </form>
               </dd>
