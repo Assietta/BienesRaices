@@ -1,10 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
-import { StarIcon } from "@heroicons/react/20/solid";
 import axios from "axios";
 import styles from "./page.module.css";
-
-const reviews = { href: "#", average: 4, totalCount: 117 };
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -31,28 +28,15 @@ export default function Example({ params }) {
     return <div>Cargando...</div>;
   }
 
-  // const handleReservarClick = async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       `http://localhost:3001/createOrder/${id}`
-  //     );
-  //     const redirectUrl = response.data;
-  //     window.location.href = redirectUrl;
-  //   } catch (error) {
-  //     console.error(error);
-  //     // Manejar el error de acuerdo a tus necesidades
-  //   }
-  // };
-
   const handleReservarClick = async () => {
     try {
       const response = await axios.get(
         `http://localhost:3001/createOrder/${id}`
       );
       const preferenceId = response.data;
-      console.log(response.data);
+      console.log(preferenceId);
       const redirectUrl = `https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=${preferenceId}`;
-      window.location.href = redirectUrl;
+      window.open(redirectUrl, "_blank");
     } catch (error) {
       console.error(error);
       // Manejar el error de acuerdo a tus necesidades
@@ -117,6 +101,7 @@ export default function Example({ params }) {
     propiedad.photos[2],
     propiedad.photos[3],
     propiedad.photos[4],
+    propiedad.photos[5],
   ];
 
   const openModal = (index) => {
@@ -181,43 +166,10 @@ export default function Example({ params }) {
         </nav>
 
         {/* Image gallery */}
-        <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
-          <div className="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
-            <img
-              src={product.images[0].src}
-              alt={product.images[0].alt}
-              className="h-full w-full object-cover object-center"
-            />
-          </div>
-          <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
-            <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
-              <img
-                src={product.images[1].src}
-                alt={product.images[1].alt}
-                className="h-full w-full object-cover object-center"
-              />
-            </div>
-            <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
-              <img
-                src={product.images[2].src}
-                alt={product.images[2].alt}
-                className="h-full w-full object-cover object-center"
-              />
-            </div>
-          </div>
-          <div className="aspect-h-5 aspect-w-4 lg:aspect-h-4 lg:aspect-w-3 sm:overflow-hidden sm:rounded-lg">
-            <img
-              src={product.images[3].src}
-              alt={product.images[3].alt}
-              className="h-full w-full object-cover object-center"
-            />
-          </div>
-        </div>
-
-        <div className="container mx-auto px-5 py-2 lg:px-32 lg:pt-24">
-          <div className="-m-1 flex flex-wrap md:-m-2">
+        <div className="container mx-auto px-2 py-2 lg:px-32 lg:pt-12">
+          <div className="flex flex-wrap md:-m-2">
             {images.map((image, index) => (
-              <div className="w-1/2 p-1 md:p-2" key={index}>
+              <div className="w-1/3 p-1 md:p-2" key={index}>
                 <img
                   alt="gallery"
                   className="block h-full w-full rounded-lg object-cover object-center cursor-pointer"
@@ -320,15 +272,13 @@ export default function Example({ params }) {
               </div>
             </div>
 
-            <form className="mt-10">
-              <button
-                type="submit"
-                className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                onClick={handleReservarClick}
-              >
-                Reservar
-              </button>
-            </form>
+            <button
+              type="submit"
+              className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              onClick={handleReservarClick}
+            >
+              Reservar
+            </button>
           </div>
 
           <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
@@ -340,28 +290,6 @@ export default function Example({ params }) {
                 <p className="text-base text-gray-900">{product.description}</p>
               </div>
             </div>
-
-            {/* <div className="mt-10">
-              <h3 className="text-sm font-medium text-gray-900">Highlights</h3>
-
-              <div className="mt-4">
-                <ul role="list" className="list-disc space-y-2 pl-4 text-sm">
-                  {product.highlights.map((highlight) => (
-                    <li key={highlight} className="text-gray-400">
-                      <span className="text-gray-600">{highlight}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            <div className="mt-10">
-              <h2 className="text-sm font-medium text-gray-900">Details</h2>
-
-              <div className="mt-4 space-y-6">
-                <p className="text-sm text-gray-600">{product.details}</p>
-              </div>
-            </div> */}
           </div>
         </div>
       </div>
