@@ -1,5 +1,8 @@
 const { RealState } = require("../db");
 const mercadopago = require("mercadopago");
+const axios = require('axios');
+
+
 
 const createOrderHandler = async (req, res) => {
   const { id } = req.params;
@@ -27,7 +30,9 @@ const createOrderHandler = async (req, res) => {
 
     const preferenceId = result.response.id;
    
-
+    // const response = await axios(`http://localhost:3001/createOrder/${id}`);
+    // const preferenceIddata = response.data;
+    // console.log(preferenceIddata);
     // const handleReservarClick = async () => {
     //   try {
     //     const response = await axios.get('http://localhost:3001/createOrder/:id');
