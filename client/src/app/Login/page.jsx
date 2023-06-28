@@ -3,14 +3,16 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { validateForm } from './validates';
 import axios from 'axios';
+import SignUp from '../SignUp/page';
 
-export default function Example() {
+export default function Login() {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
 
   const [errors, setErrors] = useState({});
+  const [showSignUp, setShowSignUp] = useState(false);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -99,12 +101,20 @@ export default function Example() {
                     Ingresar{' '}
                   </button>
                   <p style={{ fontSize: '11px', textAlign: 'center' }}>Or</p>
-                  <Link href={'/SignUp'}>
+                  {/* <Link href={'/SignUp'}>
                     <button className="mx-auto block mb-2 md:mb-0 bg-blue-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-blue-500">
                       Registrarse
                     </button>
-                  </Link>
+                  </Link> */}
+                  <button
+                    className="mx-auto block mb-2 md:mb-0 bg-blue-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-blue-500"
+                    type="button"
+                    onClick={() => setShowSignUp(true)}
+                  >
+                    Registrarse
+                  </button>
                 </form>
+                {showSignUp && <SignUp />}
               </dd>
             </div>
           </dl>

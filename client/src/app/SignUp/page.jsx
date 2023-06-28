@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { validateForm } from '../Appraisals/validates';
 import axios from 'axios';
 
-export default function Example() {
+export default function SignUp() {
   const [formData, setFormData] = useState({
     name: '',
     lastName: '',
