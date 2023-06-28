@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./page.module.css";
+import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -11,6 +12,7 @@ export default function Example({ params }) {
   const [propiedad, setPropiedad] = useState();
   const [modalOpen, setModalOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [markerPosition, setMarkerPosition] = useState(null);
 
   const { id } = params;
 
@@ -121,6 +123,21 @@ export default function Example({ params }) {
       newIndex = 0;
     }
     setCurrentIndex(newIndex);
+  };
+
+  const mapContainerStyle = {
+    marginTop: "50px",
+    width: "100%",
+    height: "400px",
+  };
+
+  const center = {
+    lat: parseFloat(propiedad.geo_lat),
+    lng: parseFloat(propiedad.geo_long),
+  };
+
+  const handleMapLoad = (map) => {
+    setMarkerPosition(center);
   };
 
   return (
@@ -290,6 +307,16 @@ export default function Example({ params }) {
                 <p className="text-base text-gray-900">{product.description}</p>
               </div>
             </div>
+            <LoadScript googleMapsApiKey="AIzaSyDSHb1gBxjiShwN6LVC_bBnxt9E60TwvmI">
+              <GoogleMap
+                mapContainerStyle={mapContainerStyle}
+                center={center}
+                zoom={14}
+                onLoad={handleMapLoad}
+              >
+                <Marker position={markerPosition} />
+              </GoogleMap>
+            </LoadScript>
           </div>
         </div>
       </div>
