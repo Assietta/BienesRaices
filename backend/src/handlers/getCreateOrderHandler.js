@@ -5,7 +5,7 @@ const createOrderHandler = async (req, res) => {
   const { id } = req.params;
   mercadopago.configure({
     access_token:
-      "TEST-4304274978344220-062414-3619cd7e5c484d5fcb746d26d1cc68c0-1406402853",
+      "TEST-3997372599676210-062811-66dfa8cae7119a0899839a60c67bdbf6-261786889",
   });
 
   try {
