@@ -34,6 +34,8 @@ const cleanData = (data) => {
     const type = object.type?.name || '';
     const unroofed_surface = object.unroofed_surface || '';
     const videos = object.videos?.map(video => video.url) || [''];
+    const geo_lat = object.geo_lat || '';
+    const geo_long = object.geo_long || '';
     
     const cleanedObject = {
       address,
@@ -63,6 +65,8 @@ const cleanData = (data) => {
       videos,
       photos,
       tags,
+      geo_lat,
+      geo_long,
     };
     
     cleanedData.push(cleanedObject);
