@@ -50,7 +50,18 @@ export default function ContainerF() {
 
       const randomImageIndex = Math.floor(Math.random() * 5);
     return (
-        <div >
+        <div  className='flex flex-col  m-1 bg-green'>
+          <div>
+            <div className='flex flex-col  m-1 bg-green'>
+				      holaaaa
+			      </div>
+          </div>
+        
+          <div className='flex flex-row  m-1 bg-green'>
+            <div className='flex flex-col  m-1 bg-green bg-white'>
+				    holaaaaa
+			      </div>
+            <div className='bg-white'>
         {/* Card */}
         {viewProps.map((prop) => (
           
@@ -70,6 +81,7 @@ export default function ContainerF() {
             type={prop.type}
             price={prop.operations[0]?.prices[0]?.price}
             currency={prop.operations[0]?.prices[0]?.currency}
+            description={prop.description}
             
           />
         ))}
@@ -117,6 +129,9 @@ export default function ContainerF() {
     </button>
   </li>
 </div>
-</div>
+            </div>
+          </div>
+       
+        </div>
     );
   }

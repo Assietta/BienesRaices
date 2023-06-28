@@ -1,13 +1,13 @@
 import styles from './Card.module.css';
 import Link from 'next/link';
 import Image from 'next/image';
-import { describe } from 'node:test';
-import { Description } from '@headlessui/react/dist/components/description/description';
+
 
 const Card = (props) => {
   const {
     id,
     address,
+	description,
     bathrooms,
     Image,
     suite_amount,
@@ -27,8 +27,10 @@ const Card = (props) => {
   return (
     <>
  
+			
         <div class="flex flex-col  m-1">
-	        <div class="relative flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs md:max-w-3xl mx-auto border border-white bg-white">
+
+	        <div class="relative flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs md:max-w-6xl mx-auto border border-white bg-white whitespace-nowrap overflow-hidden overflow-ellipsis">
 		        <div class="w-full md:w-1/3 bg-white grid place-items-center">
 			        <img src={Image} alt="tailwind logo" class="rounded-xl " />
                  </div>
@@ -58,7 +60,7 @@ const Card = (props) => {
 						Superhost</div>
 				    </div>
 				    <h3 class="font-black text-gray-800 md:text-3xl text-xl">{address}</h3>
-				    <p class="md:text-lg text-gray-500 text-base">{Description}</p>
+				    <p class="md:text-lg text-gray-500 text-base">{description}</p>
 				    <p class="text-xl font-black text-gray-800">
 					    $110
 					    <span class="font-normal text-gray-600 text-base">/night</span>
