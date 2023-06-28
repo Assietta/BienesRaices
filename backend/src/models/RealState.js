@@ -125,6 +125,14 @@ module.exports = (sequelize) => {
     isReserved:{
       type: DataTypes.BOOLEAN,
       defaultValue: false,
+    },
+    geo_long:{
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    geo_lat:{
+      type: DataTypes.STRING,
+      allowNull: false,
     }
   });
 };
