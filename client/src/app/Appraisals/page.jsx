@@ -88,7 +88,7 @@ export default function Example() {
                       value={formData.name}
                       onChange={handleInputChange}
                     />
-                    {errors.firstName && <p>{errors.firstName}</p>}
+                    {errors.name && <p>{errors.name}</p>}
                   </div>
 
                   {/* input apellido */}
