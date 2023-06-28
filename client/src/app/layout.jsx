@@ -1,13 +1,17 @@
+'use client'
 import './globals.css'
 import React from 'react';
 import Footer from "./Components/Footer"
 import Navbar from './Components/NavBar/Navbar'
 import { Inter } from 'next/font/google'
-
+import { Provider } from 'react-redux';
+import store from '../redux/store';
+import axios from "axios"
 // const inter = Inter({ subsets: ['latin'] })
 
 export default function RootLayout({children}){
   return (
+    <Provider store={store}>
   <html>
     <head>
 
@@ -18,10 +22,11 @@ export default function RootLayout({children}){
       <div>
         <Footer/>
       </div>
-       
+
     </body>
 
   </html>
-   
+  </Provider>
+
   )
-} 
+}

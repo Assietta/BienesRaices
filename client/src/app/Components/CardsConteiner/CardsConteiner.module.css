@@ -2,12 +2,13 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   background-color: #f8f8f8;
-  background-image: linear-gradient(132deg, #F4D03F 0%, #16A085 100%);
+  background-image: linear-gradient(132deg, #ffffff 0%, #fdfdfd 100%);
   min-height: calc(100vh - 40px);
   position: relative;
 }
 
 .pagination {
+  margin-top: 20px;
   position: absolute;
   bottom: 0;
   left: 0;
