@@ -15,7 +15,7 @@ const cleanData = (data) => {
     const expenses = object.expenses || 0;
     const floors_amount = object.floors_amount || 0;
     const has_temporary_rent = object.has_temporary_rent;
-    const location = object.short_location || '';
+    const location = object.location.name || '';
     const operations = object.operations || {};
     const orientation = object.orientation || '';
     const parking_lot_amount = object.parking_lot_amount || 0;
