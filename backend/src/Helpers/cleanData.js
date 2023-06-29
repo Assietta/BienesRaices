@@ -1,5 +1,3 @@
-
-
 const cleanData = (data) => {
   const objects = data.objects;
   const cleanedData = [];
@@ -16,7 +14,7 @@ const cleanData = (data) => {
     const floors_amount = object.floors_amount || 0;
     const has_temporary_rent = object.has_temporary_rent;
     const location = object.short_location || '';
-    const operations = object.operations || {};
+    const operations = object.operations || [];
     const orientation = object.orientation || '';
     const parking_lot_amount = object.parking_lot_amount || 0;
     const photos = object.photos?.map(photo => photo.image) || [''];
@@ -37,6 +35,20 @@ const cleanData = (data) => {
     const geo_lat = object.geo_lat || '';
     const geo_long = object.geo_long || '';
     
+    const cleanedOperations = object.operations?.map(operation => {
+      const price = operation.prices?.[0]?.price || 0;
+      const currency = operation.prices?.[0]?.currency || '';
+      const operation_type = operation.operation_type || '';
+      const period = operation.prices?.[0]?.period || 0;
+
+      return {
+        price,
+        currency,
+        operation_type,
+        period
+      };
+    }) || [];
+
     const cleanedObject = {
       address,
       real_address,
@@ -46,7 +58,6 @@ const cleanData = (data) => {
       disposition,
       orientation,
       location,
-      operations,
       type,
       expenses,
       room_amount,
@@ -67,8 +78,9 @@ const cleanData = (data) => {
       tags,
       geo_lat,
       geo_long,
+      ...cleanedOperations[0],
     };
-    
+
     cleanedData.push(cleanedObject);
   }
   

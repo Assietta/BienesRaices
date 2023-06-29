@@ -1,25 +1,27 @@
 const { RealState } = require('../db');
+const { Op } = require('sequelize');
 
-
-const postFilterController = async (type, maxPrice, minPrice) => {
+const postFilterController = async (type, maxPrice, minPrice, orientation) => {
   const filters = {};
   if (type) {
     filters.type = type;
   }
-  if (maxPrice && minPrice) {
-    filters['$operations.prices.price$'] = {
-      [Op.between]: [minPrice, maxPrice],
-    };
-  } else if (maxPrice) {
-    filters['$operations.prices.price$'] = {
-      [Op.lte]: maxPrice,
-    };
-  } else if (minPrice) {
-    filters['$operations.prices.price$'] = {
-      [Op.gte]: minPrice,
-    };
+  if (orientation) {
+    filters.orientation = orientation;
   }
 
+  if (minPrice) {
+    filters.price = {
+      [Op.gte]: minPrice
+    };
+  }
+  if (maxPrice) {
+    filters.price = {
+      ...filters.price,
+      [Op.lte]: maxPrice
+    };
+  }
+  
   try {
     const properties = await RealState.findAll({
       where: filters
