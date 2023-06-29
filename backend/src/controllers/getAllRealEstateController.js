@@ -12,8 +12,6 @@ const getAllApi = async() => {
     apiInfo = cleanData(data)
 
     apiInfo.forEach(async property => await RealState.findOrCreate({ where: property }))
-
-
-}
+};
 
 module.exports = getAllApi

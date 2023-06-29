@@ -5,7 +5,7 @@ const createOrderHandler = async (req, res) => {
   const { id } = req.params;
   mercadopago.configure({
     access_token:
-      "TEST-4304274978344220-062414-3619cd7e5c484d5fcb746d26d1cc68c0-1406402853",
+      "TEST-3997372599676210-062811-66dfa8cae7119a0899839a60c67bdbf6-261786889",
   });
 
   try {
@@ -26,10 +26,23 @@ const createOrderHandler = async (req, res) => {
     });
 
     const preferenceId = result.response.id;
-    const redirectUrl = `https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=${preferenceId}`;
+   
+
+    // const handleReservarClick = async () => {
+    //   try {
+    //     const response = await axios.get('http://localhost:3001/createOrder/:id');
+    //     const preferenceId = response.data;
+    //     const redirectUrl = `https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=${preferenceId}`;
+    //     window.location.href = redirectUrl;
+    //   } catch (error) {
+    //     console.error(error);
+    //     // Manejar el error de acuerdo a tus necesidades
+    //   }
+    // };
+  
 
     
-    res.send(redirectUrl);
+    res.send(preferenceId);
     // res.redirect(redirectUrl);
   } catch (error) {
     console.error(error);

@@ -1,6 +1,6 @@
 const { RealState } = require("../db.js");
 
-const postRealState= async( address, bathroom_amount, age, description, disposition, expenses, floors_amount, has_temporary_rent, location, operations, orientation, parking_lot_amount, photos, real_address,  property_condition, roofed_surface, room_amount, semiroofed_surface , situation, suite_amount, surface, tags, toilet_amount, total_surface,  type, unroofed_surface , videos)=>{
+const postRealState= async( address, bathroom_amount, age, description, disposition, expenses, floors_amount, has_temporary_rent, location, price, period, currency, operation_type, orientation, parking_lot_amount, photos, real_address,  property_condition, roofed_surface, room_amount, semiroofed_surface , situation, suite_amount, surface, tags, toilet_amount, total_surface,  type, unroofed_surface , videos, geo_lat, geo_long)=>{
     const findInmueble = await RealState.findOne({
         where: { address: address.toLowerCase() }
       });
@@ -17,7 +17,10 @@ const postRealState= async( address, bathroom_amount, age, description, disposit
          floors_amount: floors_amount,
          has_temporary_rent: has_temporary_rent,
          location: location, 
-         operations: operations,
+         price: price,
+         operation_type: operation_type,
+         currency: currency,
+         period: period,
          orientation: orientation, 
          parking_lot_amount: parking_lot_amount, 
          photos: photos,
@@ -34,7 +37,9 @@ const postRealState= async( address, bathroom_amount, age, description, disposit
          total_surface: total_surface,  
          type: type, 
          unroofed_surface: unroofed_surface, 
-         videos: videos
+         videos: videos,
+         geo_lat: geo_lat,
+         geo_long: geo_long
         });
         return newPublication
 }
