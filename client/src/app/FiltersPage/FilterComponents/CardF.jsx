@@ -28,11 +28,11 @@ const Card = (props) => {
     <>
  
 			
-        <div class="flex flex-col  m-1">
+        <div class="flex flex-col  m-1 w-full ">
 
-	        <div class="relative flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs md:max-w-6xl mx-auto border border-white bg-white whitespace-nowrap overflow-hidden overflow-ellipsis">
-		        <div class="w-full md:w-1/3 bg-white grid place-items-center">
-			        <img src={Image} alt="tailwind logo" class="rounded-xl " />
+	        <div class="relative flex flex-col md:flex-row w-full rounded-xl shadow-lg max-w-xs md:max-w-6xl mx-auto bg-green-500 whitespace-nowrap overflow-hidden overflow-ellipsis" >
+		        <div class="w-full h-full grid object-cover" style={{maxWidth: '100%'}} >
+			        <img src={Image}  alt="tailwind logo"  style={{ maxHeight: 240, objectFit: 'contain', objectPosition: 'center'}} />
                  </div>
 			    <div class="w-full md:w-2/3 bg-white flex flex-col space-y-2 p-3">
 				    <div class="flex justify-between item-center">
