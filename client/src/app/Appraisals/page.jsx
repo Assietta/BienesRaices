@@ -15,7 +15,7 @@ export default function Example() {
         address: '',
         callTime: '',
       });
-    
+      console.log(formData)
       const [errors, setErrors] = useState({});
     
       const handleInputChange = (event) => {
@@ -100,7 +100,9 @@ export default function Example() {
 								<input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4" type="text" name="lastName"  placeholder="Ingrese su apellido"
                   value={formData.lastName}
                   onChange={handleInputChange}
+                  
                 />
+                ;
                 {errors.lastName && <p>{errors.lastName}</p>}
 						</div>
 
