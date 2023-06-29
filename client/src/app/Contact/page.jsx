@@ -128,7 +128,7 @@ export default function Example() {
                       placeholder="ingrese su numero de telefono"
                       className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
                       required="required"
-                      type="text"
+                      type="number"
                       name="phone"
                       value={formData.phone}
                       onChange={handleInputChange}
@@ -145,7 +145,7 @@ export default function Example() {
                       placeholder="ingrese su numero de celular"
                       className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
                       required="required"
-                      type="text"
+                      type="number"
                       name="mobile"
                       value={formData.mobile}
                       onChange={handleInputChange}
