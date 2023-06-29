@@ -18,7 +18,9 @@ export default function ContainerF() {
     const propsGlobal = useSelector((state) => state.allProps);
     const filterProps = useSelector((state) => state.allPropsCopy);
   
-   
+    const tipe1 = ["Agua", "Corriente", "Cloaca", "Gas", "Natural", "Electricidad", "Pavimento"];
+    const tipe2 = ["Balcón", "Baulera", "Cocina", "Comedor", "Comedor diario", "Dependencia", "Suite", "Oficina", "Hall", "Lavadero", "Living", "Living-comedor", "Patio", "Toilette", "Vestidor", "Escritorio"];
+    const tipe3 = ["Aire Acondicionado", "individual", "Calefacción", "Hidromasaje", "Apto mascotas", "Cochera subterránea", "Luminoso", "Lavadero", "Calefacción individual"];
   
   
   
@@ -52,140 +54,6 @@ export default function ContainerF() {
 
       const randomImageIndex = Math.floor(Math.random() * 5);
     return (
-        // <div  className='flex flex-col  m-1 bg-green'>
-        //   <div>
-        //     <div className='flex flex-col  m-1 bg-green-500'>
-				//       holaaaa
-			  //     </div>
-        //   </div>
-        
-        //   <div className='flex flex-row  m-1 bg-green'>
-        //     <div className='flex flex-col  m-1  bg-white w-1/4'>
-            
-        //     <div class="border-t border-gray-200 px-4 py-6">
-        //       <h3 class="-mx-2 -my-3 flow-root">
-           
-        //         <button type="button" class="flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500" aria-controls="filter-section-mobile-0" aria-expanded="false">
-        //           <span class="font-medium text-gray-900">Color</span>
-        //           <span class="ml-6 flex items-center">
-                
-        //             <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-        //               <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
-        //             </svg>
-              
-        //             <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-        //               <path fill-rule="evenodd" d="M4 10a.75.75 0 01.75-.75h10.5a.75.75 0 010 1.5H4.75A.75.75 0 014 10z" clip-rule="evenodd" />
-        //             </svg>
-        //           </span>
-        //         </button>
-        //       </h3>
-           
-        //       <div class="pt-6" id="filter-section-mobile-0">
-        //         <div class="space-y-6">
-        //           <div class="flex items-center">
-        //             <input id="filter-mobile-color-0" name="color[]" value="white" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"/>
-        //             <label for="filter-mobile-color-0" class="ml-3 min-w-0 flex-1 text-gray-500">White</label>
-        //           </div>
-        //           <div class="flex items-center">
-        //             <input id="filter-mobile-color-1" name="color[]" value="beige" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"/>
-        //             <label for="filter-mobile-color-1" class="ml-3 min-w-0 flex-1 text-gray-500">Beige</label>
-        //           </div>
-        //           <div class="flex items-center">
-        //             <input id="filter-mobile-color-2" name="color[]" value="blue" type="checkbox" checked class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"/>
-        //             <label for="filter-mobile-color-2" class="ml-3 min-w-0 flex-1 text-gray-500">Blue</label>
-        //           </div>
-        //           <div class="flex items-center">
-        //             <input id="filter-mobile-color-3" name="color[]" value="brown" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"/>
-        //             <label for="filter-mobile-color-3" class="ml-3 min-w-0 flex-1 text-gray-500">Brown</label>
-        //           </div>
-        //           <div class="flex items-center">
-        //             <input id="filter-mobile-color-4" name="color[]" value="green" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"/>
-        //             <label for="filter-mobile-color-4" class="ml-3 min-w-0 flex-1 text-gray-500">Green</label>
-        //           </div>
-        //           <div class="flex items-center">
-        //             <input id="filter-mobile-color-5" name="color[]" value="purple" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"/>
-        //             <label for="filter-mobile-color-5" class="ml-3 min-w-0 flex-1 text-gray-500">Purple</label>
-        //           </div>
-        //         </div>
-        //       </div>
-        //       </div>
-              
-
-
-
-			  //     </div>
-        //     <div className='grid grid-cols-3 bg-green-500 '>
-        //           {/* Card */}
-        //         {viewProps.map((prop) => (
-        //           <Card
-        //             key={prop.id}
-        //             id={prop.id}
-        //             address={prop.address}
-        //             bathrooms={prop.bathroom_amount}
-        //             Image={prop.photos[randomImageIndex]}
-        //             suite_amount={prop.suite_amount}
-        //             room_amount={prop.room_amount}
-        //             parking_lot_amount={prop.parking_lot_amount}
-        //             bathroom_amount={prop.bathroom_amount}
-        //             real_address={prop.real_address}
-        //             operation_type={prop.operations[0]?.operation_type}
-        //             total_surface={prop.total_surface}
-        //             type={prop.type}
-        //             price={prop.operations[0]?.prices[0]?.price}
-        //             currency={prop.operations[0]?.prices[0]?.currency}
-        //             description={prop.description}
-        //           />
-        //                 ))}
-
-        //           {/* Paginación */}
-        //       <div className='flex justify-center mt-4 bg-blue-500 w-full ml-20' >
-        //           {/* Botón de retroceso */}
-        //             <li className={style.il}>
-        //               <button
-        //                 onClick={goToPreviousPage}
-        //                 disabled={currentPage === 1}
-        //                 className={`h-10 px-5 text-green-600 transition-colors duration-150 rounded-l-lg focus:shadow-outline hover:bg-green-100 ${currentPage === 1 ? 'hidden' : ''}`}
-        //               >
-        //               <svg
-        //                 className="w-4 h-4 fill-current"
-        //                 viewBox="0 0 20 20"
-        //               >
-        //                 <path d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" fillRule="evenodd" />
-        //               </svg>
-        //               </button>
-        //             </li>
-
-        //           {/* Número de página actual */}
- 
-        //             <li className={style.il}>
-        //               <button className="h-10 px-5 text-white transition-colors duration-150 bg-green-600 border border-r-0 border-green-600 focus:shadow-outline">
-        //                 {currentPage}
-        //               </button>
-        //             </li>
- 
-
-        //           {/* Botón de avance */}
-        //             <li className={style.il}>
-        //               <button
-        //                 onClick={goToNextPage}
-        //                 disabled={currentPage === Math.ceil(allProps.length / itemsPerPage)}
-        //                 className={`h-10 px-5 text-green-600 transition-colors duration-150 rounded-r-lg focus:shadow-outline hover:bg-green-100 ${currentPage === Math.ceil(allProps.length / itemsPerPage) ? 'hidden' : ''}`}
-        //               >
-        //                 <svg
-        //                   className="w-4 h-4 fill-current"
-        //                   viewBox="0 0 20 20"
-        //                 >
-        //                   <path d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" fillRule="evenodd" />
-        //                 </svg>
-        //               </button>
-        //            </li>
-        //       </div>
-        //     </div>
-        //   </div>
-       
-        // </div>
-
-
         <div className='flex flex-col bg-green-500 text-center '> 
             <div className='flex justify-center p-4'> 
               <select  class="border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -256,35 +124,66 @@ export default function ContainerF() {
               <div className='w-1/3 bg-blue-500'> Hola 2
                 <div class=" px-4 py-6">
 
-                  <h3 class="-mx-2 -my-3 flow-root">
+                  <h3 class="bg-green-500">
                       Servicios
                   </h3>
 
-                  <div class="border-t border-gray-200 py-6">
-                    <div class="flex flex-cols-2 ">
-                      <div class="flex items-center">
-                        <input id="filter-mobile-color-0" name="color[]" value="white" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"/>
-                        <label for="filter-mobile-color-0" class="ml-3 min-w-0 flex-1 text-gray-500">Agua Corriente</label>
+                  <div className='grid grid-cols-3 justify-center'>
+                      <div class="">
+                          <input id="default-checkbox1" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                          <label for="default-checkbox1" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Agua Corriente</label>
                       </div>
-                      <div class="flex items-center">
-                        <input id="filter-mobile-color-1" name="color[]" value="beige" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"/>
-                        <label for="filter-mobile-color-1" class="ml-3 min-w-0 flex-1 text-gray-500">Cloaca</label>
+                      <div class="">
+                          <input id="default-checkbox2" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                          <label for="default-checkbox2" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Cloaca</label>
                       </div>
-                      <div class="flex items-center">
-                        <input id="filter-mobile-color-3" name="color[]" value="brown" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"/>
-                        <label for="filter-mobile-color-3" class="ml-3 min-w-0 flex-1 text-gray-500">Gas Natural</label>
+                      <div class="">
+                          <input id="default-checkbox3" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                          <label for="default-checkbox3" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Gas Natural</label>
                       </div>
-                      <div class="flex items-center">
-                        <input id="filter-mobile-color-4" name="color[]" value="green" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"/>
-                        <label for="filter-mobile-color-4" class="ml-3 min-w-0 flex-1 text-gray-500">Electricidad</label>
+                      <div class="">
+                          <input id="default-checkbox4" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                          <label for="default-checkbox4" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Electricidad</label>
                       </div>
-                      <div class="flex items-center">
-                        <input id="filter-mobile-color-5" name="color[]" value="purple" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"/>
-                        <label for="filter-mobile-color-5" class="ml-3 min-w-0 flex-1 text-gray-500">Pavimento</label>
+                      <div class="">
+                          <input id="default-checkbox5" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                          <label for="default-checkbox5" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Pavimento</label>
                       </div>
-                    </div>
                   </div>
+
                   
+                </div>
+
+                <div class=" px-4 py-6">
+
+                  <h3 class="bg-green-500">
+                      Ambientes
+                  </h3>
+
+                  <div className='grid grid-cols-3 justify-center'>
+                      <div class="">
+                          <input id="default-checkbox1" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                          <label for="default-checkbox1" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Balcón</label>
+                      </div>
+                      <div class="">
+                          <input id="default-checkbox2" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                          <label for="default-checkbox2" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Comedor</label>
+                      </div>
+                      <div class="">
+                          <input id="default-checkbox3" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                          <label for="default-checkbox3" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Suite</label>
+                      </div>
+                      <div class="">
+                          <input id="default-checkbox4" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                          <label for="default-checkbox4" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Electricidad</label>
+                      </div>
+                      <div class="">
+                          <input id="default-checkbox5" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                          <label for="default-checkbox5" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Pavimento</label>
+                      </div>
+                  </div>
+
+
                 </div>
               </div>
 
