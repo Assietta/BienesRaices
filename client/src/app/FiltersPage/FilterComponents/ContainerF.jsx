@@ -54,7 +54,7 @@ export default function ContainerF() {
 
       const randomImageIndex = Math.floor(Math.random() * 5);
     return (
-        <div className='flex flex-col bg-green-500 text-center '> 
+        <div className='flex flex-col bg-gray text-center '> 
             <div className='flex justify-center p-4'> 
               <select  class="border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 <option hidden>Propiedad</option>
@@ -121,34 +121,26 @@ export default function ContainerF() {
 
             <div className='flex flex-row'>
 
-              <div className='w-1/3 bg-blue-500'> Hola 2
+              <div className='w-1/3 bg-gray-500'>
                 <div class=" px-4 py-6">
 
-                  <h3 class="bg-green-500">
+                  <h3 class="bg-white text-black">
                       Servicios
                   </h3>
 
                   <div className='grid grid-cols-3 justify-center'>
-                      <div class="">
-                          <input id="default-checkbox1" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
-                          <label for="default-checkbox1" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Agua Corriente</label>
-                      </div>
-                      <div class="">
-                          <input id="default-checkbox2" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
-                          <label for="default-checkbox2" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Cloaca</label>
-                      </div>
-                      <div class="">
-                          <input id="default-checkbox3" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
-                          <label for="default-checkbox3" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Gas Natural</label>
-                      </div>
-                      <div class="">
-                          <input id="default-checkbox4" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
-                          <label for="default-checkbox4" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Electricidad</label>
-                      </div>
-                      <div class="">
-                          <input id="default-checkbox5" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
-                          <label for="default-checkbox5" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Pavimento</label>
-                      </div>
+                  {tipe1.map((services) => (
+                      <label key={services} className={style.checkboxes}>
+                        <input
+                          type="checkbox"
+                          name="ambient"
+                          value={services}
+                        />
+                        <span className={style.checkboxText}>
+                          {services.charAt(0).toUpperCase() + services.slice(1)}
+                        </span>
+                      </label>
+                    ))}
                   </div>
 
                   
@@ -156,35 +148,50 @@ export default function ContainerF() {
 
                 <div class=" px-4 py-6">
 
-                  <h3 class="bg-green-500">
+                  <h3 class="bg-white text-black">
                       Ambientes
                   </h3>
-
+                  
                   <div className='grid grid-cols-3 justify-center'>
-                      <div class="">
-                          <input id="default-checkbox1" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
-                          <label for="default-checkbox1" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Balcón</label>
-                      </div>
-                      <div class="">
-                          <input id="default-checkbox2" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
-                          <label for="default-checkbox2" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Comedor</label>
-                      </div>
-                      <div class="">
-                          <input id="default-checkbox3" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
-                          <label for="default-checkbox3" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Suite</label>
-                      </div>
-                      <div class="">
-                          <input id="default-checkbox4" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
-                          <label for="default-checkbox4" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Electricidad</label>
-                      </div>
-                      <div class="">
-                          <input id="default-checkbox5" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
-                          <label for="default-checkbox5" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Pavimento</label>
-                      </div>
+                  {tipe2.map((ambient) => (
+                      <label key={ambient} className={style.checkboxes}>
+                        <input
+                          type="checkbox"
+                          name="ambient"
+                          value={ambient}
+                        />
+                        <span className={style.checkboxText}>
+                          {ambient.charAt(0).toUpperCase() + ambient.slice(1)}
+                        </span>
+                      </label>
+                    ))}
                   </div>
 
+                </div>
+
+                <div class=" px-4 py-6">
+
+                  <h3 class="bg-white text-black">
+                      Adicionales
+                  </h3>
+                  
+                  <div className='grid grid-cols-3 justify-center'>
+                  {tipe3.map((addons) => (
+                      <label key={addons} className={style.checkboxes}>
+                        <input
+                          type="checkbox"
+                          name="ambient"
+                          value={addons}
+                        />
+                        <span className={style.checkboxText}>
+                          {addons.charAt(0).toUpperCase() + addons.slice(1)}
+                        </span>
+                      </label>
+                    ))}
+                  </div>
 
                 </div>
+
               </div>
 
 
