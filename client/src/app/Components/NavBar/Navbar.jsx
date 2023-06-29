@@ -3,27 +3,26 @@ import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import Image from 'next/image'
-
+import Image from "next/image";
 
 const navigation = [
   {
-    label: "Home",
+    label: "Inicio",
     route: "/",
     current: true,
   },
   {
-    label: "About",
+    label: "Nosotros",
     route: "/About",
     current: false,
   },
   {
-    label: "Appraisals",
+    label: "Tasaciones",
     route: "/Appraisals",
     current: false,
   },
   {
-    label: "Contact",
+    label: "Contacto",
     route: "/Contact",
     current: false,
   },
@@ -73,21 +72,6 @@ export default function Example() {
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
-                    {/* {navigation.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className={classNames(
-                          item.current
-                            ? "bg-gray-900 text-white"
-                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                          "rounded-md px-3 py-2 text-sm font-medium"
-                        )}
-                        aria-current={item.current ? "page" : undefined}
-                      >
-                        {item.name}
-                      </a>
-                    ))} */}
                     {navigation.map(({ label, route }) => (
                       <Link
                         key={route}
@@ -97,24 +81,29 @@ export default function Example() {
                         {label}
                       </Link>
                     ))}
-                    <label htmlFor="email-address" className="sr-only">
-                      Searchbar
-                    </label>
-                    
                   </div>
                 </div>
               </div>
+
+              <div className="hidden sm:ml-6 sm:block">
+                <div className="flex space-x-4">
+                  <Link
+                    key="login"
+                    href="/login"
+                    className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                  >
+                    Iniciar sesión
+                  </Link>
+                </div>
+              </div>
+
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
                   <div>
                     <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="sr-only">Open user menu</span>
-                      {/* <img
-                        className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt=""
-                      /> */}
+
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
