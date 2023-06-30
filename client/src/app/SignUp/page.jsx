@@ -43,6 +43,13 @@ export default function SignUp() {
     }
     clearForm();
   };
+
+  const handleSingUpValidate = () => {
+    if (Object.keys(errors).length === 0) {
+      alert('Registro exitoso');
+    }
+  };
+
   return (
     <div class=" min-h-screen flex items-center justify-center bg-center py-12 px-4 sm:px-6 lg:px-8 bg-black bg-no-repeat bg-cover ">
       <div className=" mx-auto md:max-w-35rem h-50 space-y-8 p-10 bg-white rounded-xl shadow-lg z-10">
@@ -148,6 +155,7 @@ export default function SignUp() {
                   <button
                     class="mx-auto block mb-2 md:mb-0 bg-green-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500"
                     type="submit"
+                    onClick={handleSingUpValidate}
                   >
                     Enviar{' '}
                   </button>
