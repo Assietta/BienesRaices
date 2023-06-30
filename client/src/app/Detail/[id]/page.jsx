@@ -4,10 +4,6 @@ import axios from "axios";
 import styles from "./page.module.css";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
-
 export default function Example({ params }) {
   const [propiedad, setPropiedad] = useState();
   const [modalOpen, setModalOpen] = useState(false);
@@ -53,48 +49,7 @@ export default function Example({ params }) {
       { id: 1, name: propiedad.operations[0].operation_type },
       { id: 2, name: propiedad.type },
     ],
-    images: [
-      {
-        src: propiedad.photos[0],
-        alt: propiedad.photos[0],
-      },
-      {
-        src: propiedad.photos[1],
-        alt: propiedad.photos[1],
-      },
-      {
-        src: propiedad.photos[2],
-        alt: propiedad.photos[2],
-      },
-      {
-        src: propiedad.photos[3],
-        alt: propiedad.photos[3],
-      },
-    ],
-    colors: [
-      { name: "White", class: "bg-white", selectedClass: "ring-gray-400" },
-      { name: "Gray", class: "bg-gray-200", selectedClass: "ring-gray-400" },
-      { name: "Black", class: "bg-gray-900", selectedClass: "ring-gray-900" },
-    ],
-    sizes: [
-      { name: "XXS", inStock: false },
-      { name: "XS", inStock: true },
-      { name: "S", inStock: true },
-      { name: "M", inStock: true },
-      { name: "L", inStock: true },
-      { name: "XL", inStock: true },
-      { name: "2XL", inStock: true },
-      { name: "3XL", inStock: true },
-    ],
     description: propiedad.description,
-    highlights: [
-      "Hand cut and sewn locally",
-      "Dyed with our proprietary colors",
-      "Pre-washed & pre-shrunk",
-      "Ultra-soft 100% cotton",
-    ],
-    details:
-      'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
   };
 
   const images = [
