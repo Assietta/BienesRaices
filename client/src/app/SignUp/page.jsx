@@ -1,14 +1,15 @@
 'use client';
 import { useState } from 'react';
-import { validateForm } from '../Appraisals/validates';
+import { validateForm } from './validates';
 import axios from 'axios';
 
 export default function SignUp() {
   const [formData, setFormData] = useState({
-    name: '',
+    username: '',
     lastName: '',
     email: '',
     mobile: '',
+    password: ''
   });
 
   const [errors, setErrors] = useState({});
@@ -24,20 +25,20 @@ export default function SignUp() {
 
   const clearForm = () => {
     setFormData({
-      name: '',
+      username: '',
       lastName: '',
       email: '',
       mobile: '',
+      password: ''
     });
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const validationErrors = validateForm(formData, setErrors, errors);
-
     if (Object.keys(validationErrors).length === 0) {
       console.log(formData);
-      await axios.post('http://localhost:3001/signUp', formData);
+      await axios.post('http://localhost:3001/users', formData);
       console.log('Appraisals successfully send');
     }
     clearForm();
@@ -61,14 +62,14 @@ export default function SignUp() {
                   <div class="mb-3 space-y-2 w-full text-xs">
                     <label class="font-semibold text-gray-600 py-2">
                       {' '}
-                      Nombre <abbr title="required">*</abbr>
+                      Usuario <abbr title="required">*</abbr>
                     </label>
                     <input
                       placeholder="Ingresa tu nombre"
                       class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
                       type="text"
-                      name="name"
-                      value={formData.name}
+                      name="username"
+                      value={formData.username}
                       onChange={handleInputChange}
                     />
                     {errors.name && <p>{errors.name}</p>}
@@ -121,6 +122,24 @@ export default function SignUp() {
                       type="text"
                       name="mobile"
                       value={formData.mobile}
+                      onChange={handleInputChange}
+                    />
+                    {errors.mobile && <p>{errors.mobile}</p>}
+                  </div>
+
+                  {/* input password */}
+                  <div class="mb-3 space-y-2 w-full text-xs">
+                    <label class="font-semibold text-gray-600 py-2">
+                      {' '}
+                      Contraseña <abbr title="required">*</abbr>
+                    </label>
+                    <input
+                      placeholder="ingrese contraseña"
+                      class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
+                      required="required"
+                      type="password"
+                      name="password"
+                      value={formData.password}
                       onChange={handleInputChange}
                     />
                     {errors.mobile && <p>{errors.mobile}</p>}

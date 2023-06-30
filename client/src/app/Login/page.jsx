@@ -1,11 +1,18 @@
 'use client';
 import Link from 'next/link';
-import { useState } from 'react';
+import { use, useState } from 'react';
 import { validateForm } from './validates';
-import axios from 'axios';
 import SignUp from '../SignUp/page';
+import { signIn, useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 export default function Login() {
+  const router = useRouter()
+  const session = useSession()
+  console.log(session);
+
+  if(session.status === 'authenticated') router.push('/')
+
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -33,14 +40,13 @@ export default function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const validationErrors = validateForm(formData, setErrors, errors);
-
     if (Object.keys(validationErrors).length === 0) {
-      console.log(formData);
-      await axios.post('http://localhost:3001/login', formData);
-      console.log('Appraisals successfully send');
+      const res = await signIn('credentials', formData)
+      if(res?.ok) router.push('/home')
     }
     clearForm();
   };
+
   return (
     <div class=" min-h-screen flex items-center justify-center bg-center py-12 px-4 sm:px-6 lg:px-8 bg-black bg-no-repeat bg-cover ">
       <div className=" mx-auto md:max-w-35rem h-50 space-y-8 p-10 bg-white rounded-xl shadow-lg z-10">
@@ -100,6 +106,8 @@ export default function Login() {
                   >
                     Ingresar{' '}
                   </button>
+                  <button onClick={() => signIn('google')}>Iniciar sesión con Google</button>
+                  <button onClick={() => signIn('github')}>Iniciar sesión con GitHub</button>
                   <p style={{ fontSize: '11px', textAlign: 'center' }}>Or</p>
                   {/* <Link href={'/SignUp'}>
                     <button className="mx-auto block mb-2 md:mb-0 bg-blue-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-blue-500">

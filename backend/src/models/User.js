@@ -25,7 +25,7 @@ module.exports = (sequelize) => {
     },
     rol: {
         type: DataTypes.STRING,
-        allowNull: false
+        defaultValue: 'usuario',
     }
   });
 };

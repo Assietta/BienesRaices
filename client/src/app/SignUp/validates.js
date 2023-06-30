@@ -1,10 +1,10 @@
 export const validateForm = (formData) => {
   let errors = {};
 
-  if (!formData.name) {
-    errors.name = 'Nombre vacío';
+  if (!formData.username) {
+    errors.username = 'Nombre vacío';
   } else if (!/^[a-zA-Z\s]+$/.test(formData.firstName)) {
-    errors.firstName = 'Nombre inválido';
+    errors.username = 'Nombre inválido';
   }
 
   if (!formData.lastName) {
