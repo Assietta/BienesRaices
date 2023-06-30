@@ -94,18 +94,38 @@ export default function Login() {
                     {errors.password && <p>{errors.password}</p>}
                   </div>
 
+                  {/* botones */}
+
                   <button
                     className="mx-auto block mb-2 md:mb-0 bg-green-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500"
                     type="submit"
                   >
                     Ingresar{' '}
                   </button>
+
+                  <div className="flex justify-center">
+                    <Link href={'/api/auth/signin/google'}>
+                      <button className="mx-auto block mb-2 md:mb-0 bg-blue-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-blue-500">
+                        Google
+                      </button>
+                    </Link>
+
+                    <Link href={'/api/auth/signin/facebook'}>
+                      <button className="mx-auto block mb-2 md:mb-0 bg-blue-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-blue-500">
+                        Facebook
+                      </button>
+                    </Link>
+                  </div>
+
                   <p style={{ fontSize: '11px', textAlign: 'center' }}>Or</p>
+
                   {/* <Link href={'/SignUp'}>
                     <button className="mx-auto block mb-2 md:mb-0 bg-blue-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-blue-500">
                       Registrarse
                     </button>
                   </Link> */}
+
+                  {/* Registro */}
                   <button
                     className="mx-auto block mb-2 md:mb-0 bg-blue-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-blue-500"
                     type="button"
