@@ -1,3 +1,5 @@
+const { v4: uuidv4 } = require('uuid');
+
 const cleanData = (data) => {
   const objects = data.objects;
   const cleanedData = [];
@@ -49,6 +51,15 @@ const cleanData = (data) => {
       };
     }) || [];
 
+
+    const cleanedTags = tags.map(tag => {
+      return {
+        id: uuidv4(), // Genera un UUID único para cada tag
+        name: tag.name,
+        type: tag.type
+      };
+    });
+
     const cleanedObject = {
       address,
       real_address,
@@ -75,7 +86,7 @@ const cleanData = (data) => {
       description,
       videos,
       photos,
-      tags,
+      tags: cleanedTags,
       geo_lat,
       geo_long,
       ...cleanedOperations[0],
