@@ -53,9 +53,28 @@ const handler = NextAuth({
           console.error(error);
           return null;
         }
-    }})
+    },
+    
+  })
     // Puedes agregar más proveedores aquí si lo deseas
-  ]
+  ],
+
+  pages: {
+    signIn: "/Login"
+  },
+  session: {
+    strategy: "jwt",
+  },
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) token.user = user;
+      return token;
+    },
+    async session({ session, token }) {
+      session.user = token.user
+      return session;
+    },
+  },
 })
 
 export { handler as GET, handler as POST }
