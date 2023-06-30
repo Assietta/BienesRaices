@@ -63,7 +63,10 @@ export default function ContainerF() {
       currency: "",
       minPrice: 0,
       maxPrice: 0,
-      tags: [""]
+      bathroom_amount: 0,
+      parking_lot_amount: 0,
+      room_amount: 0,
+      suite_amount: 0
     });
     
 
@@ -177,42 +180,20 @@ export default function ContainerF() {
                 <option value="USD">USD</option>
               </select>
 
-              <select  
-               name="minPrice"
+              <div className='flex flex-col'>
+                <label htmlFor="">Minimo</label>
+                <input name="minPrice" className='text-black'
                value={filters.minPrice}
-               onChange={handleChange}
-              className='text-black'>
-                <option hidden>Minimo</option>
-                <option value="0">0</option>
-                <option value="10000">10.000</option>
-                <option value="100000">100.000</option>
-                <option value="500000">500.000</option>
-                <option value="1000000">1.000.000</option>
-                <option value="5000000">5.000.000</option>
-                <option value="10000000">10.000.000</option>
-                <option value="50000000">50.000.000</option>
-                <option value="100000000">100.000.000</option>
-                <option value="250000000">250.000.000</option>
-                <option value="500000000">500.000.000</option>
-              </select>
-              <select 
-               name="maxPrice"
+               onChange={handleChange}/>
+              </div>
+
+              <div className='flex flex-col'>
+                <label htmlFor="">Maximo</label>
+                <input className='text-black' type="number" name="maxPrice"
                value={filters.maxPrice}
-               onChange={handleChange}
-              className='text-black'>
-                <option hidden>Maximo</option>
-                <option value="500000000">500.000.000</option>
-                <option value="250000000">250.000.000</option>
-                <option value="100000000">100.000.000</option>
-                <option value="50000000">50.000.000</option>
-                <option value="10000000">10.000.000</option>
-                <option value="5000000">5.000.000</option>
-                <option value="1000000">1.000.000</option>
-                <option value="500000">500.000</option>
-                <option value="100000">100.000</option>
-                <option value="10000">10.000</option>
-                <option value="0">0</option>
-              </select>
+               onChange={handleChange}/>
+              </div>
+              
               </div>
               <button onClick={handleClick}>Realizar filtro</button>
             </div>
@@ -223,6 +204,54 @@ export default function ContainerF() {
               <div className='w-1/3 bg-gray-500'>
                 <div class=" px-4 py-6">
 
+
+
+
+                <div className='flex flex-row m-4'>
+                <label htmlFor="" className='ml-5 mr-5'>Baños</label>
+                <input name="bathroom_amount" type='number' className='text-black'
+               value={filters.bathroom_amount}
+               onChange={handleChange}/>
+              </div>
+
+              <div className='flex flex-row m-4'>
+                <label htmlFor="" className='ml-5 mr-5'>Habitaciones</label>
+                <input name="room_amount" className='text-black' type='number'
+               value={filters.room_amount}
+               onChange={handleChange}/>
+              </div>
+
+              <div className='flex flex-row m-4'>
+                <label htmlFor="" className='ml-5 mr-5'>Dormitorios</label>
+                <input name="suite_amount" type='number' className='text-black'
+               value={filters.suite_amount}
+               onChange={handleChange}/>
+              </div>
+
+              <div className='flex flex-row m-4'>
+                <label htmlFor="" className='ml-5 mr-5'>Cocheras</label>
+                <input name="parking_lot_amount" type='number' className='text-black'
+               value={filters.parking_lot_amount}
+               onChange={handleChange}/>
+              </div>
+
+
+              <select  
+               name="orientation"
+               value={filters.orientation}
+               onChange={handleChange}
+              class="border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option hidden>Superficie</option>
+                <option value="Frente">0 a 25m2</option>
+                <option value="Frente">25m2 a 50m2</option>
+                <option value="Frente">50m2 a 75m2</option>
+                <option value="Frente">75m2 a 100m2</option>
+                <option value="Frente">100m2 a 200m2</option>
+                <option value="Frente">200m2 a 500m2</option>
+                <option value="Frente">mas de 500m2</option>
+              </select>
+
+              
                   <h3 class="bg-white text-black">
                       Servicios
                   </h3>
@@ -244,7 +273,7 @@ export default function ContainerF() {
 
                   
                 </div>
-
+                    
                 <div class=" px-4 py-6">
 
                   <h3 class="bg-white text-black">
