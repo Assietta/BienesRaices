@@ -89,7 +89,7 @@ import { useState, useEffect, useRef } from 'react';
           </div>
           <div className="relative  w-full ">
             <img
-              src="https://i.ibb.co/TLLBYMn/agente-inmobiliario-vista-lateral-presentando-casa.jpg"
+              src="https://i.ibb.co/BcFQvvW/pareja-feliz-llaves-apartamento-nuevo.jpg"
               alt="image 1"
               className=" w-full object-cover"
             />
