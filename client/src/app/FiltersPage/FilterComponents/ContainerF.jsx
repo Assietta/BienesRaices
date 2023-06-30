@@ -12,16 +12,90 @@ import {
     OrderByPrice
   } from '../../../redux/actions';
 import { SearchBar } from '@/app/Components/SearchBar/SearchBar';
-
+import axios from 'axios';
 
 export default function ContainerF() {
     const propsGlobal = useSelector((state) => state.allProps);
     const filterProps = useSelector((state) => state.allPropsCopy);
   
+   
+    
+    // // Tipo para el que deseas obtener los 20 elementos más repetidos (1, 2 o 3)
+    // const tipoDeseado = 3;
+    
+    // // Filtrar objetos por tipo deseado
+    // const objetosFiltrados = propsGlobal.filter(obj => obj.tags.find(tag => tag.type === tipoDeseado));
+    
+    // // Contar la cantidad de ocurrencias de cada nombre de tag
+    // const tagCounts = objetosFiltrados.reduce((counts, obj) => {
+      //   obj.tags.forEach(tag => {
+        //     if (tag.type === tipoDeseado) {
+          //       counts[tag.name] = (counts[tag.name] || 0) + 1;
+    //     }
+    //   });
+    //   return counts;
+    // }, {});
+    
+    // // Ordenar los nombres de tag en función de su recuento de ocurrencias de forma descendente
+    // const sortedTags = Object.keys(tagCounts).sort((a, b) => tagCounts[b] - tagCounts[a]);
+    
+    // // Tomar los 20 nombres de tag más repetidos
+    // const top20Tags = sortedTags.slice(0, 20);
+    
+    // console.log(top20Tags);
+    
     const tipe1 = ["Agua", "Corriente", "Cloaca", "Gas", "Natural", "Electricidad", "Pavimento"];
-    const tipe2 = ["Balcón", "Baulera", "Cocina", "Comedor", "Comedor diario", "Dependencia", "Suite", "Oficina", "Hall", "Lavadero", "Living", "Living-comedor", "Patio", "Toilette", "Vestidor", "Escritorio"];
-    const tipe3 = ["Aire Acondicionado", "individual", "Calefacción", "Hidromasaje", "Apto mascotas", "Cochera subterránea", "Luminoso", "Lavadero", "Calefacción individual"];
+    const tipe2 = ['Cocina', 'Living comedor', 'Balcón', 'Comedor', 'Living', 'Lavadero', 'Comedor diario', 'Escritorio', 'Oficina', 'Galería', 'Jardín', 'Toilette', 'Hall', 'Suite', 'Baulera', 'Vestidor', 'Dependencia', 'Biblioteca', 'Patio', 'Terraza'];
+    const tipe3 = ['Apto profesional', 'Calefacción individual', 'Apto mascotas', 'Luminoso', 'En construcción', 'Preinstalación de A/A', 'Parrilla', 'Solarium', 'Calefacción', 'Pileta', 'SUM', 'Cochera subterránea', 'Gimnasio', 'Calefacción por radiadores', 'Aire Acondicionado individual', 'Seguridad Porteria', 'Apto crédito', 'Alarma', 'Seguridad Diurna', 'Lavadero'];
   
+    
+    
+
+
+
+
+    const [propiedad, setPropiedad] = useState();
+
+    const [filters, setFilters] = useState({
+      type: "",
+      operation_type: "",
+      orientation: "",
+      currency: "",
+      minPrice: 0,
+      maxPrice: 0,
+      tags: [""]
+    });
+    
+
+    
+ 
+
+    const handleChange = (event) => {
+      const { name, value } = event.target;
+      setFilters((prevFilters) => ({
+        ...prevFilters,
+        [name]: value,
+      }));
+    };
+    
+    
+    
+  
+    const handleClick = () => {
+      axios
+        .post("http://localhost:3001/filter", filters)
+        .then((res) => {
+          if (res.data) {
+            setPropiedad(res.data);
+          } else {
+            window.alert("No hay propiedades con ese ID");
+          }
+        })
+        .catch((error) => {
+          console.error("Error al realizar la solicitud:", error);
+        });
+    };
+    
   
   
     const itemsPerPage = 9;
@@ -31,7 +105,7 @@ export default function ContainerF() {
   
     const indexOfLastCountry = currentPage * itemsPerPage;
     const indexOfFirstCountry = indexOfLastCountry - itemsPerPage;
-    const viewProps = allProps.slice(indexOfFirstCountry, indexOfLastCountry);
+    const viewProps = propiedad?.slice(indexOfFirstCountry, indexOfLastCountry);
 
 
     const goToPreviousPage = () => {
@@ -52,70 +126,95 @@ export default function ContainerF() {
         }
       }, [propsGlobal]);
 
-      const randomImageIndex = Math.floor(Math.random() * 5);
+      const randomImageIndex = 0
     return (
         <div className='flex flex-col bg-gray text-center '> 
             <div className='flex justify-center p-4'> 
-              <select  class="border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <option hidden>Propiedad</option>
-                <option value="US">Casa</option>
-                <option value="CA">Departamento</option>
-                <option value="FR">Francia</option>
-              </select>
+            <select
+              name="type"
+              value={filters.type}
+              onChange={handleChange}
+              className="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            >
+              <option hidden>Propiedad</option>
+              <option value="Casa">Casa</option>
+              <option value="Departamento">Departamento</option>
+              <option value="Oficina">Oficina</option>
+            </select>
 
-              <select  class="border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <option hidden>Operacion</option>
-                <option value="US">Venta</option>
-                <option value="CA">Alquiler</option>
-                <option value="CA">Alquiler Temporal</option>
-              </select>
+            <select
+              name="operation_type"
+              value={filters.operation_type}
+              onChange={handleChange}
+              className="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            >
+              <option hidden>Operación</option>
+              <option value="Venta">Venta</option>
+              <option value="Alquiler">Alquiler</option>
+            </select>
 
-              <select  class="border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
+              <select  
+               name="orientation"
+               value={filters.orientation}
+               onChange={handleChange}
+              class="border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 <option hidden>Orientacion</option>
-                <option value="US">Frente</option>
-                <option value="CA">Norte</option>
-                <option value="CA">Sur</option>
+                <option value="Frente">Frente</option>
+                <option value="Contrafrente">Contrafrente</option>
               </select>
 
               <SearchBar/>
               
               <div className='flex'>
-              <select  class="border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              <select  
+               name="currency"
+               value={filters.currency}
+               onChange={handleChange}
+              class="border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 <option hidden>Moneda</option>
-                <option value="US">ARS</option>
-                <option value="CA">USD</option>
+                <option value="ARS">ARS</option>
+                <option value="USD">USD</option>
               </select>
 
-              <select  className='text-black'>
+              <select  
+               name="minPrice"
+               value={filters.minPrice}
+               onChange={handleChange}
+              className='text-black'>
                 <option hidden>Minimo</option>
-                <option value="US">0</option>
-                <option value="CA">10.000</option>
-                <option value="CA">100.000</option>
-                <option value="CA">500.000</option>
-                <option value="CA">1.000.000</option>
-                <option value="CA">5.000.000</option>
-                <option value="CA">10.000.000</option>
-                <option value="CA">50.000.000</option>
-                <option value="CA">100.000.000</option>
-                <option value="CA">250.000.000</option>
-                <option value="CA">500.000.000</option>
+                <option value="0">0</option>
+                <option value="10000">10.000</option>
+                <option value="100000">100.000</option>
+                <option value="500000">500.000</option>
+                <option value="1000000">1.000.000</option>
+                <option value="5000000">5.000.000</option>
+                <option value="10000000">10.000.000</option>
+                <option value="50000000">50.000.000</option>
+                <option value="100000000">100.000.000</option>
+                <option value="250000000">250.000.000</option>
+                <option value="500000000">500.000.000</option>
               </select>
-              <select  className='text-black'>
+              <select 
+               name="maxPrice"
+               value={filters.maxPrice}
+               onChange={handleChange}
+              className='text-black'>
                 <option hidden>Maximo</option>
-                <option value="CA">500.000.000</option>
-                <option value="CA">250.000.000</option>
-                <option value="CA">100.000.000</option>
-                <option value="CA">50.000.000</option>
-                <option value="CA">10.000.000</option>
-                <option value="CA">5.000.000</option>
-                <option value="CA">1.000.000</option>
-                <option value="CA">500.000</option>
-                <option value="CA">100.000</option>
-                <option value="CA">10.000</option>
-                <option value="US">0</option>
+                <option value="500000000">500.000.000</option>
+                <option value="250000000">250.000.000</option>
+                <option value="100000000">100.000.000</option>
+                <option value="50000000">50.000.000</option>
+                <option value="10000000">10.000.000</option>
+                <option value="5000000">5.000.000</option>
+                <option value="1000000">1.000.000</option>
+                <option value="500000">500.000</option>
+                <option value="100000">100.000</option>
+                <option value="10000">10.000</option>
+                <option value="0">0</option>
               </select>
               </div>
-              
+              <button onClick={handleClick}>Realizar filtro</button>
             </div>
 
 
@@ -133,8 +232,8 @@ export default function ContainerF() {
                       <label key={services} className={style.checkboxes}>
                         <input
                           type="checkbox"
-                          name="ambient"
-                          value={services}
+                          name="tags"
+                          value={filters.tags}
                         />
                         <span className={style.checkboxText}>
                           {services.charAt(0).toUpperCase() + services.slice(1)}
@@ -198,7 +297,7 @@ export default function ContainerF() {
 
               <div className='w-full bg-white text-black'>
                 <div className='grid grid-cols-3 '>
-                  {viewProps.map((prop) => (
+                  {viewProps?.map((prop) => (
                     <Card
                       key={prop.id}
                       id={prop.id}
