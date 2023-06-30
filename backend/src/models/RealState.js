@@ -46,8 +46,20 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    operations: {
-      type: DataTypes.JSONB,
+    price: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    period: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    currency: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    operation_type: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
     orientation: {
