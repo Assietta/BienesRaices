@@ -11,6 +11,7 @@
   "dependencies": {
     "@headlessui/react": "^1.7.15",
     "@heroicons/react": "^2.0.18",
+    "@react-google-maps/api": "^2.18.1",
     "@types/node": "20.3.1",
     "@types/react": "18.2.13",
     "@types/react-dom": "18.2.6",
@@ -19,6 +20,7 @@
     "bcryptjs": "^2.4.3",
     "eslint": "8.43.0",
     "eslint-config-next": "13.4.6",
+    "mercadopago": "^1.5.16",
     "next": "13.4.6",
     "next-auth": "^4.22.1",
     "react": "18.2.0",
