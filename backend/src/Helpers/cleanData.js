@@ -7,27 +7,27 @@ const cleanData = (data) => {
   for (let i = 0; i < objects.length; i++) {
     const object = objects[i];
 
-    const address = object.fake_address || '';
+    const address = object.fake_address || "";
     const bathroom_amount = object.bathroom_amount || 0;
     const age = object.age || 0;
-    const description = object.description || '';
-    const disposition = object.disposition || '';
+    const description = object.description || "";
+    const disposition = object.disposition || "";
     const expenses = object.expenses || 0;
     const floors_amount = object.floors_amount || 0;
     const has_temporary_rent = object.has_temporary_rent;
-    const location = object.short_location || '';
-    const operations = object.operations || [];
-    const orientation = object.orientation || '';
+    const location = object.location.name || '';
+    const operations = object.operations || {};
+    const orientation = object.orientation || "";
     const parking_lot_amount = object.parking_lot_amount || 0;
-    const photos = object.photos?.map(photo => photo.image) || [''];
-    const real_address = object.real_address || '';
-    const property_condition = object.property_condition || '';
-    const roofed_surface = object.roofed_surface || '';
+    const photos = object.photos?.map((photo) => photo.image) || [""];
+    const real_address = object.real_address || "";
+    const property_condition = object.property_condition || "";
+    const roofed_surface = object.roofed_surface || "";
     const room_amount = object.room_amount || 0;
-    const semiroofed_surface = object.semiroofed_surface || '';
-    const situation = object.situation || '';
+    const semiroofed_surface = object.semiroofed_surface || "";
+    const situation = object.situation || "";
     const suite_amount = object.suite_amount || 0;
-    const surface = object.surface || '';
+    const surface = object.surface || "";
     const tags = object.tags || [{}];
     const toilet_amount = object.toilet_amount || 0;
     const total_surface = object.total_surface || '';
@@ -92,12 +92,13 @@ const cleanData = (data) => {
       ...cleanedOperations[0],
     };
 
+
     cleanedData.push(cleanedObject);
   }
-  
+
   return cleanedData;
 };
 
 module.exports = {
-  cleanData
+  cleanData,
 };

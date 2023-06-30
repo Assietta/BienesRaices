@@ -53,24 +53,26 @@ export default function Example() {
                   )}
                 </Disclosure.Button>
               </div>
-              <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+              <div className="flex items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
-                  <Image
-                    className="block h-8 w-auto lg:hidden"
-                    src="https://static.tokkobroker.com/tfw_images/5859_MR%20Propiedades/MR-LogoMRCUCICBA-003.png"
+                  {/* <Image
+                    className="block h-16 w-auto lg:hidden"
+                    src="https://i.ibb.co/pzFrvn1/logo-png-white.png"
                     alt="Your Company"
-                    width={50}
-                    height={50}
-                  />
+                    width={100}
+                    height={100}
+                  /> */}
                   <Image
-                    className="hidden h-8 w-auto lg:block"
-                    src="https://static.tokkobroker.com/tfw_images/5859_MR%20Propiedades/MR-LogoMRCUCICBA-003.png"
+                    className="hidden h-16 w-auto lg:block"
+                    src="https://i.ibb.co/pzFrvn1/logo-png-white.png"
                     alt="Your Company"
-                    width={50}
-                    height={50}
+                    width={100}
+                    height={100}
                   />
                 </div>
-                <div className="hidden sm:ml-6 sm:block">
+              </div>
+              <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                <div className="hidden sm:ml-6 sm:block justify-center align-center">
                   <div className="flex space-x-4">
                     {navigation.map(({ label, route }) => (
                       <Link
@@ -88,8 +90,8 @@ export default function Example() {
               <div className="hidden sm:ml-6 sm:block">
                 <div className="flex space-x-4">
                   <Link
-                    key="login"
-                    href="/login"
+                    key="Login"
+                    href="/Login"
                     className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                   >
                     Iniciar sesión
