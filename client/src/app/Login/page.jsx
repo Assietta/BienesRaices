@@ -9,7 +9,6 @@ import { useRouter } from 'next/navigation';
 export default function Login() {
   const router = useRouter();
   const session = useSession();
-  console.log(session);
 
   if (session.status === 'authenticated') router.push('/');
 
