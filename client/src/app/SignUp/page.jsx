@@ -101,7 +101,7 @@ export default function SignUp() {
                   <div class="mb-3 space-y-2 w-full text-xs">
                     <label class="font-semibold text-gray-600 py-2">
                       {' '}
-                      Mail <abbr title="required">*</abbr>
+                      correo electronico <abbr title="required">*</abbr>
                     </label>
                     <input
                       placeholder="nombre@dominio.com"

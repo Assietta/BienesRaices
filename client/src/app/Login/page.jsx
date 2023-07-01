@@ -57,7 +57,7 @@ export default function Login() {
         <div className=" mx-auto md:max-w-35rem h-50 space-y-8 p-10 bg-white rounded-xl shadow-lg z-10">
           <div className="mx-auto max-w-2xl lg:text-center">
             <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              Login
+              Iniciar sesion
             </p>
           </div>
           <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
@@ -70,11 +70,11 @@ export default function Login() {
                     <div className="mb-3 space-y-2 w-full text-xs">
                       <label className="font-semibold text-gray-600 py-2">
                         {' '}
-                        Mail <abbr title="required">*</abbr>
+                        Correo electronico <abbr title="required">*</abbr>
                       </label>
                       <input
                         placeholder="nombre@dominio.com"
-                        class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
+                        className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
                         required="required"
                         type="text"
                         name="email"
@@ -89,7 +89,7 @@ export default function Login() {
                     <div className="mb-3 space-y-2 w-full text-xs">
                       <label className="font-semibold text-gray-600 py-2">
                         {' '}
-                        Password <abbr title="required">*</abbr>
+                        Contraseña <abbr title="required">*</abbr>
                       </label>
                       <input
                         placeholder="ingrese su Password"
