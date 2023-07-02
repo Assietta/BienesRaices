@@ -10,13 +10,13 @@ const createOrderHandler = async (req, res) => {
 
   try {
     const property = await RealState.findOne({ where: { id: id } });
-    const price = parseFloat(property?.operations[0]?.prices[0]?.price) * 0.001;
+    const price = parseFloat(property?.price) * 0.001;
     const result = await mercadopago.preferences.create({
       items: [
         {
           title: id,
           quantity: 1,
-          currency_id: property?.operations[0]?.prices[0]?.currency,
+          currency_id: property?.currency,
           unit_price: price,
         },
       ],
