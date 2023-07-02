@@ -10,19 +10,18 @@ export default function SignUp() {
     lastName: '',
     email: '',
     mobile: '',
-    password: ''
+    password: '',
   });
 
   const [errors, setErrors] = useState({});
-    const [showLogin, setShowLogin] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setFormData({
-      ...formData,
+    setFormData((prevFormData) => ({
+      ...prevFormData,
       [name]: value,
-    });
-    setErrors(validateForm({ ...formData, [name]: value }));
+    }));
   };
 
   const clearForm = () => {
@@ -31,27 +30,24 @@ export default function SignUp() {
       lastName: '',
       email: '',
       mobile: '',
-      password: ''
+      password: '',
     });
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const validationErrors = validateForm(formData, setErrors, errors);
+    const validationErrors = validateForm(formData);
+    setErrors(validationErrors);
+
     if (Object.keys(validationErrors).length === 0) {
       console.log(formData);
       await axios.post('http://localhost:3001/users', formData);
       console.log('Signup successfully send');
+       alert('Registro exitoso');
       setShowLogin(true);
+      clearForm();
     }
-    clearForm();
-  };
-
-  const handleSingUpValidate = () => {
-    if (Object.keys(errors).length === 0) {
-      alert('Registro exitoso');
     
-    }
   };
 
   return (
@@ -160,7 +156,6 @@ export default function SignUp() {
                     <button
                       className="mx-auto block mb-2 md:mb-0 bg-green-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500"
                       type="submit"
-                      onClick={handleSingUpValidate}
                     >
                       Enviar{' '}
                     </button>

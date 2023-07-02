@@ -22,11 +22,10 @@ export default function Login() {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setFormData({
-      ...formData,
+    setFormData((prevFormData) => ({
+      ...prevFormData,
       [name]: value,
-    });
-    setErrors(validateForm({ ...formData, [name]: value }));
+    }));
   };
 
   const clearForm = () => {
@@ -38,12 +37,14 @@ export default function Login() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const validationErrors = validateForm(formData, setErrors, errors);
+    const validationErrors = validateForm(formData);
+    setErrors(validationErrors);
+
     if (Object.keys(validationErrors).length === 0) {
       const res = await signIn('credentials', formData);
       if (res?.ok) router.push('/home');
+      clearForm();
     }
-    clearForm();
   };
 
   const handleSignUpClick = () => {
@@ -125,7 +126,7 @@ export default function Login() {
                         Facebook
                       </button>
                     </div>
-                    <p style={{ fontSize: '11px', textAlign: 'center' }}>Or</p>
+                    <p style={{ fontSize: '11px', textAlign: 'center' }}>¿no tienes cuenta?</p>
 
                     {/* <Link href={'/SignUp'}>
                       <button className="mx-auto block mb-2 md:mb-0 bg-blue-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-blue-500">
