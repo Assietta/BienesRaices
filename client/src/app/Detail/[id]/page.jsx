@@ -43,10 +43,10 @@ export default function Example({ params }) {
 
   const product = {
     name: propiedad.address,
-    price: "$ " + propiedad.operations[0].prices[0].price,
+    price: propiedad.currency + "$ " + propiedad.price.toLocaleString(),
     href: "#",
     breadcrumbs: [
-      { id: 1, name: propiedad.operations[0].operation_type },
+      { id: 1, name: propiedad.operation_type },
       { id: 2, name: propiedad.type },
     ],
     description: propiedad.description,
@@ -183,7 +183,7 @@ export default function Example({ params }) {
           </div>
 
           {/* Options */}
-          <div className="mt-4 lg:row-span-3 lg:mt-0">
+          <div className="mt-4 lg:row-span-3 lg:mt-0 text-center md:text-left">
             <h2 className="sr-only">Product information</h2>
             <p className="text-3xl tracking-tight text-gray-900">
               {product.price}
@@ -200,7 +200,7 @@ export default function Example({ params }) {
               </div>
               <div className="mt-6 border-t border-gray-100">
                 <dl className="divide-y divide-gray-100">
-                  <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <div className="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                     <dt className="text-sm font-medium leading-6 text-gray-900">
                       Superficie cubierta
                     </dt>
@@ -208,7 +208,7 @@ export default function Example({ params }) {
                       {propiedad.roofed_surface} m²
                     </dd>
                   </div>
-                  <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <div className="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                     <dt className="text-sm font-medium leading-6 text-gray-900">
                       Superficie Total
                     </dt>
@@ -216,7 +216,7 @@ export default function Example({ params }) {
                       {propiedad.surface} m²
                     </dd>
                   </div>
-                  <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <div className="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                     <dt className="text-sm font-medium leading-6 text-gray-900">
                       Ambientes
                     </dt>
@@ -224,7 +224,7 @@ export default function Example({ params }) {
                       {propiedad.room_amount}
                     </dd>
                   </div>
-                  <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <div className="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                     <dt className="text-sm font-medium leading-6 text-gray-900">
                       Orientación
                     </dt>
@@ -232,7 +232,7 @@ export default function Example({ params }) {
                       {propiedad.orientation}
                     </dd>
                   </div>
-                  <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <div className="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                     <dt className="text-sm font-medium leading-6 text-gray-900">
                       Antigüedad
                     </dt>
@@ -259,7 +259,9 @@ export default function Example({ params }) {
               <h3 className="sr-only">Description</h3>
 
               <div className="space-y-6">
-                <p className="text-base text-gray-900">{product.description}</p>
+                <p className="text-base text-gray-900 leading-8">
+                  {product.description}
+                </p>
               </div>
             </div>
             <LoadScript googleMapsApiKey="AIzaSyDSHb1gBxjiShwN6LVC_bBnxt9E60TwvmI">
