@@ -1,26 +1,22 @@
-'use client';
-import React, { useEffect, useState } from 'react';
-import style from './CardsConteiner.module.css';
-import SearchBar from '../SearchBar/SearchBar';
-import Card from '../Card/Card';
-import { useDispatch, useSelector } from 'react-redux';
+"use client";
+import React, { useEffect, useState } from "react";
+import style from "./CardsConteiner.module.css";
+import SearchBar from "../SearchBar/SearchBar";
+import Card from "../Card/Card";
+import { useDispatch, useSelector } from "react-redux";
 import {
   getAllProperties,
   orderByOperation,
   orderByOrientation,
   orderByFloor,
-  OrderByPrice
-} from '../../../redux/actions';
+  OrderByPrice,
+} from "../../../redux/actions";
 
 const CardsConteiner = () => {
   const propsGlobal = useSelector((state) => state.allProps);
   const filterProps = useSelector((state) => state.allPropsCopy);
 
- 
-
-
-
-  const itemsPerPage = 8;
+  const itemsPerPage = 3;
   const [currentPage, setCurrentPage] = useState(1);
 
   const [allProps, setProps] = useState([]);
@@ -47,65 +43,62 @@ const CardsConteiner = () => {
     }
   }, [propsGlobal]);
 
-  const filterByPrice = (e) => {
-    dispatch(OrderByPrice(e.target.value));
+  // const filterByPrice = (e) => {
+  //   dispatch(OrderByPrice(e.target.value));
 
-    if (e.target.value === "All") {
-      setProps([...allProps]);
-    } else {
-      setProps([...filterProps]);
-    }
-    e.target.value = "";
-  };
+  //   if (e.target.value === "All") {
+  //     setProps([...allProps]);
+  //   } else {
+  //     setProps([...filterProps]);
+  //   }
+  //   e.target.value = "";
+  // };
 
-  const filterByOrientation = (e) => {
-    dispatch(orderByOrientation(e.target.value));
+  // const filterByOrientation = (e) => {
+  //   dispatch(orderByOrientation(e.target.value));
 
-    if (e.target.value === "All") {
-      setProps([...propsGlobal]);
-    } else {
-      const filteredProps = propsGlobal.filter(
-        (prop) => prop.orientation === e.target.value
-      );
-      setProps([...filteredProps]);
-    }
-    setCurrentPage(1); // Reinicia la página actual después de aplicar el filtro
-  };
+  //   if (e.target.value === "All") {
+  //     setProps([...propsGlobal]);
+  //   } else {
+  //     const filteredProps = propsGlobal.filter(
+  //       (prop) => prop.orientation === e.target.value
+  //     );
+  //     setProps([...filteredProps]);
+  //   }
+  //   setCurrentPage(1); // Reinicia la página actual después de aplicar el filtro
+  // };
 
-  const filterByOperation = (e) => {
-    dispatch(orderByOperation(e.target.value));
+  // const filterByOperation = (e) => {
+  //   dispatch(orderByOperation(e.target.value));
 
-    if (e.target.value === "All") {
-      setProps([...propsGlobal]);
-    } else {
-      const filteredProps = propsGlobal.filter(
-        (prop) => prop.operations[0]?.operation_type === e.target.value
-      );
-      setProps([...filteredProps]);
-    }
-    setCurrentPage(1); // Reinicia la página actual después de aplicar el filtro
-  };
+  //   if (e.target.value === "All") {
+  //     setProps([...propsGlobal]);
+  //   } else {
+  //     const filteredProps = propsGlobal.filter(
+  //       (prop) => prop.operations[0]?.operation_type === e.target.value
+  //     );
+  //     setProps([...filteredProps]);
+  //   }
+  //   setCurrentPage(1); // Reinicia la página actual después de aplicar el filtro
+  // };
 
-  const filterByFloor = (e) => {
-    dispatch(orderByFloor(e.target.value));
+  // const filterByFloor = (e) => {
+  //   dispatch(orderByFloor(e.target.value));
 
-    if (e.target.value === "") {
-      setProps([...propsGlobal]);
-    } else {
-      const filteredProps = propsGlobal.filter(
-        (prop) => prop.floors_amount === Number(e.target.value)
-      );
-      setProps([...filteredProps]);
-    }
-    setCurrentPage(1); // Reinicia la página actual después de aplicar el filtro
-  };
- const randomImageIndex = Math.floor(Math.random() * 5);
+  //   if (e.target.value === "") {
+  //     setProps([...propsGlobal]);
+  //   } else {
+  //     const filteredProps = propsGlobal.filter(
+  //       (prop) => prop.floors_amount === Number(e.target.value)
+  //     );
+  //     setProps([...filteredProps]);
+  //   }
+  //   setCurrentPage(1); // Reinicia la página actual después de aplicar el filtro
+  // };
+  const randomImageIndex = Math.floor(Math.random() * 5);
   return (
-    <>
-      <div className={style.filtersContainer}>
-        {/* <div className={style.searchBar}>
-          <SearchBar searchCountry={searchCountry} />
-        </div> */}
+    <div>
+      {/* <div className={style.filtersContainer}>
         <div className={style.filters}>
           <select className={style.selects} onChange={filterByOrientation}>
             <option value="" hidden>
@@ -140,7 +133,7 @@ const CardsConteiner = () => {
             <option value="3">3</option>
           </select>
 
-          {/* <select className={style.selects} onChange={filterByPrice}>
+          <select className={style.selects} onChange={filterByPrice}>
             <option value="" hidden>
               Price
             </option>
@@ -150,14 +143,14 @@ const CardsConteiner = () => {
             <option value="50000000">50.000.000</option>
             <option value="10000000">10.000.000</option>
             <option value="1000000">1.000.000</option>
-          </select> */}
+          </select> 
         </div>
-      </div>
+      </div> */}
 
+      <h1 className={style.title}>Propiedades Destacadas</h1>
       <div className={style.container}>
         {/* Card */}
         {viewProps.map((prop) => (
-          
           <Card
             key={prop.id}
             id={prop.id}
@@ -174,61 +167,64 @@ const CardsConteiner = () => {
             type={prop.type}
             price={prop.price}
             currency={prop.currency}
-            
           />
         ))}
+      </div>
+      <div>
+        {/* Paginación */}
+        <div className={style.pagination}>
+          {/* Botón de retroceso */}
+          <li className={style.il}>
+            <button
+              onClick={goToPreviousPage}
+              disabled={currentPage === 1}
+              className={`h-10 px-5 text-green-600 transition-colors duration-150 rounded-l-lg focus:shadow-outline hover:bg-green-100 ${
+                currentPage === 1 ? "hidden" : ""
+              }`}
+            >
+              <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                <path
+                  d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                  clipRule="evenodd"
+                  fillRule="evenodd"
+                />
+              </svg>
+            </button>
+          </li>
 
-          {/* Paginación */}
-<div className={style.pagination}>
-  {/* Botón de retroceso */}
-  <li className={style.il}>
-    <button
-      onClick={goToPreviousPage}
-      disabled={currentPage === 1}
-      className={`h-10 px-5 text-green-600 transition-colors duration-150 rounded-l-lg focus:shadow-outline hover:bg-green-100 ${currentPage === 1 ? 'hidden' : ''}`}
-    >
-      <svg
-        className="w-4 h-4 fill-current"
-        viewBox="0 0 20 20"
-      >
-        <path d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" fillRule="evenodd" />
-      </svg>
-    </button>
-  </li>
+          {/* Número de página actual */}
 
-  {/* Número de página actual */}
- 
-  <li className={style.il}>
-    <button className="h-10 px-5 text-white transition-colors duration-150 bg-green-600 border border-r-0 border-green-600 focus:shadow-outline">
-      {currentPage}
-    </button>
-  </li>
- 
+          <li className={style.il}>
+            <button className="h-10 px-5 text-white transition-colors duration-150 bg-green-600 border border-r-0 border-green-600 focus:shadow-outline">
+              {currentPage}
+            </button>
+          </li>
 
-  {/* Botón de avance */}
-  <li className={style.il}>
-    <button
-      onClick={goToNextPage}
-      disabled={currentPage === Math.ceil(allProps.length / itemsPerPage)}
-      className={`h-10 px-5 text-green-600 transition-colors duration-150 rounded-r-lg focus:shadow-outline hover:bg-green-100 ${currentPage === Math.ceil(allProps.length / itemsPerPage) ? 'hidden' : ''}`}
-    >
-      <svg
-        className="w-4 h-4 fill-current"
-        viewBox="0 0 20 20"
-      >
-        <path d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" fillRule="evenodd" />
-      </svg>
-    </button>
-  </li>
-</div>
-
-
-
-        
-        <div class=" p-12 flex items-center flex-wrap">
+          {/* Botón de avance */}
+          <li className={style.il}>
+            <button
+              onClick={goToNextPage}
+              disabled={
+                currentPage === Math.ceil(allProps.length / itemsPerPage)
+              }
+              className={`h-10 px-5 text-green-600 transition-colors duration-150 rounded-r-lg focus:shadow-outline hover:bg-green-100 ${
+                currentPage === Math.ceil(allProps.length / itemsPerPage)
+                  ? "hidden"
+                  : ""
+              }`}
+            >
+              <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                <path
+                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                  clipRule="evenodd"
+                  fillRule="evenodd"
+                />
+              </svg>
+            </button>
+          </li>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
