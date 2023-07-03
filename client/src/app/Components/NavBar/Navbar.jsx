@@ -35,7 +35,7 @@ function classNames(...classes) {
 
 export default function Example() {
   const session = useSession();
-  console.log(session);
+  console.log(session)
 
   const autenticated = () => {
     if (session.status === 'authenticated') {
@@ -112,7 +112,7 @@ export default function Example() {
                   ) : (
                     <>
                       <p className="text-gray-300 rounded-md px-3 py-2 text-sm font-medium">
-                        Bienvenido
+                        {`Bienvenido ${session.data.user.name || session.data.user.username}`}
                       </p>
                       <Link
                         key="LogOut"
