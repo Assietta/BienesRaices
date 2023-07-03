@@ -105,28 +105,34 @@ export default function Login() {
 
                     {/* botones */}
                     <button
-                      className="mx-auto block mb-2 md:mb-0 bg-green-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500"
+                      className="mx-auto block mb-4 md:mb-1 bg-green-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500"
                       type="submit"
                     >
-                      Ingresar{' '}
+                      Ingresar
                     </button>
+
+                    <p style={{ fontSize: '11px', textAlign: 'center' }}>
+                      Iniciar sesion con:
+                    </p>
 
                     <div className="flex justify-center">
                       <button
                         onClick={() => signIn('google')}
-                        className="mx-auto block mb-2 md:mb-0 bg-blue-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-blue-500"
+                        className="mx-auto block mb-2 md:mb-0 mr-2 md:mr-4 bg-blue-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-blue-500"
                       >
                         Google
                       </button>
 
                       <button
                         onClick={() => signIn('facebook')}
-                        className="mx-auto block mb-2 md:mb-0 bg-blue-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-blue-500"
+                        className="mx-auto block mb-2 md:mb-0 ml-2 md:ml-4 bg-blue-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-blue-500"
                       >
                         Facebook
                       </button>
                     </div>
-                    <p style={{ fontSize: '11px', textAlign: 'center' }}>¿no tienes cuenta?</p>
+                    <p style={{ fontSize: '11px', textAlign: 'center' }}>
+                      ¿no tienes cuenta?
+                    </p>
 
                     {/* <Link href={'/SignUp'}>
                       <button className="mx-auto block mb-2 md:mb-0 bg-blue-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-blue-500">
