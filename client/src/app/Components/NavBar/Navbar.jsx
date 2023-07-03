@@ -1,38 +1,49 @@
-"use client";
+
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import Image from "next/image";
+import LogIn from "./LogIn"
 
 const navigation = [
   {
-    label: "Inicio",
-    route: "/",
+    label: 'Inicio',
+    route: '/',
     current: true,
   },
   {
-    label: "Nosotros",
-    route: "/About",
+    label: 'Nosotros',
+    route: '/About',
     current: false,
   },
   {
-    label: "Tasaciones",
-    route: "/Appraisals",
+    label: 'Tasaciones',
+    route: '/Appraisals',
     current: false,
   },
   {
-    label: "Contacto",
-    route: "/Contact",
+    label: 'Contacto',
+    route: '/Contact',
     current: false,
   },
 ];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
+  return classes.filter(Boolean).join(' ');
 }
 
 export default function Example() {
+  // const session = useSession();
+  // console.log(session)
+
+  // const autenticated = () => {
+  //   if (session.status === 'authenticated') {
+  //     return true;
+  //   } else session.status === 'unauthenticated';
+  //   return false;
+  // };
+
   return (
     <Disclosure
       as="nav"
@@ -87,17 +98,7 @@ export default function Example() {
                 </div>
               </div>
 
-              <div className="hidden sm:ml-6 sm:block">
-                <div className="flex space-x-4">
-                  <Link
-                    key="Login"
-                    href="/Login"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-                  >
-                    Iniciar sesión
-                  </Link>
-                </div>
-              </div>
+              <LogIn/>
 
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 {/* Profile dropdown */}
@@ -137,8 +138,8 @@ export default function Example() {
                           <a
                             href="#"
                             className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
+                              active ? 'bg-gray-100' : '',
+                              'block px-4 py-2 text-sm text-gray-700'
                             )}
                           >
                             Facebook
@@ -150,8 +151,8 @@ export default function Example() {
                           <a
                             href="#"
                             className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
+                              active ? 'bg-gray-100' : '',
+                              'block px-4 py-2 text-sm text-gray-700'
                             )}
                           >
                             Instagram
@@ -163,8 +164,8 @@ export default function Example() {
                           <a
                             href="#"
                             className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
+                              active ? 'bg-gray-100' : '',
+                              'block px-4 py-2 text-sm text-gray-700'
                             )}
                           >
                             Linkedin

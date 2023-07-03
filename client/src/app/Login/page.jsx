@@ -9,7 +9,6 @@ import { useRouter } from 'next/navigation';
 export default function Login() {
   const router = useRouter();
   const session = useSession();
-  console.log(session);
 
   if (session.status === 'authenticated') router.push('/');
 
@@ -23,11 +22,10 @@ export default function Login() {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setFormData({
-      ...formData,
+    setFormData((prevFormData) => ({
+      ...prevFormData,
       [name]: value,
-    });
-    setErrors(validateForm({ ...formData, [name]: value }));
+    }));
   };
 
   const clearForm = () => {
@@ -39,16 +37,18 @@ export default function Login() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const validationErrors = validateForm(formData, setErrors, errors);
+    const validationErrors = validateForm(formData);
+    setErrors(validationErrors);
+
     if (Object.keys(validationErrors).length === 0) {
       const res = await signIn('credentials', formData);
       if (res?.ok) router.push('/home');
+      clearForm();
     }
-    clearForm();
   };
 
   const handleSignUpClick = () => {
-    setShowSignUp(true);
+    setShowSignUp(!showSignUp);
   };
 
   return (
@@ -57,7 +57,7 @@ export default function Login() {
         <div className=" mx-auto md:max-w-35rem h-50 space-y-8 p-10 bg-white rounded-xl shadow-lg z-10">
           <div className="mx-auto max-w-2xl lg:text-center">
             <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              Login
+              Iniciar sesion
             </p>
           </div>
           <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
@@ -70,11 +70,11 @@ export default function Login() {
                     <div className="mb-3 space-y-2 w-full text-xs">
                       <label className="font-semibold text-gray-600 py-2">
                         {' '}
-                        Mail <abbr title="required">*</abbr>
+                        Correo electronico <abbr title="required">*</abbr>
                       </label>
                       <input
                         placeholder="nombre@dominio.com"
-                        class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
+                        className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
                         required="required"
                         type="text"
                         name="email"
@@ -89,13 +89,13 @@ export default function Login() {
                     <div className="mb-3 space-y-2 w-full text-xs">
                       <label className="font-semibold text-gray-600 py-2">
                         {' '}
-                        Password <abbr title="required">*</abbr>
+                        Contraseña <abbr title="required">*</abbr>
                       </label>
                       <input
                         placeholder="ingrese su Password"
                         className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
                         required="required"
-                        type="text"
+                        type="password"
                         name="password"
                         value={formData.password}
                         onChange={handleInputChange}
@@ -105,44 +105,49 @@ export default function Login() {
 
                     {/* botones */}
                     <button
-                      className="mx-auto block mb-2 md:mb-0 bg-green-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500"
+                      className="mx-auto block mb-4 md:mb-1 bg-green-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500"
                       type="submit"
                     >
-                      Ingresar{' '}
+                      Ingresar
                     </button>
 
-                    <div className="flex justify-center">
-                      <button
-                        onClick={() => signIn('google')}
-                        className="mx-auto block mb-2 md:mb-0 bg-blue-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-blue-500"
-                      >
-                        Google
-                      </button>
+                    <p style={{ fontSize: '11px', textAlign: 'center' }}>
+                      Iniciar sesion con:
+                    </p>
+                  </form>
+                  <div className="flex justify-center">
+                    <button
+                      onClick={() => signIn('google')}
+                      className="mx-auto block mb-2 md:mb-0 mr-2 md:mr-4 bg-blue-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-blue-500"
+                    >
+                      Google
+                    </button>
 
-                      <button
-                        onClick={() => signIn('github')}
-                        className="mx-auto block mb-2 md:mb-0 bg-blue-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-blue-500"
-                      >
-                        Facebook
-                      </button>
-                    </div>
-                    <p style={{ fontSize: '11px', textAlign: 'center' }}>Or</p>
+                    <button
+                      onClick={() => signIn('facebook')}
+                      className="mx-auto block mb-2 md:mb-0 ml-2 md:ml-4 bg-blue-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-blue-500"
+                    >
+                      Facebook
+                    </button>
+                  </div>
+                  <p style={{ fontSize: '11px', textAlign: 'center' }}>
+                    ¿no tienes cuenta?
+                  </p>
 
-                    {/* <Link href={'/SignUp'}>
+                  {/* <Link href={'/SignUp'}>
                       <button className="mx-auto block mb-2 md:mb-0 bg-blue-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-blue-500">
                         Registrarse
                       </button>
                     </Link> */}
 
-                    {/* Registro */}
-                    <button
-                      className="mx-auto block mb-2 md:mb-0 bg-blue-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-blue-500"
-                      type="button"
-                      onClick={handleSignUpClick}
-                    >
-                      Registrarse
-                    </button>
-                  </form>
+                  {/* Registro */}
+                  <button
+                    className="mx-auto block mb-2 md:mb-0 bg-blue-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-blue-500"
+                    type="button"
+                    onClick={handleSignUpClick}
+                  >
+                    Registrarse
+                  </button>
                 </dd>
               </div>
             </dl>

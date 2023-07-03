@@ -1,16 +1,22 @@
 const { RealState } = require("../db");
 const mercadopago = require("mercadopago");
+require('dotenv').config();
+const {
+  TOKEN_MP
+} = process.env;
 
 const createOrderHandler = async (req, res) => {
   const { id } = req.params;
   mercadopago.configure({
     access_token:
-      "TEST-3997372599676210-062811-66dfa8cae7119a0899839a60c67bdbf6-261786889",
+      TOKEN_MP,
   });
 
   try {
+
     const property = await RealState.findOne({ where: { id: id } });
     const price = parseFloat(property?.price) * 0.001;
+    
     const result = await mercadopago.preferences.create({
       items: [
         {
