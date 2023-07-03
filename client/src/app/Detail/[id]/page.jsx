@@ -51,7 +51,7 @@ export default async function Example({ params }) {
 
   const product = {
     name: propiedad.address,
-    price: "$ " + propiedad.price,
+    price: propiedad.currency + "$ " + propiedad.price.toLocaleString(),
     href: "#",
     breadcrumbs: [
       { id: 1, name: propiedad.operation_type },
