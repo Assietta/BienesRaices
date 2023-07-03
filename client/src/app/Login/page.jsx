@@ -95,7 +95,7 @@ export default function Login() {
                         placeholder="ingrese su Password"
                         className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
                         required="required"
-                        type="text"
+                        type="password"
                         name="password"
                         value={formData.password}
                         onChange={handleInputChange}
@@ -114,41 +114,40 @@ export default function Login() {
                     <p style={{ fontSize: '11px', textAlign: 'center' }}>
                       Iniciar sesion con:
                     </p>
+                  </form>
+                  <div className="flex justify-center">
+                    <button
+                      onClick={() => signIn('google')}
+                      className="mx-auto block mb-2 md:mb-0 mr-2 md:mr-4 bg-blue-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-blue-500"
+                    >
+                      Google
+                    </button>
 
-                    <div className="flex justify-center">
-                      <button
-                        onClick={() => signIn('google')}
-                        className="mx-auto block mb-2 md:mb-0 mr-2 md:mr-4 bg-blue-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-blue-500"
-                      >
-                        Google
-                      </button>
+                    <button
+                      onClick={() => signIn('facebook')}
+                      className="mx-auto block mb-2 md:mb-0 ml-2 md:ml-4 bg-blue-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-blue-500"
+                    >
+                      Facebook
+                    </button>
+                  </div>
+                  <p style={{ fontSize: '11px', textAlign: 'center' }}>
+                    ¿no tienes cuenta?
+                  </p>
 
-                      <button
-                        onClick={() => signIn('facebook')}
-                        className="mx-auto block mb-2 md:mb-0 ml-2 md:ml-4 bg-blue-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-blue-500"
-                      >
-                        Facebook
-                      </button>
-                    </div>
-                    <p style={{ fontSize: '11px', textAlign: 'center' }}>
-                      ¿no tienes cuenta?
-                    </p>
-
-                    {/* <Link href={'/SignUp'}>
+                  {/* <Link href={'/SignUp'}>
                       <button className="mx-auto block mb-2 md:mb-0 bg-blue-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-blue-500">
                         Registrarse
                       </button>
                     </Link> */}
 
-                    {/* Registro */}
-                    <button
-                      className="mx-auto block mb-2 md:mb-0 bg-blue-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-blue-500"
-                      type="button"
-                      onClick={handleSignUpClick}
-                    >
-                      Registrarse
-                    </button>
-                  </form>
+                  {/* Registro */}
+                  <button
+                    className="mx-auto block mb-2 md:mb-0 bg-blue-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-blue-500"
+                    type="button"
+                    onClick={handleSignUpClick}
+                  >
+                    Registrarse
+                  </button>
                 </dd>
               </div>
             </dl>
