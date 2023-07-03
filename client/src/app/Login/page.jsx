@@ -48,7 +48,7 @@ export default function Login() {
   };
 
   const handleSignUpClick = () => {
-    setShowSignUp(true);
+    setShowSignUp(!showSignUp);
   };
 
   return (
