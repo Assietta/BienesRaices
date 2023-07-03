@@ -11,6 +11,7 @@ export default function SignUp() {
     email: '',
     mobile: '',
     password: '',
+    confirmPassword: '',
   });
 
   const [errors, setErrors] = useState({});
@@ -31,6 +32,7 @@ export default function SignUp() {
       email: '',
       mobile: '',
       password: '',
+      confirmPassword: '',
     });
   };
 
@@ -43,11 +45,10 @@ export default function SignUp() {
       console.log(formData);
       await axios.post('http://localhost:3001/users', formData);
       console.log('Signup successfully send');
-       alert('Registro exitoso');
+      alert('Registro exitoso');
       setShowLogin(true);
       clearForm();
     }
-    
   };
 
   return (
@@ -80,7 +81,7 @@ export default function SignUp() {
                         value={formData.username}
                         onChange={handleInputChange}
                       />
-                      {errors.name && <p>{errors.name}</p>}
+                      {errors.username && <p>{errors.username}</p>}
                     </div>
                     {/* input apellido */}
                     <div className="mb-3 space-y-2 w-full text-xs">
@@ -150,7 +151,27 @@ export default function SignUp() {
                         value={formData.password}
                         onChange={handleInputChange}
                       />
-                      {errors.mobile && <p>{errors.mobile}</p>}
+                      {errors.password && <p>{errors.password}</p>}
+                    </div>
+
+                    {/* input password confirm */}
+                    <div className="mb-3 space-y-2 w-full text-xs">
+                      <label className="font-semibold text-gray-600 py-2">
+                        {' '}
+                        Confirmar Contraseña <abbr title="required">*</abbr>
+                      </label>
+                      <input
+                        placeholder="confirmar contraseña"
+                        className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
+                        required="required"
+                        type="password"
+                        name="confirmPassword"
+                        value={formData.confirmPassword}
+                        onChange={handleInputChange}
+                      />
+                      {errors.confirmPassword && (
+                        <p>{errors.confirmPassword}</p>
+                      )}
                     </div>
 
                     <button
