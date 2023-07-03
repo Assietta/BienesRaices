@@ -112,8 +112,19 @@ export default function Example() {
                   ) : (
                     <>
                       <p className="text-gray-300 rounded-md px-3 py-2 text-sm font-medium">
-                        {`Bienvenido ${session.data.user.name || session.data.user.username}`}
+                        {`Bienvenido ${
+                          session.data.user.name || session.data.user.username
+                        }`}
                       </p>
+                      {session.data.user.image && (
+                        <Image
+                          className="hidden h-10 w-auto lg:block"
+                          src={session.data.user.image}
+                          alt="image"
+                          width={100}
+                          height={100}
+                        />
+                      )}
                       <Link
                         key="LogOut"
                         href="/api/auth/signout"

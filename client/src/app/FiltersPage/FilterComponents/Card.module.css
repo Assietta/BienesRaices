@@ -1,18 +1,16 @@
 .card {
   background-color: white;
   color: black;
-  box-shadow: 8px 7px 10px 3px rgba(0, 0, 0, 0.212);
-  width: 300px;
-  height: auto;
-  margin: 20px 20px;
+  box-shadow: 10px 9px 12px 5px rgb(0 0 0 / 50%);
+  width: 400px;
+  height: 500px;
+  margin: 20px 70px;
   border-radius: 15px;
-  transition: 0.5s ease-in-out;
-
 }
 
 /* Transición */
 .card.transition-transform {
-  transition: transform 1s ease-in-out;
+  transition: transform 0.3s ease;
 }
 
 /* Transformación */
@@ -21,13 +19,12 @@
 }
 
 /* Efecto hover */
-/* .card.hovered {
+.card.hovered {
   transform: translateY(-2px);
-} */
+}
 
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 10px 9px 12px 5px rgba(0, 0, 0, 0.521);
+  transform: translateY(-2px);
 }
 
 

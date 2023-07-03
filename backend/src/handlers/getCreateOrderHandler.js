@@ -1,32 +1,34 @@
 const { RealState } = require("../db");
 const mercadopago = require("mercadopago");
+require('dotenv').config();
+const {
+  TOKEN_MP
+} = process.env;
 
 const createOrderHandler = async (req, res) => {
   const { id } = req.params;
   mercadopago.configure({
     access_token:
-      "TEST-3997372599676210-062811-66dfa8cae7119a0899839a60c67bdbf6-261786889",
+      TOKEN_MP,
   });
 
   try {
-    const property = await RealState.findOne({   where: { id: id }});
-    const price= parseFloat(property?.operations[0]?.prices[0]?.price) * 0.001
-;
 
+    const property = await RealState.findOne({ where: { id: id } });
+    const price = parseFloat(property?.price) * 0.001;
+    
     const result = await mercadopago.preferences.create({
       items: [
         {
           title: id,
           quantity: 1,
-          currency_id: property?.operations[0]?.prices[0]?.currency,
+          currency_id: property?.currency,
           unit_price: price,
         },
       ],
-
     });
 
     const preferenceId = result.response.id;
-   
 
     // const handleReservarClick = async () => {
     //   try {
@@ -39,9 +41,7 @@ const createOrderHandler = async (req, res) => {
     //     // Manejar el error de acuerdo a tus necesidades
     //   }
     // };
-  
 
-    
     res.send(preferenceId);
     // res.redirect(redirectUrl);
   } catch (error) {
