@@ -7,32 +7,42 @@ import Image from "next/image";
 
 const navigation = [
   {
-    label: "Inicio",
-    route: "/",
+    label: 'Inicio',
+    route: '/',
     current: true,
   },
   {
-    label: "Nosotros",
-    route: "/About",
+    label: 'Nosotros',
+    route: '/About',
     current: false,
   },
   {
-    label: "Tasaciones",
-    route: "/Appraisals",
+    label: 'Tasaciones',
+    route: '/Appraisals',
     current: false,
   },
   {
-    label: "Contacto",
-    route: "/Contact",
+    label: 'Contacto',
+    route: '/Contact',
     current: false,
   },
 ];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
+  return classes.filter(Boolean).join(' ');
 }
 
 export default function Example() {
+  const session = useSession();
+  console.log(session)
+
+  const autenticated = () => {
+    if (session.status === 'authenticated') {
+      return true;
+    } else session.status === 'unauthenticated';
+    return false;
+  };
+
   return (
     <Disclosure
       as="nav"
@@ -89,13 +99,40 @@ export default function Example() {
 
               <div className="hidden sm:ml-6 sm:block">
                 <div className="flex space-x-4">
-                  <Link
-                    key="Login"
-                    href="/Login"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-                  >
-                    Iniciar sesión
-                  </Link>
+                  {!autenticated() ? (
+                    <Link
+                      key="Login"
+                      href="/Login"
+                      className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                      onClick={() => handleSignUpClick()}
+                    >
+                      Iniciar sesión
+                    </Link>
+                  ) : (
+                    <>
+                      <p className="text-gray-300 rounded-md px-3 py-2 text-sm font-medium">
+                        {`Bienvenido ${
+                          session.data.user.name || session.data.user.username
+                        }`}
+                      </p>
+                      {session.data.user.image && (
+                        <Image
+                          className="hidden h-10 w-auto lg:block"
+                          src={session.data.user.image}
+                          alt="image"
+                          width={100}
+                          height={100}
+                        />
+                      )}
+                      <Link
+                        key="LogOut"
+                        href="/api/auth/signout"
+                        className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                      >
+                        Cerrar Sesion
+                      </Link>
+                    </>
+                  )}
                 </div>
               </div>
 
@@ -137,8 +174,8 @@ export default function Example() {
                           <a
                             href="#"
                             className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
+                              active ? 'bg-gray-100' : '',
+                              'block px-4 py-2 text-sm text-gray-700'
                             )}
                           >
                             Facebook
@@ -150,8 +187,8 @@ export default function Example() {
                           <a
                             href="#"
                             className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
+                              active ? 'bg-gray-100' : '',
+                              'block px-4 py-2 text-sm text-gray-700'
                             )}
                           >
                             Instagram
@@ -163,8 +200,8 @@ export default function Example() {
                           <a
                             href="#"
                             className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
+                              active ? 'bg-gray-100' : '',
+                              'block px-4 py-2 text-sm text-gray-700'
                             )}
                           >
                             Linkedin

@@ -44,7 +44,8 @@ export default function Example() {
     if (Object.keys(validationErrors).length === 0) {
       console.log(formData);
       await axios.post('http://localhost:3001/contact', formData);
-      console.log('Appraisals successfully send');
+      alert('Contacto enviado');
+      console.log('Contact successfully send');
       clearForm();
     }
   };
@@ -94,7 +95,7 @@ export default function Example() {
                   {/* input mail */}
                   <div className="mb-3 space-y-2 w-full text-xs">
                     <label className="font-semibold text-gray-600 py-2">
-                      Mail <abbr title="required">*</abbr>
+                      Correo electronico <abbr title="required">*</abbr>
                     </label>
                     <input
                       placeholder="nombre@dominio.com"
