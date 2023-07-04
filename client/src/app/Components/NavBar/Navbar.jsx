@@ -4,7 +4,7 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import Image from "next/image";
-import LogIn from "./LogIn"
+import { useSession, signOut } from "next-auth/react";
 
 const navigation = [
   {
@@ -34,15 +34,15 @@ function classNames(...classes) {
 }
 
 export default function Example() {
-  // const session = useSession();
-  // console.log(session)
+  const session = useSession();
+  console.log(session)
 
-  // const autenticated = () => {
-  //   if (session.status === 'authenticated') {
-  //     return true;
-  //   } else session.status === 'unauthenticated';
-  //   return false;
-  // };
+  const autenticated = () => {
+    if (session.status === 'authenticated') {
+      return true;
+    } else session.status === 'unauthenticated';
+    return false;
+  };
 
   return (
     <Disclosure
@@ -125,13 +125,13 @@ export default function Example() {
                           height={100}
                         />
                       )}
-                      <Link
+                      <button
                         key="LogOut"
-                        href="/api/auth/signout"
+                        onClick={()=> signOut()}
                         className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                       >
                         Cerrar Sesion
-                      </Link>
+                      </button>
                     </>
                   )}
                 </div>
