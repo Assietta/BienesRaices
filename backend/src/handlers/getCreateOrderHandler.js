@@ -42,8 +42,8 @@ const createOrderHandler = async (req, res) => {
     //   }
     // };
 
-    res.send(preferenceId);
-    // res.redirect(redirectUrl);
+    // res.send(preferenceId);
+    res.redirect(redirectUrl);
   } catch (error) {
     console.error(error);
     res.status(500).send("Error al crear la orden");
