@@ -25,7 +25,7 @@ const createOrderHandler = async (req, res) => {
           currency_id: property?.currency,
           unit_price: price,
         },
-      ],
+      ],notification_url:'https://bienesraices-production-9eb3.up.railway.app/webhook'
     });
 
     const preferenceId = result.response.id;
@@ -50,4 +50,29 @@ const createOrderHandler = async (req, res) => {
   }
 };
 
-module.exports = { createOrderHandler };
+
+const webhookHandler=async(req, res)=>{
+  // const payment= req.query.payment_id;
+  console.log(req.body);
+  
+  // try {
+  
+  //   //   const data= await  axios.get(`https://api.mercadopago.com/v1/payments/${payment}`, {
+  //   //     headers: {
+  //   //         'Authorization': `Bearer TEST-4304274978344220-062414-3619cd7e5c484d5fcb746d26d1cc68c0-1406402853`
+  //   //     }
+  //   // }).then(response => {
+  //   //     console.log(response.data);
+  //   // }).catch(error => {
+  //   //     console.error(error);
+  //   // });
+  //   console.log(payment);
+    
+    res.status(200).send("OK");
+  // } catch (error) {
+  //   console.log(error);
+  
+  // }
+  };
+
+module.exports = { createOrderHandler , webhookHandler};

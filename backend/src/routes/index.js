@@ -14,11 +14,13 @@ const { mailHandler } = require('../handlers/postMailHandler');
 const {createOrderHandler}= require('../handlers/getCreateOrderHandler');
 const { deleteRealStateHandler } = require('../handlers/deleteRealStateHandler')
 const { postFilterHandler } = require('../handlers/postFilterHandler');
+const {webhookHandler}= require('../handlers/getCreateOrderHandler');
 
 router.get('/realState', realStateHandler);
 router.get('/realState/:id', getPropertyIdHandler);
 router.get('/users', getUsersHandler);
 router.get('/createOrder/:id', createOrderHandler);
+router.post('/webhook', webhookHandler);
 
 router.post('/realState', postRealStateHandler);
 router.post('/users', postUserHandler);
