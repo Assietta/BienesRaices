@@ -52,7 +52,7 @@ export default function Login() {
   };
 
   return (
-    <div class=" min-h-screen flex items-center justify-center bg-center py-12 px-4 sm:px-6 lg:px-8 bg-black bg-no-repeat bg-cover ">
+    <div className=" min-h-screen flex items-center justify-center bg-center py-12 px-4 sm:px-6 lg:px-8 bg-black bg-no-repeat bg-cover ">
       {!showSignUp && (
         <div className=" mx-auto md:max-w-35rem h-50 space-y-8 p-10 bg-white rounded-xl shadow-lg z-10">
           <div className="mx-auto max-w-2xl lg:text-center">
@@ -124,7 +124,9 @@ export default function Login() {
                     </button>
 
                     <button
-                      onClick={() => signIn('facebook')}
+                      onClick={async() => {
+                        const res = await signIn('facebook')
+                      }}
                       className="mx-auto block mb-2 md:mb-0 ml-2 md:ml-4 bg-blue-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-blue-500"
                     >
                       Facebook

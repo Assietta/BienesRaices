@@ -116,7 +116,7 @@ export default function Example() {
                           session.data.user.name || session.data.user.username
                         }`}
                       </p>
-                      {session.data.user.image && (
+                      {session.data.user?.image && (
                         <Image
                           className="hidden h-10 w-auto lg:block"
                           src={session.data.user.image}

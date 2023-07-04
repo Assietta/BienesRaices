@@ -8,6 +8,7 @@ const nextConfig = {
       'static.tokkobroker.com',
       'flowbite.com',
       'lh3.googleusercontent.com',
+      'platform-lookaside.fbsbx.com'
     ],
   },
 };
