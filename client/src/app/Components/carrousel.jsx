@@ -1,4 +1,4 @@
-"use client"
+
 // import React from 'react';
 import { Carousel, Typography, Button } from "@material-tailwind/react";
  
@@ -29,16 +29,16 @@ import { useState, useEffect, useRef } from 'react';
                   color="white"
                   className="mb-4 text-3xl md:text-4xl lg:text-5xl"
                 >
-                  Confíe en Nosotros para su Éxito Inmobiliario: Su Socio de Confianza
+                Su Socio de Confianza
                 </Typography>
                 <Typography
                   variant="lead"
                   color="white"
                   className="mb-12 opacity-80"
                 >
-                 En nuestro equipo inmobiliario, comprendemos la importancia de su confianza al tomar decisiones sobre comprar o alquilar una propiedad.
-                  Nos comprometemos a brindarle un servicio confiable, transparente e integral. Nuestro enfoque personalizado y nuestra experiencia nos permiten ser su socio de confianza en este emocionante viaje.
-                 Juntos, haremos realidad su sueño inmobiliario.
+                 
+                 Nos comprometemos a brindarle un servicio confiable, transparente e integral. Nuestro enfoque personalizado y nuestra experiencia nos permiten ser su socio de confianza en este emocionante viaje.
+                 
                 </Typography>
                 {/* <div className="flex justify-center gap-2">
                   <Button size="lg" color="white">
@@ -66,15 +66,14 @@ import { useState, useEffect, useRef } from 'react';
                   color="white"
                   className="mb-4 text-3xl md:text-4xl lg:text-5xl"
                 >
-                  Compromiso Inquebrantable: Su Aliado para Comprar y Alquilar Propiedades de Ensueño
+                Su Aliado para Comprar y Alquilar Propiedades de Ensueño
                 </Typography>
                 <Typography
                   variant="lead"
                   color="white"
                   className="mb-12 opacity-80"
                 >
-                  En nuestra página inmobiliaria, entendemos la importancia del compromiso absoluto para satisfacer sus necesidades inmobiliarias. Nuestro equipo se compromete a brindarle un servicio excepcional y personalizado en la búsqueda y adquisición de su hogar ideal. Con una dedicación inquebrantable, trabajamos incansablemente para superar sus expectativas y hacer realidad sus sueños de propiedad. 
-                  Su satisfacción es nuestro mayor compromiso.
+                   Su satisfacción es nuestro mayor compromiso.
                 </Typography>
                 {/* <div className="flex justify-center gap-2">
                   <Button size="lg" color="white">
@@ -100,14 +99,14 @@ import { useState, useEffect, useRef } from 'react';
                   color="white"
                   className="mb-4 text-3xl md:text-4xl lg:text-5xl"
                 >
-                  Comunicación Transparente: La Clave para una Experiencia Inmobiliaria Exitosa
+                  La Clave para una Experiencia Inmobiliaria Exitosa
                 </Typography>
                 <Typography
                   variant="lead"
                   color="white"
                   className="mb-12 opacity-80"
                 >
-                  En nuestra página de venta y alquiler de propiedades, valoramos la comunicación transparente como pilar fundamental para una experiencia inmobiliaria satisfactoria. Nos esforzamos por mantener una comunicación clara y constante, manteniéndole informado en cada paso del proceso. Nuestro equipo estará a su disposición para responder a sus preguntas y brindarle actualizaciones regulares sobre el progreso de su transacción inmobiliaria. Con una comunicación fluida, garantizamos que se sienta involucrado y seguro durante todo el proceso. Confíe en nosotros para una experiencia inmobiliaria donde la comunicación sea la clave del éxito.
+                  Valoramos la comunicación transparente como pilar fundamental para una experiencia inmobiliaria satisfactoria.
                 </Typography>
                 {/* <div className="flex justify-center gap-2">
                   <Button size="lg" color="white">

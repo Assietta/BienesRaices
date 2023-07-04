@@ -1,10 +1,10 @@
-'use client';
-import { Fragment } from 'react';
-import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
-import Link from 'next/link';
-import Image from 'next/image';
-import { useSession } from 'next-auth/react';
+
+import { Fragment } from "react";
+import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+import Image from "next/image";
+import LogIn from "./LogIn"
 
 const navigation = [
   {
@@ -34,15 +34,15 @@ function classNames(...classes) {
 }
 
 export default function Example() {
-  const session = useSession();
-  console.log(session)
+  // const session = useSession();
+  // console.log(session)
 
-  const autenticated = () => {
-    if (session.status === 'authenticated') {
-      return true;
-    } else session.status === 'unauthenticated';
-    return false;
-  };
+  // const autenticated = () => {
+  //   if (session.status === 'authenticated') {
+  //     return true;
+  //   } else session.status === 'unauthenticated';
+  //   return false;
+  // };
 
   return (
     <Disclosure
