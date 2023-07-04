@@ -62,26 +62,27 @@ console.log(result);
 
 
 const webhookHandler=async(req, res)=>{
-const payment= req.query.payment_id;
+// const payment= req.query.payment_id;
+console.log(req.body);
 
-try {
+// try {
 
-  //   const data= await  axios.get(`https://api.mercadopago.com/v1/payments/${payment}`, {
-  //     headers: {
-  //         'Authorization': `Bearer TEST-4304274978344220-062414-3619cd7e5c484d5fcb746d26d1cc68c0-1406402853`
-  //     }
-  // }).then(response => {
-  //     console.log(response.data);
-  // }).catch(error => {
-  //     console.error(error);
-  // });
-  console.log(payment);
+//   //   const data= await  axios.get(`https://api.mercadopago.com/v1/payments/${payment}`, {
+//   //     headers: {
+//   //         'Authorization': `Bearer TEST-4304274978344220-062414-3619cd7e5c484d5fcb746d26d1cc68c0-1406402853`
+//   //     }
+//   // }).then(response => {
+//   //     console.log(response.data);
+//   // }).catch(error => {
+//   //     console.error(error);
+//   // });
+//   console.log(payment);
   
   res.status(200).send("OK");
-} catch (error) {
-  console.log(error);
+// } catch (error) {
+//   console.log(error);
 
-}
+// }
 };
 
 const approved =async(req, res)=>{
