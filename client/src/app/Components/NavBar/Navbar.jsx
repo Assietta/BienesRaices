@@ -1,10 +1,10 @@
-'use client';
-import { Fragment } from 'react';
-import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
-import Link from 'next/link';
-import Image from 'next/image';
-import { useSession } from 'next-auth/react';
+
+import { Fragment } from "react";
+import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+import Image from "next/image";
+import { useSession, signOut } from "next-auth/react";
 
 const navigation = [
   {
@@ -35,7 +35,6 @@ function classNames(...classes) {
 
 export default function Example() {
   const session = useSession();
-  console.log(session)
 
   const autenticated = () => {
     if (session.status === 'authenticated') {
@@ -105,7 +104,6 @@ export default function Example() {
                       key="Login"
                       href="/Login"
                       className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-                      onClick={() => handleSignUpClick()}
                     >
                       Iniciar sesión
                     </Link>
@@ -116,22 +114,22 @@ export default function Example() {
                           session.data.user.name || session.data.user.username
                         }`}
                       </p>
-                      {session.data.user.image && (
+                      {session.data.user?.image && (
                         <Image
-                          className="hidden h-10 w-auto lg:block"
+                          className="hidden h-10 w-auto lg:block rounded-full"
                           src={session.data.user.image}
                           alt="image"
                           width={100}
                           height={100}
                         />
                       )}
-                      <Link
+                      <button
                         key="LogOut"
-                        href="/api/auth/signout"
+                        onClick={() => signOut()}
                         className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                       >
                         Cerrar Sesion
-                      </Link>
+                      </button>
                     </>
                   )}
                 </div>

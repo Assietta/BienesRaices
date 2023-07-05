@@ -10,18 +10,25 @@ module.exports = (sequelize) => {
       allowNull: false,
       primaryKey: true
     },
+    provider:{
+      type:DataTypes.STRING,
+      defaultValue: 'credentials'
+    },
     username: {
       type: DataTypes.STRING,
       allowNull: false
     },
     email: {
       type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
+      allowNull: false
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
+    },
+    image: {
+      type:DataTypes.STRING(2080),
+      allowNull: true
     },
     rol: {
         type: DataTypes.STRING,
