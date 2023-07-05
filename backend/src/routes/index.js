@@ -15,6 +15,7 @@ const {createOrderHandler}= require('../handlers/postCreateOrderHandler');
 const { deleteRealStateHandler } = require('../handlers/deleteRealStateHandler')
 const { postFilterHandler } = require('../handlers/postFilterHandler');
 const {webhookHandler}= require('../handlers/postCreateOrderHandler');
+const {getOrdersHandler}= require('../handlers/getOrdersHandler');
 
 router.get('/realState', realStateHandler);
 router.get('/realState/:id', getPropertyIdHandler);
@@ -22,6 +23,7 @@ router.get('/users', getUsersHandler);
 router.get('/success', (req, res)=> res.send(req.query.payment_id));
 router.get('/pending', (req, res)=> res.send("pend") );
 router.get('/failure', (req, res)=> res.send("fail"));
+router.get('/orders', getOrdersHandler); 
 
 router.post('/realState', postRealStateHandler);
 router.post('/users', postUserHandler);
