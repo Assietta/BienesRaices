@@ -1,6 +1,5 @@
 import NextAuth from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
-import GitHubProvider from "next-auth/providers/github";
 import FacebookProvider from "next-auth/providers/facebook"
 import CredentialsProvider from "next-auth/providers/credentials";
 import axios from 'axios'
@@ -17,12 +16,7 @@ const handler = NextAuth({
       clientSecret: process.env.FACEBOOK_SECRET,
     }),
     CredentialsProvider({
-      // The name to display on the sign in form (e.g. "Sign in with...")
       name: 'Credentials',
-      // `credentials` is used to generate a form on the sign in page.
-      // You can specify which fields should be submitted, by adding keys to the `credentials` object.
-      // e.g. domain, username, password, 2FA token, etc.
-      // You can pass any HTML attribute to the <input> tag through the object.
       credentials: {
         username: { label: 'Username', type: 'text', placeholder: 'username' },
         email: { label: 'Email', type: 'text', placeholder: 'email' },
@@ -71,12 +65,67 @@ const handler = NextAuth({
     strategy: 'jwt',
   },
   callbacks: {
+    async signIn(user, account, profile) {
+      // Se verifica si el usuario ha iniciado sesión con Google o Facebook
+      const { data } = await axios('http://localhost:3001/users')
+      if (user.account?.provider === 'google') {
+        // Se guarda el usuario en la base de datos
+        const userDb = data.users?.find(userDb => userDb.email === user.user.email)
+
+        if(userDb?.password === '' && userDb.provider === 'google') {
+          return true
+        }
+        const newUser = {
+          provider: user.account.provider,
+          image: user.user.image,
+          email: user.user.email,
+          password: '', // No se guarda la contraseña para los usuarios de Google y Facebook
+          username: user.user.name,
+        };
+
+        await axios.post('http://localhost:3001/users', newUser);
+      }
+
+      if (user.account?.provider === 'facebook') {
+        // Se guarda el usuario en la base de datos
+        const userDb = data.users?.find(userDb => userDb.email === user.user.email)
+
+        if(userDb?.password === '' && userDb.provider === 'facebook') {
+          return true
+        }
+        const newUser = {
+          provider: user.account.provider,
+          image: user.user.image,
+          email: user.user.email,
+          password: '', // No se guarda la contraseña para los usuarios de Google y Facebook
+          username: user.user.name,
+        };
+
+        await axios.post('http://localhost:3001/users', newUser);
+      }
+
+      return true;
+    },
     async jwt({ token, user }) {
       if (user) token.user = user;
       return token;
     },
     async session({ session, token }) {
       session.user = token.user;
+      if(session.user.id.length === 21){
+        const provider = 'google'
+        const info = await axios('http://localhost:3001/users')
+        const userNew = info.data.users.find(userDb => userDb.email === session.user.email && userDb.provider === provider)
+        session.user = userNew
+      }
+      if(session.user.id.length === 16){
+        const provider = 'facebook'
+        const info = await axios('http://localhost:3001/users')
+        const userNew = info.data.users.find(userDb => userDb.email === session.user.email && userDb.provider === provider)
+        session.user = userNew
+      }
+      if(!session.user.image) session.user.image = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVkI_FHVMm6hQ_h9uBT_SgaBNvtGePVuYxRmol4cPMwN89l3343X6w4Msap6vcZs-AsCs&usqp=CAU'
+
       return session;
     },
   },

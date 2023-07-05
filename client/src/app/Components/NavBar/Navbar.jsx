@@ -4,7 +4,7 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import Image from "next/image";
-import LogIn from "./LogIn"
+import { useSession, signOut } from "next-auth/react";
 
 const navigation = [
   {
@@ -34,15 +34,14 @@ function classNames(...classes) {
 }
 
 export default function Example() {
-  // const session = useSession();
-  // console.log(session)
+  const session = useSession();
 
-  // const autenticated = () => {
-  //   if (session.status === 'authenticated') {
-  //     return true;
-  //   } else session.status === 'unauthenticated';
-  //   return false;
-  // };
+  const autenticated = () => {
+    if (session.status === 'authenticated') {
+      return true;
+    } else session.status === 'unauthenticated';
+    return false;
+  };
 
   return (
     <Disclosure
@@ -98,7 +97,43 @@ export default function Example() {
                 </div>
               </div>
 
-              <LogIn/>
+              <div className="hidden sm:ml-6 sm:block">
+                <div className="flex space-x-4">
+                  {!autenticated() ? (
+                    <Link
+                      key="Login"
+                      href="/Login"
+                      className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                    >
+                      Iniciar sesión
+                    </Link>
+                  ) : (
+                    <>
+                      <p className="text-gray-300 rounded-md px-3 py-2 text-sm font-medium">
+                        {`Bienvenido ${
+                          session.data.user.name || session.data.user.username
+                        }`}
+                      </p>
+                      {session.data.user?.image && (
+                        <Image
+                          className="hidden h-10 w-auto lg:block rounded-full"
+                          src={session.data.user.image}
+                          alt="image"
+                          width={100}
+                          height={100}
+                        />
+                      )}
+                      <button
+                        key="LogOut"
+                        onClick={() => signOut()}
+                        className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                      >
+                        Cerrar Sesion
+                      </button>
+                    </>
+                  )}
+                </div>
+              </div>
 
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 {/* Profile dropdown */}
