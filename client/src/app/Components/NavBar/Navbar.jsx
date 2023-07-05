@@ -35,7 +35,6 @@ function classNames(...classes) {
 
 export default function Example() {
   const session = useSession();
-  console.log(session)
 
   const autenticated = () => {
     if (session.status === 'authenticated') {
@@ -105,7 +104,6 @@ export default function Example() {
                       key="Login"
                       href="/Login"
                       className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-                      onClick={() => handleSignUpClick()}
                     >
                       Iniciar sesión
                     </Link>
