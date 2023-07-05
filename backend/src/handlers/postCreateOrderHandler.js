@@ -70,22 +70,23 @@ const createOrderHandler = async (req, res) => {
 const webhookHandler=async(req, res)=>{
   // const payment= req.query.payment_id;
   const payment= req.query;
+  console.log(payment);
   try {
     if(payment.type==="payment"){
       const data=await mercadopago.payment.findById(payment["data.id"]);
     console.log(data);
 
       // BUSCAR USER EN DB
-      const user = await User.findByPk(data.external_reference); // Asegúrate de que el modelo User exista y esté configurado correctamente
+      const user = await User.findByPk(data?.external_reference); // Asegúrate de que el modelo User exista y esté configurado correctamente
 
       // BUSCAR PROPERTY EN DB
-      const property = await RealState.findByPk(data.description); // Asegúrate de que el modelo RealState exista y esté configurado correctamente
+      const property = await RealState.findByPk(data?.description); // Asegúrate de que el modelo RealState exista y esté configurado correctamente
 
       // GUARDAR REGISTRO EN ORDERS
       const newOrder = await Order.create({
-        client_idDB: data.external_reference,
+        client_idDB: data?.external_reference,
         usernameDB: user.username,
-        property_idDB: data.description,
+        property_idDB: data?.description,
         address_of_property_to_reserveDB: property.address,
         date_created: data.date_created,
         chain: data.currency_id,
