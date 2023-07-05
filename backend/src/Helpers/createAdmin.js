@@ -7,8 +7,7 @@ const createAdmin = () => {
     const rol = 'admin'
     console.log(email, password, username, rol);
 
-    const user = postUserController(email, password, username, rol)
-    console.log(user);
+    postUserController(email, password, username, rol)
 }
 
 module.exports = createAdmin
