@@ -3,6 +3,8 @@ const mercadopago = require("mercadopago");
 const axios=require('axios');
 
 const createOrderHandler = async (req, res) => {
+  const userId = req.body.userId;
+ 
   const { id } = req.params;
   mercadopago.configure({
     access_token:
@@ -29,6 +31,7 @@ const createOrderHandler = async (req, res) => {
         pending: "http://localhost:3001/pending",
       },
       auto_return:"approved",
+      external_reference: userId,
       // notification_url: "https://d280-2802-8010-960b-6700-5565-878c-cb53-8ee7.sa.ngrok.io/webhook",
       // redirect_urls: { failure: 'https://d280-2802-8010-960b-6700-5565-878c-cb53-8ee7.sa.ngrok.io/failure', pending: 'https://d280-2802-8010-960b-6700-5565-878c-cb53-8ee7.sa.ngrok.io/pending', success: 'https://d280-2802-8010-960b-6700-5565-878c-cb53-8ee7.sa.ngrok.io/success' },
 
@@ -65,13 +68,17 @@ const webhookHandler=async(req, res)=>{
 // const payment= req.query.payment_id;
 const payment= req.query;
 try {
+
   if(payment.type==="payment"){
     const data=await mercadopago.payment.findById(payment["data.id"]);
-  console.log(data)
-  }
+  console.log(data);
+  //GUARDAR EN DB
+  //NOTIFICACION POR MAIL
+  res.status(200).send("OK");};
+  
 } catch (error) {
   return res.sendStatus(500).json({error: error.message});
-  res.status(200).send("OK");};
+}
 }
 // try {
 //   //   const data= await  axios.get(`https://api.mercadopago.com/v1/payments/${payment}`, {
