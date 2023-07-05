@@ -1,7 +1,8 @@
 const nodemailer = require('nodemailer');
-const { mailController } = require('../controllers/postMailController')
+const { mailController } = require('../controllers/postMailController');
 
-const mailHandler = async (req, res) => {
+
+const mailHandler = async (destinatario, asunto, cuerpo) => {
     try {
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
@@ -12,15 +13,15 @@ const mailHandler = async (req, res) => {
       pass: process.env.SMTP_PASS,
             },
     });  
-      const { destinatario, asunto, cuerpo } = req.body;
-
+      // const { destinatario, asunto, cuerpo } = req.body;
+      console.log(destinatario);
       const mailOptions = mailController(destinatario, asunto, cuerpo)
+      console.log(mailOptions);
       // Enviar el correo electrónico
       await transporter.sendMail(mailOptions);
-  
-      res.status(200).json({ message: 'Correo enviado con éxito' });
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      console.log(error);
+      throw new Error('No se pudo crear el mail');
     }
   };
 
