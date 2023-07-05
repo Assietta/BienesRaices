@@ -1,6 +1,8 @@
 const { RealState } = require("../db");
 const mercadopago = require("mercadopago");
 require('dotenv').config();
+const { mailHandler } = require('./postMailHandler');
+
 const {
   TOKEN_MP
 } = process.env;
@@ -105,9 +107,13 @@ const webhookHandler=async(req, res)=>{
       });
 
       console.log(newOrder);
-
+      let asunto='';
+      data.status==='approved'?  asunto='Su transacción ha sido exitosa': asunto='Su transacción ha sido rechazada';
+      const cuerpo = `Operación nº ${data.id}, cualquier consulta comunicate con nosotros`
 
     //NOTIFICACION POR MAIL
+    await mailHandler(user.email, asunto, cuerpo);
+
 
     res.status(200).send("OK");
     }
