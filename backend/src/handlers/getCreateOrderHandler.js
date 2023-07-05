@@ -71,9 +71,9 @@ try {
   }
 } catch (error) {
   return res.sendStatus(500).json({error: error.message});
+  res.status(200).send("OK");};
 }
 // try {
-
 //   //   const data= await  axios.get(`https://api.mercadopago.com/v1/payments/${payment}`, {
 //   //     headers: {
 //   //         'Authorization': `Bearer TEST-4304274978344220-062414-3619cd7e5c484d5fcb746d26d1cc68c0-1406402853`
@@ -85,12 +85,12 @@ try {
 //   // });
 //   console.log(payment);
   
-  res.status(200).send("OK");
+
 // } catch (error) {
 //   console.log(error);
 
 // }
-};
+
 
 const approved =async(req, res)=>{
   axios.get(`https://api.mercadopago.com/v1/payments/${paymentdId}`, {

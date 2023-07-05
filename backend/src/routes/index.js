@@ -25,7 +25,7 @@ router.post('/users', postUserHandler);
 router.post('/contact', postContactHandler);
 router.post('/appraisals', postAppraisalsHandler);
 router.post('/sendMail', mailHandler);
-router.get('/createOrder/:id', createOrderHandler);
+router.post('/createOrder/:id', createOrderHandler);
 router.post('/webhook', webhookHandler);
 router.get('/success', (req, res)=> res.send(req.query.payment_id));
 router.get('/pending', (req, res)=> res.send("pend") );
