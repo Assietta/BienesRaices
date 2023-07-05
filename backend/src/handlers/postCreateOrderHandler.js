@@ -2,6 +2,8 @@ const { RealState } = require("../db");
 const mercadopago = require("mercadopago");
 require('dotenv').config();
 const { mailHandler } = require('./postMailHandler');
+const { User } = require("../db");
+const { Order } = require("../db");
 
 const {
   TOKEN_MP
