@@ -25,7 +25,15 @@ const createOrderHandler = async (req, res) => {
           currency_id: property?.currency,
           unit_price: price,
         },
-      ],notification_url:'https://bienesraices-production-9eb3.up.railway.app/webhook'
+      ],
+      
+      back_urls: {
+        success: "https://bienesraices-production-9eb3.up.railway.app/success",
+        failure: "https://bienesraices-production-9eb3.up.railway.app/failure",
+        pending: "https://bienesraices-production-9eb3.up.railway.app/pending",
+      },
+      auto_return:"approved",
+      notification_url:'https://bienesraices-production-9eb3.up.railway.app/webhook'
     });
 
     const preferenceId = result.response.id;
@@ -74,6 +82,18 @@ const webhookHandler=async(req, res)=>{
   //   console.log(error);
   
   // }
-  };
+};
+
+const approved =async(req, res)=>{
+  axios.get(`https://api.mercadopago.com/v1/payments/${paymentdId}`, {
+    headers: {
+        'Authorization': `Bearer TEST-4304274978344220-062414-3619cd7e5c484d5fcb746d26d1cc68c0-1406402853`
+    }
+}).then(response => {
+    console.log(response.data);
+}).catch(error => {
+    console.error(error);
+});}
+
 
 module.exports = { createOrderHandler , webhookHandler};
