@@ -62,8 +62,15 @@ const createOrderHandler = async (req, res) => {
 
 const webhookHandler=async(req, res)=>{
   // const payment= req.query.payment_id;
-  console.log(req.body);
-  
+  const payment= req.query;
+  try {
+    if(payment.type==="payment"){
+      const data=await mercadopago.payment.findById(payment["data.id"]);
+    console.log(data)
+    }
+  } catch (error) {
+    return res.sendStatus(500).json({error: error.message});
+  }
   // try {
   
   //   //   const data= await  axios.get(`https://api.mercadopago.com/v1/payments/${payment}`, {
@@ -82,7 +89,7 @@ const webhookHandler=async(req, res)=>{
   //   console.log(error);
   
   // }
-};
+  };
 
 const approved =async(req, res)=>{
   axios.get(`https://api.mercadopago.com/v1/payments/${paymentdId}`, {
