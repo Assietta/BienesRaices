@@ -12,6 +12,7 @@ const {
 const createOrderHandler = async (req, res) => {
   const { id } = req.params;
   const userId = req.body.userId;
+  console.log(userId)
 
   mercadopago.configure({
     access_token:
