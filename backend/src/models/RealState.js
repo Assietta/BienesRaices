@@ -128,11 +128,11 @@ module.exports = (sequelize) => {
     },
     geo_long:{
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     geo_lat:{
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     }
   });
 };

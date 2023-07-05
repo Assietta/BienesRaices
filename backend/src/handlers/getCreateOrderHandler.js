@@ -29,8 +29,8 @@ const createOrderHandler = async (req, res) => {
         pending: "http://localhost:3001/pending",
       },
       auto_return:"approved",
-      notification_url: "https://d280-2802-8010-960b-6700-5565-878c-cb53-8ee7.sa.ngrok.io/webhook",
-      redirect_urls: { failure: 'https://d280-2802-8010-960b-6700-5565-878c-cb53-8ee7.sa.ngrok.io/failure', pending: 'https://d280-2802-8010-960b-6700-5565-878c-cb53-8ee7.sa.ngrok.io/pending', success: 'https://d280-2802-8010-960b-6700-5565-878c-cb53-8ee7.sa.ngrok.io/success' },
+      // notification_url: "https://d280-2802-8010-960b-6700-5565-878c-cb53-8ee7.sa.ngrok.io/webhook",
+      // redirect_urls: { failure: 'https://d280-2802-8010-960b-6700-5565-878c-cb53-8ee7.sa.ngrok.io/failure', pending: 'https://d280-2802-8010-960b-6700-5565-878c-cb53-8ee7.sa.ngrok.io/pending', success: 'https://d280-2802-8010-960b-6700-5565-878c-cb53-8ee7.sa.ngrok.io/success' },
 
     });
 console.log(result);
