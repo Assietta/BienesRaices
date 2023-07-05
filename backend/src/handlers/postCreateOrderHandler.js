@@ -7,6 +7,8 @@ const {
 
 const createOrderHandler = async (req, res) => {
   const { id } = req.params;
+  const userId = req.body.userId;
+
   mercadopago.configure({
     access_token:
       TOKEN_MP,
@@ -33,6 +35,7 @@ const createOrderHandler = async (req, res) => {
         pending: "https://bienesraices-production-9eb3.up.railway.app/pending",
       },
       auto_return:"approved",
+      external_reference: userId,
       notification_url:'https://bienesraices-production-9eb3.up.railway.app/webhook'
     });
 
@@ -66,11 +69,15 @@ const webhookHandler=async(req, res)=>{
   try {
     if(payment.type==="payment"){
       const data=await mercadopago.payment.findById(payment["data.id"]);
-    console.log(data)
+    console.log(data);
+    //BUSCAR USER EN DB Y GUARDAR REGISTRO EN ORDERS
+    //NOTIFICACION POR MAIL
+    res.status(200).send("OK");
     }
   } catch (error) {
     return res.sendStatus(500).json({error: error.message});
   }
+};
   // try {
   
   //   //   const data= await  axios.get(`https://api.mercadopago.com/v1/payments/${payment}`, {
@@ -84,12 +91,12 @@ const webhookHandler=async(req, res)=>{
   //   // });
   //   console.log(payment);
     
-    res.status(200).send("OK");
+    
   // } catch (error) {
   //   console.log(error);
   
   // }
-  };
+
 
 const approved =async(req, res)=>{
   axios.get(`https://api.mercadopago.com/v1/payments/${paymentdId}`, {
