@@ -116,7 +116,7 @@ export default function Example() {
                       </p>
                       {session.data.user?.image && (
                         <Image
-                          className="hidden h-10 w-auto lg:block"
+                          className="hidden h-10 w-auto lg:block rounded-full"
                           src={session.data.user.image}
                           alt="image"
                           width={100}
@@ -125,7 +125,7 @@ export default function Example() {
                       )}
                       <button
                         key="LogOut"
-                        onClick={()=> signOut()}
+                        onClick={() => signOut()}
                         className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                       >
                         Cerrar Sesion
