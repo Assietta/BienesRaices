@@ -29,7 +29,6 @@ const {
 // Syncing all the models at once.
 conn.sync({ alter: true }).then(() => {
   server.listen(PORT, () => {
-    createAdmin();
     getAllApi();
     console.log(`%s listening at ${PORT}`); // eslint-disable-line no-console
   });
