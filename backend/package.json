@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon -L",
+    "start": "node index.js --omit=dev",
     "test": "mocha -w ./tests/**/*.spec.js"
   },
   "author": "Henry",
@@ -15,6 +15,8 @@
   },
   "dependencies": {
     "axios": "^1.4.0",
+    "bcrypt": "^5.1.0",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",

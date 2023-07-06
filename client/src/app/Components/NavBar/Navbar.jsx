@@ -1,38 +1,48 @@
-"use client";
+
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import Image from "next/image";
+import { useSession, signOut } from "next-auth/react";
 
 const navigation = [
   {
-    label: "Inicio",
-    route: "/",
+    label: 'Inicio',
+    route: '/',
     current: true,
   },
   {
-    label: "Nosotros",
-    route: "/About",
+    label: 'Nosotros',
+    route: '/About',
     current: false,
   },
   {
-    label: "Tasaciones",
-    route: "/Appraisals",
+    label: 'Tasaciones',
+    route: '/Appraisals',
     current: false,
   },
   {
-    label: "Contacto",
-    route: "/Contact",
+    label: 'Contacto',
+    route: '/Contact',
     current: false,
   },
 ];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
+  return classes.filter(Boolean).join(' ');
 }
 
 export default function Example() {
+  const session = useSession();
+
+  const autenticated = () => {
+    if (session.status === 'authenticated') {
+      return true;
+    } else session.status === 'unauthenticated';
+    return false;
+  };
+
   return (
     <Disclosure
       as="nav"
@@ -53,24 +63,26 @@ export default function Example() {
                   )}
                 </Disclosure.Button>
               </div>
-              <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+              <div className="flex items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
-                  <Image
-                    className="block h-8 w-auto lg:hidden"
-                    src="https://static.tokkobroker.com/tfw_images/5859_MR%20Propiedades/MR-LogoMRCUCICBA-003.png"
+                  {/* <Image
+                    className="block h-16 w-auto lg:hidden"
+                    src="https://i.ibb.co/pzFrvn1/logo-png-white.png"
                     alt="Your Company"
-                    width={50}
-                    height={50}
-                  />
+                    width={100}
+                    height={100}
+                  /> */}
                   <Image
-                    className="hidden h-8 w-auto lg:block"
-                    src="https://static.tokkobroker.com/tfw_images/5859_MR%20Propiedades/MR-LogoMRCUCICBA-003.png"
+                    className="hidden h-16 w-auto lg:block"
+                    src="https://i.ibb.co/pzFrvn1/logo-png-white.png"
                     alt="Your Company"
-                    width={50}
-                    height={50}
+                    width={100}
+                    height={100}
                   />
                 </div>
-                <div className="hidden sm:ml-6 sm:block">
+              </div>
+              <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                <div className="hidden sm:ml-6 sm:block justify-center align-center">
                   <div className="flex space-x-4">
                     {navigation.map(({ label, route }) => (
                       <Link
@@ -87,13 +99,39 @@ export default function Example() {
 
               <div className="hidden sm:ml-6 sm:block">
                 <div className="flex space-x-4">
-                  <Link
-                    key="login"
-                    href="/login"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-                  >
-                    Iniciar sesión
-                  </Link>
+                  {!autenticated() ? (
+                    <Link
+                      key="Login"
+                      href="/Login"
+                      className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                    >
+                      Iniciar sesión
+                    </Link>
+                  ) : (
+                    <>
+                      <p className="text-gray-300 rounded-md px-3 py-2 text-sm font-medium">
+                        {`Bienvenido ${
+                          session.data.user.name || session.data.user.username
+                        }`}
+                      </p>
+                      {session.data.user?.image && (
+                        <Image
+                          className="hidden h-10 w-auto lg:block rounded-full"
+                          src={session.data.user.image}
+                          alt="image"
+                          width={100}
+                          height={100}
+                        />
+                      )}
+                      <button
+                        key="LogOut"
+                        onClick={() => signOut()}
+                        className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                      >
+                        Cerrar Sesion
+                      </button>
+                    </>
+                  )}
                 </div>
               </div>
 
@@ -135,8 +173,8 @@ export default function Example() {
                           <a
                             href="#"
                             className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
+                              active ? 'bg-gray-100' : '',
+                              'block px-4 py-2 text-sm text-gray-700'
                             )}
                           >
                             Facebook
@@ -148,8 +186,8 @@ export default function Example() {
                           <a
                             href="#"
                             className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
+                              active ? 'bg-gray-100' : '',
+                              'block px-4 py-2 text-sm text-gray-700'
                             )}
                           >
                             Instagram
@@ -161,8 +199,8 @@ export default function Example() {
                           <a
                             href="#"
                             className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
+                              active ? 'bg-gray-100' : '',
+                              'block px-4 py-2 text-sm text-gray-700'
                             )}
                           >
                             Linkedin

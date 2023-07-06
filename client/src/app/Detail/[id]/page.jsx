@@ -1,32 +1,38 @@
-"use client";
-import { useState, useEffect } from "react";
+
+// import { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./page.module.css";
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
+import Gallery from "./gallery"
+import { idText } from "typescript";
+import Map from "./map"
 
-export default function Example({ params }) {
-  const [propiedad, setPropiedad] = useState();
-  const [modalOpen, setModalOpen] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
 
+
+const fetchPropId = async  (id) =>{
+  const res = await fetch(`http://localhost:3001/realState/${id}`)
+         return  res.json()
+         
+        }
+
+export default async function Example({ params }) {
   const { id } = params;
+ const propiedad = await fetchPropId(id)
+ 
 
-  useEffect(() => {
-    axios.get(`http://localhost:3001/realState/${id}`).then((res) => {
-      if (res.data) {
-        setPropiedad(res.data);
-      } else {
-        window.alert("No hay propiedades con ese ID");
-      }
-    });
-  }, [id]);
 
-  if (!propiedad) {
-    return <div>Cargando...</div>;
-  }
+
+
+
+
+  
+  console.log(propiedad);
+ 
+
+
+
+
+
 
   const handleReservarClick = async () => {
     try {
@@ -45,54 +51,13 @@ export default function Example({ params }) {
 
   const product = {
     name: propiedad.address,
-    price: "$ " + propiedad.operations[0].prices[0].price,
+    price: propiedad.currency + "$ " + propiedad.price.toLocaleString(),
     href: "#",
     breadcrumbs: [
-      { id: 1, name: propiedad.operations[0].operation_type },
+      { id: 1, name: propiedad.operation_type },
       { id: 2, name: propiedad.type },
     ],
-    images: [
-      {
-        src: propiedad.photos[0],
-        alt: propiedad.photos[0],
-      },
-      {
-        src: propiedad.photos[1],
-        alt: propiedad.photos[1],
-      },
-      {
-        src: propiedad.photos[2],
-        alt: propiedad.photos[2],
-      },
-      {
-        src: propiedad.photos[3],
-        alt: propiedad.photos[3],
-      },
-    ],
-    colors: [
-      { name: "White", class: "bg-white", selectedClass: "ring-gray-400" },
-      { name: "Gray", class: "bg-gray-200", selectedClass: "ring-gray-400" },
-      { name: "Black", class: "bg-gray-900", selectedClass: "ring-gray-900" },
-    ],
-    sizes: [
-      { name: "XXS", inStock: false },
-      { name: "XS", inStock: true },
-      { name: "S", inStock: true },
-      { name: "M", inStock: true },
-      { name: "L", inStock: true },
-      { name: "XL", inStock: true },
-      { name: "2XL", inStock: true },
-      { name: "3XL", inStock: true },
-    ],
     description: propiedad.description,
-    highlights: [
-      "Hand cut and sewn locally",
-      "Dyed with our proprietary colors",
-      "Pre-washed & pre-shrunk",
-      "Ultra-soft 100% cotton",
-    ],
-    details:
-      'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
   };
 
   const images = [
@@ -104,24 +69,22 @@ export default function Example({ params }) {
     propiedad.photos[5],
   ];
 
-  const openModal = (index) => {
-    setCurrentIndex(index);
-    setModalOpen(true);
+
+  
+const center = {
+  lat: parseFloat(propiedad?.geo_lat),
+  lng: parseFloat(propiedad?.geo_long),
+};
+
+
+
+   const mapContainerStyle = {
+    marginTop: "50px",
+    width: "100%",
+    height: "400px",
   };
 
-  const closeModal = () => {
-    setModalOpen(false);
-  };
 
-  const changeImage = (n) => {
-    let newIndex = currentIndex + n;
-    if (newIndex < 0) {
-      newIndex = images.length - 1;
-    } else if (newIndex >= images.length) {
-      newIndex = 0;
-    }
-    setCurrentIndex(newIndex);
-  };
 
   return (
     <div className="bg-white">
@@ -166,41 +129,11 @@ export default function Example({ params }) {
         </nav>
 
         {/* Image gallery */}
-        <div className="container mx-auto px-2 py-2 lg:px-32 lg:pt-12">
-          <div className="flex flex-wrap md:-m-2">
-            {images.map((image, index) => (
-              <div className="w-1/3 p-1 md:p-2" key={index}>
-                <img
-                  alt="gallery"
-                  className="block h-full w-full rounded-lg object-cover object-center cursor-pointer"
-                  src={image}
-                  onClick={() => openModal(index)}
-                />
-              </div>
-            ))}
-          </div>
+        <Gallery images= {images}/>
+        
 
-          {modalOpen && (
-            <div className={styles.modalOverlay}>
-              <div className={styles.modal}>
-                <span className={styles.close} onClick={closeModal}>
-                  &times;
-                </span>
-                <img
-                  className={styles.modalContent}
-                  src={images[currentIndex]}
-                  alt="modal"
-                />
-                <a className={styles.prev} onClick={() => changeImage(-1)}>
-                  &#10094;
-                </a>
-                <a className={styles.next} onClick={() => changeImage(1)}>
-                  &#10095;
-                </a>
-              </div>
-            </div>
-          )}
-        </div>
+
+
 
         {/* Product info */}
         <div className="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
@@ -211,7 +144,7 @@ export default function Example({ params }) {
           </div>
 
           {/* Options */}
-          <div className="mt-4 lg:row-span-3 lg:mt-0">
+          <div className="mt-4 lg:row-span-3 lg:mt-0 text-center md:text-left">
             <h2 className="sr-only">Product information</h2>
             <p className="text-3xl tracking-tight text-gray-900">
               {product.price}
@@ -228,7 +161,7 @@ export default function Example({ params }) {
               </div>
               <div className="mt-6 border-t border-gray-100">
                 <dl className="divide-y divide-gray-100">
-                  <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <div className="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                     <dt className="text-sm font-medium leading-6 text-gray-900">
                       Superficie cubierta
                     </dt>
@@ -236,7 +169,7 @@ export default function Example({ params }) {
                       {propiedad.roofed_surface} m²
                     </dd>
                   </div>
-                  <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <div className="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                     <dt className="text-sm font-medium leading-6 text-gray-900">
                       Superficie Total
                     </dt>
@@ -244,7 +177,7 @@ export default function Example({ params }) {
                       {propiedad.surface} m²
                     </dd>
                   </div>
-                  <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <div className="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                     <dt className="text-sm font-medium leading-6 text-gray-900">
                       Ambientes
                     </dt>
@@ -252,7 +185,7 @@ export default function Example({ params }) {
                       {propiedad.room_amount}
                     </dd>
                   </div>
-                  <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <div className="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                     <dt className="text-sm font-medium leading-6 text-gray-900">
                       Orientación
                     </dt>
@@ -260,7 +193,7 @@ export default function Example({ params }) {
                       {propiedad.orientation}
                     </dd>
                   </div>
-                  <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <div className="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                     <dt className="text-sm font-medium leading-6 text-gray-900">
                       Antigüedad
                     </dt>
@@ -272,13 +205,13 @@ export default function Example({ params }) {
               </div>
             </div>
 
-            <button
+            {/* <button
               type="submit"
               className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
               onClick={handleReservarClick}
             >
               Reservar
-            </button>
+            </button> */}
           </div>
 
           <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
@@ -287,9 +220,22 @@ export default function Example({ params }) {
               <h3 className="sr-only">Description</h3>
 
               <div className="space-y-6">
-                <p className="text-base text-gray-900">{product.description}</p>
+                <p className="text-base text-gray-900 leading-8">
+                  {product.description}
+                </p>
               </div>
             </div>
+            <Map mapContainerStyle = {mapContainerStyle} center = {center}/>
+            {/* <LoadScript googleMapsApiKey="AIzaSyDSHb1gBxjiShwN6LVC_bBnxt9E60TwvmI">
+              <GoogleMap
+                mapContainerStyle={mapContainerStyle}
+                center={center}
+                zoom={14}
+                onLoad={handleMapLoad}
+              >
+                <Marker position={markerPosition} />
+              </GoogleMap>
+            </LoadScript> */}
           </div>
         </div>
       </div>

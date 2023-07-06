@@ -12,7 +12,7 @@ const {
 const createOrderHandler = async (req, res) => {
   const { id } = req.params;
   const userId = req.body.userId;
-  console.log(userId)
+  // console.log(userId)
 
   mercadopago.configure({
     access_token:
@@ -22,7 +22,11 @@ const createOrderHandler = async (req, res) => {
   try {
 
     const property = await RealState.findOne({ where: { id: id } });
+
     const price= parseFloat(property?.operations[0]?.prices[0]?.price) * 0.000001
+
+    // const price = parseFloat(property?.price) * 0.001;
+
     
     const result = await mercadopago.preferences.create({
       items: [
@@ -35,6 +39,7 @@ const createOrderHandler = async (req, res) => {
       ],
       
       back_urls: {
+
         success: `${HOST}/success`,
         failure: `${HOST}/failure`,
         pending: `${HOST}/pending`,
@@ -42,6 +47,7 @@ const createOrderHandler = async (req, res) => {
       auto_return:"approved",
       external_reference: userId,
       notification_url:'https://4da9-2802-8010-960b-6700-41f-5b9a-c49f-a933.ngrok-free.app/webhook'
+
     });
 
     const preferenceId = result.response.id;
@@ -58,9 +64,11 @@ const createOrderHandler = async (req, res) => {
     //   }
     // };
 
+
     // res.send(preferenceId);
     const redirectUrl = `https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=${preferenceId}`;
      res.send(redirectUrl);
+
   } catch (error) {
     console.error(error);
     res.status(500).send("Error al crear la orden");
@@ -71,7 +79,7 @@ const createOrderHandler = async (req, res) => {
 const webhookHandler=async(req, res)=>{
   // const payment= req.query.payment_id;
   const payment= req.query;
-  console.log(payment);
+  // console.log(payment);
   try {  if(payment.type==="payment"){
       const data=await mercadopago.payment.findById(payment["data.id"]);
     console.log(data);
@@ -108,12 +116,12 @@ const webhookHandler=async(req, res)=>{
         transaction_amount_refunded: parseFloat(data?.response.transaction_amount_refunded),
       });
       console.log(newOrder);
-      console.log(String(user?.dataValues.email));
       let asunto='';
       data.status==='approved'?  asunto='Su transacción ha sido exitosa': asunto='Su transacción ha sido rechazada';
       const cuerpo = `Operación nº ${data.id}, cualquier consulta comunicate con nosotros`
 
     //NOTIFICACION POR MAIL
+
     await mailHandler(String(user?.dataValues.email), asunto, cuerpo);
 
 
@@ -123,6 +131,7 @@ const webhookHandler=async(req, res)=>{
     console.log(error)
     res.status(500).json({error: error.message});
 
+ploy
   }
 };
 
@@ -157,6 +166,7 @@ module.exports = { createOrderHandler , webhookHandler};
 // } catch (error) {
 //   console.error(error);
 // }
+
 
 
 

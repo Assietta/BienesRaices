@@ -7,6 +7,9 @@ const nextConfig = {
       'i.ibb.co',
       'static.tokkobroker.com',
       'flowbite.com',
+      'lh3.googleusercontent.com',
+      'platform-lookaside.fbsbx.com',
+      'encrypted-tbn0.gstatic.com'
     ],
   },
 };

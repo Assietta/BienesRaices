@@ -1,6 +1,6 @@
 const { RealState } = require("../db.js");
 
-const putRealStateController= async(id, address, bathroom_amount, age, description, disposition, expenses, floors_amount, has_temporary_rent, location, operations, orientation, parking_lot_amount, photos, real_address,  property_condition, roofed_surface, room_amount, semiroofed_surface , situation, suite_amount, surface, tags, toilet_amount, total_surface,  type, unroofed_surface , videos)=>{
+const putRealStateController= async(id, address, bathroom_amount, age, description, disposition, expenses, floors_amount, has_temporary_rent, location, price, period, currency, operation_type, orientation, parking_lot_amount, photos, real_address,  property_condition, roofed_surface, room_amount, semiroofed_surface , situation, suite_amount, surface, tags, toilet_amount, total_surface,  type, unroofed_surface , videos)=>{
 
   try {
     // Busca el registro en la base de datos por su ID
@@ -21,7 +21,10 @@ const putRealStateController= async(id, address, bathroom_amount, age, descripti
     property.floors_amount= floors_amount,
     property.has_temporary_rent= has_temporary_rent,
     property.location= location, 
-    property.operations= operations,
+    property.price= price,
+    property.period= period,
+    property.currency= currency,
+    property.operation_type= operation_type,
     property.orientation= orientation, 
     property.parking_lot_amount= parking_lot_amount, 
     property.photos= photos,
