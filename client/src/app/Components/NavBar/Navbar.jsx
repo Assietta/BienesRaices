@@ -1,10 +1,10 @@
-
-import { Fragment } from "react";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
-import Image from "next/image";
-import { useSession, signOut } from "next-auth/react";
+import { Fragment, useState } from 'react';
+import { Disclosure, Menu, Transition } from '@headlessui/react';
+import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import Link from 'next/link';
+import Image from 'next/image';
+import { useSession, signOut } from 'next-auth/react';
+import ProfileUser from '../../ProfileUser/ProfileUser';
 
 const navigation = [
   {
@@ -34,6 +34,8 @@ function classNames(...classes) {
 }
 
 export default function Example() {
+  const [showProfile, setShowProfile] = useState(false);
+
   const session = useSession();
 
   const autenticated = () => {
@@ -109,11 +111,14 @@ export default function Example() {
                     </Link>
                   ) : (
                     <>
-                      <p className="text-gray-300 rounded-md px-3 py-2 text-sm font-medium">
-                        {`Bienvenido ${
-                          session.data.user.name || session.data.user.username
-                        }`}
-                      </p>
+                      <button onClick={() => setShowProfile(!showProfile)}>
+                        <p className="text-gray-300 rounded-md px-3 py-2 text-sm font-medium">
+                          {`Bienvenido ${
+                            session.data.user.name || session.data.user.username
+                          }`}
+                        </p>
+                      </button>
+
                       {session.data.user?.image && (
                         <Image
                           className="hidden h-10 w-auto lg:block rounded-full"
@@ -214,6 +219,8 @@ export default function Example() {
             </div>
           </div>
 
+          <div className="">{showProfile && <ProfileUser />}</div>
+          
           {navigation.map(({ label, route }) => (
             <Disclosure.Panel className="sm:hidden" key={route}>
               <div className="bg-black space-y-1 px-2 pb-3 pt-2">
