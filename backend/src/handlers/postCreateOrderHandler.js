@@ -108,12 +108,13 @@ const webhookHandler=async(req, res)=>{
         transaction_amount_refunded: parseFloat(data?.response.transaction_amount_refunded),
       });
       console.log(newOrder);
-    //   let asunto='';
-    //   data.status==='approved'?  asunto='Su transacción ha sido exitosa': asunto='Su transacción ha sido rechazada';
-    //   const cuerpo = `Operación nº ${data.id}, cualquier consulta comunicate con nosotros`
+      console.log(String(user?.dataValues.email));
+      let asunto='';
+      data.status==='approved'?  asunto='Su transacción ha sido exitosa': asunto='Su transacción ha sido rechazada';
+      const cuerpo = `Operación nº ${data.id}, cualquier consulta comunicate con nosotros`
 
-    // //NOTIFICACION POR MAIL
-    // await mailHandler(user.email, asunto, cuerpo);
+    //NOTIFICACION POR MAIL
+    await mailHandler(String(user?.dataValues.email), asunto, cuerpo);
 
 
     res.status(204).send("OK");
