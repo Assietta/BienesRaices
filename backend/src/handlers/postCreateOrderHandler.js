@@ -115,7 +115,7 @@ const webhookHandler=async(req, res)=>{
       const cuerpo = `Operación nº ${data.id}, cualquier consulta comunicate con nosotros`
 
     //NOTIFICACION POR MAIL
-    await mailHandler(String(user.dataValues.username), asunto, cuerpo);
+    await mailHandler(String(user?.dataValues.email), asunto, cuerpo);
 
 
     res.status(200).send("OK");
