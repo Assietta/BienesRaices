@@ -12,7 +12,8 @@ const {
 const createOrderHandler = async (req, res) => {
   const { id } = req.params;
   const userId = req.body.userId;
-  // console.log(userId)
+  console.log(userId);
+  console.log(id);
 
   mercadopago.configure({
     access_token:
@@ -112,7 +113,7 @@ const webhookHandler=async(req, res)=>{
       console.log(newOrder);
       let asunto='';
       String(data?.response.status)==='approved'?  asunto='Su transacción ha sido exitosa': asunto='Su transacción ha sido rechazada';
-      const cuerpo = `Operación nº ${String(data?.response.id)}, cualquier consulta comunicate con nosotros`
+      const cuerpo = `Operación nº cualquier consulta comunicate con nosotros`
 
     //NOTIFICACION POR MAIL
     await mailHandler(String(user?.dataValues.email), asunto, cuerpo);
@@ -121,7 +122,8 @@ const webhookHandler=async(req, res)=>{
     res.status(200).send("OK");
     }
   } catch (error) {
-    return res.sendStatus(500).json({error: error.message});
+    return res.status(500).json({error: error.message});
+
   }
 };
 
