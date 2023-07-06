@@ -111,11 +111,11 @@ const webhookHandler=async(req, res)=>{
       });
       console.log(newOrder);
       let asunto='';
-      data.status==='approved'?  asunto='Su transacción ha sido exitosa': asunto='Su transacción ha sido rechazada';
+      String(data?.response.status)==='approved'?  asunto='Su transacción ha sido exitosa': asunto='Su transacción ha sido rechazada';
       const cuerpo = `Operación nº ${data.id}, cualquier consulta comunicate con nosotros`
 
     //NOTIFICACION POR MAIL
-    await mailHandler(user.email, asunto, cuerpo);
+    await mailHandler(String(user.dataValues.username), asunto, cuerpo);
 
 
     res.status(200).send("OK");
