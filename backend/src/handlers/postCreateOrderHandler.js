@@ -41,7 +41,7 @@ const createOrderHandler = async (req, res) => {
       },
       auto_return:"approved",
       external_reference: userId,
-      notification_url:' https://984b-190-174-229-190.ngrok-free.app/webhook'
+      notification_url:'https://984b-190-174-229-190.ngrok-free.app/webhook'
     });
 
     const preferenceId = result.response.id;
