@@ -1,45 +1,45 @@
 "use client";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import DashboardCard from "./DashboardCard";
-import DashboardUser from "./DashboardUser";
+import UsersDashboard from "./usersDashboard";
+import PropiedadesDashboard from "./propiedadesDashboard";
 import axios from "axios";
 
 export default function Example() {
-  const [viewProps, setViewProps] = useState([]);
-  const [viewUsers, setViewUsers] = useState([]);
+  // const [viewProps, setViewProps] = useState([]);
+  // const [viewUsers, setViewUsers] = useState([]);
 
-  useEffect(() => {
-    fetchDataProps();
-  }, []);
+  // useEffect(() => {
+  //   fetchDataProps();
+  // }, []);
 
-  const fetchDataProps = async () => {
-    try {
-      const response = await axios.get(
-        `http://localhost:3001/realstate?limit=6`
-      );
-      const data = response.data;
-      setViewProps(data);
-    } catch (error) {
-      // Manejar el error de la solicitud
-      console.error(error);
-    }
-  };
+  // const fetchDataProps = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       `http://localhost:3001/realstate?limit=6`
+  //     );
+  //     const data = response.data;
+  //     setViewProps(data);
+  //   } catch (error) {
+  //     // Manejar el error de la solicitud
+  //     console.error(error);
+  //   }
+  // };
 
-  useEffect(() => {
-    fetchDataUsers();
-  }, []);
+  // useEffect(() => {
+  //   fetchDataUsers();
+  // }, []);
 
-  const fetchDataUsers = async () => {
-    try {
-      const response = await axios.get(`http://localhost:3001/users/`);
-      const data = response.data.users;
-      setViewUsers(data);
-    } catch (error) {
-      // Manejar el error de la solicitud
-      console.error(error);
-    }
-  };
+  // const fetchDataUsers = async () => {
+  //   try {
+  //     const response = await axios.get(`http://localhost:3001/users/`);
+  //     const data = response.data.users;
+  //     setViewUsers(data);
+  //   } catch (error) {
+  //     // Manejar el error de la solicitud
+  //     console.error(error);
+  //   }
+  // };
 
   return (
     <div className="bg-white">
@@ -239,7 +239,7 @@ export default function Example() {
                         Usuarios
                       </p>
                       <p className="text-white font-bold text-2xl inline-flex items-center space-x-2">
-                        <span>{viewUsers.length}</span>
+                        {/* <span>{viewUsers.length}</span> */}
                         <span>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -350,7 +350,7 @@ export default function Example() {
                 </div>
               </div>
             </div>
-            <div id="last-incomes">
+            {/* <div id="last-incomes">
               <h1 className="font-bold py-4 uppercase">Propiedades</h1>
               <div id="stats" className="flex-1 overflow-y-scroll h-60">
                 {viewProps.map((prop) => (
@@ -368,8 +368,9 @@ export default function Example() {
                   />
                 ))}
               </div>
-            </div>
-            <div id="last-users">
+            </div> */}
+            <PropiedadesDashboard></PropiedadesDashboard>
+            {/* <div id="last-users">
               <h1 className="font-bold py-4 uppercase">Usuarios</h1>
               <div id="stats" className="flex-1 overflow-y-scroll w-full">
                 {viewUsers.map((user) => (
@@ -384,7 +385,8 @@ export default function Example() {
                   />
                 ))}
               </div>
-            </div>
+            </div> */}
+            <UsersDashboard></UsersDashboard>
             <div id="last-users">
               <h1 className="font-bold py-4 uppercase">Ordenes</h1>
               <div
