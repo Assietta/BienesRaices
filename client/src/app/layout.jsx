@@ -1,4 +1,4 @@
-// 'use client'
+'use client'
 import './globals.css'
 import React from 'react';
 import Footer from "./Components/Footer"
