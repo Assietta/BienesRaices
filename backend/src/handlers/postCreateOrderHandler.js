@@ -30,9 +30,9 @@ const createOrderHandler = async (req, res) => {
       ],
       
       back_urls: {
-        success: "https://localhost:3001/success",
-        failure: "https://localhost:3001/failure",
-        pending: "https://localhost:3001/pending",
+        success: "http://localhost:3001/success",
+        failure: "http://localhost:3001/failure",
+        pending: "http://localhost:3001/pending",
       },
       auto_return:"approved",
       external_reference: userId,
