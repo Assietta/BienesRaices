@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useState, useRef } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
@@ -128,13 +128,6 @@ export default function Example() {
                           height={100}
                         />
                       )}
-                      <button
-                        key="LogOut"
-                        onClick={() => signOut()}
-                        className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-                      >
-                        Cerrar Sesion
-                      </button>
                     </>
                   )}
                 </div>
@@ -219,8 +212,10 @@ export default function Example() {
             </div>
           </div>
 
-          <div className="">{showProfile && <ProfileUser />}</div>
-          
+          <div className="absolute top-16 right-44">
+            {showProfile && <ProfileUser />}
+          </div>
+
           {navigation.map(({ label, route }) => (
             <Disclosure.Panel className="sm:hidden" key={route}>
               <div className="bg-black space-y-1 px-2 pb-3 pt-2">
