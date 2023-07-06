@@ -41,7 +41,7 @@ const createOrderHandler = async (req, res) => {
       },
       auto_return:"approved",
       external_reference: userId,
-      notification_url:'https://bienesraices-production-9eb3.up.railway.app/webhook'
+      notification_url:'https://4da9-2802-8010-960b-6700-41f-5b9a-c49f-a933.ngrok-free.app/webhook'
     });
 
     const preferenceId = result.response.id;
@@ -75,55 +75,53 @@ const webhookHandler=async(req, res)=>{
   try {  if(payment.type==="payment"){
       const data=await mercadopago.payment.findById(payment["data.id"]);
     console.log(data);
-   
-
-    
       // BUSCAR USER EN DB
-      const user = await User.findByPk(data?.external_reference); // Asegúrate de que el modelo User exista y esté configurado correctamente
-
+      const user = await User.findByPk(data.response.external_reference); 
       // BUSCAR PROPERTY EN DB
-      const property = await RealState.findByPk(data?.description); // Asegúrate de que el modelo RealState exista y esté configurado correctamente
+      const property = await RealState.findByPk(data.response.description); 
+// console.log(property);
 
       // GUARDAR REGISTRO EN ORDERS
       const newOrder = await Order.create({
-        client_idDB: data?.external_reference,
-        usernameDB: user.username,
-        property_idDB: data?.description,
-        address_of_property_to_reserveDB: property.address,
-        date_created: data.date_created,
-        chain: data.currency_id,
-        transaction_amount: data.transaction_amount,
-        date_approved: data.date_approved,
-        payment_id: data.id,
-        payer_first_nameMP: data.payer.first_name,
-        payer_last_nameMP: data.payer.last_name,
-        payer_emailMP: data.payer.email,
-        payer_emailDB: user.email,
-        payer_identificationMP: data.payer.identification,
-        payer_phoneMP: data.payer.phone,
-        payer_idMP: data.payer.id,
-        payment_method_id: data.payment_method_id,
-        payment_type_id: data.payment_type_id,
-        statement_descriptor_usernameMP: data.statement_descriptor,
-        status_approved_rejected: data.status,
-        status_detail_accredited: data.status_detail,
-        taxes_amount: data.taxes_amount,
-        transaction_amount_refunded: data.transaction_amount_refunded
+        client_idDB: String(data.response.external_reference),
+        usernameDB: String(user.dataValues.username),
+        property_idDB: String(data.response.description),
+        address_of_property_to_reserveDB: String(property.dataValues.address),
+        date_created: String(data.response.date_created),
+        chain: String(data.response.currency_id),
+        transaction_amount: String(data.response.transaction_amount),
+        date_approved: String(data?.response.date_approved),
+        payment_id: String(data?.response.id),
+        payer_first_nameMP: String(data?.response.payer['first_name']),
+        payer_last_nameMP: String(data?.response.payer['last_name']),
+        payer_emailMP: String(data?.response.payer['email']),
+        payer_emailDB: String(user?.dataValues.email),
+        payer_identificationMP: String(data?.response.payer['identification']),
+        payer_phoneMP: String(data?.response.payer['phone']),
+        payer_idMP: String(data?.response.payer['id']),
+        payment_method_id: String(data?.response.payment_method_id),
+        payment_type_id: String(data?.response.payment_type_id),
+        statement_descriptor_usernameMP: String(data?.response.statement_descriptor),
+        status_approved_rejected: String(data?.response.status),
+        status_detail_accredited: String(data?.response.status_detail),
+        taxes_amount: parseFloat(data?.response.taxes_amount),
+        transaction_amount_refunded: parseFloat(data?.response.transaction_amount_refunded),
       });
-
       console.log(newOrder);
-      let asunto='';
-      data.status==='approved'?  asunto='Su transacción ha sido exitosa': asunto='Su transacción ha sido rechazada';
-      const cuerpo = `Operación nº ${data.id}, cualquier consulta comunicate con nosotros`
+    //   let asunto='';
+    //   data.status==='approved'?  asunto='Su transacción ha sido exitosa': asunto='Su transacción ha sido rechazada';
+    //   const cuerpo = `Operación nº ${data.id}, cualquier consulta comunicate con nosotros`
 
-    //NOTIFICACION POR MAIL
-    await mailHandler(user.email, asunto, cuerpo);
+    // //NOTIFICACION POR MAIL
+    // await mailHandler(user.email, asunto, cuerpo);
 
 
-    res.status(200).send("OK");
+    res.status(204).send("OK");
     }
   } catch (error) {
-    return res.sendStatus(500).json({error: error.message});
+    console.log(error)
+    res.status(500).json({error: error.message});
+
   }
 };
 
