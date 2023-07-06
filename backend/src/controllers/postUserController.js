@@ -20,7 +20,6 @@ const postUserController = async(email, password, username, rol, image, provider
         provider
       });
     }
-
     return user;
   };
 
