@@ -20,6 +20,11 @@ const {getOrdersHandler}= require('../handlers/getOrdersHandler');
 router.get('/realState', realStateHandler);
 router.get('/realState/:id', getPropertyIdHandler);
 router.get('/users', getUsersHandler);
+router.get('/success', (req, res)=> res.send(req.query.payment_id));
+router.get('/pending', (req, res)=> res.send("pend") );
+router.get('/failure', (req, res)=> res.send("fail"));
+router.get('/approved', approved);
+router.get('/orders', getOrdersHandler); 
 
 router.post('/realState', postRealStateHandler);
 router.post('/users', postUserHandler);
@@ -28,11 +33,6 @@ router.post('/appraisals', postAppraisalsHandler);
 router.post('/sendMail', mailHandler);
 router.post('/createOrder/:id', createOrderHandler);
 router.post('/webhook', webhookHandler);
-router.get('/success', (req, res)=> res.send(req.query.payment_id));
-router.get('/pending', (req, res)=> res.send("pend") );
-router.get('/failure', (req, res)=> res.send("fail"));
-router.get('/approved', approved);
-router.get('/orders', getOrdersHandler); 
 
 router.delete('/users/:id', deleteUserHandler);
 router.delete('/realState/:id', deleteRealStateHandler)
