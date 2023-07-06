@@ -30,13 +30,13 @@ const createOrderHandler = async (req, res) => {
       ],
       
       back_urls: {
-        success: "https://bienesraices-production-9eb3.up.railway.app/success",
-        failure: "https://bienesraices-production-9eb3.up.railway.app/failure",
-        pending: "https://bienesraices-production-9eb3.up.railway.app/pending",
+        success: "http://localhost:3001/success",
+        failure: "http://localhost:3001/failure",
+        pending: "http://localhost:3001/pending",
       },
       auto_return:"approved",
       external_reference: userId,
-      notification_url:'https://bienesraices-production-9eb3.up.railway.app/webhook'
+      notification_url:'https://22bc-190-174-229-190.ngrok-free.app/webhook'
     });
 
     const preferenceId = result.response.id;
@@ -53,9 +53,9 @@ const createOrderHandler = async (req, res) => {
     //   }
     // };
 
-    // res.send(preferenceId);
-    const redirectUrl = `https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=${preferenceId}`;
-    res.redirect(redirectUrl);
+    res.send(preferenceId);
+    // const redirectUrl = `https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=${preferenceId}`;
+    // res.send(redirectUrl);
   } catch (error) {
     console.error(error);
     res.status(500).send("Error al crear la orden");

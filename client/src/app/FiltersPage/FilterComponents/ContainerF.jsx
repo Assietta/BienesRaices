@@ -132,12 +132,14 @@ export default function ContainerF() {
       const randomImageIndex = 0
     return (
         <div className='flex flex-col bg-gray text-center '> 
-            <div className='flex justify-center p-4'> 
+            <div className='flex justify-center p-4 m-2 space-x-4'> 
+            <SearchBar/>
+
             <select
               name="type"
               value={filters.type}
               onChange={handleChange}
-              className="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="border text-sm text-black rounded-lg"
             >
               <option hidden>Propiedad</option>
               <option value="Casa">Casa</option>
@@ -149,7 +151,7 @@ export default function ContainerF() {
               name="operation_type"
               value={filters.operation_type}
               onChange={handleChange}
-              className="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="border text-sm text-black rounded-lg"
             >
               <option hidden>Operación</option>
               <option value="Venta">Venta</option>
@@ -161,20 +163,20 @@ export default function ContainerF() {
                name="orientation"
                value={filters.orientation}
                onChange={handleChange}
-              class="border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              class="border text-sm text-black rounded-lg">
                 <option hidden>Orientacion</option>
                 <option value="Frente">Frente</option>
                 <option value="Contrafrente">Contrafrente</option>
               </select>
 
-              <SearchBar/>
               
-              <div className='flex'>
+              
+              <div className='flex space-x-4'>
               <select  
                name="currency"
                value={filters.currency}
                onChange={handleChange}
-              class="border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              class="border text-sm text-black rounded-lg">
                 <option hidden>Moneda</option>
                 <option value="ARS">ARS</option>
                 <option value="USD">USD</option>
@@ -199,7 +201,7 @@ export default function ContainerF() {
             </div>
 
 
-            <div className='flex flex-row'>
+            <div className='flex flex-row '>
 
               <div className='w-1/3 bg-gray-500'>
                 <div class=" px-4 py-6">
