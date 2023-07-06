@@ -25,7 +25,9 @@ const handler = NextAuth({
       async authorize(credentials, req) {
         // Add logic here to look up the user from the credentials supplied
         try {
-          const { data } = await axios('https://localhost:3001/users');
+
+          const { data } = await axios('http://localhost:3001/users');
+
 
           const user = data.users.find(
             (user) => user?.email === credentials?.email
@@ -67,7 +69,7 @@ const handler = NextAuth({
   callbacks: {
     async signIn(user, account, profile) {
       // Se verifica si el usuario ha iniciado sesión con Google o Facebook
-      const { data } = await axios('https://localhost:3001/users')
+      const { data } = await axios('http://localhost:3001/users')
       if (user.account?.provider === 'google') {
         // Se guarda el usuario en la base de datos
         const userDb = data.users?.find(userDb => userDb.email === user.user.email)
@@ -83,7 +85,7 @@ const handler = NextAuth({
           username: user.user.name,
         };
 
-        await axios.post('https://localhost:3001/users', newUser);
+        await axios.post('http://localhost:3001/users', newUser);
       }
 
       if (user.account?.provider === 'facebook') {
@@ -101,7 +103,7 @@ const handler = NextAuth({
           username: user.user.name,
         };
 
-        await axios.post('https://localhost:3001/users', newUser);
+        await axios.post('http://localhost:3001/users', newUser);
       }
 
       return true;
@@ -114,13 +116,13 @@ const handler = NextAuth({
       session.user = token.user;
       if(session.user.id.length === 21){
         const provider = 'google'
-        const info = await axios('https://localhost:3001/users')
+        const info = await axios('http://localhost:3001/users')
         const userNew = info.data.users.find(userDb => userDb.email === session.user.email && userDb.provider === provider)
         session.user = userNew
       }
       if(session.user.id.length === 16){
         const provider = 'facebook'
-        const info = await axios('https://localhost:3001/users')
+        const info = await axios('http://localhost:3001/users')
         const userNew = info.data.users.find(userDb => userDb.email === session.user.email && userDb.provider === provider)
         session.user = userNew
       }
