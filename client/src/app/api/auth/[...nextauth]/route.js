@@ -28,7 +28,7 @@ const handler = NextAuth({
           const { data } = await axios('http://localhost:3001/users');
 
           const user = data.users.find(
-            (user) => user?.email === credentials?.email
+            (user) => user?.email === credentials?.email && user.provider === 'credentials'
           );
 
           if (user) {
