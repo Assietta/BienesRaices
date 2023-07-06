@@ -23,9 +23,9 @@ const createOrderHandler = async (req, res) => {
 
     const property = await RealState.findOne({ where: { id: id } });
 
-    const price= parseFloat(property?.operations[0]?.prices[0]?.price) * 0.000001
+    // const price= parseFloat(property?.operations[0]?.prices[0]?.price) * 0.000001
 
-    // const price = parseFloat(property?.price) * 0.001;
+    const price = parseFloat(property?.price) * 0.001;
 
     
     const result = await mercadopago.preferences.create({
@@ -46,7 +46,7 @@ const createOrderHandler = async (req, res) => {
       },
       auto_return:"approved",
       external_reference: userId,
-      notification_url:'https://4da9-2802-8010-960b-6700-41f-5b9a-c49f-a933.ngrok-free.app/webhook'
+      notification_url:'https://22bc-190-174-229-190.ngrok-free.app/webhook'
 
     });
 
@@ -117,12 +117,12 @@ const webhookHandler=async(req, res)=>{
       });
       console.log(newOrder);
       let asunto='';
-      data.status==='approved'?  asunto='Su transacción ha sido exitosa': asunto='Su transacción ha sido rechazada';
-      const cuerpo = `Operación nº ${data.id}, cualquier consulta comunicate con nosotros`
+      String(data?.response.status)==='approved'?  asunto='Su transacción ha sido exitosa': asunto='Su transacción ha sido rechazada';
+      const cuerpo = `Cualquier consulta comunicate con nosotros`
 
     //NOTIFICACION POR MAIL
-
     await mailHandler(String(user?.dataValues.email), asunto, cuerpo);
+
 
 
     res.status(204).send("OK");
@@ -131,7 +131,7 @@ const webhookHandler=async(req, res)=>{
     console.log(error)
     res.status(500).json({error: error.message});
 
-ploy
+
   }
 };
 
