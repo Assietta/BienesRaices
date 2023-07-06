@@ -112,7 +112,7 @@ const webhookHandler=async(req, res)=>{
       console.log(newOrder);
       let asunto='';
       String(data?.response.status)==='approved'?  asunto='Su transacción ha sido exitosa': asunto='Su transacción ha sido rechazada';
-      const cuerpo = `Operación nº ${data.id}, cualquier consulta comunicate con nosotros`
+      const cuerpo = `Operación nº ${String(data?.response.id)}, cualquier consulta comunicate con nosotros`
 
     //NOTIFICACION POR MAIL
     await mailHandler(String(user?.dataValues.email), asunto, cuerpo);
