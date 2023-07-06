@@ -1,4 +1,4 @@
-'use client';
+// 'use client';
 import Image from 'next/image';
 import Carrousel from './Components/carrousel';
 import CardConteiner from './Components/CardsConteiner/CardsConteiner';
