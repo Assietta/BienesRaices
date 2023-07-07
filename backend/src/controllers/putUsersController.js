@@ -1,6 +1,6 @@
 const { User } = require('../db');
 
-const putUsersController = async (id, username, email, password, rol) => {
+const putUsersController = async (id, username, email, password, rol, favorites) => {
   try {
     // Busca el registro en la base de datos por su ID
     const user = await User.findByPk(id);
@@ -14,6 +14,7 @@ const putUsersController = async (id, username, email, password, rol) => {
     user.email = email;
     user.password = password;
     user.rol = rol;
+    user.favorites = favorites;
 
     // Guarda los cambios en la base de datos
     await user.save();
