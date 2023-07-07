@@ -10,7 +10,7 @@ const mailController = (destinatario, asunto, cuerpo) => {
  from: process.env.SMTP_USER,
  to: destinatario,
  subject: asunto,
- text: cuerpo,
+ html: cuerpo,
 };
 return mailOptions;
 };

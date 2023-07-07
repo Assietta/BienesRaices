@@ -13,11 +13,11 @@ const mailHandler = async (destinatario, asunto, cuerpo) => {
       pass: process.env.SMTP_PASS,
             },
     });  
-      // const { destinatario, asunto, cuerpo } = req.body;
+
       console.log(destinatario);
       const mailOptions = mailController(destinatario, asunto, cuerpo)
       console.log(mailOptions);
-      // Enviar el correo electrónico
+
       await transporter.sendMail(mailOptions);
     } catch (error) {
       console.log(error);
