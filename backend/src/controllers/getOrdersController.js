@@ -3,8 +3,8 @@ const { Order } = require("../db.js");
 getOrdersController = async(req) => {
     try {
       let orders;
-      if (req.query.id) {
-        orders = await Order.findOne({ where: { id: req.query.id } });
+      if (req.query.payment_id) {
+        orders = await Order.findOne({ where: { payment_id: req.query.payment_id } });
       } else {
         orders = await Order.findAll();
       }
