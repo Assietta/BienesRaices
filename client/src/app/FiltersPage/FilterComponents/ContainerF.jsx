@@ -3,58 +3,29 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import style from './ConteinerF.module.css';
 import CardF from './CardF'
-import Card from "../../Components/Card/Card";
-import {
-    getAllProperties,
-    orderByOperation,
-    orderByOrientation,
-    orderByFloor,
-    OrderByPrice
-  } from '../../../redux/actions';
+
+
 import { SearchBar } from '@/app/Components/SearchBar/SearchBar';
 import axios from 'axios';
 
-export default function ContainerF() {
-    const propsGlobal = useSelector((state) => state.allProps);
-    const filterProps = useSelector((state) => state.allPropsCopy);
+export default  function ContainerF() {
+    // const propsGlobal = useSelector((state) => state.allProps);
+
+    const [viewProps, setViewProps] = useState([]);
+    
+    const itemsPerPage = 9;
+    const [currentPage, setCurrentPage] = useState(1);
   
-   
-    
-    // // Tipo para el que deseas obtener los 20 elementos más repetidos (1, 2 o 3)
-    // const tipoDeseado = 3;
-    
-    // // Filtrar objetos por tipo deseado
-    // const objetosFiltrados = propsGlobal.filter(obj => obj.tags.find(tag => tag.type === tipoDeseado));
-    
-    // // Contar la cantidad de ocurrencias de cada nombre de tag
-    // const tagCounts = objetosFiltrados.reduce((counts, obj) => {
-      //   obj.tags.forEach(tag => {
-        //     if (tag.type === tipoDeseado) {
-          //       counts[tag.name] = (counts[tag.name] || 0) + 1;
-    //     }
-    //   });
-    //   return counts;
-    // }, {});
-    
-    // // Ordenar los nombres de tag en función de su recuento de ocurrencias de forma descendente
-    // const sortedTags = Object.keys(tagCounts).sort((a, b) => tagCounts[b] - tagCounts[a]);
-    
-    // // Tomar los 20 nombres de tag más repetidos
-    // const top20Tags = sortedTags.slice(0, 20);
-    
-    // console.log(top20Tags);
-    
+    const [allProps, setProps] = useState([]);
+    const [propiedad, setPropiedad] = useState();
+  
+
     const tipe1 = ["Agua", "Corriente", "Cloaca", "Gas", "Natural", "Electricidad", "Pavimento"];
     const tipe2 = ['Cocina', 'Living comedor', 'Balcón', 'Comedor', 'Living', 'Lavadero', 'Comedor diario', 'Escritorio', 'Oficina', 'Galería', 'Jardín', 'Toilette', 'Hall', 'Suite', 'Baulera', 'Vestidor', 'Dependencia', 'Biblioteca', 'Patio', 'Terraza'];
     const tipe3 = ['Apto profesional', 'Calefacción individual', 'Apto mascotas', 'Luminoso', 'En construcción', 'Preinstalación de A/A', 'Parrilla', 'Solarium', 'Calefacción', 'Pileta', 'SUM', 'Cochera subterránea', 'Gimnasio', 'Calefacción por radiadores', 'Aire Acondicionado individual', 'Seguridad Porteria', 'Apto crédito', 'Alarma', 'Seguridad Diurna', 'Lavadero'];
+
+
   
-    
-    
-
-
-
-
-    const [propiedad, setPropiedad] = useState();
 
     const [filters, setFilters] = useState({
       type: "",
@@ -82,7 +53,7 @@ export default function ContainerF() {
     };
     
     
-    
+    //fetching post para enviar los filtros seleccionados, actualizando el setPropiedades con las propiedades filtradas
   
     const handleClick = () => {
       axios
@@ -101,33 +72,40 @@ export default function ContainerF() {
     
   
   
-    const itemsPerPage = 9;
-    const [currentPage, setCurrentPage] = useState(1);
-  
-    const [allProps, setProps] = useState([]);
-  
-    const indexOfLastCountry = currentPage * itemsPerPage;
-    const indexOfFirstCountry = indexOfLastCountry - itemsPerPage;
-    const viewProps = propiedad?.slice(indexOfFirstCountry, indexOfLastCountry);
+    
 
-
-    const goToPreviousPage = () => {
-        setCurrentPage((prevPage) => prevPage - 1);
-      };
     
-      const goToNextPage = () => {
-        setCurrentPage((prevPage) => prevPage + 1);
-      };
-    
-      const dispatch = useDispatch();
-    
-      useEffect(() => {
-        if (propsGlobal.length < 1) {
-          dispatch(getAllProperties());
-        } else {
-          setProps(propsGlobal);
+    //fetching de data para traer las propiedades con el paginado, guardandolas en setViewProps
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3001/realstate?page=${currentPage}&limit=9`);
+        const data = response.data;
+        console.log(data);
+        setViewProps(data);
+      } catch (error) {
+          // Manejar el error de la solicitud
+          console.error(error);
         }
-      }, [propsGlobal]);
+      };
+      
+      // funciones para mover el paginado.
+
+      useEffect(() => {
+        fetchData();
+      }, [currentPage]);
+      
+      //va a la pagina anterior a la actual
+      
+      const goToPreviousPage = () => {
+          setCurrentPage((prevPage) => prevPage - 1);
+        };
+      
+       //va a la siguiente pagina
+
+        const goToNextPage = () => {
+          setCurrentPage((prevPage) => prevPage + 1);
+        };
+      
 
       const randomImageIndex = 0
     return (
@@ -329,7 +307,7 @@ export default function ContainerF() {
               <div className='w-full bg-white text-black'>
                 <div className='grid grid-cols-3 '>
                   {viewProps?.map((prop) => (
-                    <Card
+                    <CardF
                       key={prop.id}
                       id={prop.id}
                       address={prop.address}
