@@ -23,7 +23,13 @@ export default function UsersDashboard() {
   return (
     <div id="last-users">
       <h1 className="font-bold py-4 uppercase">Usuarios</h1>
-      <div id="stats" className="flex-1 overflow-y-scroll w-full">
+      <table className="w-full whitespace-nowrap">
+        <thead className="bg-black/60">
+          <th className="text-left py-3 px-2 rounded-l-lg">Nombre</th>
+          <th className="text-left py-3 px-2">Email</th>
+          <th className="text-left py-3 px-2">Rol</th>
+          <th className="text-left py-3 px-2 rounded-r-lg">Actions</th>
+        </thead>
         {viewUsers.map((user) => (
           <DashboardUser
             key={user.id}
@@ -35,7 +41,7 @@ export default function UsersDashboard() {
             rol={user.rol}
           />
         ))}
-      </div>
+      </table>
     </div>
   );
 }

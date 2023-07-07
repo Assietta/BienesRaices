@@ -1,46 +1,10 @@
 "use client";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import UsersDashboard from "./usersDashboard";
-import PropiedadesDashboard from "./propiedadesDashboard";
-import axios from "axios";
+import UsersDashboard from "./users/usersDashboard";
+import PropiedadesDashboard from "./propiedades/propiedadesDashboard";
 
 export default function Example() {
-  // const [viewProps, setViewProps] = useState([]);
-  // const [viewUsers, setViewUsers] = useState([]);
-
-  // useEffect(() => {
-  //   fetchDataProps();
-  // }, []);
-
-  // const fetchDataProps = async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       `http://localhost:3001/realstate?limit=6`
-  //     );
-  //     const data = response.data;
-  //     setViewProps(data);
-  //   } catch (error) {
-  //     // Manejar el error de la solicitud
-  //     console.error(error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetchDataUsers();
-  // }, []);
-
-  // const fetchDataUsers = async () => {
-  //   try {
-  //     const response = await axios.get(`http://localhost:3001/users/`);
-  //     const data = response.data.users;
-  //     setViewUsers(data);
-  //   } catch (error) {
-  //     // Manejar el error de la solicitud
-  //     console.error(error);
-  //   }
-  // };
-
   return (
     <div className="bg-white">
       <div className="antialiased bg-black w-full min-h-screen text-slate-300 relative py-4">
@@ -350,42 +314,7 @@ export default function Example() {
                 </div>
               </div>
             </div>
-            {/* <div id="last-incomes">
-              <h1 className="font-bold py-4 uppercase">Propiedades</h1>
-              <div id="stats" className="flex-1 overflow-y-scroll h-60">
-                {viewProps.map((prop) => (
-                  <DashboardCard
-                    key={prop.id}
-                    id={prop.id}
-                    address={prop.address}
-                    Image={prop.photos[0]}
-                    real_address={prop.real_address}
-                    operation_type={prop.operation_type}
-                    total_surface={prop.total_surface}
-                    type={prop.type}
-                    price={prop.price}
-                    currency={prop.currency}
-                  />
-                ))}
-              </div>
-            </div> */}
             <PropiedadesDashboard></PropiedadesDashboard>
-            {/* <div id="last-users">
-              <h1 className="font-bold py-4 uppercase">Usuarios</h1>
-              <div id="stats" className="flex-1 overflow-y-scroll w-full">
-                {viewUsers.map((user) => (
-                  <DashboardUser
-                    key={user.id}
-                    id={user.id}
-                    provider={user.provider}
-                    image={user.image}
-                    username={user.username}
-                    email={user.email}
-                    rol={user.rol}
-                  />
-                ))}
-              </div>
-            </div> */}
             <UsersDashboard></UsersDashboard>
             <div id="last-users">
               <h1 className="font-bold py-4 uppercase">Ordenes</h1>
