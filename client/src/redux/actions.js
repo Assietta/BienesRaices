@@ -13,7 +13,7 @@ import axios from 'axios';
 export function getAllProperties() {
   return async function (dispatch) {
     try {
-      const response = await axios.get('bienesraices-production-9eb3.up.railway.app/realState');
+      const response = await axios.get('http://localhost:3001/realState');
 
       dispatch({
         type: GET_PROP,

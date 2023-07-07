@@ -10,7 +10,7 @@ import Map from "./map"
 
 
 const fetchPropId = async  (id) =>{
-  const res = await fetch(`bienesraices-production-9eb3.up.railway.app/realState/${id}`)
+  const res = await fetch(`http://localhost:3001/realState/${id}`)
          return  res.json()
          
         }

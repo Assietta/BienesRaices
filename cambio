@@ -1,0 +1,274 @@
+[33mcommit 17c68d2056f1f4a1b187a4fcc00cab2f7bae024c[m[33m ([m[1;36mHEAD -> [m[1;32mdeploy[m[33m, [m[1;31morigin/deploy[m[33m)[m
+Author: nicoargiz <nicoargiz@hotmail.com>
+Date:   Fri Jul 7 09:32:14 2023 -0300
+
+    cambios en url de peticiones del front
+
+[33mcommit c9be7bd12a90cd431d3f220cfd12c6d0c3ade8b4[m
+Author: nicoargiz <nicoargiz@hotmail.com>
+Date:   Fri Jul 7 09:19:33 2023 -0300
+
+    cambio
+
+[33mcommit 7105243e1b6dd9a2d29e4cee323e3f884814407d[m
+Author: Lulisderoo20 <92049842+Lulisderoo20@users.noreply.github.com>
+Date:   Thu Jul 6 15:16:37 2023 -0300
+
+    Update CardsConteiner.jsx
+
+[33mcommit 438fa09d628dfebbdd6496ce2cfc5c8c717c5633[m
+Author: Lulisderoo20 <92049842+Lulisderoo20@users.noreply.github.com>
+Date:   Thu Jul 6 15:10:42 2023 -0300
+
+    Update layout.jsx
+
+[33mcommit 151e543630edbcf69c747e990a00693a1a661161[m
+Author: Lulisderoo20 <92049842+Lulisderoo20@users.noreply.github.com>
+Date:   Thu Jul 6 15:10:30 2023 -0300
+
+    Update page.jsx
+
+[33mcommit 1307978bfaba63ed864a5f33a3c81d21bee628c8[m
+Author: Lulisderoo20 <92049842+Lulisderoo20@users.noreply.github.com>
+Date:   Thu Jul 6 15:05:23 2023 -0300
+
+    Update app.js
+
+[33mcommit da30e5ff4ef82efccdb69fa41dd847382a2d3d26[m
+Author: Lulisderoo20 <92049842+Lulisderoo20@users.noreply.github.com>
+Date:   Thu Jul 6 14:55:12 2023 -0300
+
+    Update app.js
+    
+    https://bienesraices-production-888d.up.railway.app lo saque de app y puse http://localhost:3000
+
+[33mcommit f0bf878cf6ffd01b5d1857c9271ff1fd9d5f91df[m
+Merge: bf79797 e98e0b9
+Author: Lucia Lisdero <lulisdero20@gmail.com>
+Date:   Thu Jul 6 13:23:20 2023 -0300
+
+    Merge branch 'deploy' of https://github.com/Assietta/BienesRaices into deploy
+
+[33mcommit bf7979794fac6f4bdb825a3d9a87ecc014aea334[m
+Author: Lucia Lisdero <lulisdero20@gmail.com>
+Date:   Thu Jul 6 13:21:46 2023 -0300
+
+    front
+
+[33mcommit e98e0b950d738f1fe3c7d0aa459ec0f9d0462295[m
+Author: nicoargiz <nicoargiz@hotmail.com>
+Date:   Thu Jul 6 12:24:06 2023 -0300
+
+    cambio
+
+[33mcommit 1817d4d3aa1b8a649fe922fb16cccdca6d1be087[m
+Merge: fd60637 aec20c1
+Author: nicoargiz <nicoargiz@hotmail.com>
+Date:   Thu Jul 6 12:17:48 2023 -0300
+
+    cambios actualizados
+
+[33mcommit aec20c13666c25550670b5a51982d41b6cd25d1a[m[33m ([m[1;32mDev[m[33m)[m
+Merge: f2d9b7a d8c04f4
+Author: NAlonsoBulacio <125888959+NAlonsoBulacio@users.noreply.github.com>
+Date:   Thu Jul 6 12:08:20 2023 -0300
+
+    Merge pull request #63 from Assietta/pasareladepagos
+    
+    para Dev
+
+[33mcommit d8c04f41c1fe9ca0c15ade098554f6c92cc1df6f[m
+Author: Lucia Lisdero <lulisdero20@gmail.com>
+Date:   Thu Jul 6 12:04:23 2023 -0300
+
+    para Dev
+
+[33mcommit fd60637db0c636cf99d92caa7e482fb7061cf28b[m
+Author: Lulisderoo20 <92049842+Lulisderoo20@users.noreply.github.com>
+Date:   Wed Jul 5 22:22:46 2023 -0300
+
+    Update postCreateOrderHandler.js
+
+[33mcommit b4eb455a447c470bc821ba7d6c803f874fb4d3db[m
+Author: Lulisderoo20 <92049842+Lulisderoo20@users.noreply.github.com>
+Date:   Wed Jul 5 22:17:42 2023 -0300
+
+    Update postCreateOrderHandler.js
+
+[33mcommit 1e064f7d733e0c1b6dea91e2d972a35573311185[m
+Author: Lucia Lisdero <lulisdero20@gmail.com>
+Date:   Wed Jul 5 21:59:32 2023 -0300
+
+    .
+
+[33mcommit 2b1cf17b3f38809aac41261dbe30515da75a6ba7[m
+Author: Lucia Lisdero <lulisdero20@gmail.com>
+Date:   Wed Jul 5 21:13:00 2023 -0300
+
+    listo
+
+[33mcommit 855ebc4c0b1f9d7108a83287c721ace0e194f54b[m[33m ([m[1;31morigin/deployLu[m[33m)[m
+Author: Lucia Lisdero <lulisdero20@gmail.com>
+Date:   Wed Jul 5 16:59:35 2023 -0300
+
+    console.log(userId)
+
+[33mcommit 6d943996264caf8522903f778eecd1ceb38a969f[m
+Author: Lucia Lisdero <lulisdero20@gmail.com>
+Date:   Wed Jul 5 16:48:02 2023 -0300
+
+    .
+
+[33mcommit 348ba8d3551ad80afb16e7fafb6b9761c95c5baf[m
+Author: Lucia Lisdero <lulisdero20@gmail.com>
+Date:   Wed Jul 5 16:27:52 2023 -0300
+
+    .
+
+[33mcommit b3f70c61080a01dc5145b187a1de219577aa3244[m
+Author: Lucia Lisdero <lulisdero20@gmail.com>
+Date:   Wed Jul 5 16:23:37 2023 -0300
+
+    .
+
+[33mcommit c3ff60a8ccf46802219c762f80aa98013c8ec5a4[m
+Author: Lucia Lisdero <lulisdero20@gmail.com>
+Date:   Wed Jul 5 16:21:54 2023 -0300
+
+    preferenceId
+
+[33mcommit 4cfd175f6c1137dfd3cb8e2e961c44eb95830ccb[m
+Merge: c2e3b42 27c63c9
+Author: Lucia Lisdero <lulisdero20@gmail.com>
+Date:   Wed Jul 5 16:15:13 2023 -0300
+
+    Merge branch 'deploy' of https://github.com/Assietta/BienesRaices into deploy
+
+[33mcommit c2e3b4251d62341d4b83c89f59c8f45f38df0dfe[m
+Author: Lucia Lisdero <lulisdero20@gmail.com>
+Date:   Wed Jul 5 16:15:02 2023 -0300
+
+    .
+
+[33mcommit 27c63c9127ec9cc73f244d6e67babdffe01cabae[m
+Author: nicoargiz <nicoargiz@hotmail.com>
+Date:   Wed Jul 5 16:10:49 2023 -0300
+
+    lol ahora si?
+
+[33mcommit e1630fba3ede4639fb1ef51c2bfbae026d474dd4[m
+Author: nicoargiz <nicoargiz@hotmail.com>
+Date:   Wed Jul 5 16:06:23 2023 -0300
+
+    arreglado?
+
+[33mcommit 67c4456bc3f3fbf3fce1f2cf328e0cff27fb2b0e[m
+Author: nicoargiz <nicoargiz@hotmail.com>
+Date:   Wed Jul 5 16:01:38 2023 -0300
+
+    modificacion postusercont
+
+[33mcommit 57bfbd8824f4fa169104132da0f110a7b46d8fed[m
+Author: NAlonsoBulacio <125888959+NAlonsoBulacio@users.noreply.github.com>
+Date:   Wed Jul 5 15:58:49 2023 -0300
+
+    Update index.js
+
+[33mcommit 007f0f270df7e09ef5864377e43bd7e09c11b1ca[m
+Author: NAlonsoBulacio <125888959+NAlonsoBulacio@users.noreply.github.com>
+Date:   Wed Jul 5 15:57:11 2023 -0300
+
+    Update index.js
+
+[33mcommit 5ee8ea5c7424c91a44cd293c305db52e22d75f83[m
+Author: Lucia Lisdero <lulisdero20@gmail.com>
+Date:   Wed Jul 5 15:55:57 2023 -0300
+
+    user y order models
+
+[33mcommit 113d9ea476cebe043d250c1359c6e397a61a94cd[m
+Author: Lucia Lisdero <lulisdero20@gmail.com>
+Date:   Wed Jul 5 15:50:04 2023 -0300
+
+    notificacion mail order
+
+[33mcommit f2d9b7a701a4ceab7308d1e66b87f339bb9a6021[m[33m ([m[1;31morigin/feat/modelUsers[m[33m)[m
+Merge: 325de6c 77dedbc
+Author: NAlonsoBulacio <125888959+NAlonsoBulacio@users.noreply.github.com>
+Date:   Wed Jul 5 15:38:25 2023 -0300
+
+    Merge pull request #62 from Assietta/deploy
+    
+    Deploy
+
+[33mcommit 77dedbcc3ed717afc2dbc59faa564817f7c33b38[m
+Merge: 6dcf615 325de6c
+Author: Lucia Lisdero <lulisdero20@gmail.com>
+Date:   Wed Jul 5 15:34:37 2023 -0300
+
+    Merge branch 'Dev' into deploy, dev de front
+
+[33mcommit 325de6c0a11690bbc5cebc4ce0ea2ca29e1be912[m
+Merge: 96cacc2 29a7d25
+Author: NAlonsoBulacio <125888959+NAlonsoBulacio@users.noreply.github.com>
+Date:   Wed Jul 5 15:23:25 2023 -0300
+
+    Merge pull request #61 from Assietta/Auth
+    
+    Auth
+
+[33mcommit 29a7d250b849b6e9d59cb0491e0cbdce04c04148[m
+Author: frgalarza <francig4444@gmail.com>
+Date:   Wed Jul 5 15:12:55 2023 -0300
+
+    Update index.js
+
+[33mcommit 6dcf6150960b85e8787385bb167961b889790027[m
+Author: Lucia Lisdero <lulisdero20@gmail.com>
+Date:   Wed Jul 5 15:09:02 2023 -0300
+
+    getorder
+
+[33mcommit e13adcd9207ac698359982b95d50bd9f7f07b59d[m
+Author: Lucia Lisdero <lulisdero20@gmail.com>
+Date:   Wed Jul 5 15:00:51 2023 -0300
+
+    guardar orden de pago
+
+[33mcommit bac9c20ba6c5d2d6f692d58dd822a8e42f7107a9[m
+Merge: 47cef10 96cacc2
+Author: Franco Galarza <francig4444@gmail.com>
+Date:   Wed Jul 5 14:40:58 2023 -0300
+
+    Merge branch 'Dev' into Auth
+
+[33mcommit 47cef10311e9fd3e8436079290a83541ecb0e912[m
+Author: Franco Galarza <francig4444@gmail.com>
+Date:   Wed Jul 5 14:32:32 2023 -0300
+
+    Guardar usuarios FB y Google en DB
+
+[33mcommit 96cacc29998ccfbfa4658ff901b2f09e0ce5a58d[m
+Merge: 79b6395 43acad5
+Author: frgalarza <francig4444@gmail.com>
+Date:   Wed Jul 5 14:11:41 2023 -0300
+
+    Merge pull request #60 from Assietta/feat/postUser
+    
+    mails de appraisals, contact y postUsers
+
+[33mcommit 43acad5a6949768cf57a29bc85215f9c7970b26b[m[33m ([m[1;31morigin/feat/postUser[m[33m, [m[1;32mfeat/postUser[m[33m)[m
+Author: nicoargiz <nicoargiz@hotmail.com>
+Date:   Wed Jul 5 14:00:56 2023 -0300
+
+    mails de appraisals, contact y postUsers
+
+[33mcommit 0f5741d7212939dd28a1c2276fe4c36f972e234f[m
+Author: Lucia Lisdero <lulisdero20@gmail.com>
+Date:   Wed Jul 5 13:45:19 2023 -0300
+
+    deploy
+
+[33mcommit 65976ea90062b6b586e251ae7785a5d4985d4136[m
+Author: Lucia Lisdero <lulisdero20@gmail.com>
+Date:   
