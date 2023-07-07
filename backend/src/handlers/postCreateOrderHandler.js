@@ -76,14 +76,14 @@ const webhookHandler=async(req, res)=>{
   try {
     if(payment.type==="payment"){
       const data=await mercadopago.payment.findById(payment["data.id"]);
-    console.log(data);
+    console.log(data.response);
 
       // BUSCAR USER EN DB
-      const user = await User.findByPk(data.response.external_reference); 
-
+      const user = await User.findByPk(data.response.external_reference); //id user
+console.log(data.response.external_reference);
       // BUSCAR PROPERTY EN DB
       const property = await RealState.findByPk(data.response.description); 
-
+console.log(data.response.description);
       // GUARDAR REGISTRO EN ORDERS
       const newOrder = await Order.create({
         client_idDB: String(data.response.external_reference),
