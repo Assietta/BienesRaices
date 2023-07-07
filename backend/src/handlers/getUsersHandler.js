@@ -2,7 +2,8 @@ const { getUsersController } = require('../controllers/getUsersController')
 
 const getUsersHandler = async (req, res) => {
     try{
-     let users = await getUsersController();
+
+     let users = await getUsersController(req);
      res.status(200).json({ users })
     }catch(error){
         res.status(400).json({ error: error.message })
