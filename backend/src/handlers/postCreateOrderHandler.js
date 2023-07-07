@@ -40,7 +40,7 @@ const createOrderHandler = async (req, res) => {
       },
       auto_return: "approved",
       external_reference: userId,
-      notification_url: "https://984b-190-174-229-190.ngrok-free.app/webhook",
+      notification_url: "https://bb55-181-165-110-105.ngrok-free.app/webhook",
     });
 
     const preferenceId = result.response.id;
@@ -57,9 +57,9 @@ const createOrderHandler = async (req, res) => {
     //   }
     // };
 
-    // res.send(preferenceId);
-    const redirectUrl = `https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=${preferenceId}`;
-    res.send(redirectUrl);
+    res.send(preferenceId);
+    // const redirectUrl = `https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=${preferenceId}`;
+    // res.send(redirectUrl);
   } catch (error) {
     console.error(error);
     res.status(500).send("Error al crear la orden");
