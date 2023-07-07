@@ -1,57 +1,35 @@
-
 // import { useState, useEffect } from "react";
-import axios from "axios";
-import styles from "./page.module.css";
+import Gallery from "./gallery";
+import Map from "./map";
+import BtnReservar from "./btnReservar";
 
-import Gallery from "./gallery"
-import { idText } from "typescript";
-import Map from "./map"
-
-
-
-const fetchPropId = async  (id) =>{
-  const res = await fetch(`http://localhost:3001/realState/${id}`)
-         return  res.json()
-         
-        }
+const fetchPropId = async (id) => {
+  const res = await fetch(`http://localhost:3001/realState/${id}`);
+  return res.json();
+};
 
 export default async function Example({ params }) {
   const { id } = params;
- const propiedad = await fetchPropId(id)
- 
+  const propiedad = await fetchPropId(id);
 
-
-
-
-
-
-  
-  console.log(propiedad);
- 
-
-
-
-
-
-
-  const handleReservarClick = async () => {
-    try {
-      const response = await axios.get(
-        `http://localhost:3001/createOrder/${id}`
-      );
-      const preferenceId = response.data;
-      console.log(preferenceId);
-      const redirectUrl = `https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=${preferenceId}`;
-      window.open(redirectUrl, "_blank");
-    } catch (error) {
-      console.error(error);
-      // Manejar el error de acuerdo a tus necesidades
-    }
-  };
+  // const handleReservarClick = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       `http://localhost:3001/createOrder/${id}`
+  //     );
+  //     const preferenceId = response.data;
+  //     console.log(preferenceId);
+  //     const redirectUrl = `https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=${preferenceId}`;
+  //     window.open(redirectUrl, "_blank");
+  //   } catch (error) {
+  //     console.error(error);
+  //     // Manejar el error de acuerdo a tus necesidades
+  //   }
+  // };
 
   const product = {
     name: propiedad.address,
-    price: propiedad.currency + "$ " + propiedad.price.toLocaleString(),
+    price: propiedad.currency + " " + propiedad.price.toLocaleString(),
     href: "#",
     breadcrumbs: [
       { id: 1, name: propiedad.operation_type },
@@ -69,22 +47,16 @@ export default async function Example({ params }) {
     propiedad.photos[5],
   ];
 
+  const center = {
+    lat: parseFloat(propiedad?.geo_lat),
+    lng: parseFloat(propiedad?.geo_long),
+  };
 
-  
-const center = {
-  lat: parseFloat(propiedad?.geo_lat),
-  lng: parseFloat(propiedad?.geo_long),
-};
-
-
-
-   const mapContainerStyle = {
+  const mapContainerStyle = {
     marginTop: "50px",
     width: "100%",
     height: "400px",
   };
-
-
 
   return (
     <div className="bg-white">
@@ -129,11 +101,7 @@ const center = {
         </nav>
 
         {/* Image gallery */}
-        <Gallery images= {images}/>
-        
-
-
-
+        <Gallery images={images} />
 
         {/* Product info */}
         <div className="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
@@ -212,6 +180,7 @@ const center = {
             >
               Reservar
             </button> */}
+            <BtnReservar id={propiedad.id}></BtnReservar>
           </div>
 
           <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
@@ -225,17 +194,7 @@ const center = {
                 </p>
               </div>
             </div>
-            <Map mapContainerStyle = {mapContainerStyle} center = {center}/>
-            {/* <LoadScript googleMapsApiKey="AIzaSyDSHb1gBxjiShwN6LVC_bBnxt9E60TwvmI">
-              <GoogleMap
-                mapContainerStyle={mapContainerStyle}
-                center={center}
-                zoom={14}
-                onLoad={handleMapLoad}
-              >
-                <Marker position={markerPosition} />
-              </GoogleMap>
-            </LoadScript> */}
+            <Map mapContainerStyle={mapContainerStyle} center={center} />
           </div>
         </div>
       </div>

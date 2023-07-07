@@ -20,11 +20,9 @@
 const server = require("./src/app.js");
 const { conn } = require("./src/db.js");
 const getAllApi = require("./src/controllers/getAllRealEstateController.js");
-const createAdmin = require('./src/Helpers/createAdmin.js')
-require('dotenv').config();
-const {
-  PORT
-} = process.env;
+const createAdmin = require("./src/Helpers/createAdmin.js");
+require("dotenv").config();
+const { PORT } = process.env;
 
 // Syncing all the models at once.
 conn.sync({ alter: true }).then(() => {
