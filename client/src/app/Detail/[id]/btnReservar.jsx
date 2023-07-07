@@ -13,7 +13,7 @@ export default async function BtnReservar(props) {
     }
 
     // Si hay una sesión, puedes obtener el id del usuario
-    const userId = session.userId;
+    const userId = session.data.user.id;
 
     try {
       const response = await axios.post(
