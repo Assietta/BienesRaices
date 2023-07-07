@@ -52,7 +52,7 @@ const handler = NextAuth({
           }
         } catch (error) {
           // Manejar cualquier error que ocurra durante la ejecución
-          console.error(error);
+          console.error(error.message);
           return null;
         }
       },
@@ -72,12 +72,13 @@ const handler = NextAuth({
       const { data } = await axios('http://localhost:3001/users')
       if (user.account?.provider === 'google') {
         // Se guarda el usuario en la base de datos
-        const userDb = data.users?.find(userDb => userDb.email === user.user.email)
-
-        if(userDb?.password === '' && userDb.provider === 'google') {
+        const userDb = data.users?.find(userDb => userDb.email === user.user.email && userDb.provider === 'google')
+        console.log(userDb);
+        if(userDb?.provider === 'google') {
           return true
         }
-        const newUser = {
+        if(!userDb){
+          const newUser = {
           provider: user.account.provider,
           image: user.user.image,
           email: user.user.email,
@@ -86,16 +87,20 @@ const handler = NextAuth({
         };
 
         await axios.post('http://localhost:3001/users', newUser);
+        return true
+        }
+        
       }
 
       if (user.account?.provider === 'facebook') {
         // Se guarda el usuario en la base de datos
-        const userDb = data.users?.find(userDb => userDb.email === user.user.email)
+        const userDb = data.users?.find(userDb => userDb.email === user.user.email && userDb.provider === 'facebook')
 
-        if(userDb?.password === '' && userDb.provider === 'facebook') {
+        if(userDb?.provider === 'facebook') {
           return true
         }
-        const newUser = {
+        if(!userDb){
+          const newUser = {
           provider: user.account.provider,
           image: user.user.image,
           email: user.user.email,
@@ -104,6 +109,8 @@ const handler = NextAuth({
         };
 
         await axios.post('http://localhost:3001/users', newUser);
+        }
+        
       }
 
       return true;
@@ -114,19 +121,19 @@ const handler = NextAuth({
     },
     async session({ session, token }) {
       session.user = token.user;
-      if(session.user.id.length === 21){
+      if(session.user?.id.length === 21){
         const provider = 'google'
         const info = await axios('http://localhost:3001/users')
         const userNew = info.data.users.find(userDb => userDb.email === session.user.email && userDb.provider === provider)
         session.user = userNew
       }
-      if(session.user.id.length === 16){
+      if(session.user?.id.length === 16){
         const provider = 'facebook'
         const info = await axios('http://localhost:3001/users')
         const userNew = info.data.users.find(userDb => userDb.email === session.user.email && userDb.provider === provider)
         session.user = userNew
       }
-      if(!session.user.image) session.user.image = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVkI_FHVMm6hQ_h9uBT_SgaBNvtGePVuYxRmol4cPMwN89l3343X6w4Msap6vcZs-AsCs&usqp=CAU'
+      if(!session.user?.image) session.user.image = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVkI_FHVMm6hQ_h9uBT_SgaBNvtGePVuYxRmol4cPMwN89l3343X6w4Msap6vcZs-AsCs&usqp=CAU'
 
       return session;
     },

@@ -6,7 +6,7 @@ const { User } = require("../db");
 const { Order } = require("../db");
 
 const {
-  TOKEN_MP
+  TOKEN_MP, HOST
 } = process.env;
 
 const createOrderHandler = async (req, res) => {
@@ -22,7 +22,11 @@ const createOrderHandler = async (req, res) => {
   try {
 
     const property = await RealState.findOne({ where: { id: id } });
+
+    // const price= parseFloat(property?.operations[0]?.prices[0]?.price) * 0.000001
+
     const price = parseFloat(property?.price) * 0.001;
+
     
     const result = await mercadopago.preferences.create({
       items: [
@@ -58,9 +62,11 @@ const createOrderHandler = async (req, res) => {
     //   }
     // };
 
-    res.send(preferenceId);
-    // const redirectUrl = `https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=${preferenceId}`;
-    //  res.send(redirectUrl);
+
+    // res.send(preferenceId);
+    const redirectUrl = `https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=${preferenceId}`;
+     res.send(redirectUrl);
+
   } catch (error) {
     console.error(error);
     res.status(500).send("Error al crear la orden");
@@ -72,16 +78,14 @@ const webhookHandler=async(req, res)=>{
   // const payment= req.query.payment_id;
   const payment= req.query;
   // console.log(payment);
-  try {
-    if(payment.type==="payment"){
+  try {  if(payment.type==="payment"){
       const data=await mercadopago.payment.findById(payment["data.id"]);
-    // console.log(data);
-
+    console.log(data);
       // BUSCAR USER EN DB
-      const user = await User.findByPk(data.response.external_reference); // Asegúrate de que el modelo User exista y esté configurado correctamente
-
+      const user = await User.findByPk(data.response.external_reference); 
       // BUSCAR PROPERTY EN DB
-      const property = await RealState.findByPk(data.response.description); // Asegúrate de que el modelo RealState exista y esté configurado correctamente
+      const property = await RealState.findByPk(data.response.description); 
+// console.log(property);
 
       // GUARDAR REGISTRO EN ORDERS
       const newOrder = await Order.create({
@@ -112,16 +116,18 @@ const webhookHandler=async(req, res)=>{
       console.log(newOrder);
       let asunto='';
       String(data?.response.status)==='approved'?  asunto='Su transacción ha sido exitosa': asunto='Su transacción ha sido rechazada';
-      const cuerpo = `Operación nº ${String(data?.response.id)}, cualquier consulta comunicate con nosotros`
+      const cuerpo = `Cualquier consulta comunicate con nosotros`
 
     //NOTIFICACION POR MAIL
     await mailHandler(String(user?.dataValues.email), asunto, cuerpo);
 
 
-    res.status(200).send("OK");
+
+    res.status(204).send("OK");
     }
   } catch (error) {
-    return res.sendStatus(500).json({error: error.message});
+    console.log(error)
+    res.status(500).json({error: error.message});
   }
 };
 
@@ -145,24 +151,18 @@ module.exports = { createOrderHandler , webhookHandler};
 
 
 
+// try {
+//   const response = await axios.get(`https://api.mercadopago.com/v1/payments/${payment}`, {
+//       headers: {
+//           'Authorization': `Bearer TEST-4304274978344220-062414-3619cd7e5c484d5fcb746d26d1cc68c0-1406402853`
+//       }
+//   });
 
-  // try {
-  //   //   const data= await  axios.get(`https://api.mercadopago.com/v1/payments/${payment}`, {
-  //   //     headers: {
-  //   //         'Authorization': `Bearer TEST-4304274978344220-062414-3619cd7e5c484d5fcb746d26d1cc68c0-1406402853`
-  //   //     }
-  //   // }).then(response => {
-  //   //     console.log(response.data);
-  //   // }).catch(error => {
-  //   //     console.error(error);
-  //   // });
-  //   console.log(payment);
-    
-    
-  // } catch (error) {
-  //   console.log(error);
-  
-  // }
+//   console.log(response.data);
+// } catch (error) {
+//   console.error(error);
+// }
+
 
 
 
