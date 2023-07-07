@@ -33,6 +33,10 @@ module.exports = (sequelize) => {
     rol: {
         type: DataTypes.STRING,
         defaultValue: 'usuario',
-    }
+    },
+    favorites: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      allowNull: true,
+  },
   });
 };

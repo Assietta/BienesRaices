@@ -30,7 +30,7 @@ const handler = NextAuth({
 
 
           const user = data.users.find(
-            (user) => user?.email === credentials?.email
+            (user) => user?.email === credentials?.email && user.provider === 'credentials'
           );
 
           if (user) {
