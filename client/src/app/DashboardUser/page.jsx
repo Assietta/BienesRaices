@@ -5,13 +5,14 @@ import UsersDashboard from './MensajesContados/MensajesPerfil/Mensajes';
 import PropiedadesDashboard from './propiedades/propiedadesDashboard';
 import Mensajes from './MensajesContados/MensajesPerfil/Mensajes';
 import MensajesVista from './MensajesContados/MensajesVista';
+import Configuration from "./configuration/configuration";
 
 export default function Example() {
   const [showDashboard, setShowDashboard] = useState({
     favorito: false,
     Perfil: true,
     Mensaje: false,
-    Configuracion: false,
+    Configuration: false,
   });
 
   const showSection = (param) => {
@@ -160,6 +161,7 @@ export default function Example() {
               <a
                 href="#"
                 className="hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group"
+                onClick={() => showSection('Configuration')}
               >
                 <div className="flex flex-col space-y-2 md:flex-row md:space-y-0 space-x-2 items-center">
                   <div>
@@ -201,6 +203,7 @@ export default function Example() {
               </>
             )}
             {showDashboard.Mensaje && <MensajesVista />}
+            {showDashboard.Configuration && <Configuration/>}
           </div>
         </div>
       </div>
