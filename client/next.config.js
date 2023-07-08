@@ -9,7 +9,9 @@ const nextConfig = {
       'flowbite.com',
       'lh3.googleusercontent.com',
       'platform-lookaside.fbsbx.com',
-      'encrypted-tbn0.gstatic.com'
+      'encrypted-tbn0.gstatic.com',
+      'flowbite.s3.amazonaws.com'
+
     ],
   },
 };

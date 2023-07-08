@@ -5,6 +5,10 @@ const { mailHandler } = require('./postMailHandler');
 const { User } = require("../db");
 const { Order } = require("../db");
 
+const { mailHandler } = require('./postMailHandler');
+const { User } = require("../db");
+const { Order } = require("../db");
+
 const {
   TOKEN_MP, HOST
 } = process.env;
@@ -66,7 +70,8 @@ const createOrderHandler = async (req, res) => {
 
 
     res.send(preferenceId);
-  
+    // const redirectUrl = `https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=${preferenceId}`;
+    // res.send(redirectUrl);
 
   } catch (error) {
     console.error(error);
@@ -79,14 +84,17 @@ const webhookHandler=async(req, res)=>{
   // const payment= req.query.payment_id;
   const payment= req.query;
   // console.log(payment);
+  // console.log(payment);
   try {  if(payment.type==="payment"){
       const data=await mercadopago.payment.findById(payment["data.id"]);
     console.log(data);
+    // console.log(data);
+
       // BUSCAR USER EN DB
-      const user = await User.findByPk(data.response.external_reference); 
+      const user = await User.findByPk(data.response.external_reference); // Asegúrate de que el modelo User exista y esté configurado correctamente
+
       // BUSCAR PROPERTY EN DB
-      const property = await RealState.findByPk(data.response.description); 
-// console.log(property);
+      const property = await RealState.findByPk(data.response.description); // Asegúrate de que el modelo RealState exista y esté configurado correctamente
 
       // GUARDAR REGISTRO EN ORDERS
       const newOrder = await Order.create({
@@ -127,9 +135,7 @@ const webhookHandler=async(req, res)=>{
     res.status(204).send("OK");
     }
   } catch (error) {
-    console.log(error)
-    res.status(500).json({error: error.message});
-
+    return res.status(500).json({error: error.message});
 
   }
 };
