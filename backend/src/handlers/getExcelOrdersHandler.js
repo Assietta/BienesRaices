@@ -2,7 +2,7 @@ const XLSX = require('xlsx');
 const { Order } = require('../db')
 
 
-const getExcelOrderHandler = async (req, res)=>{
+const getExcelOrdersHandler = async (req, res)=>{
 
     const orders = await Order.findAll();
   const worksheet = XLSX.utils.json_to_sheet(orders.map(order => order.toJSON()));
@@ -13,6 +13,6 @@ const getExcelOrderHandler = async (req, res)=>{
   res.send(excelData);
 }
 module.exports = {
-    getExcelOrderHandler
+    getExcelOrdersHandler
   };
   
