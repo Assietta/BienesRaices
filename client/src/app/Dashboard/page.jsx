@@ -4,9 +4,18 @@ import Image from "next/image";
 import UsersDashboard from "./users/usersDashboard";
 import PropiedadesDashboard from "./propiedades/propiedadesDashboard";
 import OrdersDashboard from "./orders/ordersDashboard";
+import { useSession } from "next-auth/react";
 
 export default function Example() {
   const [selectedMenu, setSelectedMenu] = useState("dashboard");
+  const session = useSession();
+
+  const autenticated = () => {
+    if (session.status === "authenticated") {
+      return true;
+    } else session.status === "unauthenticated";
+    return false;
+  };
 
   return (
     <div className="bg-white">
@@ -22,19 +31,28 @@ export default function Example() {
               className="flex flex-col space-y-2 md:space-y-0 md:flex-row mb-5 items-center md:space-x-2 hover:bg-white/10 group transition duration-150 ease-linear rounded-lg group w-full py-3 px-2"
             >
               <div>
-                {/* <Image
-                  className="rounded-full w-10 h-10 relative object-cover"
-                  src=""
-                  alt=""
-                  height={100}
-                  width={100}
-                ></Image> */}
-              </div>
-              <div>
-                <p className="font-medium group-hover:text-indigo-400 leading-4">
-                  NicoArgiz
-                </p>
-                <span className="text-xs text-slate-400">MR Inmobiliaria</span>
+                <div className="flex space-x-4">
+                  {!autenticated() ? (
+                    <p></p>
+                  ) : (
+                    <>
+                      {session.data.user?.image && (
+                        <Image
+                          className="hidden h-10 w-auto lg:block rounded-full"
+                          src={session.data.user.image}
+                          alt="image"
+                          width={100}
+                          height={100}
+                        />
+                      )}
+                      <h3 className="text-gray-300 rounded-md px-3 py-2 -sm font-medium">
+                        {`${
+                          session.data.user.name || session.data.user.username
+                        }`}
+                      </h3>
+                    </>
+                  )}
+                </div>
               </div>
             </a>
             <hr className="my-2 border-slate-700"></hr>

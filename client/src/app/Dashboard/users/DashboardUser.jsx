@@ -1,7 +1,3 @@
-// import styles from "./DashboardUser.module.css";
-import Link from "next/link";
-// import Image from "next/image";
-
 const DashboardUser = (props) => {
   const { id, provider, username, email, image, rol } = props;
 

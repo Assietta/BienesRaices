@@ -41,9 +41,11 @@ const DashboardOrders = (props) => {
     <div id="last-users">
       <div className="bg-black/60 to-white/5 rounded-lg">
         <div className="flex flex-row items-center">
-          <div className="text-3xl p-4">💰</div>
+          <div className="text-3xl p-2">💰</div>
           <div className="p-2">
-            <p className="text-xl font-bold">${formatAmount(monto)}</p>
+            <p className="text-xl font-bold text-center">
+              ${formatAmount(monto)}
+            </p>
             <p className="text-gray-500 font-medium">{username}</p>
             <p className="text-gray-500 text-sm">{formatDate(date)}</p>
           </div>
@@ -81,7 +83,7 @@ const DashboardOrders = (props) => {
                 id="defaultModal"
                 tabIndex="-1"
                 aria-hidden="true"
-                className="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full"
+                className="fixed z-50 md:inset-1 h-[calc(100%-1rem)] max-h-full"
               >
                 <div className="relative w-full max-w-2xl max-h-full">
                   <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -113,7 +115,7 @@ const DashboardOrders = (props) => {
                       </button>
                     </div>
                     <div className="p-6 space-y-6">
-                      <p className="leading-relaxed text-black dark:text-gray-400">
+                      <p className="leading-relaxed text-left text-black dark:text-gray-400">
                         ID de reserva: {id}
                         <br></br>
                         ID de MP: {paymentId} <br></br>
@@ -126,11 +128,11 @@ const DashboardOrders = (props) => {
                         Fecha de reserva: {date} <br></br>
                       </p>
                     </div>
-                    <div className="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                    <div className="flex justify-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
                       <button
                         onClick={handleModalClose}
                         type="button"
-                        className="text-gray-500 bg-black hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                        className="text-white-500 bg-black hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-black focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600 w-48"
                       >
                         Cerrar
                       </button>
