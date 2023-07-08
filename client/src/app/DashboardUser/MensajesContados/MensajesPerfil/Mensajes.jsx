@@ -1,9 +1,9 @@
-"use client";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import DashboardUser from "./DashboardUser";
+'use client';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import MensajesPerfil from './MensajesPerfil';
 
-export default function UsersDashboard() {
+export default function Mensajes() {
   const [viewUsers, setViewUsers] = useState([]);
 
   useEffect(() => {
@@ -22,16 +22,16 @@ export default function UsersDashboard() {
   };
   return (
     <div id="last-users">
-      <h1 className="font-bold py-4 uppercase">Usuarios</h1>
+      <h1 className="font-bold py-4 uppercase">Mensajes contactados</h1>
+      <h2>Tasaciones</h2>
       <table className="w-full whitespace-nowrap">
         <thead className="bg-black/60">
-          <th className="text-left py-3 px-2 rounded-l-lg">Nombre</th>
-          <th className="text-left py-3 px-2">Email</th>
-          <th className="text-left py-3 px-2">Rol</th>
-          <th className="text-left py-3 px-2 rounded-r-lg">Actions</th>
+          <th className="text-left py-3 px-2 rounded-l-lg">Tipo de mensaje</th>
+          <th className="text-left py-3 px-2">Estado</th>
+          <th className="text-left py-3 px-2">Fecha</th>
         </thead>
         {viewUsers.map((user) => (
-          <DashboardUser
+          <MensajesPerfil
             key={user.id}
             id={user.id}
             provider={user.provider}
@@ -43,5 +43,6 @@ export default function UsersDashboard() {
         ))}
       </table>
     </div>
+    
   );
 }
