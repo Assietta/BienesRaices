@@ -23,7 +23,6 @@ export default function Mensajes() {
   return (
     <div id="last-users">
       <h1 className="font-bold py-4 uppercase">Mensajes contactados</h1>
-      <h2>Tasaciones</h2>
       <table className="w-full whitespace-nowrap">
         <thead className="bg-black/60">
           <th className="text-left py-3 px-2 rounded-l-lg">Tipo de mensaje</th>
