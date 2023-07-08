@@ -11,7 +11,7 @@ export default function Example() {
         <div className="grid grid-cols-12 mx-auto gap-2 sm:gap-4 md:gap-6 lg:gap-10 xl:gap-14 max-w-7xl my-10 px-2">
           <div id="menu" className="bg-white/10 col-span-3 rounded-lg p-4 ">
             <h1 className="font-bold text-lg lg:text-3xl bg-gradient-to-br from-white via-white/50 to-transparent bg-clip-text text-transparent">
-              Dashboard<span className="text-indigo-400">.</span>
+              Mi perfil<span className="text-indigo-400"></span>
             </h1>
             <p className="text-slate-400 text-sm mb-2">Bienvenido,</p>
             <a
@@ -59,7 +59,7 @@ export default function Example() {
                   </div>
                   <div>
                     <p className="font-bold text-base lg:text-lg text-slate-200 leading-4 group-hover:text-indigo-400">
-                      Dashboard
+                      Perfil
                     </p>
                     <p className="text-slate-400 text-sm hidden md:block">
                       Información general
@@ -90,7 +90,7 @@ export default function Example() {
                   </div>
                   <div>
                     <p className="font-bold text-base lg:text-lg text-slate-200 leading-4 group-hover:text-indigo-400">
-                      Mensajes
+                      Avisos contactados
                     </p>
                     <p className="text-slate-400 text-sm hidden md:block">
                       Ver/Responder Mensajes
@@ -124,10 +124,10 @@ export default function Example() {
                   </div>
                   <div>
                     <p className="font-bold text-base lg:text-lg text-slate-200 leading-4 group-hover:text-indigo-400">
-                      Usuarios
+                      Favoritos
                     </p>
                     <p className="text-slate-400 text-sm hidden md:block">
-                      Opciones de usuarios
+                      Propiedades favoritas
                     </p>
                   </div>
                 </div>
@@ -174,7 +174,7 @@ export default function Example() {
             </p>
           </div>
           <div id="content" className="bg-white/10 col-span-9 rounded-lg p-6">
-            <div id="24h">
+            {/* <div id="24h">
               <h1 className="font-bold py-4 uppercase">Estadísticas</h1>
               <div
                 id="stats"
@@ -203,7 +203,7 @@ export default function Example() {
                         Usuarios
                       </p>
                       <p className="text-white font-bold text-2xl inline-flex items-center space-x-2">
-                        {/* <span>{viewUsers.length}</span> */}
+                   
                         <span>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -313,50 +313,10 @@ export default function Example() {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
             <PropiedadesDashboard></PropiedadesDashboard>
             <UsersDashboard></UsersDashboard>
             <OrdersDashboard></OrdersDashboard>
-            {/* <div id="last-users">
-              <h1 className="font-bold py-4 uppercase">Ordenes</h1>
-              <div
-                id="stats"
-                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
-              >
-                <div class="bg-black/60 to-white/5 rounded-lg">
-                  <div class="flex flex-row items-center">
-                    <div class="text-3xl p-4">💰</div>
-                    <div class="p-2">
-                      <p class="text-xl font-bold">348$</p>
-                      <p class="text-gray-500 font-medium">Amber Gates</p>
-                      <p class="text-gray-500 text-sm">24 Nov 2022</p>
-                    </div>
-                  </div>
-                  <div class="border-t border-white/5 p-4">
-                    <a
-                      href="#"
-                      class="inline-flex space-x-2 items-center text-center"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth="1.5"
-                        stroke="currentColor"
-                        class="w-6 h-6"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          stroke-linejoin="round"
-                          d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"
-                        />
-                      </svg>
-                      <span>Info</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div> */}
           </div>
         </div>
       </div>
