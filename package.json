@@ -1,7 +1,5 @@
 {
   "dependencies": {
-    "express-fileupload": "^1.4.0",
-    "tw-elements": "^1.0.0-beta2",
-    "xlsx": "^0.18.5"
+    "tw-elements": "^1.0.0-beta2"
   }
 }
