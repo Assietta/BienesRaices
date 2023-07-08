@@ -5,10 +5,6 @@ const { mailHandler } = require('./postMailHandler');
 const { User } = require("../db");
 const { Order } = require("../db");
 
-const { mailHandler } = require('./postMailHandler');
-const { User } = require("../db");
-const { Order } = require("../db");
-
 const {
   TOKEN_MP, HOST
 } = process.env;
