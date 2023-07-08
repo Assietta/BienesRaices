@@ -15,9 +15,9 @@ const { deleteRealStateHandler } = require('../handlers/deleteRealStateHandler')
 const { postFilterHandler } = require('../handlers/postFilterHandler');
 const {webhookHandler}= require('../handlers/postCreateOrderHandler');
 const {getOrdersHandler}= require('../handlers/getOrdersHandler');
-const {getExcelOrders}= require('../handlers/getExcelOrdersHandler');
-const {getExcelUsers}= require('../handlers/getExcelUsersHandler');
-const {getExcelRealState}= require('../handlers/getExcelRealStateHandler');
+const {getExcelOrdersHandler}= require('../handlers/getExcelOrdersHandler');
+const {getExcelUsersHandler}= require('../handlers/getExcelUsersHandler');
+const {getExcelRealStateHandler}= require('../handlers/getExcelRealStateHandler');
 
 router.get('/realState', realStateHandler);
 router.get('/realState/:id', getPropertyIdHandler);
@@ -26,9 +26,9 @@ router.get('/success', (req, res)=> res.send(req.query.payment_id));
 router.get('/pending', (req, res)=> res.send("pend") );
 router.get('/failure', (req, res)=> res.send("fail"));
 router.get('/orders', getOrdersHandler); 
-router.get('/download/orders', getExcelOrders);
-router.get('/download/users', getExcelUsers);
-router.get('/download/realState', getExcelRealState);
+router.get('/download/orders', getExcelOrdersHandler);
+router.get('/download/users', getExcelUsersHandler);
+router.get('/download/realState', getExcelRealStateHandler);
 
 
 router.post('/realState', postRealStateHandler);
