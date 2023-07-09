@@ -80,7 +80,7 @@ export default function SignIn() {
                      value={formData.username}
                      onChange={handleInputChange}
                    />
-                   {errors.username && <p>{errors.username}</p>}
+                   {errors.username && <p className='text-red-600'>{errors.username}</p>}
                  </div>
                  {/* input apellido */}
                  <div className="mb-3 space-y-2 w-full text-xs pl-0 pr-0">
@@ -96,13 +96,13 @@ export default function SignIn() {
                      value={formData.lastName}
                      onChange={handleInputChange}
                    />
-                   {errors.lastName && <p>{errors.lastName}</p>}
+                   {errors.lastName && <p className='text-red-600'>{errors.lastName}</p>}
                  </div>
                  {/* input mail */}
                  <div className="mb-3 space-y-2 w-full text-xs pl-0 pr-0">
                    <label className="font-semibold text-gray-600 py-2">
                      {' '}
-                     correo electronico <abbr title="required">*</abbr>
+                     Correo electrónico <abbr title="required">*</abbr>
                    </label>
                    <input
                      placeholder="nombre@dominio.com"
@@ -114,7 +114,7 @@ export default function SignIn() {
                      value={formData.email}
                      onChange={handleInputChange}
                    />
-                   {errors.email && <p>{errors.email}</p>}
+                   {errors.email && <p className='text-red-600'>{errors.email}</p>}
                  </div>
 
                  {/* input celular */}
@@ -132,7 +132,7 @@ export default function SignIn() {
                      value={formData.mobile}
                      onChange={handleInputChange}
                    />
-                   {errors.mobile && <p>{errors.mobile}</p>}
+                   {errors.mobile && <p className='text-red-600'>{errors.mobile}</p>}
                  </div>
 
                  {/* input password */}
@@ -150,7 +150,7 @@ export default function SignIn() {
                      value={formData.password}
                      onChange={handleInputChange}
                    />
-                   {errors.password && <p>{errors.password}</p>}
+                   {errors.password && <p className='text-red-600'>{errors.password}</p>}
                  </div>
 
                  {/* input password confirm */}
@@ -168,7 +168,7 @@ export default function SignIn() {
                      value={formData.confirmPassword}
                      onChange={handleInputChange}
                    />
-                   {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+                   {errors.confirmPassword && <p className='text-red-600'>{errors.confirmPassword}</p>}
                  </div>
 
                  <button

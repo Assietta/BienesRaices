@@ -10,8 +10,8 @@ const nextConfig = {
       'lh3.googleusercontent.com',
       'platform-lookaside.fbsbx.com',
       'encrypted-tbn0.gstatic.com',
-      'flowbite.s3.amazonaws.com'
-
+      'flowbite.s3.amazonaws.com',
+      'avatars.githubusercontent.com'
     ],
   },
 };
