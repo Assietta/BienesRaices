@@ -24,7 +24,7 @@ router.get('/success', (req, res)=> res.send(req.query.payment_id));
 router.get('/pending', (req, res)=> res.send("pend") );
 router.get('/failure', (req, res)=> res.send("fail"));
 router.get('/orders', getOrdersHandler); 
-router.get('/appraisals/:id', getAppraisalsHandler)
+router.get('/appraisals/:userId', getAppraisalsHandler)
 
 router.post('/realState', postRealStateHandler);
 router.post('/users', postUserHandler);
