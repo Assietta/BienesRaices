@@ -1,36 +1,36 @@
-import { Fragment, useState, useRef } from 'react';
-import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
-import Link from 'next/link';
-import Image from 'next/image';
-import { useSession, signOut } from 'next-auth/react';
-import ProfileUser from '../../ProfileUser/ProfileUser';
+import { Fragment, useState, useRef } from "react";
+import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+import Image from "next/image";
+import { useSession, signOut } from "next-auth/react";
+import ProfileUser from "../../ProfileUser/ProfileUser";
 
 const navigation = [
   {
-    label: 'Inicio',
-    route: '/',
+    label: "Inicio",
+    route: "/",
     current: true,
   },
   {
-    label: 'Nosotros',
-    route: '/About',
+    label: "Nosotros",
+    route: "/About",
     current: false,
   },
   {
-    label: 'Tasaciones',
-    route: '/Appraisals',
+    label: "Tasaciones",
+    route: "/Appraisals",
     current: false,
   },
   {
-    label: 'Contacto',
-    route: '/Contact',
+    label: "Contacto",
+    route: "/Contact",
     current: false,
   },
 ];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ');
+  return classes.filter(Boolean).join(" ");
 }
 
 export default function Example() {
@@ -39,9 +39,9 @@ export default function Example() {
   const session = useSession();
 
   const autenticated = () => {
-    if (session.status === 'authenticated') {
+    if (session.status === "authenticated") {
       return true;
-    } else session.status === 'unauthenticated';
+    } else session.status === "unauthenticated";
     return false;
   };
 
