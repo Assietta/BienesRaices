@@ -37,8 +37,7 @@ const createOrderHandler = async (req, res) => {
       },
       auto_return: "approved",
       external_reference: userId,
-      notification_url:'https://984b-190-174-229-190.ngrok-free.app/webhook'
-
+      notification_url: "https://984b-190-174-229-190.ngrok-free.app/webhook",
     });
 
     const preferenceId = result.response.id;
@@ -55,9 +54,9 @@ const createOrderHandler = async (req, res) => {
     //   }
     // };
 
-    // res.send(preferenceId);
-    const redirectUrl = `https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=${preferenceId}`;
-     res.send(redirectUrl);
+    res.send(preferenceId);
+    // const redirectUrl = `https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=${preferenceId}`;
+    // res.send(redirectUrl);
   } catch (error) {
     console.error(error);
     res.status(500).send("Error al crear la orden");
@@ -69,10 +68,11 @@ const webhookHandler = async (req, res) => {
   const payment = req.query;
   // console.log(payment);
   // console.log(payment);
-  try {  if(payment.type==="payment"){
-      const data=await mercadopago.payment.findById(payment["data.id"]);
-    console.log(data);
-    // console.log(data);
+  try {
+    if (payment.type === "payment") {
+      const data = await mercadopago.payment.findById(payment["data.id"]);
+      console.log(data);
+      // console.log(data);
 
       // BUSCAR USER EN DB
       const user = await User.findByPk(data.response.external_reference); // Asegúrate de que el modelo User exista y esté configurado correctamente
@@ -111,20 +111,19 @@ const webhookHandler = async (req, res) => {
         ),
       });
       console.log(newOrder);
-      let asunto='';
-      String(data?.response.status)==='approved'?  asunto='Su transacción ha sido exitosa': asunto='Su transacción ha sido rechazada';
-      const cuerpo = `Cualquier consulta comunicate con nosotros`
+      let asunto = "";
+      String(data?.response.status) === "approved"
+        ? (asunto = "Su transacción ha sido exitosa")
+        : (asunto = "Su transacción ha sido rechazada");
+      const cuerpo = `Cualquier consulta comunicate con nosotros`;
 
-    //NOTIFICACION POR MAIL
-    await mailHandler(String(user?.dataValues.email), asunto, cuerpo);
-
-
+      //NOTIFICACION POR MAIL
+      await mailHandler(String(user?.dataValues.email), asunto, cuerpo);
 
       res.status(204).send("OK");
     }
   } catch (error) {
-    return res.status(500).json({error: error.message});
-
+    return res.status(500).json({ error: error.message });
   }
 };
 

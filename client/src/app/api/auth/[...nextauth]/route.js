@@ -1,5 +1,6 @@
 import NextAuth from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
+import GitHubProvider from 'next-auth/providers/github'
 import FacebookProvider from "next-auth/providers/facebook"
 import CredentialsProvider from "next-auth/providers/credentials";
 import axios from 'axios'
@@ -11,9 +12,9 @@ const handler = NextAuth({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
-    FacebookProvider({
-      clientId: process.env.FACEBOOK_ID,
-      clientSecret: process.env.FACEBOOK_SECRET,
+    GitHubProvider({
+      clientId: process.env.GITHUB_ID,
+      clientSecret: process.env.GITHUB_SECRET,
     }),
     CredentialsProvider({
       name: 'Credentials',
@@ -90,11 +91,11 @@ const handler = NextAuth({
         
       }
 
-      if (user.account?.provider === 'facebook') {
+      if (user.account?.provider === 'github') {
         // Se guarda el usuario en la base de datos
-        const userDb = data.users?.find(userDb => userDb.email === user.user.email && userDb.provider === 'facebook')
+        const userDb = data.users?.find(userDb => userDb.email === user.user.email && userDb.provider === 'github')
 
-        if(userDb?.provider === 'facebook') {
+        if(userDb?.provider === 'github') {
           return true
         }
         if(!userDb){
@@ -125,8 +126,8 @@ const handler = NextAuth({
         const userNew = info.data.users.find(userDb => userDb.email === session.user.email && userDb.provider === provider)
         session.user = userNew
       }
-      if(session.user?.id.length === 16){
-        const provider = 'facebook'
+      if(session.user?.id.length === 8){
+        const provider = 'github'
         const info = await axios('http://localhost:3001/users')
         const userNew = info.data.users.find(userDb => userDb.email === session.user.email && userDb.provider === provider)
         session.user = userNew

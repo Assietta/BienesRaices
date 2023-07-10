@@ -4,8 +4,11 @@ import { useState } from 'react';
 import { validateForm } from '../Appraisals/validates';
 import axios from 'axios';
 import Title from "./title"
+import { useSession } from 'next-auth/react'
 
 export default function Example() {
+  const session = useSession()
+
   const [formData, setFormData] = useState({
     name: '',
     lastName: '',
@@ -46,7 +49,7 @@ export default function Example() {
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      await axios.post('http://localhost:3001/appraisals', formData);
+      await axios.post('http://localhost:3001/appraisals', {...formData, userId: session?.data.user.id});
       alert("Tasacion enviada")
       console.log('Appraisals successfully send');
        clearForm();
