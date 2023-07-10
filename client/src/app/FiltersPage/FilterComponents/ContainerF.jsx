@@ -75,7 +75,7 @@ export default  function ContainerF() {
     
 
     
-    //fetching de data para traer las propiedades con el paginado, guardandolas en setViewProps
+    fetching de data para traer las propiedades con el paginado, guardandolas en setViewProps
     const fetchData = async () => {
       try {
         const response = await axios.get(`http://localhost:3001/realstate?page=${currentPage}&limit=9`);
@@ -83,24 +83,24 @@ export default  function ContainerF() {
         console.log(data);
         setViewProps(data);
       } catch (error) {
-          // Manejar el error de la solicitud
+          Manejar el error de la solicitud
           console.error(error);
         }
       };
       
-      // funciones para mover el paginado.
+      funciones para mover el paginado.
 
       useEffect(() => {
         fetchData();
       }, [currentPage]);
       
-      //va a la pagina anterior a la actual
+      va a la pagina anterior a la actual
       
       const goToPreviousPage = () => {
           setCurrentPage((prevPage) => prevPage - 1);
         };
       
-       //va a la siguiente pagina
+       va a la siguiente pagina
 
         const goToNextPage = () => {
           setCurrentPage((prevPage) => prevPage + 1);

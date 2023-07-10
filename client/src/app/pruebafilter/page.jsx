@@ -6,6 +6,38 @@ import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from
 
 export default function FilterComponent () {
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
+
+    const [viewProps, setViewProps] = useState([])
+
+    const [allProps, setProps] = useState([]);
+    const [propiedad, setPropiedad] = useState();
+  
+
+    const [filterForm, setFilterForm] = useState({
+      type: "",
+      operation_type: "",
+      orientation: "",
+      currency: "",
+      minPrice: 0,
+      maxPrice: 0,
+      bathroom_amount: 0,
+      parking_lot_amount: 0,
+      room_amount: 0,
+      suite_amount: 0
+    });
+    
+    const handleChange = (event) => {
+      const { name, value } = event.target;
+      setFilterForm((prevFilters) => ({
+        ...prevFilters,
+        [name]: value,
+      }));
+      console.log(setFilterForm)
+    };
+
+
+
+
     const sortOptions = [
         { name: 'Most Popular', href: '#', current: true },
         { name: 'Best Rating', href: '#', current: false },
@@ -35,8 +67,8 @@ export default function FilterComponent () {
             id: 'Precio',
             name: 'Precio',
             options: [
-              { value: 'ARS', label: 'USD', checked: false },
-              { value: 'UDS', label: 'USD', checked: false },
+              { value: 'ARS', label: 'ARS', checked: false, },
+              { value: 'USD', label: 'USD', checked: false },
   
             ],
           },
@@ -331,6 +363,7 @@ export default function FilterComponent () {
                                   defaultValue={option.value}
                                   type="checkbox"
                                   defaultChecked={option.checked}
+                                  onChange={handleChange}
                                   className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                                 />
                                 <label
