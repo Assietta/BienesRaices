@@ -27,7 +27,7 @@ const handler = NextAuth({
         // Add logic here to look up the user from the credentials supplied
         try {
 
-          const { data } = await axios('http://localhost:3001/users');
+          const { data } = await axios('https://bienesraices-production-9eb3.up.railway.app/users');
 
 
           const user = data.users.find(

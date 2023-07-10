@@ -43,7 +43,7 @@ export default function Example() {
 
     if (Object.keys(validationErrors).length === 0) {
       console.log(formData);
-      await axios.post('http://localhost:3001/contact', formData);
+      await axios.post('https://bienesraices-production-9eb3.up.railway.app/contact', formData);
       alert('Contacto enviado');
       console.log('Contact successfully send');
       clearForm();

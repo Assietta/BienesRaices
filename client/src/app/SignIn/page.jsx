@@ -43,7 +43,7 @@ export default function SignIn() {
 
     if (Object.keys(validationErrors).length === 0) {
       console.log(formData);
-      await axios.post('http://localhost:3001/users', formData);
+      await axios.post('https://bienesraices-production-9eb3.up.railway.app/users', formData);
       console.log('Signup successfully send');
       alert('Registro exitoso');
       clearForm();

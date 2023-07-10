@@ -78,7 +78,7 @@ export default  function ContainerF() {
     //fetching de data para traer las propiedades con el paginado, guardandolas en setViewProps
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/realstate?page=${currentPage}&limit=9`);
+        const response = await axios.get(`https://bienesraices-production-9eb3.up.railway.app/realstate?page=${currentPage}&limit=9`);
         const data = response.data;
         console.log(data);
         setViewProps(data);

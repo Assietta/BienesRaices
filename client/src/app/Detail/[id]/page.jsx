@@ -4,7 +4,7 @@ import Map from "./map";
 import BtnReservar from "./btnReservar";
 
 const fetchPropId = async (id) => {
-  const res = await fetch(`http://localhost:3001/realState/${id}`);
+  const res = await fetch(`https://bienesraices-production-9eb3.up.railway.app/realState/${id}`);
   return res.json();
 };
 
