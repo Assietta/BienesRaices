@@ -2,6 +2,7 @@
 import Gallery from "./gallery";
 import Map from "./map";
 import BtnReservar from "./btnReservar";
+import BtnFav from "./btnFav";
 
 const fetchPropId = async (id) => {
   const res = await fetch(`https://bienesraices-production-9eb3.up.railway.app/realState/${id}`);
@@ -172,15 +173,8 @@ export default async function Example({ params }) {
                 </dl>
               </div>
             </div>
-
-            {/* <button
-              type="submit"
-              className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-              onClick={handleReservarClick}
-            >
-              Reservar
-            </button> */}
             <BtnReservar id={propiedad.id}></BtnReservar>
+            <BtnFav id={propiedad.id}></BtnFav>
           </div>
 
           <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">

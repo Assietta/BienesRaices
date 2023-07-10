@@ -52,5 +52,3 @@ router.put('/realState/:id', putRealStateHandler);
 
 module.exports = router;
 
-
-

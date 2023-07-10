@@ -29,20 +29,7 @@ export default async function BtnReservar(props) {
       // Manejar el error de acuerdo a tus necesidades
     }
   };
-  // const handleReservarClick = async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       `https://bienesraices-production-9eb3.up.railway.app/createOrder/${id}`
-  //     );
-  //     const preferenceId = response.data;
-  //     console.log(preferenceId);
-  //     const redirectUrl = `https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=${preferenceId}`;
-  //     window.open(redirectUrl, "_blank");
-  //   } catch (error) {
-  //     console.error(error);
-  //     // Manejar el error de acuerdo a tus necesidades
-  //   }
-  // };
+
   return (
     <button
       type="submit"
