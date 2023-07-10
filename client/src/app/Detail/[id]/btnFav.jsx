@@ -40,7 +40,7 @@ export default function BtnFav(props) {
         updatedFavorites.push(id);
       }
 
-      await axios.put(`http://localhost:3001/users/${userId}`, {
+      await axios.put(`https://bienesraices-production-9eb3.up.railway.app/users/${userId}`, {
         favorites: updatedFavorites,
       });
 
