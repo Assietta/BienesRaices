@@ -15,7 +15,7 @@ export default async function Example({ params }) {
   // const handleReservarClick = async () => {
   //   try {
   //     const response = await axios.get(
-  //       `http://localhost:3001/createOrder/${id}`
+  //       `https://bienesraices-production-9eb3.up.railway.app/createOrder/${id}`
   //     );
   //     const preferenceId = response.data;
   //     console.log(preferenceId);

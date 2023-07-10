@@ -57,7 +57,7 @@ export default  function ContainerF() {
   
     const handleClick = () => {
       axios
-        .post("http://localhost:3001/filter", filters)
+        .post("https://bienesraices-production-9eb3.up.railway.app/filter", filters)
         .then((res) => {
           if (res.data) {
             setPropiedad(res.data);
