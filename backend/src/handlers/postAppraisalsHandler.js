@@ -3,7 +3,7 @@ const postAppraisalsController = require('../controllers/postAppraisalsControlle
 
 const postAppraisalsHandler = async (req, res) => {
   try {
-    const { name, lastName, email, phone, mobile, comment, address, callTime } =
+    const { name, lastName, email, phone, mobile, comment, address, callTime, userId } =
       req.body;
 
     const AppraisalPosted = await postAppraisalsController(
@@ -14,7 +14,8 @@ const postAppraisalsHandler = async (req, res) => {
       mobile,
       comment,
       address,
-      callTime
+      callTime,
+      userId
     );
     const asunto = 'Consulta con Henry Real State';
     const destinatario = email;

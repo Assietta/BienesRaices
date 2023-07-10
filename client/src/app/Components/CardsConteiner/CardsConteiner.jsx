@@ -13,7 +13,7 @@ const CardsConteiner = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`http://localhost:3001/realstate?page=${currentPage}&limit=3`);
+      const response = await axios.get(`http://localhost:3001/realstate?page=${currentPage}&limit=5`);
       const data = response.data;
       console.log(data);
       setViewProps(data);
@@ -26,12 +26,14 @@ const CardsConteiner = () => {
   const randomImageIndex = Math.floor(Math.random() * 5);
 
   const handleNextPage = () => {
-    setCurrentPage((prevPage) => prevPage + 1);
-  };
+    console.log(currentPage);
+    setCurrentPage((currentPage) => currentPage + 1)
+  }
 
   const handlePreviousPage = () => {
+    console.log(currentPage);
     if (currentPage > 1) {
-      setCurrentPage((prevPage) => prevPage - 1);
+      setCurrentPage((currentPage) => currentPage - 1)
     }
   };
 

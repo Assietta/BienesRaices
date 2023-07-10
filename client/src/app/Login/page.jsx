@@ -39,8 +39,9 @@ export default function Login() {
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      const res = await signIn('credentials', formData);
-      if (res?.ok) router.push('/home');
+      const res = await signIn('credentials', { ...formData, redirect: false})
+      console.log(res);
+      if(res?.error) setErrors({email : 'Correo o contraseña invalidos'})
       clearForm();
     }
   };
@@ -50,7 +51,7 @@ export default function Login() {
       <div className=" mx-auto md:max-w-35rem h-50 space-y-8 p-10 bg-white rounded-xl shadow-lg z-10 pl-0 pr-0">
         <div className="mx-auto max-w-2xl lg:text-center">
           <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-            Iniciar sesion
+            Iniciar sesión
           </p>
         </div>
         <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
@@ -63,19 +64,18 @@ export default function Login() {
                   <div className="mb-3 space-y-2 w-full text-xs">
                     <label className="font-semibold text-gray-600 py-2">
                       {' '}
-                      Correo electronico <abbr title="required">*</abbr>
+                      Correo electrónico <abbr title="required">*</abbr>
                     </label>
                     <input
                       placeholder="nombre@dominio.com"
                       className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
-                      required="required"
                       type="text"
                       name="email"
                       id="integration_shop_name"
                       value={formData.email}
                       onChange={handleInputChange}
                     />
-                    {errors.email && <p>{errors.email}</p>}
+                    {errors.email && <p className='text-red-600'>{errors.email}</p>}
                   </div>
 
                   {/* input password */}
@@ -87,13 +87,12 @@ export default function Login() {
                     <input
                       placeholder="ingrese su Password"
                       className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
-                      required="required"
                       type="password"
                       name="password"
                       value={formData.password}
                       onChange={handleInputChange}
                     />
-                    {errors.password && <p>{errors.password}</p>}
+                    {errors.password && <p className='text-red-600'>{errors.password}</p>}
                   </div>
 
                   {/* botones */}
@@ -107,26 +106,24 @@ export default function Login() {
                   <p style={{ fontSize: '11px', textAlign: 'center' }}>
                    
                   </p>
+                  <p className="text-center mt-2">o ingresa con</p>
                 </form>
-                <div className="flex justify-center">
-                  <button
-                    onClick={() => signIn('google')}
-                    className="mx-auto block mb-2 md:mb-0 mr-2 md:mr-4 bg-blue-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-blue-500"
-                  >
-                    Google
+                <div className="flex justify-center space-x-4">
+                  <button onClick={() => signIn('google')} className="flex items-center justify-center w-11 h-11 shadow-sm rounded-full hover:shadow-lg">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcSUWGIs3vTxgqa_qQ-0etVCRtIvpxtSI9Xg&usqp=CAU" alt="Google" className="rounded-full w-9 h-9" />
                   </button>
 
-                  <button
-                    onClick={async () => {
-                      const res = await signIn('facebook');
-                    }}
-                    className="mx-auto block mb-2 md:mb-0 ml-2 md:ml-4 bg-blue-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-blue-500"
-                  >
-                    Facebook
+                  <button onClick={() => signIn('github')} className="flex items-center justify-center bg-gray-800 text-white w-11 h-11 rounded-full hover:bg-gray-900">
+                    <svg className="w-6 h-6" viewBox="0 0 16 16" fill="currentColor">
+                      <path
+                        fillRule="evenodd"
+                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.24.82.73 1.23 1.9.88 2.37.67.07-.53.28-.88.51-1.08-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.58.82-2.14-.08-.2-.36-1.01.08-2.1 0 0 .67-.21 2.2.81.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.02 2.2-.81 2.2-.81.44 1.09.17 1.9.08 2.1.51.56.82 1.27.82 2.14 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.14.46.55.38A8.02 8.02 0 0 0 16 8c0-4.42-3.58-8-8-8z"
+                      />
+                    </svg>
                   </button>
                 </div>
                 <p style={{ fontSize: '11px', textAlign: 'center' }}>
-                  ¿no tienes cuenta?
+                  ¿No tienes cuenta?
                 </p>
 
                 <Link href={'/SignIn'}>
