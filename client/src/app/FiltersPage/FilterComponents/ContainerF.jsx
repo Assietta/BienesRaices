@@ -254,7 +254,7 @@ export default  function ContainerF() {
                   
                 </div>
                     
-                <div class=" px-4 py-6">
+                <div class=" px-4  py-6">
 
                   <h3 class="bg-white text-black">
                       Ambientes
@@ -304,10 +304,12 @@ export default  function ContainerF() {
 
 
 
-              <div className='w-full bg-white text-black'>
-                <div className='grid grid-cols-3 '>
+              <div className='w-full text-black'>
+                <div className=' 
+                    
+                '>
                   {viewProps?.map((prop) => (
-                    <CardF
+                    <CardF 
                       key={prop.id}
                       id={prop.id}
                       address={prop.address}
