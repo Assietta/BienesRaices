@@ -75,7 +75,7 @@ export default  function ContainerF() {
     
 
     
-    //fetching de data para traer las propiedades con el paginado, guardandolas en setViewProps
+    // fetching de data para traer las propiedades con el paginado, guardandolas en 
     const fetchData = async () => {
       try {
         const response = await axios.get(`http://localhost:3001/realstate?page=${currentPage}&limit=9`);
@@ -94,13 +94,13 @@ export default  function ContainerF() {
         fetchData();
       }, [currentPage]);
       
-      //va a la pagina anterior a la actual
+      // va a la pagina anterior a la actual
       
       const goToPreviousPage = () => {
           setCurrentPage((prevPage) => prevPage - 1);
         };
       
-       //va a la siguiente pagina
+      //  va a la siguiente pagina
 
         const goToNextPage = () => {
           setCurrentPage((prevPage) => prevPage + 1);
