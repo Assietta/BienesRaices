@@ -18,6 +18,10 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false
     },
+    disabled: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
     email: {
       type: DataTypes.STRING,
       allowNull: false
