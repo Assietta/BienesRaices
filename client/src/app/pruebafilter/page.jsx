@@ -18,7 +18,7 @@ export default function FilterComponent() {
       id: "Tipo de operacion",
       name: "Tipo de operacion",
       options: [
-        { value: "Venta", label: "Venta", checked: true },
+        { value: "Venta", label: "Venta", checked: false },
         { value: "Alquiler", label: "Alquiler", checked: false },
       ],
     },
@@ -28,7 +28,7 @@ export default function FilterComponent() {
       id: "Tipo de propiedad",
       name: "Tipo de propiedad",
       options: [
-        { value: "Casa", label: "Casa", checked: true },
+        { value: "Casa", label: "Casa", checked: false },
         { value: "Departamento", label: "Departamento", checked: false },
         { value: "Oficina", label: "Oficina", checked: false },
       ],
@@ -39,7 +39,7 @@ export default function FilterComponent() {
       id: "Precio",
       name: "Precio",
       options: [
-        { value: "ARS", label: "ARS", checked: true },
+        { value: "ARS", label: "ARS", checked: false },
         { value: "UDS", label: "USD", checked: false },
       ],
     },
@@ -49,7 +49,7 @@ export default function FilterComponent() {
       id: "ubicacion",
       name: "Ubicacion",
       options: [
-        { value: "CABA", label: "CABA", checked: true },
+        { value: "CABA", label: "CABA", checked: false },
         { value: "vicente lopez", label: "Vicente López", checked: false },
         { value: "san idisro", label: "San Isidro", checked: false },
         { value: "olivos", label: "Olivos", checked: false },
@@ -62,7 +62,7 @@ export default function FilterComponent() {
       id: "Cantidad de Ambientes",
       name: "Cantidad de Ambientes",
       options: [
-        { value: "1", label: "1", checked: true },
+        { value: "1", label: "1", checked: false },
         { value: "2", label: "2", checked: false },
         { value: "3", label: "3", checked: false },
         { value: "4", label: "4", checked: false },
@@ -75,7 +75,7 @@ export default function FilterComponent() {
       id: "Antiguedad",
       name: "Antigüedad",
       options: [
-        { value: "-1", label: "A estrenar", checked: true },
+        { value: "-1", label: "A estrenar", checked: false },
         { value: "1", label: "1", checked: false },
         { value: "2", label: "2", checked: false },
         { value: "3", label: "3", checked: false },
@@ -108,7 +108,7 @@ export default function FilterComponent() {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    console.log(filters);
+    // console.log(filters);
     setFilters((prevFilters) => ({
       ...prevFilters,
       [name]: value,
@@ -129,6 +129,7 @@ export default function FilterComponent() {
         console.error("Error al realizar la solicitud:", error);
       });
   };
+  console.log(propiedad);
 
   // //fetching de data para traer las propiedades con el paginado, guardandolas en setViewProps
   const fetchData = async () => {
@@ -674,26 +675,47 @@ export default function FilterComponent() {
               <div className="lg:col-span-3">
                 <div className="w-full bg-white text-black">
                   <div className="flex-1">
-                    {viewProps?.map((prop) => (
-                      <FilterCardContainer
-                        key={prop.id}
-                        id={prop.id}
-                        address={prop.address}
-                        bathrooms={prop.bathroom_amount}
-                        Imagep={prop.photos[randomImageIndex]}
-                        suite_amount={prop.suite_amount}
-                        room_amount={prop.room_amount}
-                        parking_lot_amount={prop.parking_lot_amount}
-                        bathroom_amount={prop.bathroom_amount}
-                        real_address={prop.real_address}
-                        operation_type={prop.operation_type}
-                        total_surface={prop.total_surface}
-                        type={prop.type}
-                        price={prop.price}
-                        currency={prop.currency}
-                        description={prop.description}
-                      />
-                    ))}
+                    {propiedad?.length >= 1
+                      ? propiedad.map((prop) => (
+                          <FilterCardContainer
+                            key={prop.id}
+                            id={prop.id}
+                            address={prop.address}
+                            bathrooms={prop.bathroom_amount}
+                            Imagep={prop.photos[randomImageIndex]}
+                            suite_amount={prop.suite_amount}
+                            room_amount={prop.room_amount}
+                            parking_lot_amount={prop.parking_lot_amount}
+                            bathroom_amount={prop.bathroom_amount}
+                            real_address={prop.real_address}
+                            operation_type={prop.operation_type}
+                            total_surface={prop.total_surface}
+                            type={prop.type}
+                            price={prop.price}
+                            currency={prop.currency}
+                            description={prop.description}
+                          />
+                        ))
+                      : viewProps.map((prop) => (
+                          <FilterCardContainer
+                            key={prop.id}
+                            id={prop.id}
+                            address={prop.address}
+                            bathrooms={prop.bathroom_amount}
+                            Imagep={prop.photos[randomImageIndex]}
+                            suite_amount={prop.suite_amount}
+                            room_amount={prop.room_amount}
+                            parking_lot_amount={prop.parking_lot_amount}
+                            bathroom_amount={prop.bathroom_amount}
+                            real_address={prop.real_address}
+                            operation_type={prop.operation_type}
+                            total_surface={prop.total_surface}
+                            type={prop.type}
+                            price={prop.price}
+                            currency={prop.currency}
+                            description={prop.description}
+                          />
+                        ))}
                   </div>
 
                   <div>

@@ -1,7 +1,20 @@
-const { RealState, Tag } = require('../db');
-const { Op } = require('sequelize');
+const { RealState, Tag } = require("../db");
+const { Op } = require("sequelize");
 
-const postFilterController = async (type, operation_type, maxPrice, minPrice, orientation, currency, tags, parking_lot_amount, bathroom_amount, suite_amount, room_amount) => {
+const postFilterController = async (
+  type,
+  operation_type,
+  maxPrice,
+  minPrice,
+  orientation,
+  currency,
+  location,
+  tags,
+  parking_lot_amount,
+  bathroom_amount,
+  suite_amount,
+  room_amount
+) => {
   const filters = {};
   if (type) {
     filters.type = type;
@@ -27,40 +40,43 @@ const postFilterController = async (type, operation_type, maxPrice, minPrice, or
   if (currency) {
     filters.currency = currency;
   }
+  if (location) {
+    filters.location = location;
+  }
   if (minPrice) {
     filters.price = {
-      [Op.gte]: minPrice
+      [Op.gte]: minPrice,
     };
   }
   if (maxPrice) {
     filters.price = {
       ...filters.price,
-      [Op.lte]: maxPrice
+      [Op.lte]: maxPrice,
     };
   }
 
   if (tags && tags.length > 0) {
-    const tagNames = tags.map(tag => tag.name);
+    const tagNames = tags.map((tag) => tag.name);
     const tagIds = await Tag.findAll({
-      attributes: ['id'],
-      where: { name: tagNames }
+      attributes: ["id"],
+      where: { name: tagNames },
     });
-    const tagIdsArray = tagIds.map(tag => tag.id);
+    const tagIdsArray = tagIds.map((tag) => tag.id);
     filters.tags = {
-      [Op.contains]: tagIdsArray
+      [Op.contains]: tagIdsArray,
     };
   }
   console.log(filters);
   try {
     const properties = await RealState.findAll({
-      where: filters
+      where: filters,
     });
     return properties;
   } catch (error) {
-    throw new Error('No se pudo concretar el filtro');
+    throw new Error("No se pudo concretar el filtro");
   }
 };
 
 module.exports = {
-  postFilterController
+  postFilterController,
 };
