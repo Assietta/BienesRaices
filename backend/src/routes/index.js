@@ -38,7 +38,7 @@ router.get('/download/users', getExcelUsersHandler);
 router.get('/download/realState', getExcelRealStateHandler);
 router.get('/appraisals/:userId', getAppraisalsHandler);
 router.get('/orders/:userId', getOrderByIdHandler);
-router.get('/contact/:email', getContactByIdHandler);
+router.get('/contact/:userId', getContactByIdHandler);
 router.get('/contact', getAllContactHandler)
 
 router.get('/appraisals', getAllAppraisalsHandler)
