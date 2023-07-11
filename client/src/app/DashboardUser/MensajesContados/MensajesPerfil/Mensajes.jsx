@@ -8,7 +8,12 @@ export default function Mensajes() {
   const session = useSession();
   const id = session.data.user.id;
 
-  const [viewUsers, setViewUsers] = useState([]);
+  const [viewUsers, setViewUsers] = useState({
+    Appraisals: [],
+    Contacts: [],
+    Orders: [],
+    Favorits: []
+  });
 
   useEffect(() => {
     fetchDataUsers();
@@ -20,12 +25,12 @@ export default function Mensajes() {
         `http://localhost:3001/appraisals/${id}`
       );
       const data = response.data;
-      setViewUsers([data]);
+      setViewUsers({Appraisals: [data]});
     } catch (error) {
       // Manejar el error de la solicitud
     }
   };
-console.log(viewUsers);
+
   return (
     <div id="last-users">
       <h1 className="font-bold py-4 uppercase">Mensajes contactados</h1>
@@ -35,9 +40,10 @@ console.log(viewUsers);
           <th className="text-left py-3 px-2">Estado</th>
           <th className="text-left py-3 px-2">Fecha</th>
         </thead>
-        {viewUsers.map((message) => (
+        {viewUsers.Appraisals.map((message) => (
           <MensajesPerfil
             key={message ? message.id : ''}
+            created={message ? message.createdAt : ""}
             address={message ? message.address : ''}
             callTime={message ? message.callTime : ''}
             comment={message ? message.comment : ''}

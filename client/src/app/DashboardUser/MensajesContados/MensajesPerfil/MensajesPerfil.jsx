@@ -11,6 +11,7 @@ const MensajesPerfil = (props) => {
     comment,
     mobile,
     phone,
+    created
   } = props;
 
   return (
@@ -22,6 +23,7 @@ const MensajesPerfil = (props) => {
           </span>
         </div>
       </td>
+      <td className="py-3 px-2">{created}</td>
       <td className="py-3 px-2">{address}</td>
       <td className="py-3 px-2">{callTime}</td>
       <td className="py-3 px-2">{comment}</td>
