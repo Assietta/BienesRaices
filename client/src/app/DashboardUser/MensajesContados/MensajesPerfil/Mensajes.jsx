@@ -6,7 +6,7 @@ import { useSession } from 'next-auth/react';
 
 export default function Mensajes() {
   const session = useSession();
-  const id = session.data.user.id;
+  // const id = session.data.user.id;
 
   const [viewUsers, setViewUsers] = useState([]);
 

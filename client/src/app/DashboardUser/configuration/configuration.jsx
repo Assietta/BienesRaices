@@ -5,15 +5,25 @@ import { validateForm } from "./validates";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import {validatePassword} from "./validatesPassword"
+import bcrypt from 'bcryptjs'
 
 
 export default function FormInfo () {
   const [selectedForm, setSelectedForm] = useState(null);
 
   const session = useSession();
-  const { id, username } = session.data.user;
+  const { id, username, password } = session.data.user
+  console.log(password);
 
-  // const userName = session.data.user.name
+  async function passwordMatch (formPasswordData, password){
+    const a = await bcrypt.compare(
+     formPasswordData.password,
+      password
+    )
+    return a
+
+  }
+  const userName = session.data.user.name
 
   const handleFormClick = (formId) => {
     setSelectedForm(formId);
@@ -48,7 +58,7 @@ export default function FormInfo () {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setFormData((prevFormData) => ({
+    setFormInfoData((prevFormData) => ({
       ...prevFormData,
       [name]: value,
     }));
@@ -137,13 +147,13 @@ export default function FormInfo () {
 
   const handleSubmitPassword = async (event) => {
     event.preventDefault();
-    const validationErrors = validatePassword(formPasswordData);
+    const validationErrors = validatePassword(formPasswordData, passwordMatch(formPasswordData, password));
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      console.log(formInfoData);
-      console.log(id);
-      await axios.put(`http://localhost:3001/users/${id}`, formInfoData);
+      console.log(formPasswordData);
+    
+      await axios.put(`http://localhost:3001/users/${id}`, formPasswordData);
       alert("Informacion Actualizada");
       console.log("Informacion actualizada correctamente");
       clearFormPassword();
@@ -212,11 +222,19 @@ export default function FormInfo () {
            <Title
              tit="Cambiar contraseña"
              sub="Modfica la contraseña de tu cuenta"
-           />
-           {/* cambiar contraseña */}
-           <form onSubmit={handleSubmitPassword} className="mb-8">
+          />
+
+
+           cambiar contraseña 
+
+
+            <form onSubmit={handleSubmitPassword} className="mb-8">
+             
+             
              {/* input Contraseña */}
-             <div className="mb-3 space-y-2 w-full text-xs">
+
+ 
+              {/* <div className="mb-3 space-y-2 w-full text-xs">
                <label className="font-semibold text-gray-600 py-2">
                  Contraseña actual<abbr title="required">*</abbr>
                </label>
@@ -229,9 +247,13 @@ export default function FormInfo () {
                  onChange={handleInputChangeP}
                />
                {errors.password && <p>{errors.password}</p>}
-             </div>
+             </div> */}
+
+
              {/* input Contraseña nueva */}
-             <div className="mb-3 space-y-2 w-full text-xs">
+
+
+              <div className="mb-3 space-y-2 w-full text-xs">
                <label className="font-semibold text-gray-600 py-2">
                  Contraseña nueva <abbr title="required">*</abbr>
                </label>
@@ -244,8 +266,12 @@ export default function FormInfo () {
                  onChange={handleInputChangeP}
                />
                {errors.newPassword && <p>{errors.newPassword}</p>}
-             </div>
+             </div> 
+
+
              {/* input Contraseña nueva Repetir */}
+
+
              <div className="mb-3 space-y-2 w-full text-xs">
                <label className="font-semibold text-gray-600 py-2">
                  Contraseña nueva <abbr title="required">*</abbr>
@@ -268,44 +294,9 @@ export default function FormInfo () {
              </button>
            </form>
          </div>
-      )}
+      )} 
 
 
-<h2 onClick={() => handleFormClick('form4')}>Eliminar cuenta</h2>
-      {selectedForm === 'form4' && (
-             <div id="form4"  className="border-b border-gray-700 mt-16">
-             <Title
-               t tit="Eliminar mi cuenta"
-               sub="Eliminar tu cuenta de MR propiedades, eliminara tu perfil y todos los datos de tu actividad"
-             />
-             {/* Eliminar cuenta */}
-             <form onSubmit={handleSubmit} className="mb-8">
-               {/* input Eliminar cuenta */}
-               <div className="mb-3 space-y-2 w-full text-xs">
-                 <label className="font-semibold text-gray-600 py-2">
-                   Contraseña <abbr title="required">*</abbr>
-                 </label>
-                 <input
-                   className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
-                   type="text"
-                   name="password"
-                   placeholder="Contraseña"
-                   value={formDeleteData.deleteAcount}
-                   onChange={handleInputChange}
-                 />
-                 {errors.deleteAcount && <p>{errors.deleteAcount}</p>} 
-               </div>
-               
-               <button
-                 className="mb-2 md:mb-0 bg-green-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500"
-                 type="submit"
-               >
-                 Eliminar
-               </button>
-             </form>
-           </div>
-      )}
-     
 
 
     </div>

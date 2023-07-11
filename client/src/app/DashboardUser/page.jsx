@@ -8,6 +8,7 @@ import MensajesVista from './MensajesContados/MensajesVista';
 import Configuration from "./configuration/configuration";
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import FavConteiner from "./Favorites/FavConteiner"
 
 export default function Example() {
 
@@ -214,10 +215,12 @@ export default function Example() {
               <>
                 <PropiedadesDashboard />
                 <Mensajes />
+                <FavConteiner/>
               </>
             )}
             {showDashboard.Mensaje && <MensajesVista />}
             {showDashboard.Configuration && <Configuration />}
+            {showDashboard.FavConteiner && <FavConteiner/>}
           </div>
         </div>
       </div>

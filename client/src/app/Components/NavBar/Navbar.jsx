@@ -27,6 +27,11 @@ const navigation = [
     route: "/Contact",
     current: false,
   },
+  {
+    label: "Buscar Propiedades",
+    route: "/pruebafilter",
+    current: false,
+  },
 ];
 
 function classNames(...classes) {
