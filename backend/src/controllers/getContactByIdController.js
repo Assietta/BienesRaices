@@ -1,9 +1,11 @@
 const { Contact } = require('../db')
 
-const getContactByIdController = async(userId) => {
-    const appraisals = await Contact.findOne({ where: { userId } })
+const getContactByIdController = async(email) => {
+    const contact = await Contact.findOne({ where: { email } })
 
-    return appraisals;
+    return contact;
 };
 
-module.exports = getContactByIdController
+module.exports = {
+    getContactByIdController
+};
