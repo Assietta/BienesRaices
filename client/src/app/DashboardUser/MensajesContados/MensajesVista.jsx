@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 
 export default function MensajesVista() {
   const session = useSession();
-console.log(session)
   const id = session.data.user.id
 // console.log(id)
   const [Messages, setMessages] = useState({
@@ -17,7 +16,6 @@ console.log(session)
         `http://localhost:3001/appraisals/${id}`
       );
       const data = response.data;
-    console.log(data)
       setMessages(data);
     } catch (error) {
       // Manejar el error de la solicitud

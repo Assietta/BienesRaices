@@ -1,18 +1,23 @@
 import Image from "next/image";
+import { Carousel } from "@material-tailwind/react";
 
 const testimonioText = [
   { text: "hola soy un tesmonio", user: "juan pedro" },
   { text: "hola soy un tesmonio", user: "juan pedro" },
-  { text: "hola soy un tesmonio", user: "juan pedro" },
+  { text: "hola", user: "juan pedro" },
   { text: "hola soy un tesmonio", user: "juan pedro" },
 ];
 
 export default function Testimonials() {
   return (
-    <div>
-      <div>
+    <Carousel  className="max-h-screen overflow-hidden"
+    slides={testimonioText.length}
+    outline="none"
+    fade={false}
+    >
         {testimonioText.map((testimonial) => (
-          <section class="bg-white dark:bg-gray-900">
+          <div>
+          <section class="bg-black dark:bg-gray-900">
             <div class="max-w-screen-xl px-4 py-8 mx-auto text-center lg:py-16 lg:px-6">
               <figure class="max-w-screen-md mx-auto">
                 <svg
@@ -28,7 +33,7 @@ export default function Testimonials() {
                 </svg>
                 <blockquote>
                   <div>
-                    <p class="text-2xl font-medium text-gray-900 dark:text-white">
+                    <p class="text-2xl font-medium text-white">
                       {testimonial.text}
                     </p>
                   </div>
@@ -42,7 +47,7 @@ export default function Testimonials() {
                     height={100}
                   />
                   <div class="flex items-center divide-x-2 divide-gray-500 dark:divide-gray-700">
-                    <div class="pr-3 font-medium text-gray-900 dark:text-white">{testimonial.user}
+                    <div class="pr-3 font-medium text-white">{testimonial.user}
                     </div>
                     <div class="pl-3 text-sm font-light text-gray-500 dark:text-gray-400">
                       CEO at Google
@@ -52,8 +57,8 @@ export default function Testimonials() {
               </figure>
             </div>
           </section>
+          </div>
         ))}
-      </div>
-    </div>
+    </Carousel>
   );
 }
