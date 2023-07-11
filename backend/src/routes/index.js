@@ -21,7 +21,6 @@ const { getExcelRealStateHandler }= require('../handlers/getExcelRealStateHandle
 const { getAppraisalsHandler } = require('../handlers/getAppraisalsHandler');
 const { getOrderByIdHandler } = require('../handlers/getOrderByIdHandler');
 const { getUserByIdHandler } = require('../handlers/getUserByIdHandler');
-const { getContactByIdHandler } = require('../handlers/getContactByIdHandler');
 
 router.get('/realState', realStateHandler);
 router.get('/realState/:id', getPropertyIdHandler);
@@ -36,8 +35,6 @@ router.get('/download/users', getExcelUsersHandler);
 router.get('/download/realState', getExcelRealStateHandler);
 router.get('/appraisals/:userId', getAppraisalsHandler);
 router.get('/orders/:userId', getOrderByIdHandler);
-router.get('/contact/:email', getContactByIdHandler);
-
 
 router.post('/realState', postRealStateHandler);
 router.post('/users', postUserHandler);
