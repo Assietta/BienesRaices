@@ -4,7 +4,7 @@ export const validateForm = async(formData) => {
   let errors = {};
   const { data } = await axios('http://localhost:3001/users')
 
-
+console.log(data);
   if (!formData.username) {
     errors.username = 'Nombre vacío';
   } else if (!/^[a-zA-Z\s]+$/.test(formData.username)) {
