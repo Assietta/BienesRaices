@@ -27,8 +27,8 @@ export const validateForm = (formData) => {
 
   if (!formData.password) {
     errors.password = 'Contraseña vacía';
-  } else if (!/^.{6,}$/.test(formData.password)) {
-    errors.password = ' minimo 6 caracteres';
+  } else if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{6,}$/.test(formData.password)) {
+    errors.password = 'Debe tener al menos 6 caracteres, una letra y un número';
   }
 
   if (!formData.confirmPassword) {
