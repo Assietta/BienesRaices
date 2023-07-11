@@ -174,7 +174,7 @@ export default async function Example({ params }) {
               </div>
             </div>
             <BtnReservar id={propiedad.id}></BtnReservar>
-            <BtnFav id={propiedad.id}></BtnFav>
+            <BtnFav id={propiedad.id} address={propiedad.address} price={propiedad.price} photo={propiedad.photos[0]}></BtnFav>
           </div>
 
           <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">

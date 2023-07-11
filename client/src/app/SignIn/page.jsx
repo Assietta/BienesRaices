@@ -38,7 +38,7 @@ export default function SignIn() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const validationErrors = validateForm(formData);
+    const validationErrors = await validateForm(formData);
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {

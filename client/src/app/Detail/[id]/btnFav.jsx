@@ -4,40 +4,41 @@ import { useSession } from "next-auth/react";
 import axios from "axios";
 
 export default function BtnFav(props) {
-  const { id } = props;
-  const session = useSession();
+  const { id, address, photo, price } = props;
+  const { data: session, status } = useSession();
   const [isFavorite, setIsFavorite] = useState(false);
+  const [favs, setFavs] = useState({
+    id,
+    address,
+    photo,
+    price
+  })
 
   useEffect(() => {
-    if (session && session.data && session.data.user && session.data.user.favorites && session.data.user.favorites.includes(id)) {
+    if (status === "authenticated" && session?.user?.favorites?.includes(id)) {
       setIsFavorite(true);
     } else {
       setIsFavorite(false);
     }
-  }, [id, session]);
+  }, [id, session, status]);
 
   const handleToggleFavorite = async () => {
-    // Verificar si hay una sesión
-    if (!session) {
-      console.log("No session found");
+    if (status !== "authenticated") {
+      console.log("No se encontró sesión");
       return;
     }
 
-    // Obtener el ID del usuario
-    const userId = session.data.user.id;
+    const userId = session.user.id;
 
     try {
-      // Actualizar el estado del favorito
       setIsFavorite(!isFavorite);
 
-      let updatedFavorites = [...session.data.user.favorites];
+      let updatedFavorites = Array.isArray(session.user.favorites) ? [...session.user.favorites] : [];
 
       if (isFavorite) {
-        // Si el ID ya está en favoritos, lo eliminamos del array
-        updatedFavorites = updatedFavorites.filter((favId) => favId !== id);
+        updatedFavorites = updatedFavorites.filter((favId) => favId.id !== id);
       } else {
-        // Si el ID no está en favoritos, lo agregamos al array
-        updatedFavorites.push(id);
+        updatedFavorites.push(favs);
       }
 
       await axios.put(`https://bienesraices-production-9eb3.up.railway.app/users/${userId}`, {

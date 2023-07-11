@@ -51,7 +51,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     period: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     currency: {

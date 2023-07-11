@@ -1,14 +1,62 @@
 "use client";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
+
 import UsersDashboard from "./users/usersDashboard";
 import PropiedadesDashboard from "./propiedades/propiedadesDashboard";
 import OrdersDashboard from "./orders/ordersDashboard";
+
+import DashboardUser from "./users/DashboardUser";
+import DashboardOrders from "./orders/DashboardOrders";
+import GeneralDashboard from "./general/GeneralDashboard";
+import axios from "axios";
 import { useSession } from "next-auth/react";
 
 export default function Example() {
   const [selectedMenu, setSelectedMenu] = useState("dashboard");
   const session = useSession();
+  const [viewUsers, setViewUsers] = useState([]);
+
+  useEffect(() => {
+    fetchDataUsers();
+  }, []);
+
+  const fetchDataUsers = async () => {
+    try {
+      const response = await axios.get(`https://bienesraices-production-9eb3.up.railway.app/users/`);
+      const data = response.data.users;
+      setViewUsers(data);
+    } catch (error) {
+      // Manejar el error de la solicitud
+      console.error(error);
+    }
+  };
+
+  const [viewOrders, setViewOrders] = useState([]);
+
+  useEffect(() => {
+    fetchDataOrders();
+  }, []);
+
+  const fetchDataOrders = async () => {
+    try {
+      const response = await axios.get(`https://bienesraices-production-9eb3.up.railway.app/orders/`);
+      const data = response.data.orders;
+      setViewOrders(data);
+    } catch (error) {
+      // Manejar el error de la solicitud
+      console.error(error);
+    }
+  };
+  const filteredOrders = viewOrders.filter((order, index, self) => {
+    // Filtrar las órdenes por payment_id único
+    return index === self.findIndex((o) => o.payment_id === order.payment_id);
+  });
+  // Calcula la suma de los montos de cada orden
+  const totalAmount = filteredOrders.reduce(
+    (sum, order) => sum + order.transaction_amount,
+    0
+  );
 
   const autenticated = () => {
     if (session.status === "authenticated") {
@@ -125,7 +173,7 @@ export default function Example() {
                       Propiedades
                     </p>
                     <p className="text-slate-400 text-sm hidden md:block">
-                      Listo de propiedades
+                      Listado de propiedades
                     </p>
                   </div>
                 </div>
@@ -233,7 +281,7 @@ export default function Example() {
                         Usuarios
                       </p>
                       <p className="text-white font-bold text-2xl inline-flex items-center space-x-2">
-                        {/* <span>{viewUsers.length}</span> */}
+                        <span>{viewUsers.length}</span>
                         <span>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -277,7 +325,7 @@ export default function Example() {
                         Ingresos
                       </p>
                       <p className="text-white font-bold text-2xl inline-flex items-center space-x-2">
-                        <span>$2,873.88</span>
+                        <span>{totalAmount}</span>
                         <span>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -321,7 +369,7 @@ export default function Example() {
                         Mensajes
                       </p>
                       <p className="text-white font-bold text-2xl inline-flex items-center space-x-2">
-                        <span>+79</span>
+                        <span>0</span>
                         <span>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -346,15 +394,67 @@ export default function Example() {
             </div>
             <div id="content" className="bg-white/10 col-span-9 rounded-lg p-6">
               {selectedMenu === "dashboard" && (
-                <div id="24h">
-                  <PropiedadesDashboard />
-                </div>
+                <div id="24h">{/* <PropiedadesDashboard /> */}</div>
               )}
 
-              {selectedMenu === "users" && <UsersDashboard />}
-              {/* {selectedMenu === "dashboard" && <AdminInfo />} */}
+              {selectedMenu === "dashboard" && <GeneralDashboard />}
+              {selectedMenu === "users" && (
+                <div id="last-users">
+                  <h1 className="font-bold py-4 uppercase">Usuarios</h1>
+                  <table className="w-full whitespace-nowrap">
+                    <thead className="bg-black/60">
+                      <tr>
+                        <th className="text-left py-3 px-2 rounded-l-lg">
+                          Nombre
+                        </th>
+                        <th className="text-left py-3 px-2">Email</th>
+                        <th className="text-left py-3 px-2">Rol</th>
+                        <th className="text-left py-3 px-2 rounded-r-lg">
+                          Actions
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {viewUsers.map((user) => (
+                        <DashboardUser
+                          key={user.id}
+                          id={user.id}
+                          provider={user.provider}
+                          image={user.image}
+                          username={user.username}
+                          email={user.email}
+                          rol={user.rol}
+                        />
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
               {selectedMenu === "propiedades" && <PropiedadesDashboard />}
-              {selectedMenu === "orders" && <OrdersDashboard />}
+              {selectedMenu === "orders" && (
+                <div id="last-users">
+                  <h1 className="font-bold py-4 uppercase">Reservas</h1>
+                  <div
+                    id="stats"
+                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+                  >
+                    {filteredOrders.map((order) => (
+                      <DashboardOrders
+                        key={order.id}
+                        id={order.id}
+                        paymentId={order.payment_id}
+                        address={order.address_of_property_to_reserveDB}
+                        monto={order.transaction_amount}
+                        username={order.usernameDB}
+                        email={order.payer_emailDB}
+                        status={order.status_approved_rejected}
+                        acreditacion={order.status_detail_accredited}
+                        date={order.date_approved}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>

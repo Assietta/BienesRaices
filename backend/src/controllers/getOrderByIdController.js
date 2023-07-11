@@ -7,6 +7,6 @@ const getOrderByIdController = async(userId) => {
     return order;
 };
 
-module.exports = { 
-    getOrderByIdController 
+module.exports = {
+    getOrderByIdController
 };
