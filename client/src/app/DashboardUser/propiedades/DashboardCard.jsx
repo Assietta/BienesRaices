@@ -33,9 +33,9 @@ const DashboardCard = (props) => {
           {Imagep && (
             <div
               style={{
-                position: "relative",
-                display: "flex",
-                justifyContent: "center",
+                position: 'relative',
+                display: 'flex',
+                justifyContent: 'center',
               }}
             >
               <Image
@@ -45,14 +45,14 @@ const DashboardCard = (props) => {
                 height={300}
                 alt="Property"
               ></Image>
-
+    
               <div
                 className="flex bg-white px-4 py-1 space-x-5 rounded-lg shadow"
                 style={{
-                  position: "absolute",
-                  bottom: "0",
-                  marginBottom: "10px",
-                  zIndex: "1",
+                  position: 'absolute',
+                  bottom: '0',
+                  marginBottom: '10px',
+                  zIndex: '1',
                 }}
               ></div>
               <span className="absolute top-0 left-0 inline-flex mt-3 ml-3 px-3 py-2 rounded-lg z-10 bg-red-500 text-sm font-medium text-white select-none">
