@@ -35,7 +35,7 @@ module.exports = (sequelize) => {
         defaultValue: 'usuario',
     },
     favorites: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
+      type: DataTypes.ARRAY(DataTypes.JSONB),
       allowNull: true,
   },
   });
