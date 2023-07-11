@@ -37,16 +37,16 @@ console.log(viewUsers);
         </thead>
         {viewUsers.map((message) => (
           <MensajesPerfil
-            key={message.id}
-            address={message.address}
-            callTime={message.callTime}
-            comment={message.comment}
-            email={message.email}
-            id={message.userId}
-            lastName={message.lastName}
-            mobile={message.mobile}
-            name={message.name}
-            phone={message.phone}
+            key={message ? message.id : ''}
+            address={message ? message.address : ''}
+            callTime={message ? message.callTime : ''}
+            comment={message ? message.comment : ''}
+            email={message ? message.email : ''}
+            id={message ? message.userId : ''}
+            lastName={message ? message.lastName : ''}
+            mobile={message ? message.mobile : ''}
+            name={message ? message.name : ''}
+            phone={message ? message.phone : ''}
           />
         ))}
       </table>
