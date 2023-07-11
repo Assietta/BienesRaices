@@ -8,8 +8,9 @@ const getExcelOrdersHandler = async (req, res)=>{
   const worksheet = XLSX.utils.json_to_sheet(orders.map(order => order.toJSON()));
   const workbook = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(workbook, worksheet, 'TableOrders');
-  const excelData = XLSX.write(workbook, { type: 'buffer' });
-  res.attachment('TableOrders.xlsx');
+  const excelData = XLSX.write(workbook, { type: 'buffer', bookType: 'xlsx' });
+  res.setHeader('Content-Disposition', 'attachment; filename=TableOrders.xlsx');
+  res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
   res.send(excelData);
 }
 module.exports = {
