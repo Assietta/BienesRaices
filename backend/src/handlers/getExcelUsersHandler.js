@@ -8,9 +8,8 @@ const getExcelUsersHandler = async (req, res)=>{
   const worksheet = XLSX.utils.json_to_sheet(users.map(user => user.toJSON()));
   const workbook = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(workbook, worksheet, 'TableUsers');
-  const excelData = XLSX.write(workbook, { type: 'buffer', bookType: 'xlsx' });
-  res.setHeader('Content-Disposition', 'attachment; filename=TableUsers.xlsx');
-    res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+  const excelData = XLSX.write(workbook, { type: 'buffer' });
+  res.attachment('TableUsers.xlsx');
   res.send(excelData);
 }
 module.exports = {
