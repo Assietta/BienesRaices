@@ -10,13 +10,6 @@ const putUsersController = async (id, username, email, password, rol, favorites)
     }
 
     // Actualiza los campos que deseas modificar
-<<<<<<< HEAD
-      user.username = username;
-      user.email = email;
-      user.password = password;
-      user.rol = rol;
-    user.favorites = favorites;
-=======
     if(username) {
       user.username = username;
     }
@@ -32,7 +25,6 @@ const putUsersController = async (id, username, email, password, rol, favorites)
     if(rol){
       user.rol = rol;
     }
->>>>>>> 93bce983ff3210422e31bfa45b5da60ccf524fd0
 
     // Guarda los cambios en la base de datos
     await user.save();
