@@ -7,11 +7,7 @@ const { RealState, Tag } = require('../db');
 const getAllApi = async () => {
   let apiInfo = [];
 
-<<<<<<< HEAD
   const URL = `https://www.tokkobroker.com/api/v1/property/?lang=es_ar&format=json&limit=112&offset=0&key=${API_KEY}`;
-=======
-  const URL = `https://www.tokkobroker.com/api/v1/property/?lang=es_ar&format=json&limit=300&offset=0&key=${API_KEY}`;
->>>>>>> 84d31afbc973159a396c2691fcae56f12f7abfd5
   const { data } = await axios(URL);
   apiInfo = cleanData(data);
 
