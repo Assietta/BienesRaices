@@ -117,7 +117,7 @@ export default function FilterComponent() {
 
   const handleClick = () => {
     axios
-      .post("http://localhost:3001/filter", filters)
+      .post(`http://localhost:3001/filter`, filters)
       .then((res) => {
         if (res.data) {
           setPropiedad(res.data);
@@ -135,7 +135,7 @@ export default function FilterComponent() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/realstate?page=${currentPage}&limit=9`
+        `http://localhost:3001/realstate?page=${currentPage}&limit=2`
       );
       const data = response.data;
       setViewProps(data);
@@ -282,7 +282,7 @@ export default function FilterComponent() {
           </Dialog>
         </Transition.Root>
 
-        <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-16">
           <div className=" border-b border-gray-200 pb-4 pt-6 bg-white fixed z-50 w-screen">
             <div className="flex items-baseline justify-around">
               <h1 className="text-4xl font-bold tracking-tight text-gray-900">
@@ -676,8 +676,9 @@ export default function FilterComponent() {
               <div className="lg:col-span-3">
                 <div className="w-full bg-white text-black">
                   <div className="flex-1">
-                    {propiedad?.length >= 1
-                      ? propiedad.map((prop) => (
+                    {
+                      propiedad?.length >= 1 ? (
+                        propiedad.map((prop) => (
                           <FilterCardContainer
                             key={prop.id}
                             id={prop.id}
@@ -697,26 +698,30 @@ export default function FilterComponent() {
                             description={prop.description}
                           />
                         ))
-                      : viewProps.map((prop) => (
-                          <FilterCardContainer
-                            key={prop.id}
-                            id={prop.id}
-                            address={prop.address}
-                            bathrooms={prop.bathroom_amount}
-                            Imagep={prop.photos[randomImageIndex]}
-                            suite_amount={prop.suite_amount}
-                            room_amount={prop.room_amount}
-                            parking_lot_amount={prop.parking_lot_amount}
-                            bathroom_amount={prop.bathroom_amount}
-                            real_address={prop.real_address}
-                            operation_type={prop.operation_type}
-                            total_surface={prop.total_surface}
-                            type={prop.type}
-                            price={prop.price}
-                            currency={prop.currency}
-                            description={prop.description}
-                          />
-                        ))}
+                      ) : (
+                        <h1>No hay propiedades con esas condiciones</h1>
+                      )
+                      // : viewProps.map((prop) => (
+                      //     <FilterCardContainer
+                      //       key={prop.id}
+                      //       id={prop.id}
+                      //       address={prop.address}
+                      //       bathrooms={prop.bathroom_amount}
+                      //       Imagep={prop.photos[randomImageIndex]}
+                      //       suite_amount={prop.suite_amount}
+                      //       room_amount={prop.room_amount}
+                      //       parking_lot_amount={prop.parking_lot_amount}
+                      //       bathroom_amount={prop.bathroom_amount}
+                      //       real_address={prop.real_address}
+                      //       operation_type={prop.operation_type}
+                      //       total_surface={prop.total_surface}
+                      //       type={prop.type}
+                      //       price={prop.price}
+                      //       currency={prop.currency}
+                      //       description={prop.description}
+                      //     />
+                      //   ))}
+                    }
                   </div>
 
                   <div>

@@ -13,6 +13,11 @@ const navigation = [
     current: true,
   },
   {
+    label: "Buscar Propiedades",
+    route: "/pruebafilter",
+    current: false,
+  },
+  {
     label: "Nosotros",
     route: "/About",
     current: false,

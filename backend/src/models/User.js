@@ -18,6 +18,10 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false
     },
+    disabled: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
     email: {
       type: DataTypes.STRING,
       allowNull: false
@@ -35,7 +39,7 @@ module.exports = (sequelize) => {
         defaultValue: 'usuario',
     },
     favorites: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
+      type: DataTypes.ARRAY(DataTypes.JSONB),
       allowNull: true,
   },
   });

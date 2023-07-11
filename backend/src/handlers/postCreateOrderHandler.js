@@ -1,6 +1,6 @@
 const { RealState } = require("../db");
 const mercadopago = require("mercadopago");
-require('dotenv').config();
+require("dotenv").config();
 
 const { TOKEN_MP, HOST } = process.env;
 
