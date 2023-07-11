@@ -1,8 +1,8 @@
-import styles from "./DashboardCard.module.css";
+import styles from "./Card.module.css";
 import Link from "next/link";
 import Image from "next/image";
 
-const DashboardCard = (props) => {
+const FilterCardContainer = (props) => {
   const {
     id,
     address,
@@ -30,7 +30,7 @@ const DashboardCard = (props) => {
           href={`/Detail/${id}`}
           className={styles.card}
         >
-          {Imagep && (
+          {Image && (
             <div
               style={{
                 position: "relative",
@@ -60,24 +60,24 @@ const DashboardCard = (props) => {
               </span>
             </div>
           )}
-          <div className="mt-4 p-2">
+          <div className="mt-4 p-2 w-auto">
             <h2
-              className="font-medium text-base md:text-lg text-gray-300 line-clamp-1 w-52"
+              className="font-medium text-base md:text-lg  line-clamp-1 w-56"
               title="New York"
             >
               {address}
             </h2>
             <p
-              className="mt-2 text-sm text-gray-300 line-clamp-1"
+              className="mt-2 text-sm  line-clamp-1"
               title="New York, NY 10004, United States"
             >
               {real_address}
             </p>
           </div>
           <div className="grid grid-cols-2 grid-rows-2 gap-4 p-2">
-            <p className="inline-flex flex-col xl:flex-row xl:items-center text-gray-300">
+            <p className="inline-flex flex-col xl:flex-row xl:items-center ">
               <svg
-                className="inline-block w-5 h-5 xl:w-4 xl:h-4 mr-3 fill-current text-gray-300"
+                className="inline-block w-5 h-5 xl:w-4 xl:h-4 mr-3 fill-current "
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 576 512"
               >
@@ -85,9 +85,9 @@ const DashboardCard = (props) => {
               </svg>
               <span className="mt-2 xl:mt-0">{type}</span>
             </p>
-            <p className="inline-flex flex-col xl:flex-row xl:items-center text-gray-300">
+            <p className="inline-flex flex-col xl:flex-row xl:items-center ">
               <svg
-                className="inline-block w-5 h-5 xl:w-4 xl:h-4 mr-3 fill-current text-gray-300"
+                className="inline-block w-5 h-5 xl:w-4 xl:h-4 mr-3 fill-current "
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 512 512"
               >
@@ -95,9 +95,9 @@ const DashboardCard = (props) => {
               </svg>
               <span className="mt-2 xl:mt-0">{total_surface}m2.</span>
             </p>
-            <p className="inline-flex flex-col xl:flex-row xl:items-center text-gray-300">
+            <p className="inline-flex flex-col xl:flex-row xl:items-center ">
               <svg
-                className="inline-block w-5 h-5 xl:w-4 xl:h-4 mr-3 fill-current text-gray-300"
+                className="inline-block w-5 h-5 xl:w-4 xl:h-4 mr-3 fill-current "
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 576 512"
               >
@@ -114,4 +114,4 @@ const DashboardCard = (props) => {
   );
 };
 
-export default DashboardCard;
+export default FilterCardContainer;
