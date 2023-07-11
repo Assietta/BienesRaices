@@ -5,6 +5,8 @@ const getOrderByIdController = async(userId) => {
     const order = await Order.findOne({ where: { client_idDB } })
     console.log(order);
     return order;
-}
+};
 
-module.exports = getOrderByIdController
+module.exports = { 
+    getOrderByIdController 
+};
