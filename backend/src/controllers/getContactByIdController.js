@@ -1,7 +1,7 @@
 const { Contact } = require('../db')
 
 const getContactByIdController = async(email) => {
-    const contact = await Contact.findOne({ where: { email } })
+    const contact = await Contact.findAll({ where: { email } })
 
     return contact;
 };
