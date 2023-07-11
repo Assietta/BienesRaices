@@ -41,7 +41,7 @@ const cleanData = (data) => {
       const price = operation.prices?.[0]?.price || 0;
       const currency = operation.prices?.[0]?.currency || '';
       const operation_type = operation.operation_type || '';
-      const period = operation.prices?.[0]?.period || 0;
+      const period = operation.prices?.[0]?.period.toString() || ''; 
 
       return {
         price,
