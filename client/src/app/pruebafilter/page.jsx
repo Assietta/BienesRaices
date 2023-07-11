@@ -282,7 +282,7 @@ export default function FilterComponent() {
           </Dialog>
         </Transition.Root>
 
-        <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-16">
           <div className=" border-b border-gray-200 pb-4 pt-6 bg-white fixed z-50 w-screen">
             <div className="flex items-baseline justify-around">
               <h1 className="text-4xl font-bold tracking-tight text-gray-900">
