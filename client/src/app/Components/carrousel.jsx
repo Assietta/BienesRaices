@@ -15,7 +15,7 @@ import { useState, useEffect, useRef } from 'react';
  
     export default function Carrousel() {
       return (
-        <Carousel className="rounded-xl max-h-screen overflow-hidden">
+        <Carousel className="max-h-screen overflow-hidden">
           <div className="relative  w-full ">
             <img
               src="https://i.ibb.co/TLLBYMn/agente-inmobiliario-vista-lateral-presentando-casa.jpg"
