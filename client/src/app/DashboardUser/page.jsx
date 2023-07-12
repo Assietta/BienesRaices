@@ -8,6 +8,7 @@ import MensajesVista from './MensajesContados/MensajesVista';
 import Configuration from "./configuration/configuration";
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import FavConteiner from "./Favorites/FavConteiner"
 
 export default function Example() {
 
@@ -61,7 +62,7 @@ export default function Example() {
               <div>
                 <p className="font-medium group-hover:text-indigo-400 leading-4">
                   {session.status === 'authenticated'
-                    ? session.data.user.name || session.data.user.username
+                    ?  session.data.user.username || session.data.user.name 
                     : ''}
                 </p>
                 <span className="text-xs text-slate-400">MR Inmobiliaria</span>
@@ -214,10 +215,12 @@ export default function Example() {
               <>
                 <PropiedadesDashboard />
                 <Mensajes />
+                <FavConteiner/>
               </>
             )}
             {showDashboard.Mensaje && <MensajesVista />}
             {showDashboard.Configuration && <Configuration />}
+            {showDashboard.FavConteiner && <FavConteiner/>}
           </div>
         </div>
       </div>

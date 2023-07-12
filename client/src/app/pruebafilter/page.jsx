@@ -1,151 +1,11 @@
 "use client";
 import React, { Fragment, useEffect, useState } from "react";
-import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
+import { Dialog, Disclosure, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import {
-  ChevronDownIcon,
-  FunnelIcon,
-  MinusIcon,
-  PlusIcon,
-  Squares2X2Icon,
-} from "@heroicons/react/20/solid";
+import { MinusIcon, PlusIcon } from "@heroicons/react/20/solid";
 import axios from "axios";
 import FilterCardContainer from "./FilterCardContainer";
 
-<<<<<<< HEAD
-export default function FilterComponent () {
-    const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
-
-    const [viewProps, setViewProps] = useState([])
-
-    const [allProps, setProps] = useState([]);
-    const [propiedad, setPropiedad] = useState();
-  
-
-    const [filterForm, setFilterForm] = useState({
-      type: "",
-      operation_type: "",
-      orientation: "",
-      currency: "",
-      minPrice: 0,
-      maxPrice: 0,
-      bathroom_amount: 0,
-      parking_lot_amount: 0,
-      room_amount: 0,
-      suite_amount: 0
-    });
-    
-    const handleChange = (event) => {
-      const { name, value } = event.target;
-      setFilterForm((prevFilters) => ({
-        ...prevFilters,
-        [name]: value,
-      }));
-      console.log(setFilterForm)
-    };
-
-
-
-
-    const sortOptions = [
-        { name: 'Most Popular', href: '#', current: true },
-        { name: 'Best Rating', href: '#', current: false },
-        { name: 'Newest', href: '#', current: false },
-        { name: 'Price: Low to High', href: '#', current: false },
-        { name: 'Price: High to Low', href: '#', current: false },
-      ]
-      const subCategories = [
-        { name: 'Totes', href: '#' },
-        { name: 'Backpacks', href: '#' },
-        { name: 'Travel Bags', href: '#' },
-        { name: 'Hip Bags', href: '#' },
-        { name: 'Laptop Sleeves', href: '#' },
-      ]
-      const filters = [
-        {
-          id: 'Tipo de propiedad',
-          name: 'Tipo de propiedad',
-          options: [
-            { value: 'Casa', label: 'Casa', checked: false },
-            { value: 'Departamento', label: 'Departamento', checked: false },
-            { value: 'Oficina', label: 'Oficina', checked: true },
-
-          ],
-        },
-        {
-            id: 'Precio',
-            name: 'Precio',
-            options: [
-              { value: 'ARS', label: 'ARS', checked: false, },
-              { value: 'USD', label: 'USD', checked: false },
-  
-            ],
-          },
-        {
-          id: 'ubicacion',
-          name: 'Ubicacion',
-          options: [
-            { value: 'new-arrivals', label: 'New Arrivals', checked: false },
-            { value: 'sale', label: 'Sale', checked: false },
-            { value: 'travel', label: 'Travel', checked: true },
-            { value: 'organization', label: 'Organization', checked: false },
-            { value: 'accessories', label: 'Accessories', checked: false },
-          ],
-        },
-        {
-          id: 'Cantidad de Ambientes',
-          name: 'Cantidad de Ambientes',
-          options: [
-            { value: '2l', label: '2L', checked: false },
-            { value: '6l', label: '6L', checked: false },
-            { value: '12l', label: '12L', checked: false },
-            { value: '18l', label: '18L', checked: false },
-            { value: '20l', label: '20L', checked: false },
-            { value: '40l', label: '40L', checked: true },
-          ],
-        },
-        {
-            id: 'Antigueda',
-            name: 'Antigüedad',
-            options: [
-              { value: '2l', label: '2L', checked: false },
-              { value: '6l', label: '6L', checked: false },
-              { value: '12l', label: '12L', checked: false },
-              { value: '18l', label: '18L', checked: false },
-              { value: '20l', label: '20L', checked: false },
-              { value: '40l', label: '40L', checked: true },
-            ],
-          },
-          {
-            id: 'Superficie Total',
-            name: 'Superficie Total',
-            options: [
-              { value: '2l', label: '2L', checked: false },
-              { value: '6l', label: '6L', checked: false },
-              { value: '12l', label: '12L', checked: false },
-              { value: '18l', label: '18L', checked: false },
-              { value: '20l', label: '20L', checked: false },
-              { value: '40l', label: '40L', checked: true },
-            ],
-          },
-          {
-            id: 'Características',
-            name: 'Características',
-            options: [
-              { value: '2l', label: '2L', checked: false },
-              { value: '6l', label: '6L', checked: false },
-              { value: '12l', label: '12L', checked: false },
-              { value: '18l', label: '18L', checked: false },
-              { value: '20l', label: '20L', checked: false },
-              { value: '40l', label: '40L', checked: true },
-            ],
-          }
-      ]
-      
-      function classNames(...classes) {
-        return classes.filter(Boolean).join(' ')
-      }
-=======
 export default function FilterComponent() {
   const filterOperation = [
     {
@@ -168,26 +28,27 @@ export default function FilterComponent() {
       ],
     },
   ];
-  const filterPrecio = [
-    {
-      id: "Precio",
-      name: "Precio",
-      options: [
-        { value: "ARS", label: "ARS", checked: false },
-        { value: "UDS", label: "USD", checked: false },
-      ],
-    },
-  ];
+  // const filterPrecio = [
+  //   {
+  //     id: "Precio",
+  //     name: "Precio",
+  //     options: [
+  //       { value: "ARS", label: "ARS", checked: false },
+  //       { value: "UDS", label: "USD", checked: false },
+  //     ],
+  //   },
+  // ];
   const filterLocation = [
     {
       id: "ubicacion",
       name: "Ubicacion",
       options: [
-        { value: "CABA", label: "CABA", checked: false },
-        { value: "vicente lopez", label: "Vicente López", checked: false },
-        { value: "san idisro", label: "San Isidro", checked: false },
-        { value: "olivos", label: "Olivos", checked: false },
-        { value: "martinez", label: "Martinez", checked: false },
+        { value: "Capital Federal", label: "Capital Federal", checked: false },
+        {
+          value: "G.B.A. Zona Norte",
+          label: "G.B.A. Zona Norte",
+          checked: false,
+        },
       ],
     },
   ];
@@ -204,29 +65,32 @@ export default function FilterComponent() {
       ],
     },
   ];
-  const filterAntiguedad = [
-    {
-      id: "Antiguedad",
-      name: "Antigüedad",
-      options: [
-        { value: "-1", label: "A estrenar", checked: false },
-        { value: "1", label: "1", checked: false },
-        { value: "2", label: "2", checked: false },
-        { value: "3", label: "3", checked: false },
-        { value: "4", label: "4", checked: false },
-        { value: "5+", label: "5+", checked: true },
-      ],
-    },
-  ];
+  // const filterAntiguedad = [
+  //   {
+  //     id: "Antiguedad",
+  //     name: "Antigüedad",
+  //     options: [
+  //       { value: "-1", label: "A estrenar", checked: false },
+  //       { value: "1", label: "1", checked: false },
+  //       { value: "2", label: "2", checked: false },
+  //       { value: "3", label: "3", checked: false },
+  //       { value: "4", label: "4", checked: false },
+  //       { value: "5+", label: "5+", checked: true },
+  //     ],
+  //   },
+  // ];
 
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
->>>>>>> feat/filtersDesign
 
   const [viewProps, setViewProps] = useState([]);
-  const itemsPerPage = 9;
+  // const itemsPerPage = 9;
   const [currentPage, setCurrentPage] = useState(1);
   const [allProps, setProps] = useState([]);
-  const [propiedad, setPropiedad] = useState();
+  const [propiedad, setPropiedad] = useState(null);
+
+  // const [currentPageFilter, setCurrentPageFilter] = useState(1);
+  const [itemsPerPageFilter, setItemsPerPageFilter] = useState(4);
+  const [totalItemsFilter, setTotalItemsFilter] = useState(0);
 
   const [filters, setFilters] = useState({
     type: "",
@@ -241,6 +105,8 @@ export default function FilterComponent() {
     suite_amount: 0,
   });
 
+  const [modalOpen, setModalOpen] = useState(false);
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     // console.log(filters);
@@ -254,23 +120,40 @@ export default function FilterComponent() {
     axios
       .post(`http://localhost:3001/filter`, filters)
       .then((res) => {
-        if (res.data) {
+        if (res.data && res.data.length > 1) {
           setPropiedad(res.data);
+          setTotalItemsFilter(res.data.length);
+          setCurrentPage(1); // Regresar a la primera página al obtener nuevos datos
+          console.log(res.data);
         } else {
-          window.alert("No hay propiedades con ese ID");
+          // window.alert("No hay coincidencias con la busqueda realizada");
+          setPropiedad([]); // Establecer en un arreglo vacío
+          setTotalItemsFilter(0);
+          setCurrentPage(1);
+          setModalOpen(true);
         }
       })
       .catch((error) => {
         console.error("Error al realizar la solicitud:", error);
       });
   };
-  console.log(propiedad);
+
+  const getPaginatedItems = () => {
+    if (propiedad === null) {
+      return [];
+    }
+    const startIndex = (currentPage - 1) * itemsPerPageFilter;
+    const endIndex = startIndex + itemsPerPageFilter;
+    return propiedad.slice(startIndex, endIndex);
+  };
+
+  const paginatedItems = getPaginatedItems();
 
   // //fetching de data para traer las propiedades con el paginado, guardandolas en setViewProps
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/realstate?page=${currentPage}&limit=2`
+        `http://localhost:3001/realstate?page=${currentPage}&limit=4`
       );
       const data = response.data;
       setViewProps(data);
@@ -287,13 +170,11 @@ export default function FilterComponent() {
   }, [currentPage]);
 
   // //va a la pagina anterior a la actual
-
   const goToPreviousPage = () => {
     setCurrentPage((prevPage) => prevPage - 1);
   };
 
   // //va a la siguiente pagina
-
   const goToNextPage = () => {
     setCurrentPage((prevPage) => prevPage + 1);
   };
@@ -417,8 +298,8 @@ export default function FilterComponent() {
           </Dialog>
         </Transition.Root>
 
-        <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className=" border-b border-gray-200 pb-4 pt-6 bg-white fixed z-50 w-screen">
+        <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-16">
+          <div className=" border-b border-gray-200 pb-4 pt-6 bg-white fixed z-40 w-screen">
             <div className="flex items-baseline justify-around">
               <h1 className="text-4xl font-bold tracking-tight text-gray-900">
                 Buscar propiedades
@@ -569,7 +450,7 @@ export default function FilterComponent() {
                     )}
                   </Disclosure>
                 ))}
-                {filterPrecio.map((section) => (
+                {/* {filterPrecio.map((section) => (
                   <Disclosure
                     as="div"
                     key={section.id}
@@ -627,7 +508,7 @@ export default function FilterComponent() {
                       </>
                     )}
                   </Disclosure>
-                ))}
+                ))} */}
                 {filterLocation.map((section) => (
                   <Disclosure
                     as="div"
@@ -746,7 +627,7 @@ export default function FilterComponent() {
                     )}
                   </Disclosure>
                 ))}
-                {filterAntiguedad.map((section) => (
+                {/* {filterAntiguedad.map((section) => (
                   <Disclosure
                     as="div"
                     key={section.id}
@@ -804,16 +685,15 @@ export default function FilterComponent() {
                       </>
                     )}
                   </Disclosure>
-                ))}
+                ))} */}
               </form>
 
               {/* Product grid */}
               <div className="lg:col-span-3">
                 <div className="w-full bg-white text-black">
                   <div className="flex-1">
-                    {
-                      propiedad?.length >= 1 ? (
-                        propiedad.map((prop) => (
+                    {paginatedItems?.length >= 1
+                      ? paginatedItems.map((prop) => (
                           <FilterCardContainer
                             key={prop.id}
                             id={prop.id}
@@ -833,31 +713,76 @@ export default function FilterComponent() {
                             description={prop.description}
                           />
                         ))
-                      ) : (
-                        <h1>No hay propiedades con esas condiciones</h1>
-                      )
-                      // : viewProps.map((prop) => (
-                      //     <FilterCardContainer
-                      //       key={prop.id}
-                      //       id={prop.id}
-                      //       address={prop.address}
-                      //       bathrooms={prop.bathroom_amount}
-                      //       Imagep={prop.photos[randomImageIndex]}
-                      //       suite_amount={prop.suite_amount}
-                      //       room_amount={prop.room_amount}
-                      //       parking_lot_amount={prop.parking_lot_amount}
-                      //       bathroom_amount={prop.bathroom_amount}
-                      //       real_address={prop.real_address}
-                      //       operation_type={prop.operation_type}
-                      //       total_surface={prop.total_surface}
-                      //       type={prop.type}
-                      //       price={prop.price}
-                      //       currency={prop.currency}
-                      //       description={prop.description}
-                      //     />
-                      //   ))}
-                    }
+                      : viewProps.map((prop) => (
+                          <FilterCardContainer
+                            key={prop.id}
+                            id={prop.id}
+                            address={prop.address}
+                            bathrooms={prop.bathroom_amount}
+                            Imagep={prop.photos[randomImageIndex]}
+                            suite_amount={prop.suite_amount}
+                            room_amount={prop.room_amount}
+                            parking_lot_amount={prop.parking_lot_amount}
+                            bathroom_amount={prop.bathroom_amount}
+                            real_address={prop.real_address}
+                            operation_type={prop.operation_type}
+                            total_surface={prop.total_surface}
+                            type={prop.type}
+                            price={prop.price}
+                            currency={prop.currency}
+                            description={prop.description}
+                          />
+                        ))}
                   </div>
+
+                  {modalOpen && (
+                    <div
+                      id="defaultModal"
+                      tabIndex="-1"
+                      aria-hidden="true"
+                      className="fixed top-0 left-0 right-0 z-50 w-full h-screen flex items-center justify-center"
+                    >
+                      <div className="relative bg-white rounded-lg shadow-lg w-full max-w-md p-6">
+                        <div className="flex items-start justify-between mb-4">
+                          <h3 className="text-xl font-semibold text-gray-900">
+                            Alert
+                          </h3>
+                          <button
+                            type="button"
+                            className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 flex justify-center items-center"
+                            onClick={() => setModalOpen(false)}
+                          >
+                            <svg
+                              className="w-4 h-4"
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm-.707-9.293a1 1 0 00-1.414 0L5 11.586 1.707 8.293A1 1 0 10.293 9.707L4.586 14l-3.293 3.293a1 1 0 101.414 1.414L5 16.414l3.293 3.293a1 1 0 101.414-1.414L6.414 15l3.293-3.293a1 1 0 000-1.414z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </button>
+                        </div>
+                        <div className="mb-6">
+                          <h2>
+                            No hay coincidencias con la búsqueda realizada
+                          </h2>
+                        </div>
+                        <div className="flex justify-end">
+                          <button
+                            type="button"
+                            className="text-gray-500 bg-black hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-sm font-medium px-5 py-2.5"
+                            onClick={() => setModalOpen(false)}
+                          >
+                            Cerrar
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
 
                   <div>
                     <div className="flex justify-center item-center m-4">
@@ -889,7 +814,7 @@ export default function FilterComponent() {
                           onClick={goToNextPage}
                           disabled={
                             currentPage ===
-                            Math.ceil(allProps.length / itemsPerPage)
+                            Math.ceil(allProps.length / itemsPerPageFilter)
                           }
                           className={`h-10 px-5 text-green-600 transition-colors duration-150 rounded-r-lg focus:shadow-outline hover:bg-gray-300`}
                         >

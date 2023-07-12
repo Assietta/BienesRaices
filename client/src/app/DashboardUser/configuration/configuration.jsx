@@ -1,27 +1,55 @@
 "use client"
 import { useState } from "react";
 import Title from "./title";
-import { validateForm } from "./validates";
+import validateForm  from "./validates";
 import axios from "axios";
 import { useSession } from "next-auth/react";
-import {validatePassword} from "./validatesPassword"
+import validatePassword from "./validatesPassword"
+import bcrypt from 'bcryptjs'
+import { useEffect } from "react";
+import validateDelete from "./validatesDelete"
+import validateEmail from "./validatesEmail"
+
 
 
 export default function FormInfo () {
   const [selectedForm, setSelectedForm] = useState(null);
+  const [userPassword, setUserPassword] = useState();
 
   const session = useSession();
-  const { id, username } = session.data.user;
+  const { id, username,} = session.data.user
 
-  // const userName = session.data.user.name
+
+  const fetchPassword = async (id) => {
+
+    try {
+      const response = await axios.get(`http://localhost:3001/users/${id}`);
+
+      const password = response.data.password;
+
+ 
+      setUserPassword(password);
+    } catch (error) {
+      // Manejar el error de la solicitud
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    fetchPassword(id);
+  }, )
+
+
+
+
+
+
 
   const handleFormClick = (formId) => {
     setSelectedForm(formId);
   };
 
   const [formInfoData, setFormInfoData] = useState({
-    name: "",
-    lastName: "",
+   username:""
 
   });
   const [formPasswordData, setFormPasswordData] = useState({
@@ -32,13 +60,14 @@ export default function FormInfo () {
   });
 
   const [formEmailData, setFormEmailData] = useState({
+    password:"",
     newEmail: "",
     repeatNewEmail: "",
 
   });
 
   const [formDeleteData, setFormDeleteData] = useState({
-    deleteAcountPassword: "",
+    deleteAccountPassword: "",
   });
 
 
@@ -48,7 +77,9 @@ export default function FormInfo () {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setFormData((prevFormData) => ({
+
+    setFormInfoData((prevFormData) => ({
+
       ...prevFormData,
       [name]: value,
     }));
@@ -63,6 +94,14 @@ export default function FormInfo () {
     }));
   };
 
+  const handleInputChangeEmail = (event) => {
+    const { name, value } = event.target;
+
+    setFormEmailData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
 
 
 
@@ -77,8 +116,7 @@ export default function FormInfo () {
 
   const clearFormInfo = () => {
     setFormInfoData({
-      name: "",
-      lastName: "",
+      username:""
 
 
     });
@@ -95,13 +133,20 @@ export default function FormInfo () {
   
   const clearFormInfoD = () => {
     setFormDeleteData({
-      name: "",
-      lastName: "",
+      deleteAccountPassword: "",
 
 
     });
   };
+  const clearFormInfoEmail = () => {
+    setFormDeleteData({
+      password:"",
+      newEmail: "",
+      repeatNewEmail: ""
 
+
+    });
+  };
 
   const handleSubmitInfo = async (event) => {
     event.preventDefault();
@@ -109,26 +154,26 @@ export default function FormInfo () {
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      console.log(formInfoData);
-      console.log(id);
+
       await axios.put(`http://localhost:3001/users/${id}`, formInfoData);
       alert("Informacion Actualizada");
-      console.log("Informacion actualizada correctamente");
+
       clearFormInfo();
     }
   };
-  const handleSubmitInfoD = async (event) => {
+  const handleSubmitInfoEmail = async (event) => {
     event.preventDefault();
-    const validationErrors = validateForm(formInfoData);
+    const validationErrors = await validateEmail(formEmailData, userPassword);
     setErrors(validationErrors);
 
+
     if (Object.keys(validationErrors).length === 0) {
-      console.log(formInfoData);
-      console.log(id);
-      await axios.put(`http://localhost:3001/users/${id}`, formInfoData);
+      let send = {email:formEmailData.repeatNewEmail};
+
+      await axios.put(`http://localhost:3001/users/${id}`, send);
       alert("Informacion Actualizada");
-      console.log("Informacion actualizada correctamente");
-      clearFormInfo();
+
+      clearFormInfoEmail();
     }
   };
 
@@ -137,16 +182,32 @@ export default function FormInfo () {
 
   const handleSubmitPassword = async (event) => {
     event.preventDefault();
-    const validationErrors = validatePassword(formPasswordData);
+    const validationErrors = await validatePassword(formPasswordData, userPassword);
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      console.log(formInfoData);
-      console.log(id);
-      await axios.put(`http://localhost:3001/users/${id}`, formInfoData);
+      let send = {password:formPasswordData.repeatNewPassword};
+    
+      await axios.put(`http://localhost:3001/users/${id}`, send);
       alert("Informacion Actualizada");
-      console.log("Informacion actualizada correctamente");
+
       clearFormPassword();
+    }
+  };
+
+  const handleSubmitDelete = async (event) => {
+    event.preventDefault();
+    const validationErrors = await validateDelete(formDeleteData, userPassword);
+    setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length === 0) {
+      let send= {disabled:true}
+
+    
+      await axios.put(`http://localhost:3001/users/${id}`, send );
+      alert("Informacion Actualizada");
+
+      clearFormInfoD();
     }
   };
 
@@ -166,22 +227,22 @@ export default function FormInfo () {
         {/* input Name */}
         <div className="mb-3 space-y-2 w-full text-xs">
           <label className="font-semibold text-gray-600 py-2">
-            Nombre <abbr title="required">*</abbr>
+            Nombre de usuario  
           </label>
           <input
             className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
             type="text"
-            name="name"
-            placeholder={username.split(" ")[0]}
-            value={formInfoData.name}
+            name="username"
+            placeholder={username}
+            value={formInfoData.username}
             onChange={handleInputChange}
           />
-          {errors.name && <p>{errors.name}</p>}
+          {errors.username && <p>{errors.username}</p>}
         </div>
         {/* input apellido */}
-        <div className="mb-3 space-y-2 w-full text-xs ">
+        {/* <div className="mb-3 space-y-2 w-full text-xs ">
           <label className="font-semibold text-gray-600 py-2">
-            Apellido <abbr title="required">*</abbr>
+            Apellido  
           </label>
           <input
             className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
@@ -192,13 +253,13 @@ export default function FormInfo () {
             onChange={handleInputChange}
           />
           {errors.lastName && <p>{errors.lastName}</p>}
-        </div>
+        </div>*/}
         <button
                   className="mb-2 md:mb-0 bg-green-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500"
                   type="submit"
                 >
                   Enviar
-                </button>
+                </button> 
       </form>
     </div>
       )}
@@ -212,13 +273,21 @@ export default function FormInfo () {
            <Title
              tit="Cambiar contraseña"
              sub="Modfica la contraseña de tu cuenta"
-           />
-           {/* cambiar contraseña */}
-           <form onSubmit={handleSubmitPassword} className="mb-8">
+          />
+
+
+           cambiar contraseña 
+
+
+            <form onSubmit={handleSubmitPassword} className="mb-8">
+             
+             
              {/* input Contraseña */}
-             <div className="mb-3 space-y-2 w-full text-xs">
+
+ 
+              <div className="mb-3 space-y-2 w-full text-xs">
                <label className="font-semibold text-gray-600 py-2">
-                 Contraseña actual<abbr title="required">*</abbr>
+                 Contraseña actual 
                </label>
                <input
                  className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
@@ -230,10 +299,14 @@ export default function FormInfo () {
                />
                {errors.password && <p>{errors.password}</p>}
              </div>
+
+
              {/* input Contraseña nueva */}
-             <div className="mb-3 space-y-2 w-full text-xs">
+
+
+              <div className="mb-3 space-y-2 w-full text-xs">
                <label className="font-semibold text-gray-600 py-2">
-                 Contraseña nueva <abbr title="required">*</abbr>
+                 Contraseña nueva  
                </label>
                <input
                  className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
@@ -244,11 +317,15 @@ export default function FormInfo () {
                  onChange={handleInputChangeP}
                />
                {errors.newPassword && <p>{errors.newPassword}</p>}
-             </div>
+             </div> 
+
+
              {/* input Contraseña nueva Repetir */}
+
+
              <div className="mb-3 space-y-2 w-full text-xs">
                <label className="font-semibold text-gray-600 py-2">
-                 Contraseña nueva <abbr title="required">*</abbr>
+                 Contraseña nueva  
                </label>
                <input
                  className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
@@ -268,7 +345,73 @@ export default function FormInfo () {
              </button>
            </form>
          </div>
+      )} 
+
+
+<h2 onClick={() => handleFormClick('form3')}>Cambiar email</h2>
+      {selectedForm === 'form3' && (
+             <div id="form3"  className="border-b border-gray-700 mt-16">
+             <Title
+               tit="Cambiar email"
+               sub="Modfica el correo electronico de tu cuenta"
+             />
+             {/* cambiar Email */}
+             <form onSubmit={handleSubmitInfoEmail} className="mb-8">
+               {/* input Contraseña */}
+               <div className="mb-3 space-y-2 w-full text-xs">
+                 <label className="font-semibold text-gray-600 py-2">
+                   Contraseña actual 
+                 </label>
+                 <input
+                   className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
+                   type="text"
+                   name="password"
+                   placeholder="Ingresa tu contraseña actual"
+                   value={formEmailData.password}
+                   onChange={handleInputChangeEmail}
+                 />
+                 {errors.password && <p>{errors.password}</p>}
+               </div>
+               {/* input Email nuevo */}
+               <div className="mb-3 space-y-2 w-full text-xs">
+                 <label className="font-semibold text-gray-600 py-2">
+                   Email Nuevo  
+                 </label>
+                 <input
+                   className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
+                   type="text"
+                   name="newEmail"
+                   placeholder="Ingresa tu email nuevo"
+                   value={formEmailData.newEmail}
+                   onChange={handleInputChangeEmail}
+                 />
+                 {errors.newEmail && <p>{errors.newEmail}</p>}
+               </div>
+               {/* input Email nuevo Repetir */}
+               <div className="mb-3 space-y-2 w-full text-xs">
+                 <label className="font-semibold text-gray-600 py-2">
+                   Repite el nuevo Email  
+                 </label>
+                 <input
+                   className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
+                   type="text"
+                   name="repeatNewEmail"
+                   placeholder="Repite tu email nuevo"
+                   value={formEmailData.repeatNewEmail}
+                   onChange={handleInputChangeEmail}
+                 />
+                 {errors.repeatNewEmail && <p>{errors.repeatNewEmail}</p>}
+               </div>
+               <button
+                 className="mb-2 md:mb-0 bg-green-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500"
+                 type="submit"
+               >
+                 Enviar
+               </button>
+             </form>
+           </div>
       )}
+
 
 
 <h2 onClick={() => handleFormClick('form4')}>Eliminar cuenta</h2>
@@ -279,21 +422,21 @@ export default function FormInfo () {
                sub="Eliminar tu cuenta de MR propiedades, eliminara tu perfil y todos los datos de tu actividad"
              />
              {/* Eliminar cuenta */}
-             <form onSubmit={handleSubmit} className="mb-8">
+             <form onSubmit={handleSubmitDelete} className="mb-8">
                {/* input Eliminar cuenta */}
                <div className="mb-3 space-y-2 w-full text-xs">
                  <label className="font-semibold text-gray-600 py-2">
-                   Contraseña <abbr title="required">*</abbr>
+                   Contraseña  
                  </label>
                  <input
                    className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
                    type="text"
-                   name="password"
+                   name="deleteAccountPassword"
                    placeholder="Contraseña"
-                   value={formDeleteData.deleteAcount}
-                   onChange={handleInputChange}
+                   value={formDeleteData.deleteAccountPassword}
+                   onChange={handleInputChangeD}
                  />
-                 {errors.deleteAcount && <p>{errors.deleteAcount}</p>} 
+                 {errors.deleteAccountPassword && <p>{errors.deleteAccountPassword}</p>} 
                </div>
                
                <button
@@ -304,8 +447,7 @@ export default function FormInfo () {
                </button>
              </form>
            </div>
-      )}
-     
+             )} 
 
 
     </div>
@@ -316,293 +458,4 @@ export default function FormInfo () {
 
 
 
-  // const [formPasswordData, setFormPasswordData] = useState({
-
-  //   password: "",
-  //   newPassword: "",
-  //   repeatNewPassword: "",
-  // });
-
-
-  // const [formEmailData, setFormEmailData] = useState({
-  //   email: "",
-  //   password: "",
-  //   newEmail: "",
-  //   repeatNewEmail: "",
-
-  // });
-
-
-  // const [formDeleteData, setFormDeleteData] = useState({
-  //   password: "",
-  //   deleteAcount: "",
-  // });
-
-
-
-
-
-
-
-
-
-
-// import { useState } from "react";
-// import Title from "./title";
-// import { validateForm } from "./validates";
-// import axios from "axios";
-
-// export default function Configuration() {
-//   const [formData, setFormData] = useState({
-//     name: "",
-//     lastName: "",
-//     email: "",
-//     phone: "",
-//     mobile: "",
-//     password: "",
-//     newPassword: "",
-//     repeatNewPassword: "",
-//     newEmail: "",
-//     repeatNewEmail: "",
-//     deleteAcount: "",
-//   });
-//   const [errors, setErrors] = useState({});
-
-//   const handleInputChange = (event) => {
-//     const { name, value } = event.target;
-//     setFormData((prevFormData) => ({
-//       ...prevFormData,
-//       [name]: value,
-//     }));
-//   };
-
-//   const clearForm = () => {
-//     setFormData({
-//       name: "",
-//       lastName: "",
-//       email: "",
-//       phone: "",
-//       mobile: "",
-//       password: "",
-//       newPasword: "",
-//       newEmail: "",
-//       repeatNewEmail: "",
-//       deleteAcount: "",
-//     });
-//   };
-
-//   const handleSubmit = async (event) => {
-//     event.preventDefault();
-//     const validationErrors = validateForm(formData);
-//     setErrors(validationErrors);
-
-//     if (Object.keys(validationErrors).length === 0) {
-//       console.log(formData);
-//       await axios.post("http://localhost:3001/contact", formData);
-//       alert("Contacto enviado");
-//       console.log("Contact successfully send");
-//       clearForm();
-//     }
-//   };
-
-//   return (
-//     <div>
-//       <div className="border-b border-gray-700 mt-16">
-//         <Title tit="Datos Personales" sub="Completa tus datos personales." />
-//         {/* datos personales */}
-//         <form onSubmit={handleSubmit} className="mb-8">
-//           {/* input Name */}
-//           <div className="mb-3 space-y-2 w-full text-xs">
-//             <label className="font-semibold text-gray-600 py-2">
-//               Nombre <abbr title="required">*</abbr>
-//             </label>
-//             <input
-//               className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
-//               type="text"
-//               name="name"
-//               placeholder="Ingrese su nombre"
-//               value={formData.name}
-//               onChange={handleInputChange}
-//             />
-//             {errors.name && <p>{errors.name}</p>}
-//           </div>
-//           {/* input apellido */}
-//           <div className="mb-3 space-y-2 w-full text-xs ">
-//             <label className="font-semibold text-gray-600 py-2">
-//               Apellido <abbr title="required">*</abbr>
-//             </label>
-//             <input
-//               className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
-//               type="text"
-//               name="lastName"
-//               placeholder="Ingrese su apellido"
-//               value={formData.lastName}
-//               onChange={handleInputChange}
-//             />
-//             {errors.lastName && <p>{errors.lastName}</p>}
-//           </div>
-//           <button
-//                     className="mb-2 md:mb-0 bg-green-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500"
-//                     type="submit"
-//                   >
-//                     Enviar
-//                   </button>
-//         </form>
-//       </div>
-
-//       <div className="border-b border-gray-700 mt-16">
-//         <Title
-//           tit="Cambiar contraseña"
-//           sub="Modfica la contraseña de tu cuenta"
-//         />
-//         {/* cambiar contraseña */}
-//         <form onSubmit={handleSubmit} className="mb-8">
-//           {/* input Contraseña */}
-//           <div className="mb-3 space-y-2 w-full text-xs">
-//             <label className="font-semibold text-gray-600 py-2">
-//               Contraseña actual<abbr title="required">*</abbr>
-//             </label>
-//             <input
-//               className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
-//               type="text"
-//               name="password"
-//               placeholder="Ingresa tu contraseña actual"
-//               value={formData.password}
-//               onChange={handleInputChange}
-//             />
-//             {errors.password && <p>{errors.password}</p>}
-//           </div>
-//           {/* input Contraseña nueva */}
-//           <div className="mb-3 space-y-2 w-full text-xs">
-//             <label className="font-semibold text-gray-600 py-2">
-//               Contraseña nueva <abbr title="required">*</abbr>
-//             </label>
-//             <input
-//               className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
-//               type="text"
-//               name="newPassword"
-//               placeholder="Ingresa tu contraseña nueva"
-//               value={formData.newPassword}
-//               onChange={handleInputChange}
-//             />
-//             {errors.newPassword && <p>{errors.newPassword}</p>}
-//           </div>
-//           {/* input Contraseña nueva Repetir */}
-//           <div className="mb-3 space-y-2 w-full text-xs">
-//             <label className="font-semibold text-gray-600 py-2">
-//               Contraseña nueva <abbr title="required">*</abbr>
-//             </label>
-//             <input
-//               className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
-//               type="text"
-//               name="lastName"
-//               placeholder="Repite tu contraseña nueva"
-//               value={formData.repeatNewPassword}
-//               onChange={handleInputChange}
-//             />
-//             {errors.repeatNewPassword && <p>{errors.repeatNewPassword}</p>}
-//           </div>
-//           <button
-//             className="mb-2 md:mb-0 bg-green-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500"
-//             type="submit"
-//           >
-//             Enviar
-//           </button>
-//         </form>
-//       </div>
-
-//       <div className="border-b border-gray-700 mt-16">
-//         <Title
-//           tit="Cambiar email"
-//           sub="Modfica el correo electronico de tu cuenta"
-//         />
-//         {/* cambiar Email */}
-//         <form onSubmit={handleSubmit} className="mb-8">
-//           {/* input Contraseña */}
-//           <div className="mb-3 space-y-2 w-full text-xs">
-//             <label className="font-semibold text-gray-600 py-2">
-//               Contraseña actual<abbr title="required">*</abbr>
-//             </label>
-//             <input
-//               className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
-//               type="text"
-//               name="password"
-//               placeholder="Ingresa tu contraseña actual"
-//               value={formData.password}
-//               onChange={handleInputChange}
-//             />
-//             {errors.password && <p>{errors.password}</p>}
-//           </div>
-//           {/* input Email nuevo */}
-//           <div className="mb-3 space-y-2 w-full text-xs">
-//             <label className="font-semibold text-gray-600 py-2">
-//               Email Nuevo <abbr title="required">*</abbr>
-//             </label>
-//             <input
-//               className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
-//               type="text"
-//               name="newPassword"
-//               placeholder="Ingresa tu contraseña nueva"
-//               value={formData.newEmail}
-//               onChange={handleInputChange}
-//             />
-//             {errors.newEmail && <p>{errors.newEmail}</p>}
-//           </div>
-//           {/* input Email nuevo Repetir */}
-//           <div className="mb-3 space-y-2 w-full text-xs">
-//             <label className="font-semibold text-gray-600 py-2">
-//               Repite el nuevo Email <abbr title="required">*</abbr>
-//             </label>
-//             <input
-//               className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
-//               type="text"
-//               name="repeatNewEmail"
-//               placeholder="Repite tu contraseña nueva"
-//               value={formData.repeatNewEmail}
-//               onChange={handleInputChange}
-//             />
-//             {errors.repeatNewEmail && <p>{errors.repeatNewEmail}</p>}
-//           </div>
-//           <button
-//             className="mb-2 md:mb-0 bg-green-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500"
-//             type="submit"
-//           >
-//             Enviar
-//           </button>
-//         </form>
-//       </div>
-
-//       <div className="border-b border-gray-700 mt-16">
-//         <Title
-//           tit="Eliminar mi cuenta"
-//           sub="Eliminar tu cuenta de MR propiedades, eliminara tu perfil y todos los datos de tu actividad"
-//         />
-//         {/* Eliminar cuenta */}
-//         <form onSubmit={handleSubmit} className="mb-8">
-//           {/* input Eliminar cuenta */}
-//           <div className="mb-3 space-y-2 w-full text-xs">
-//             <label className="font-semibold text-gray-600 py-2">
-//               Contraseña<abbr title="required">*</abbr>
-//             </label>
-//             <input
-//               className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
-//               type="text"
-//               name="password"
-//               placeholder="Contraseña"
-//               value={formData.deleteAcount}
-//               onChange={handleInputChange}
-//             />
-//             {errors.deleteAcount && <p>{errors.deleteAcount}</p>}
-//           </div>
-
-//           <button
-//             className="mb-2 md:mb-0 bg-green-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500"
-//             type="submit"
-//           >
-//             Enviar
-//           </button>
-//         </form>
-//       </div>
-//     </div>
-//   );
-// }
+ 
