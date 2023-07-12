@@ -32,11 +32,6 @@ const navigation = [
     route: "/Contact",
     current: false,
   },
-  {
-    label: "Buscar Propiedades",
-    route: "/pruebafilter",
-    current: false,
-  },
 ];
 
 function classNames(...classes) {
@@ -50,6 +45,7 @@ export default function Example() {
 
   const autenticated = () => {
     if (session.status === "authenticated") {
+      console.log(session, "soy la sesion nav");
       return true;
     } else session.status === "unauthenticated";
     return false;

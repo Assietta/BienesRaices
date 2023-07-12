@@ -1,18 +1,18 @@
-export const validateForm = (formInfoData, user) => {
+export default function validateForm (formInfoData)  {
     let errors = {};
 
   
-    if (!formInfoData.name) {
-      errors.name = 'Nombre vacío';
-    } else if (!/^[a-zA-Z\s]+$/.test(formInfoData.name)) {
-      errors.name = 'Nombre inválido';
+    if (!formInfoData.username) {
+      errors.username = 'Nombre vacío';
+    } else if (!/^[a-zA-Z\s]+$/.test(formInfoData.username)) {
+      errors.username = 'Nombre inválido';
     }
   
-    if (!formInfoData.lastName) {
-      errors.lastName = 'Apellido vacío';
-    } else if (!/^[a-zA-Z\s]+$/.test(formInfoData.lastName)) {
-      errors.lastName = 'Apellido inválido';
-    }
+    // if (!formInfoData.lastName) {
+    //   errors.lastName = 'Apellido vacío';
+    // } else if (!/^[a-zA-Z\s]+$/.test(formInfoData.lastName)) {
+    //   errors.lastName = 'Apellido inválido';
+    // }
   
     // if (!formData.email) {
     //   errors.email = 'Email vacío';

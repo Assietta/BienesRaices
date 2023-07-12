@@ -10,11 +10,11 @@ export default function FavConteiner () {
   const[fav, setFav] =useState([])
   const session = useSession()
   const {id} = session.data.user 
-  console.log(id);
+
     const fetchDataProps = async () => {
         try {
           const response = await axios.get(
-            `http://localhost:3001//users/${id}`
+            `http://localhost:3001/users/${id}`
           );
           const data = response.data;
           setFav(data);

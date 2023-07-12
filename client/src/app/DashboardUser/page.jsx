@@ -62,7 +62,7 @@ export default function Example() {
               <div>
                 <p className="font-medium group-hover:text-indigo-400 leading-4">
                   {session.status === 'authenticated'
-                    ? session.data.user.name || session.data.user.username
+                    ?  session.data.user.username || session.data.user.name 
                     : ''}
                 </p>
                 <span className="text-xs text-slate-400">MR Inmobiliaria</span>

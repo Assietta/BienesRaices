@@ -1,16 +1,23 @@
-export const validatePassword = (formPasswordData ) => {
+import bcrypt from 'bcryptjs'
+export default async function validatePassword (formPasswordData, userPassword )  {
     let errors = {};
+    console.log(userPassword,"soy el form del validate");
    
-  
+    const passwordMatch = await bcrypt.compare(
+      formPasswordData.password,
+      userPassword
+      )
 
 
-    //  if (!formPasswordData.password) {
-    //   errors.password = 'Contraseña vacía';
-    // } else if (passwordMatch(formPasswordData, password) == false)
+console.log(passwordMatch,"soy el resultado del passwordMatch");
+
+     if (!formPasswordData.password) {
+      errors.password = 'Contraseña vacía';
+    } else if (passwordMatch === false)
     // si mi contraseña es diferente a la actual arroja error
-    // {
-    //   errors.password = 'Contraseña incorrecta';
-    // }
+    {
+      errors.password = 'Contraseña incorrecta';
+    }
   
     if (!formPasswordData.newPassword) {
       errors.newPassword = 'Nueva contraseña vacía';
