@@ -13,6 +13,11 @@ const navigation = [
     current: true,
   },
   {
+    label: "Buscar Propiedades",
+    route: "/pruebafilter",
+    current: false,
+  },
+  {
     label: "Nosotros",
     route: "/About",
     current: false,
@@ -103,7 +108,7 @@ export default function Example() {
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
                   <div>
-                    <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                    <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 z-50">
                       <span className="sr-only">Open user menu</span>
 
                       <div className="hidden sm:ml-6 sm:block">
