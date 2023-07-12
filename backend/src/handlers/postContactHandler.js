@@ -4,9 +4,10 @@ const contactTemplate = require('../mailsTemplate/postContact');
 
 const postContactHandler = async(req, res) => {
     try {
-        const { name, lastName, email, phone, mobile, comment } = req.body
+        const { name, lastName, email, phone, mobile, comment, userId } =
+          req.body;
 
-        const ContactPosted = await postContactController(name, lastName, email, phone, mobile, comment);
+        const ContactPosted = await postContactController(name, lastName, email, phone, mobile, comment, userId);
         const asunto = 'Consulta con Henry Real State';
         const destinatario = email;
         const cuerpo = contactTemplate.replace('%NOMBRE%', name);
