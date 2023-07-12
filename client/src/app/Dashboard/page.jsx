@@ -1,17 +1,13 @@
 "use client";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
-
-import UsersDashboard from "./users/usersDashboard";
 import PropiedadesDashboard from "./propiedades/propiedadesDashboard";
-import OrdersDashboard from "./orders/ordersDashboard";
-
 import DashboardUser from "./users/DashboardUser";
 import DashboardContacts from "./contacts/DashboardContacts";
 import DashboardOrders from "./orders/DashboardOrders";
 import GeneralDashboard from "./general/GeneralDashboard";
-import axios from "axios";
-import { useSession } from "next-auth/react";
 
 export default function Example() {
   const [selectedMenu, setSelectedMenu] = useState("dashboard");
@@ -67,6 +63,10 @@ export default function Example() {
     return false;
   };
 
+  useEffect(() => {
+    fetchDataContacts();
+  }, []);
+
   const fetchDataContacts = async () => {
     try {
       const response = await axios.get(`http://localhost:3001/contact/`);
@@ -77,9 +77,6 @@ export default function Example() {
       console.error(error);
     }
   };
-  useEffect(() => {
-    fetchDataContacts();
-  }, []);
 
   return (
     <div className="bg-white">
@@ -460,7 +457,7 @@ export default function Example() {
                         <th className="text-left py-3 px-2">Email</th>
                         <th className="text-left py-3 px-2">Rol</th>
                         <th className="text-left py-3 px-2 rounded-r-lg">
-                          Actions
+                          Deshabilitar
                         </th>
                       </tr>
                     </thead>
