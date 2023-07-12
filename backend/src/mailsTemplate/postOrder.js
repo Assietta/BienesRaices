@@ -1,11 +1,11 @@
-const emailTemplate = `
+const orderTemplate = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienvenido a la aplicación</title>
+    <title>Notificación de Orden</title>
     <style>
         /* Estilos CSS */
         body {
@@ -52,25 +52,20 @@ const emailTemplate = `
             left: 20px;
             width: 100px;
         }
-
-        .username {
-            color: red;
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        <img src="https://i.ibb.co/pzFrvn1/logo-png-white.png" alt="Logo de la aplicación" class="logo">
-        <h2>Hola <span class="username">%NOMBRE%</span>, Bienvenido a nuestra aplicación.</h2>
-        <p>Gracias por registrarte. ¡Estamos emocionados de tenerte como parte de nuestra comunidad!</p>
-        <p>Para comenzar a utilizar la aplicación, simplemente inicia sesión con tu cuenta recién creada.</p>
-        <p>Haz clic en el botón de abajo para acceder a tu cuenta:</p>
-        <a class="button" href="https://bienesraices-production-888d.up.railway.app/Login">Iniciar sesión</a>
-        <p>Muchas Gracias</p>
+        <img src="https://i.ibb.co/pzFrvn1/logo-png-white.png" alt="Logo de la empresa" class="logo">
+        <h2>Su transacción ha sido %STATUS%</h2>
+        <p>Gracias por realizar su orden con nosotros. Estamos procesando su solicitud.</p>
+        <p>Si tiene alguna consulta o necesita más información, no dude en comunicarse con nuestro equipo de atención al cliente.</p>
+        <p>Atentamente,</p>
+        <p>El equipo de la empresa de bienes raíces</p>
         <p>© 2023 M - R Propiedades© Software Inmobiliario - Tokko Broker</p>
     </div>
 </body>
 </html>
 `;
 
-module.exports = emailTemplate;
+module.exports = orderTemplate;

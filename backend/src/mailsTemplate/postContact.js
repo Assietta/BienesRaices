@@ -1,11 +1,11 @@
-const emailTemplate = `
+const contactTemplate = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienvenido a la aplicación</title>
+    <title>Agradecimiento por contactarnos</title>
     <style>
         /* Estilos CSS */
         body {
@@ -60,17 +60,19 @@ const emailTemplate = `
 </head>
 <body>
     <div class="container">
-        <img src="https://i.ibb.co/pzFrvn1/logo-png-white.png" alt="Logo de la aplicación" class="logo">
-        <h2>Hola <span class="username">%NOMBRE%</span>, Bienvenido a nuestra aplicación.</h2>
-        <p>Gracias por registrarte. ¡Estamos emocionados de tenerte como parte de nuestra comunidad!</p>
-        <p>Para comenzar a utilizar la aplicación, simplemente inicia sesión con tu cuenta recién creada.</p>
-        <p>Haz clic en el botón de abajo para acceder a tu cuenta:</p>
-        <a class="button" href="https://bienesraices-production-888d.up.railway.app/Login">Iniciar sesión</a>
-        <p>Muchas Gracias</p>
+        <img src="https://i.ibb.co/pzFrvn1/logo-png-white.png" alt="Logo de la empresa" class="logo">
+        <h2>Hola <span class="username">%NOMBRE%</span>,</h2>
+        <p>Gracias por contactarte con nosotros. Valoramos tu interés en nuestros servicios y propiedades.</p>
+        <p>Hemos recibido tu mensaje y nos comunicaremos contigo a la brevedad posible.</p>
+        <p>Mientras tanto, te invitamos a explorar nuestro sitio web para obtener más información sobre nuestras propiedades y servicios.</p>
+        <p>No dudes en ponerte en contacto con nosotros si tienes alguna pregunta adicional.</p>
+        <p>Muchas gracias nuevamente por elegir nuestra empresa de bienes raíces.</p>
+        <p>Atentamente,</p>
+        <p>El equipo de la empresa de bienes raíces</p>
         <p>© 2023 M - R Propiedades© Software Inmobiliario - Tokko Broker</p>
     </div>
 </body>
 </html>
 `;
 
-module.exports = emailTemplate;
+module.exports = contactTemplate;

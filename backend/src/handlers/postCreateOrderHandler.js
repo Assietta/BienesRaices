@@ -1,7 +1,7 @@
 const { RealState } = require("../db");
 const mercadopago = require("mercadopago");
 require("dotenv").config();
-
+const orderTemplate = require('../mailsTemplate/postOrder');
 const { TOKEN_MP, HOST } = process.env;
 
 const createOrderHandler = async (req, res) => {
@@ -19,16 +19,18 @@ const createOrderHandler = async (req, res) => {
     // const price= parseFloat(property?.operations[0]?.prices[0]?.price) * 0.000001
 
     const price = parseFloat(property?.price) * 0.001;
+    const address = property?.address
 
     const result = await mercadopago.preferences.create({
       items: [
         {
-          title: id,
+          title: `${address} 1% del valor total`,
           quantity: 1,
           currency_id: property?.currency,
           unit_price: price,
         },
       ],
+
 
       back_urls: {
         success: "https://bienesraices-production-888d.up.railway.app/Success",
@@ -115,7 +117,7 @@ const webhookHandler = async (req, res) => {
       String(data?.response.status) === "approved"
         ? (asunto = "Su transacción ha sido exitosa")
         : (asunto = "Su transacción ha sido rechazada");
-      const cuerpo = `Cualquier consulta comunicate con nosotros`;
+      const cuerpo = orderTemplate.replace('%STATUS%', data?.response.status);
 
       //NOTIFICACION POR MAIL
       await mailHandler(String(user?.dataValues.email), asunto, cuerpo);
