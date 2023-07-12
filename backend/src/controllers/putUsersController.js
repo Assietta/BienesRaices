@@ -1,10 +1,11 @@
 const { log } = require('console');
 const { User } = require('../db');
+const bcrypt = require('bcryptjs');
 
-const putUsersController = async (id, username, email, password, rol, favorites) => {
+const putUsersController = async (id, username, email, password, rol, favorites, disabled) => {
     // Busca el registro en la base de datos por su ID
     const user = await User.findOne({ where: { id } })
-
+    const saltRounds = 10;
     if (!user) {
       throw new Error('No se encontró el usuario');
     }
@@ -20,10 +21,13 @@ const putUsersController = async (id, username, email, password, rol, favorites)
       user.favorites = favorites;
     }
     if(password){
-      user.password = password;
+      user.password = await bcrypt.hash(password, saltRounds);
     }
     if(rol){
       user.rol = rol;
+    }
+    if(disabled){
+      user.disabled = disabled;
     }
 
     // Guarda los cambios en la base de datos

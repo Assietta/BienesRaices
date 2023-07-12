@@ -2,9 +2,18 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import MensajesPerfil from './MensajesPerfil';
+import { useSession } from 'next-auth/react';
 
 export default function Mensajes() {
-  const [viewUsers, setViewUsers] = useState([]);
+  const session = useSession();
+  // const id = session.data.user.id;
+
+  const [viewUsers, setViewUsers] = useState({
+    Appraisals: [],
+    Contacts: [],
+    Orders: [],
+    Favorits: []
+  });
 
   useEffect(() => {
     fetchDataUsers();
@@ -12,14 +21,16 @@ export default function Mensajes() {
 
   const fetchDataUsers = async () => {
     try {
-      const response = await axios.get(`http://localhost:3001/users/`);
-      const data = response.data.users;
-      setViewUsers(data);
+      const response = await axios.get(
+        `http://localhost:3001/appraisals/${id}`
+      );
+      const data = response.data;
+      setViewUsers({Appraisals: [data]});
     } catch (error) {
       // Manejar el error de la solicitud
-      console.error(error);
     }
   };
+
   return (
     <div id="last-users">
       <h1 className="font-bold py-4 uppercase">Mensajes contactados</h1>
@@ -29,19 +40,22 @@ export default function Mensajes() {
           <th className="text-left py-3 px-2">Estado</th>
           <th className="text-left py-3 px-2">Fecha</th>
         </thead>
-        {viewUsers.map((user) => (
+        {viewUsers.Appraisals.map((message) => (
           <MensajesPerfil
-            key={user.id}
-            id={user.id}
-            provider={user.provider}
-            // image={user.image}
-            username={user.username}
-            email={user.email}
-            rol={user.rol}
+            key={message ? message.id : ''}
+            created={message ? message.createdAt : ""}
+            address={message ? message.address : ''}
+            callTime={message ? message.callTime : ''}
+            comment={message ? message.comment : ''}
+            email={message ? message.email : ''}
+            id={message ? message.userId : ''}
+            lastName={message ? message.lastName : ''}
+            mobile={message ? message.mobile : ''}
+            name={message ? message.name : ''}
+            phone={message ? message.phone : ''}
           />
         ))}
       </table>
     </div>
-    
   );
 }
