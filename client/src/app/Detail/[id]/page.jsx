@@ -13,21 +13,6 @@ export default async function Example({ params }) {
   const { id } = params;
   const propiedad = await fetchPropId(id);
 
-  // const handleReservarClick = async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       `http://localhost:3001/createOrder/${id}`
-  //     );
-  //     const preferenceId = response.data;
-  //     console.log(preferenceId);
-  //     const redirectUrl = `https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=${preferenceId}`;
-  //     window.open(redirectUrl, "_blank");
-  //   } catch (error) {
-  //     console.error(error);
-  //     // Manejar el error de acuerdo a tus necesidades
-  //   }
-  // };
-
   const product = {
     name: propiedad.address,
     price: propiedad.currency + " " + propiedad.price.toLocaleString(),
@@ -167,14 +152,21 @@ export default async function Example({ params }) {
                       Antigüedad
                     </dt>
                     <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                      {propiedad.age} años
+                      {propiedad.age === -1
+                        ? "Menos de un año"
+                        : `${propiedad.age} años`}
                     </dd>
                   </div>
                 </dl>
               </div>
             </div>
             <BtnReservar id={propiedad.id}></BtnReservar>
-            <BtnFav id={propiedad.id} address={propiedad.address} price={propiedad.price} photo={propiedad.photos[0]}></BtnFav>
+            <BtnFav
+              id={propiedad.id}
+              address={propiedad.address}
+              price={propiedad.price}
+              photo={propiedad.photos[0]}
+            ></BtnFav>
           </div>
 
           <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">

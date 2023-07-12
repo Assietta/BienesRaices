@@ -169,13 +169,11 @@ export default function FilterComponent() {
   }, [currentPage]);
 
   // //va a la pagina anterior a la actual
-
   const goToPreviousPage = () => {
     setCurrentPage((prevPage) => prevPage - 1);
   };
 
   // //va a la siguiente pagina
-
   const goToNextPage = () => {
     setCurrentPage((prevPage) => prevPage + 1);
   };
