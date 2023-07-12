@@ -7,6 +7,7 @@ import PropiedadesDashboard from "./propiedades/propiedadesDashboard";
 import OrdersDashboard from "./orders/ordersDashboard";
 
 import DashboardUser from "./users/DashboardUser";
+import DashboardContacts from "./contacts/DashboardContacts";
 import DashboardOrders from "./orders/DashboardOrders";
 import GeneralDashboard from "./general/GeneralDashboard";
 import axios from "axios";
@@ -16,6 +17,7 @@ export default function Example() {
   const [selectedMenu, setSelectedMenu] = useState("dashboard");
   const session = useSession();
   const [viewUsers, setViewUsers] = useState([]);
+  const [contacts, setContacts] = useState([]);
 
   useEffect(() => {
     fetchDataUsers();
@@ -64,6 +66,20 @@ export default function Example() {
     } else session.status === "unauthenticated";
     return false;
   };
+
+  const fetchDataContacts = async () => {
+    try {
+      const response = await axios.get(`http://localhost:3001/contact/`);
+      const data = response.data;
+      setContacts(data);
+    } catch (error) {
+      // Manejar el error de la solicitud
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    fetchDataContacts();
+  }, []);
 
   return (
     <div className="bg-white">
@@ -246,6 +262,40 @@ export default function Example() {
                   </div>
                 </div>
               </a>
+              <a
+                href="#"
+                className={`hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group ${
+                  selectedMenu === "dashboard" ? "bg-white/10" : ""
+                }`}
+                onClick={() => setSelectedMenu("contacts")}
+              >
+                <div className="flex flex-col space-y-2 md:flex-row md:space-y-0 space-x-2 items-center">
+                  <div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="w-6 h-6 group-hover:text-indigo-400"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
+                      />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="font-bold text-base lg:text-lg text-slate-200 leading-4 group-hover:text-indigo-400">
+                      Mensajes
+                    </p>
+                    <p className="text-slate-400 text-sm hidden md:block">
+                      Mensajes recibidos
+                    </p>
+                  </div>
+                </div>
+              </a>
             </div>
             <p className="text-sm text-center text-gray-600">
               v2.0.0.3 | &copy; 2023
@@ -369,7 +419,7 @@ export default function Example() {
                         Mensajes
                       </p>
                       <p className="text-white font-bold text-2xl inline-flex items-center space-x-2">
-                        <span>0</span>
+                        <span>{contacts.length}</span>
                         <span>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -424,6 +474,35 @@ export default function Example() {
                           username={user.username}
                           email={user.email}
                           rol={user.rol}
+                        />
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+              {selectedMenu === "contacts" && (
+                <div id="last-users">
+                  <h1 className="font-bold py-4 uppercase">Mensajes</h1>
+                  <table className="w-full whitespace-nowrap">
+                    <thead className="bg-black/60">
+                      <tr>
+                        <th className="text-left py-3 px-2 rounded-l-lg">
+                          Email
+                        </th>
+                        <th className="text-left py-3 px-2">Nombre</th>
+                        <th className="text-left py-3 px-2">Apellido</th>
+                        <th className="text-left py-3 px-2 rounded-r-lg">
+                          Mensaje
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {contacts.map((contact) => (
+                        <DashboardContacts
+                          comment={contact.comment}
+                          email={contact.email}
+                          name={contact.name}
+                          lastName={contact.lastName}
                         />
                       ))}
                     </tbody>

@@ -7,7 +7,7 @@ const DashboardUser = (props) => {
         <div className="inline-flex space-x-3 items-center">
           <span>
             <img className="rounded-full w-8 h-8" src={image} alt="img user">
-              {/* {image} */}
+              {image}
             </img>
           </span>
           <span>{username}</span>

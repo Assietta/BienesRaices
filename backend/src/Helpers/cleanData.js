@@ -1,4 +1,4 @@
-const { v4: uuidv4 } = require('uuid');
+const { v4: uuidv4 } = require("uuid");
 
 const cleanData = (data) => {
   const objects = data.objects;
@@ -15,7 +15,7 @@ const cleanData = (data) => {
     const expenses = object.expenses || 0;
     const floors_amount = object.floors_amount || 0;
     const has_temporary_rent = object.has_temporary_rent;
-    const location = object.location.name || '';
+    const location = object.location.short_location.split(" | ")[0] || "";
     const operations = object.operations || {};
     const orientation = object.orientation || "";
     const parking_lot_amount = object.parking_lot_amount || 0;
@@ -30,33 +30,33 @@ const cleanData = (data) => {
     const surface = object.surface || "";
     const tags = object.tags || [{}];
     const toilet_amount = object.toilet_amount || 0;
-    const total_surface = object.total_surface || '';
-    const type = object.type?.name || '';
-    const unroofed_surface = object.unroofed_surface || '';
-    const videos = object.videos?.map(video => video.url) || [''];
-    const geo_lat = object.geo_lat || '';
-    const geo_long = object.geo_long || '';
-    
-    const cleanedOperations = object.operations?.map(operation => {
-      const price = operation.prices?.[0]?.price || 0;
-      const currency = operation.prices?.[0]?.currency || '';
-      const operation_type = operation.operation_type || '';
-      const period = operation.prices?.[0]?.period.toString() || ''; 
+    const total_surface = object.total_surface || "";
+    const type = object.type?.name || "";
+    const unroofed_surface = object.unroofed_surface || "";
+    const videos = object.videos?.map((video) => video.url) || [""];
+    const geo_lat = object.geo_lat || "";
+    const geo_long = object.geo_long || "";
 
-      return {
-        price,
-        currency,
-        operation_type,
-        period
-      };
-    }) || [];
+    const cleanedOperations =
+      object.operations?.map((operation) => {
+        const price = operation.prices?.[0]?.price || 0;
+        const currency = operation.prices?.[0]?.currency || "";
+        const operation_type = operation.operation_type || "";
+        const period = operation.prices?.[0]?.period.toString() || "";
 
+        return {
+          price,
+          currency,
+          operation_type,
+          period,
+        };
+      }) || [];
 
-    const cleanedTags = tags.map(tag => {
+    const cleanedTags = tags.map((tag) => {
       return {
         id: uuidv4(), // Genera un UUID único para cada tag
         name: tag.name,
-        type: tag.type
+        type: tag.type,
       };
     });
 
@@ -91,7 +91,6 @@ const cleanData = (data) => {
       geo_long,
       ...cleanedOperations[0],
     };
-
 
     cleanedData.push(cleanedObject);
   }
