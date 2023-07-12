@@ -4,7 +4,7 @@
   justify-content: center;
   background-color: #f8f8f8;
   padding-top: 30px;
-  height: 90vh;
+  height: auto;
 }
 @media(max-width: 900px){
   .container{

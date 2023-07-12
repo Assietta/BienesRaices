@@ -1,57 +1,21 @@
-
 // import { useState, useEffect } from "react";
-import axios from "axios";
-import styles from "./page.module.css";
+import Gallery from "./gallery";
+import Map from "./map";
+import BtnReservar from "./btnReservar";
+import BtnFav from "./btnFav";
 
-import Gallery from "./gallery"
-import { idText } from "typescript";
-import Map from "./map"
-
-
-
-const fetchPropId = async  (id) =>{
-  const res = await fetch(`http://localhost:3001/realState/${id}`)
-         return  res.json()
-         
-        }
+const fetchPropId = async (id) => {
+  const res = await fetch(`http://localhost:3001/realState/${id}`);
+  return res.json();
+};
 
 export default async function Example({ params }) {
   const { id } = params;
- const propiedad = await fetchPropId(id)
- 
-
-
-
-
-
-
-  
-  console.log(propiedad);
- 
-
-
-
-
-
-
-  const handleReservarClick = async () => {
-    try {
-      const response = await axios.get(
-        `http://localhost:3001/createOrder/${id}`
-      );
-      const preferenceId = response.data;
-      console.log(preferenceId);
-      const redirectUrl = `https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=${preferenceId}`;
-      window.open(redirectUrl, "_blank");
-    } catch (error) {
-      console.error(error);
-      // Manejar el error de acuerdo a tus necesidades
-    }
-  };
+  const propiedad = await fetchPropId(id);
 
   const product = {
     name: propiedad.address,
-    price: propiedad.currency + "$ " + propiedad.price.toLocaleString(),
+    price: propiedad.currency + " " + propiedad.price.toLocaleString(),
     href: "#",
     breadcrumbs: [
       { id: 1, name: propiedad.operation_type },
@@ -69,25 +33,19 @@ export default async function Example({ params }) {
     propiedad.photos[5],
   ];
 
+  const center = {
+    lat: parseFloat(propiedad?.geo_lat),
+    lng: parseFloat(propiedad?.geo_long),
+  };
 
-  
-const center = {
-  lat: parseFloat(propiedad?.geo_lat),
-  lng: parseFloat(propiedad?.geo_long),
-};
-
-
-
-   const mapContainerStyle = {
+  const mapContainerStyle = {
     marginTop: "50px",
     width: "100%",
     height: "400px",
   };
 
-
-
   return (
-    <div className="bg-white">
+    <div className="bg-white mt-16">
       <div className="pt-6">
         <nav aria-label="Breadcrumb">
           <ol
@@ -129,11 +87,7 @@ const center = {
         </nav>
 
         {/* Image gallery */}
-        <Gallery images= {images}/>
-        
-
-
-
+        <Gallery images={images} />
 
         {/* Product info */}
         <div className="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
@@ -198,20 +152,21 @@ const center = {
                       Antigüedad
                     </dt>
                     <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                      {propiedad.age} años
+                      {propiedad.age === -1
+                        ? "Menos de un año"
+                        : `${propiedad.age} años`}
                     </dd>
                   </div>
                 </dl>
               </div>
             </div>
-
-            {/* <button
-              type="submit"
-              className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-              onClick={handleReservarClick}
-            >
-              Reservar
-            </button> */}
+            <BtnReservar id={propiedad.id}></BtnReservar>
+            <BtnFav
+              id={propiedad.id}
+              address={propiedad.address}
+              price={propiedad.price}
+              photo={propiedad.photos[0]}
+            ></BtnFav>
           </div>
 
           <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
@@ -225,17 +180,7 @@ const center = {
                 </p>
               </div>
             </div>
-            <Map mapContainerStyle = {mapContainerStyle} center = {center}/>
-            {/* <LoadScript googleMapsApiKey="AIzaSyDSHb1gBxjiShwN6LVC_bBnxt9E60TwvmI">
-              <GoogleMap
-                mapContainerStyle={mapContainerStyle}
-                center={center}
-                zoom={14}
-                onLoad={handleMapLoad}
-              >
-                <Marker position={markerPosition} />
-              </GoogleMap>
-            </LoadScript> */}
+            <Map mapContainerStyle={mapContainerStyle} center={center} />
           </div>
         </div>
       </div>
