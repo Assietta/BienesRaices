@@ -22,7 +22,7 @@ export default function Mensajes() {
   const fetchDataUsers = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/appraisals/${id}`
+        `https://bienesraices-production-9eb3.up.railway.app/appraisals/${id}`
       );
       const data = response.data;
       setViewUsers({Appraisals: [data]});

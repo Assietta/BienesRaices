@@ -69,7 +69,7 @@ export default function Example() {
 
   const fetchDataContacts = async () => {
     try {
-      const response = await axios.get(`http://localhost:3001/contact/`);
+      const response = await axios.get(`https://bienesraices-production-9eb3.up.railway.app/contact/`);
       const data = response.data;
       setContacts(data);
     } catch (error) {

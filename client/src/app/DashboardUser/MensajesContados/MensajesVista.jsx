@@ -18,7 +18,7 @@ export default function MensajesVista() {
   const fetchAppraisals = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/appraisals/${id}`
+        `https://bienesraices-production-9eb3.up.railway.app/appraisals/${id}`
       );
       const data = response.data;
       setMessages({ Appraisals: [data] });
@@ -27,23 +27,11 @@ export default function MensajesVista() {
     }
   };
 
-    const fetchOrders = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:3001/orders/${id}`
-        );
-        const data = response.data;
-        console.log(response);
-        setMessages({ Orders: [data] });
-      } catch (error) {
-        // Manejar el error de la solicitud
-      }
-  };
   
       const fetchOrders = async () => {
         try {
           const response = await axios.get(
-            `http://localhost:3001/orders/${id}`
+            `https://bienesraices-production-9eb3.up.railway.app/orders/${id}`
           );
           const data = response.data;
           console.log(response);

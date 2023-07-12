@@ -56,7 +56,7 @@ export default function FormInfo () {
     if (Object.keys(validationErrors).length === 0) {
       console.log(formInfoData);
       console.log(id);
-      await axios.put(`http://localhost:3001/users/${id}`, formInfoData);
+      await axios.put(`https://bienesraices-production-9eb3.up.railway.app/users/${id}`, formInfoData);
       alert("Informacion Actualizada");
       console.log("Informacion actualizada correctamente");
       clearForm();
