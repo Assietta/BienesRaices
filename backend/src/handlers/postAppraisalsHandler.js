@@ -1,5 +1,6 @@
 const { mailHandler } = require('./postMailHandler');
 const postAppraisalsController = require('../controllers/postAppraisalsController');
+const appraisalsTemplate = require('../mailsTemplate/postAppraisals');
 
 const postAppraisalsHandler = async (req, res) => {
   try {
@@ -19,7 +20,7 @@ const postAppraisalsHandler = async (req, res) => {
     );
     const asunto = 'Consulta con Henry Real State';
     const destinatario = email;
-    const cuerpo = `Buenas ${name} ${lastName}. Gracias por comunicarte con nosotros. Estamos analizando tu consulta por tasacion y te contactaremos a la brevedad.`
+    const cuerpo = appraisalsTemplate.replace('%NOMBRE%', name).replace('%APELLIDO%', lastname);
     await mailHandler(destinatario, asunto, cuerpo);
 
     return res.status(200).json(AppraisalPosted);

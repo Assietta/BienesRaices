@@ -1,5 +1,6 @@
 const { mailHandler } = require('./postMailHandler');
 const postContactController = require('../controllers/postContactController');
+const contactTemplate = require('../mailsTemplate/postContact');
 
 const postContactHandler = async(req, res) => {
     try {
@@ -8,7 +9,7 @@ const postContactHandler = async(req, res) => {
         const ContactPosted = await postContactController(name, lastName, email, phone, mobile, comment);
         const asunto = 'Consulta con Henry Real State';
         const destinatario = email;
-        const cuerpo = `Gracias por comunicarte con nosotros. Estamos analizando tu consulta y te contactaremos a la brevedad.`
+        const cuerpo = contactTemplate.replace('%NOMBRE%', name);
         await mailHandler(destinatario, asunto, cuerpo);
         return res.status(200).json(ContactPosted)
     } catch (error) {

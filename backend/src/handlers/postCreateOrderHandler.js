@@ -1,7 +1,7 @@
 const { RealState } = require("../db");
 const mercadopago = require("mercadopago");
 require("dotenv").config();
-
+const orderTemplate = require('../mailsTemplate/postOrder');
 const { TOKEN_MP, HOST } = process.env;
 
 const createOrderHandler = async (req, res) => {
@@ -115,7 +115,7 @@ const webhookHandler = async (req, res) => {
       String(data?.response.status) === "approved"
         ? (asunto = "Su transacción ha sido exitosa")
         : (asunto = "Su transacción ha sido rechazada");
-      const cuerpo = `Cualquier consulta comunicate con nosotros`;
+      const cuerpo = orderTemplate.replace('%STATUS%', data?.response.status);
 
       //NOTIFICACION POR MAIL
       await mailHandler(String(user?.dataValues.email), asunto, cuerpo);
