@@ -11,12 +11,13 @@ const getAllApi = async () => {
   const { data } = await axios(URL);
   apiInfo = cleanData(data);
 
+
   for (const property of apiInfo) {
     const realState = await RealState.findOrCreate({ where: property });
     const tags = property.tags || [];
 
     const promises = tags.map(async tag => {
-      await Tag.findOrCreate({ where: { id: tag.id, name: tag.name, type: tag.type } });
+      await Tag.findOrCreate({ where: {  name: tag.name, type: tag.type } });
     });
 
     await Promise.all(promises);

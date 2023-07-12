@@ -1,8 +1,8 @@
 const getAllContactController = require('../controllers/getAllContactsController')
 
-const getAllContactHandler = (req, res) => {
+const getAllContactHandler = async(req, res) => {
     try {
-        const contacts = getAllContactController()
+        const contacts = await getAllContactController()
 
         return res.status(200).json(contacts)
     } catch (error) {
