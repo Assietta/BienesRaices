@@ -71,6 +71,7 @@ export default function Example() {
                   )}
                 </Disclosure.Button>
               </div>
+              <Link key="/" href="/">
               <div className="flex items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
                   {/* <Image
@@ -89,6 +90,7 @@ export default function Example() {
                   />
                 </div>
               </div>
+              </Link>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="hidden sm:ml-6 sm:block justify-center align-center">
                   <div className="flex space-x-4">
@@ -109,7 +111,7 @@ export default function Example() {
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
                   <div>
-                    <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                    <Menu.Button className="flex text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 z-50">
                       <span className="sr-only">Open user menu</span>
 
                       <div className="hidden sm:ml-6 sm:block">
@@ -123,7 +125,7 @@ export default function Example() {
                               Iniciar sesión
                             </Link>
                           ) : (
-                            <>
+                            <div  className="flex rounded-full bg-gray-800">
                               <button
                                 onClick={() => setShowProfile(!showProfile)}
                               >
@@ -144,7 +146,7 @@ export default function Example() {
                                   height={100}
                                 />
                               )}
-                            </>
+                            </div>
                           )}
                         </div>
                       </div>
