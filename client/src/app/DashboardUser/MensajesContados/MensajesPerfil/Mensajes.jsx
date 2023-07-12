@@ -26,7 +26,7 @@ export default function Mensajes() {
 
   const fetchOrders = async (id) => {
     try {
-      const response = await axios.get(`http://localhost:3001/orders/${id}`);
+      const response = await axios.get(`https://bienesraices-production-9eb3.up.railway.app/orders/${id}`);
       const data = response.data;
       setOrders(data);
     } catch (error) {
@@ -36,7 +36,7 @@ export default function Mensajes() {
 
   const fetchContacts = async (id) => {
     try {
-      const response = await axios.get(`http://localhost:3001/contact/${id}`);
+      const response = await axios.get(`https://bienesraices-production-9eb3.up.railway.app/contact/${id}`);
       const data = response.data;
       setContacts(data);
     } catch (error) {
