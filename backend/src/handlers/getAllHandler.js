@@ -1,7 +1,7 @@
 const { getRealState } = require('../controllers/getAllController.js');
 
 const realStateHandler = async (req, res) => {
-  const { page = 1, limit = 3 } = req.query;
+  const { page = 1, limit = 50 } = req.query;
 
   try {
     const apiResponse = await getRealState(page, limit);
