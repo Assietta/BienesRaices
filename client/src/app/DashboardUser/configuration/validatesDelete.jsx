@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs'
 export default async function validateDelete  (formDeleteData,userPassword ) {
     let errors = {};
-    console.log(formDeleteData,"soy el delete del validate");
+   
    
     const passwordMatch = await bcrypt.compare(
     formDeleteData.deleteAccountPassword,

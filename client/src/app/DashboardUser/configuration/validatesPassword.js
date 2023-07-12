@@ -1,15 +1,13 @@
 import bcrypt from 'bcryptjs'
 export default async function validatePassword (formPasswordData, userPassword )  {
     let errors = {};
-    console.log(userPassword,"soy el form del validate");
+
    
     const passwordMatch = await bcrypt.compare(
       formPasswordData.password,
       userPassword
       )
 
-
-console.log(passwordMatch,"soy el resultado del passwordMatch");
 
      if (!formPasswordData.password) {
       errors.password = 'Contraseña vacía';
