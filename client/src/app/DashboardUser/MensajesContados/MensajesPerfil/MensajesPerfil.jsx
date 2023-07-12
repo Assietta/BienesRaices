@@ -23,15 +23,12 @@ const MensajesPerfil = (props) => {
           </span>
         </div>
       </td>
-      <td className="py-3 px-2">{created}</td>
-      <td className="py-3 px-2">{address}</td>
-      <td className="py-3 px-2">{callTime}</td>
+      <td className="py-3 px-2">{created.split("T")[0]}</td>
       <td className="py-3 px-2">{comment}</td>
       <td className="py-3 px-2">{email}</td>
-      <td className="py-3 px-2">{mobile}</td>
-      <td className="py-3 px-2">{phone}</td>
+
     </tr>
   );
-};
+}; 
 
 export default MensajesPerfil;

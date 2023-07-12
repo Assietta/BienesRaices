@@ -214,8 +214,7 @@ export default function Example() {
             {showDashboard.Perfil && (
               <>
                 <PropiedadesDashboard />
-                <Mensajes />
-                <FavConteiner/>
+                <Mensajes />      
               </>
             )}
             {showDashboard.Mensaje && <MensajesVista />}
