@@ -22,9 +22,11 @@ const { getAppraisalsHandler } = require('../handlers/getAppraisalsHandler');
 const { getOrderByIdHandler } = require('../handlers/getOrderByIdHandler');
 const { getUserByIdHandler } = require('../handlers/getUserByIdHandler');
 const { getContactByIdHandler } = require('../handlers/getContactByIdHandler');
-const { getAllContactHandler } = require('../handlers/getAllContactHandler')
-const { getAllAppraisalsHandler } = require('../handlers/getAllAppraisalsHandler')
-const { getAllTagsHandler } = require('../handlers/getAllTagsHandler')
+const { getAllContactHandler } = require('../handlers/getAllContactHandler');
+const { getAllAppraisalsHandler } = require('../handlers/getAllAppraisalsHandler');
+const { getAllTagsHandler } = require('../handlers/getAllTagsHandler');
+const { getTestimonialsHandler } = require('../handlers/getTestimonialsHandler');
+const { postTestimonialHandler } = require('../handlers/postTestimonialHandler');
 
 router.get('/realState', realStateHandler);
 router.get('/realState/:id', getPropertyIdHandler);
@@ -40,12 +42,13 @@ router.get('/download/realState', getExcelRealStateHandler);
 router.get('/appraisals/:userId', getAppraisalsHandler);
 router.get('/orders/:userId', getOrderByIdHandler);
 router.get('/contact/:userId', getContactByIdHandler);
-router.get('/contact', getAllContactHandler)
-router.get('/tags', getAllTagsHandler)
-
+router.get('/contact', getAllContactHandler);
+router.get('/tags', getAllTagsHandler);
+router.get('/testimonials', getTestimonialsHandler);
 router.get('/appraisals', getAllAppraisalsHandler)
 
 router.post('/realState', postRealStateHandler);
+router.post('/testimonial', postTestimonialHandler);
 router.post('/users', postUserHandler);
 router.post('/contact', postContactHandler);
 router.post('/appraisals', postAppraisalsHandler);
