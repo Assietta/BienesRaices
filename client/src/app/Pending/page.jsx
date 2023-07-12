@@ -1,6 +1,4 @@
-import { useState } from "react";
-import { Dialog } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+
 
 export default function Pending() {
   return (
@@ -21,20 +19,20 @@ export default function Pending() {
         <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
           <div className="text-center">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-              Your transaction is pending, please contact us
+              Tu transacción está pendiente, por favor contactate con nosotros
             </h1>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <a
                 href="http://localhost:3000/Contact"
                 className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Contact us
+                Contacto
               </a>
               <a
                 href="https://www.mercadopago.com.ar/home"
                 className="text-sm font-semibold leading-6 text-gray-900"
               >
-                Go to MercadoPago<span aria-hidden="true">→</span>
+                Ir a MercadoPago<span aria-hidden="true">→</span>
               </a>
             </div>
           </div>
