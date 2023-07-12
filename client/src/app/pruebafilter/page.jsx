@@ -28,30 +28,27 @@ export default function FilterComponent() {
       ],
     },
   ];
-  const filterPrecio = [
-    {
-      id: "Precio",
-      name: "Precio",
-      options: [
-        { value: "ARS", label: "ARS", checked: false },
-        { value: "UDS", label: "USD", checked: false },
-      ],
-    },
-  ];
+  // const filterPrecio = [
+  //   {
+  //     id: "Precio",
+  //     name: "Precio",
+  //     options: [
+  //       { value: "ARS", label: "ARS", checked: false },
+  //       { value: "UDS", label: "USD", checked: false },
+  //     ],
+  //   },
+  // ];
   const filterLocation = [
     {
       id: "ubicacion",
       name: "Ubicacion",
       options: [
-        { value: "CABA", label: "CABA", checked: false },
+        { value: "Capital Federal", label: "Capital Federal", checked: false },
         {
           value: "G.B.A. Zona Norte",
           label: "G.B.A. Zona Norte",
           checked: false,
         },
-        { value: "san idisro", label: "San Isidro", checked: false },
-        { value: "olivos", label: "Olivos", checked: false },
-        { value: "martinez", label: "Martinez", checked: false },
       ],
     },
   ];
@@ -68,20 +65,20 @@ export default function FilterComponent() {
       ],
     },
   ];
-  const filterAntiguedad = [
-    {
-      id: "Antiguedad",
-      name: "Antigüedad",
-      options: [
-        { value: "-1", label: "A estrenar", checked: false },
-        { value: "1", label: "1", checked: false },
-        { value: "2", label: "2", checked: false },
-        { value: "3", label: "3", checked: false },
-        { value: "4", label: "4", checked: false },
-        { value: "5+", label: "5+", checked: true },
-      ],
-    },
-  ];
+  // const filterAntiguedad = [
+  //   {
+  //     id: "Antiguedad",
+  //     name: "Antigüedad",
+  //     options: [
+  //       { value: "-1", label: "A estrenar", checked: false },
+  //       { value: "1", label: "1", checked: false },
+  //       { value: "2", label: "2", checked: false },
+  //       { value: "3", label: "3", checked: false },
+  //       { value: "4", label: "4", checked: false },
+  //       { value: "5+", label: "5+", checked: true },
+  //     ],
+  //   },
+  // ];
 
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
@@ -452,7 +449,7 @@ export default function FilterComponent() {
                     )}
                   </Disclosure>
                 ))}
-                {filterPrecio.map((section) => (
+                {/* {filterPrecio.map((section) => (
                   <Disclosure
                     as="div"
                     key={section.id}
@@ -510,7 +507,7 @@ export default function FilterComponent() {
                       </>
                     )}
                   </Disclosure>
-                ))}
+                ))} */}
                 {filterLocation.map((section) => (
                   <Disclosure
                     as="div"
@@ -629,7 +626,7 @@ export default function FilterComponent() {
                     )}
                   </Disclosure>
                 ))}
-                {filterAntiguedad.map((section) => (
+                {/* {filterAntiguedad.map((section) => (
                   <Disclosure
                     as="div"
                     key={section.id}
@@ -687,7 +684,7 @@ export default function FilterComponent() {
                       </>
                     )}
                   </Disclosure>
-                ))}
+                ))} */}
               </form>
 
               {/* Product grid */}
