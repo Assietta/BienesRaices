@@ -24,7 +24,7 @@ const createOrderHandler = async (req, res) => {
     const result = await mercadopago.preferences.create({
       items: [
         {
-          title: address,
+          title: `${address} 1% del valor total`,
           quantity: 1,
           currency_id: property?.currency,
           unit_price: price,
