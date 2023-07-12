@@ -2,9 +2,9 @@ const { getContactByIdController } = require('../controllers/getContactByIdContr
 
 const getContactByIdHandler = async (req, res)=> {
     try {
-        const { email } = req.params
+        const { userId } = req.params
 
-        const contact = await getContactByIdController(email)
+        const contact = await getContactByIdController(userId)
 
         return res.status(200).json(contact)
     } catch (error) {
