@@ -153,7 +153,7 @@ export default function FilterComponent() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/realstate?page=${currentPage}&limit=4`
+        `https://bienesraices-production-9eb3.up.railway.app/realstate?page=${currentPage}&limit=4`
       );
       const data = response.data;
       setViewProps(data);
