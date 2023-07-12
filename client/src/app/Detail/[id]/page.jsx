@@ -45,7 +45,7 @@ export default async function Example({ params }) {
   };
 
   return (
-    <div className="bg-white">
+    <div className="bg-white mt-16">
       <div className="pt-6">
         <nav aria-label="Breadcrumb">
           <ol

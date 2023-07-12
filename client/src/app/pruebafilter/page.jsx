@@ -44,7 +44,11 @@ export default function FilterComponent() {
       name: "Ubicacion",
       options: [
         { value: "CABA", label: "CABA", checked: false },
-        { value: "vicente lopez", label: "Vicente López", checked: false },
+        {
+          value: "G.B.A. Zona Norte",
+          label: "G.B.A. Zona Norte",
+          checked: false,
+        },
         { value: "san idisro", label: "San Isidro", checked: false },
         { value: "olivos", label: "Olivos", checked: false },
         { value: "martinez", label: "Martinez", checked: false },
