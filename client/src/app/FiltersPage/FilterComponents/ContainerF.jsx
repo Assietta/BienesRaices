@@ -96,6 +96,49 @@ export default function ContainerF() {
 
   //fetching post para enviar los filtros seleccionados, actualizando el setPropiedades con las propiedades filtradas
 
+<<<<<<< HEAD
+    const handleChange = (event) => {
+      const { name, value } = event.target;
+      setFilters((prevFilters) => ({
+        ...prevFilters,
+        [name]: value,
+      }));
+    };
+    
+    
+    //fetching post para enviar los filtros seleccionados, actualizando el setPropiedades con las propiedades filtradas
+  
+    const handleClick = () => {
+      axios
+        .post("http://localhost:3001/filter", filters)
+        .then((res) => {
+          if (res.data) {
+            setPropiedad(res.data);
+          } else {
+            window.alert("No hay propiedades con ese ID");
+          }
+        })
+        .catch((error) => {
+          console.error("Error al realizar la solicitud:", error);
+        });
+    };
+    
+  
+  
+    
+
+    
+    // fetching de data para traer las propiedades con el paginado, guardandolas en 
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3001/realstate?page=${currentPage}&limit=9`);
+        const data = response.data;
+        console.log(data);
+        setViewProps(data);
+      } catch (error) {
+          // Manejar el error de la solicitud
+          console.error(error);
+=======
   const handleClick = () => {
     axios
       .post("https://bienesraices-production-9eb3.up.railway.app/filter", filters)
@@ -104,6 +147,7 @@ export default function ContainerF() {
           setPropiedad(res.data);
         } else {
           window.alert("No hay propiedades con ese ID");
+>>>>>>> feat/filtersDesign
         }
       })
       .catch((error) => {
@@ -111,6 +155,19 @@ export default function ContainerF() {
       });
   };
 
+<<<<<<< HEAD
+      useEffect(() => {
+        fetchData();
+      }, [currentPage]);
+      
+      // va a la pagina anterior a la actual
+      
+      const goToPreviousPage = () => {
+          setCurrentPage((prevPage) => prevPage - 1);
+        };
+      
+      //  va a la siguiente pagina
+=======
   //fetching de data para traer las propiedades con el paginado, guardandolas en setViewProps
   const fetchData = async () => {
     try {
@@ -125,6 +182,7 @@ export default function ContainerF() {
       console.error(error);
     }
   };
+>>>>>>> feat/filtersDesign
 
   // funciones para mover el paginado.
 

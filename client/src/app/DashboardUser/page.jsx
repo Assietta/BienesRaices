@@ -6,8 +6,17 @@ import PropiedadesDashboard from './propiedades/propiedadesDashboard';
 import Mensajes from './MensajesContados/MensajesPerfil/Mensajes';
 import MensajesVista from './MensajesContados/MensajesVista';
 import Configuration from "./configuration/configuration";
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import FavConteiner from "./Favorites/FavConteiner"
 
 export default function Example() {
+
+  const router = useRouter();
+  const session = useSession();
+  
+  if (session.status === 'unauthenticated') router.push('/');
+
   const [showDashboard, setShowDashboard] = useState({
     favorito: false,
     Perfil: true,
@@ -38,17 +47,23 @@ export default function Example() {
               className="flex flex-col space-y-2 md:space-y-0 md:flex-row mb-5 items-center md:space-x-2 hover:bg-white/10 group transition duration-150 ease-linear rounded-lg group w-full py-3 px-2"
             >
               <div>
-                <Image
-                  className="rounded-full w-10 h-10 relative object-cover"
-                  src=""
-                  alt=""
-                  height={100}
-                  width={100}
-                />
+                {session.status === 'authenticated' ? (
+                  <Image
+                    className="rounded-full w-10 h-10 relative object-cover"
+                    src={session.data.user.image}
+                    alt=""
+                    height={100}
+                    width={100}
+                  />
+                ) : (
+                  ''
+                )}
               </div>
               <div>
                 <p className="font-medium group-hover:text-indigo-400 leading-4">
-                  NicoArgiz
+                  {session.status === 'authenticated'
+                    ?  session.data.user.username || session.data.user.name 
+                    : ''}
                 </p>
                 <span className="text-xs text-slate-400">MR Inmobiliaria</span>
               </div>
@@ -56,7 +71,7 @@ export default function Example() {
             <hr className="my-2 border-slate-700" />
             <div id="menu" className="flex flex-col space-y-2 my-5">
               <a
-                href="#"
+                href="#1"
                 className="hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group"
                 onClick={() => showSection('Perfil')}
               >
@@ -88,7 +103,7 @@ export default function Example() {
                 </div>
               </a>
               <a
-                href="#"
+                href="#2"
                 className="hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group"
                 onClick={() => showSection('Mensaje')}
               >
@@ -123,7 +138,7 @@ export default function Example() {
                 </div>
               </a>
               <a
-                href="#"
+                href="#3"
                 className="hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group"
               >
                 <div className="flex flex-col space-y-2 md:flex-row md:space-y-0 space-x-2 items-center">
@@ -159,7 +174,7 @@ export default function Example() {
                 </div>
               </a>
               <a
-                href="#"
+                href="#4"
                 className="hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group"
                 onClick={() => showSection('Configuration')}
               >
@@ -200,10 +215,12 @@ export default function Example() {
               <>
                 <PropiedadesDashboard />
                 <Mensajes />
+                <FavConteiner/>
               </>
             )}
             {showDashboard.Mensaje && <MensajesVista />}
-            {showDashboard.Configuration && <Configuration/>}
+            {showDashboard.Configuration && <Configuration />}
+            {showDashboard.FavConteiner && <FavConteiner/>}
           </div>
         </div>
       </div>

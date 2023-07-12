@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { signOut } from 'next-auth/react';
+import Link from 'next/link';
 
 export default function ProfileUser() {
   return (
@@ -8,8 +9,8 @@ export default function ProfileUser() {
         <div class="px-3 py-4 overflow-y-auto rounded bg-gray-50 dark:bg-gray-800">
           <ul class="space-y-2">
             <li>
-              <a
-                href="#"
+              <Link
+                href="/DashboardUser"
                 class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
               >
                 <svg
@@ -21,8 +22,8 @@ export default function ProfileUser() {
                   <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
                   <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
                 </svg>
-                <span class="ml-3">Dashboard</span>
-              </a>
+                <span class="ml-3">Mi perfil</span>
+              </Link>
             </li>
             <li>
               <a
@@ -30,6 +31,7 @@ export default function ProfileUser() {
                 target="_blank"
                 class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
               >
+                z
                 <svg
                   class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                   fill="currentColor"
