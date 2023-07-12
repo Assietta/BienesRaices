@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export const validateForm = async(formData) => {
   let errors = {};
-  const { data } = await axios('http://localhost:3001/users')
+  const { data } = await axios('https://bienesraices-production-9eb3.up.railway.app/users')
 
 console.log(data);
   if (!formData.username) {
