@@ -12,7 +12,7 @@ const DashboardUser = (props) => {
       let response;
 
       if (isUserDisabled) {
-        response = await axios.put(`http://localhost:3001/users/${id}`, {
+        response = await axios.put(`https://bienesraices-production-9eb3.up.railway.app/users/${id}`, {
           disabled: false,
         });
         console.log(response.status);
@@ -22,7 +22,7 @@ const DashboardUser = (props) => {
           alert("No se pudo habilitar al usuario");
         }
       } else {
-        response = await axios.put(`http://localhost:3001/users/${id}`, {
+        response = await axios.put(`https://bienesraices-production-9eb3.up.railway.app/users/${id}`, {
           disabled: true,
         });
         console.log(response.status);

@@ -5,17 +5,17 @@ import Link from "next/link";
 
 export default function GeneralDashboard() {
   const downloadUsers = async () => {
-    const res = await axios.get("http://localhost:3001/download/users");
+    const res = await axios.get("https://bienesraices-production-9eb3.up.railway.app/download/users");
     FileDownload(res.data, "TableUsers.xlsx");
   };
 
   const downloadOrders = async () => {
-    const res = await axios.get("http://localhost:3001/download/orders");
+    const res = await axios.get("https://bienesraices-production-9eb3.up.railway.app/download/orders");
     FileDownload(res.data, "TableOrders.xlsx");
   };
 
   const downloadRealStates = async () => {
-    const res = await axios.get("http://localhost:3001/download/realstate");
+    const res = await axios.get("https://bienesraices-production-9eb3.up.railway.app/download/realstate");
     FileDownload(res.data, "TableRealStates.xlsx");
   };
 

@@ -12,7 +12,7 @@ export default function UsersDashboard() {
 
   const fetchDataUsers = async () => {
     try {
-      const response = await axios.get(`http://localhost:3001/users/`);
+      const response = await axios.get(`https://bienesraices-production-9eb3.up.railway.app/users/`);
       const data = response.data.users;
       setViewUsers(data);
     } catch (error) {

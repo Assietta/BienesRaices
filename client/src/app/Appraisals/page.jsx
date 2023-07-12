@@ -51,7 +51,7 @@ export default function Example() {
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      await axios.post('http://localhost:3001/appraisals', {...formData, userId: session?.data.user.id});
+      await axios.post('https://bienesraices-production-9eb3.up.railway.app/appraisals', {...formData, userId: session?.data.user.id});
       alert("Tasacion enviada")
       console.log('Appraisals successfully send');
        clearForm();

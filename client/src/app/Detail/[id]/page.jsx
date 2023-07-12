@@ -5,7 +5,7 @@ import BtnReservar from "./btnReservar";
 import BtnFav from "./btnFav";
 
 const fetchPropId = async (id) => {
-  const res = await fetch(`http://localhost:3001/realState/${id}`);
+  const res = await fetch(`https://bienesraices-production-9eb3.up.railway.app/realState/${id}`);
   return res.json();
 };
 

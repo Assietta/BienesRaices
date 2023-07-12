@@ -13,7 +13,7 @@ export default function PropiedadesDashboard() {
   const fetchDataProps = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/realstate?limit=6`
+        `https://bienesraices-production-9eb3.up.railway.app/realstate?limit=6`
       );
       const data = response.data;
       setViewProps(data);

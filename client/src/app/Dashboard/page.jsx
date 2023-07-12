@@ -21,7 +21,7 @@ export default function Example() {
 
   const fetchDataUsers = async () => {
     try {
-      const response = await axios.get(`http://localhost:3001/users/`);
+      const response = await axios.get(`https://bienesraices-production-9eb3.up.railway.app/users/`);
       const data = response.data.users;
       setViewUsers(data);
     } catch (error) {
@@ -38,7 +38,7 @@ export default function Example() {
 
   const fetchDataOrders = async () => {
     try {
-      const response = await axios.get(`http://localhost:3001/orders/`);
+      const response = await axios.get(`https://bienesraices-production-9eb3.up.railway.app/orders/`);
       const data = response.data.orders;
       setViewOrders(data);
     } catch (error) {
@@ -69,7 +69,7 @@ export default function Example() {
 
   const fetchDataContacts = async () => {
     try {
-      const response = await axios.get(`http://localhost:3001/contact/`);
+      const response = await axios.get(`https://bienesraices-production-9eb3.up.railway.app/contact/`);
       const data = response.data;
       setContacts(data);
     } catch (error) {

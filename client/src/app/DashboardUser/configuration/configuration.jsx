@@ -23,7 +23,7 @@ export default function FormInfo () {
   const fetchPassword = async (id) => {
 
     try {
-      const response = await axios.get(`http://localhost:3001/users/${id}`);
+      const response = await axios.get(`https://bienesraices-production-9eb3.up.railway.app/users/${id}`);
 
       const password = response.data.password;
 
@@ -155,7 +155,7 @@ export default function FormInfo () {
 
     if (Object.keys(validationErrors).length === 0) {
 
-      await axios.put(`http://localhost:3001/users/${id}`, formInfoData);
+      await axios.put(`https://bienesraices-production-9eb3.up.railway.app/users/${id}`, formInfoData);
       alert("Informacion Actualizada");
 
       clearFormInfo();
@@ -170,7 +170,7 @@ export default function FormInfo () {
     if (Object.keys(validationErrors).length === 0) {
       let send = {email:formEmailData.repeatNewEmail};
 
-      await axios.put(`http://localhost:3001/users/${id}`, send);
+      await axios.put(`https://bienesraices-production-9eb3.up.railway.app/users/${id}`, send);
       alert("Informacion Actualizada");
 
       clearFormInfoEmail();
@@ -188,7 +188,7 @@ export default function FormInfo () {
     if (Object.keys(validationErrors).length === 0) {
       let send = {password:formPasswordData.repeatNewPassword};
     
-      await axios.put(`http://localhost:3001/users/${id}`, send);
+      await axios.put(`https://bienesraices-production-9eb3.up.railway.app/users/${id}`, send);
       alert("Informacion Actualizada");
 
       clearFormPassword();
@@ -204,7 +204,7 @@ export default function FormInfo () {
       let send= {disabled:true}
 
     
-      await axios.put(`http://localhost:3001/users/${id}`, send );
+      await axios.put(`https://bienesraices-production-9eb3.up.railway.app/users/${id}`, send );
       alert("Informacion Actualizada");
 
       clearFormInfoD();

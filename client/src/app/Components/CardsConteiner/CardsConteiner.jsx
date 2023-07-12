@@ -13,7 +13,7 @@ const CardsConteiner = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`http://localhost:3001/realstate?page=${currentPage}&limit=5`);
+      const response = await axios.get(`https://bienesraices-production-9eb3.up.railway.app/realstate?page=${currentPage}&limit=5`);
       const data = response.data;
       console.log(data);
       setViewProps(data);

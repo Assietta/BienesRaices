@@ -10,7 +10,7 @@ export default function RealStateForm() {
     useEffect(() => {
       const fetchTags = async () => {
         try {
-          const { data } = await axios.get('http://localhost:3001/tags');
+          const { data } = await axios.get('https://bienesraices-production-9eb3.up.railway.app/tags');
           setTags(data);
         } catch (error) {
           console.error(error);
@@ -91,7 +91,7 @@ export default function RealStateForm() {
     setFormData({...formData, tags: selectedTags})
     setFormData({...formData, photos: photos})
     try {
-      const response = await axios.post('http://localhost:3001/realState', formData);
+      const response = await axios.post('https://bienesraices-production-9eb3.up.railway.app/realState', formData);
       console.log('RealState created:', response.data);
       // Aquí puedes realizar alguna acción adicional después de crear el RealState
     } catch (error) {
