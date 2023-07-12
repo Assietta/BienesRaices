@@ -48,7 +48,7 @@ router.get('/testimonials', getTestimonialsHandler);
 router.get('/appraisals', getAllAppraisalsHandler)
 
 router.post('/realState', postRealStateHandler);
-router.post('/testimonial', postTestimonialHandler);
+router.post('/testimonials', postTestimonialHandler);
 router.post('/users', postUserHandler);
 router.post('/contact', postContactHandler);
 router.post('/appraisals', postAppraisalsHandler);
