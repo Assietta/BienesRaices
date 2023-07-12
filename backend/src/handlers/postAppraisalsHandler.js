@@ -20,7 +20,7 @@ const postAppraisalsHandler = async (req, res) => {
     );
     const asunto = 'Consulta con Henry Real State';
     const destinatario = email;
-    const cuerpo = appraisalsTemplate.replace('%NOMBRE%', name).replace('%APELLIDO%', lastname);
+    const cuerpo = appraisalsTemplate.replace('%NOMBRE%', name).replace('%APELLIDO%', lastName);
     await mailHandler(destinatario, asunto, cuerpo);
 
     return res.status(200).json(AppraisalPosted);
