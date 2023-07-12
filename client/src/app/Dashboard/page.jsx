@@ -482,7 +482,7 @@ export default function Example() {
               )}
               {selectedMenu === "contacts" && (
                 <div id="last-users">
-                  <h1 className="font-bold py-4 uppercase">Mensaje</h1>
+                  <h1 className="font-bold py-4 uppercase">Mensajes</h1>
                   <table className="w-full whitespace-nowrap">
                     <thead className="bg-black/60">
                       <tr>
