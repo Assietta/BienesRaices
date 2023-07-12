@@ -32,6 +32,7 @@ export default function Success() {
               >
                 MR Home
               </a>
+              
               <a
                 href="https://www.mercadopago.com.ar/home"
                 className="text-sm font-semibold leading-6 text-gray-900"
