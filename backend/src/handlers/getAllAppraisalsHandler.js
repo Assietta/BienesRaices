@@ -1,8 +1,8 @@
 const getAllAppraisalsController = require('../controllers/getAllAppraisalsController')
 
-const getAllAppraisalsHandler = (req, res) => {
+const getAllAppraisalsHandler = async (req, res) => {
     try {
-        const appraisals = getAllAppraisalsController()
+        const appraisals = await getAllAppraisalsController()
 
         return res.status(200).json(appraisals)
     } catch (error) {

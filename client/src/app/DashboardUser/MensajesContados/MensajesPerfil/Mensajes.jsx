@@ -5,31 +5,52 @@ import MensajesPerfil from './MensajesPerfil';
 import { useSession } from 'next-auth/react';
 
 export default function Mensajes() {
-  const session = useSession();
-  const id = session.data.user.id;
+  const { data: session } = useSession();
+  const id = session?.user?.id;
 
-  const [viewUsers, setViewUsers] = useState({
-    Appraisals: [],
-    Contacts: [],
-    Orders: [],
-    Favorits: []
-  });
+  const [appraisals, setAppraisals] = useState([]);
+  const [contacts, setContacts] = useState([]);
+  const [orders, setViewOrders] = useState([]);
 
-  useEffect(() => {
-    fetchDataUsers();
-  }, []);
-
-  const fetchDataUsers = async () => {
+  const fetchAppraisals = async (id) => {
     try {
       const response = await axios.get(
         `http://localhost:3001/appraisals/${id}`
       );
       const data = response.data;
-      setViewUsers({Appraisals: [data]});
+      setAppraisals(data);
     } catch (error) {
       // Manejar el error de la solicitud
     }
   };
+
+  const fetchOrders = async (id) => {
+    try {
+      const response = await axios.get(`http://localhost:3001/orders/${id}`);
+      const data = response.data;
+      setOrders(data);
+    } catch (error) {
+      // Manejar el error de la solicitud
+    }
+  };
+
+  const fetchContacts = async (id) => {
+    try {
+      const response = await axios.get(`http://localhost:3001/contact/${id}`);
+      const data = response.data;
+      setContacts(data);
+    } catch (error) {
+      // Manejar el error de la solicitud
+    }
+  };
+
+  useEffect(() => {
+    fetchAppraisals(id);
+    fetchOrders(id);
+    fetchContacts(id);
+  }, []);
+
+  console.log(appraisals);
 
   return (
     <div id="last-users">
@@ -37,22 +58,26 @@ export default function Mensajes() {
       <table className="w-full whitespace-nowrap">
         <thead className="bg-black/60">
           <th className="text-left py-3 px-2 rounded-l-lg">Tipo de mensaje</th>
-          <th className="text-left py-3 px-2">Estado</th>
           <th className="text-left py-3 px-2">Fecha</th>
+          <th className="text-left py-3 px-2">Mensaje</th>
+          <th className="text-left py-3 px-2">Email</th>
         </thead>
-        {viewUsers.Appraisals.map((message) => (
+        {appraisals.map((message) => (
           <MensajesPerfil
             key={message ? message.id : ''}
-            created={message ? message.createdAt : ""}
-            address={message ? message.address : ''}
-            callTime={message ? message.callTime : ''}
+            created={message ? message.createdAt : ''}
             comment={message ? message.comment : ''}
             email={message ? message.email : ''}
-            id={message ? message.userId : ''}
-            lastName={message ? message.lastName : ''}
-            mobile={message ? message.mobile : ''}
-            name={message ? message.name : ''}
-            phone={message ? message.phone : ''}
+            name={'Tasacion'}
+          />
+        ))}
+        {contacts.map((message) => (
+          <MensajesPerfil
+            key={message ? message.id : ''}
+            created={message ? message.createdAt : ''}
+            comment={message ? message.comment : ''}
+            email={message ? message.email : ''}
+            name={'Contacto'}
           />
         ))}
       </table>
