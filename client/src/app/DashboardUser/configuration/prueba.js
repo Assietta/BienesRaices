@@ -282,3 +282,45 @@ const FormSelector = () => {
 };
 
 export default FormSelector;
+
+
+
+
+<h2 onClick={() => handleFormClick('form4')}>Eliminar cuenta</h2>
+      {selectedForm === 'form4' && (
+             <div id="form4"  className="border-b border-gray-700 mt-16">
+             <Title
+               t tit="Eliminar mi cuenta"
+               sub="Eliminar tu cuenta de MR propiedades, eliminara tu perfil y todos los datos de tu actividad"
+             />
+             {/* Eliminar cuenta */}
+             <form onSubmit={handleSubmit} className="mb-8">
+               {/* input Eliminar cuenta */}
+               <div className="mb-3 space-y-2 w-full text-xs">
+                 <label className="font-semibold text-gray-600 py-2">
+                   Contraseña <abbr title="required">*</abbr>
+                 </label>
+                 <input
+                   className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
+                   type="text"
+                   name="password"
+                   placeholder="Contraseña"
+                   value={formDeleteData.deleteAcount}
+                   onChange={handleInputChange}
+                 />
+                 {errors.deleteAcount && <p>{errors.deleteAcount}</p>} 
+               </div>
+               
+               <button
+                 className="mb-2 md:mb-0 bg-green-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500"
+                 type="submit"
+               >
+                 Eliminar
+               </button>
+             </form>
+           </div>
+      )}
+     
+
+
+    </div>
