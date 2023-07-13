@@ -115,14 +115,14 @@ const webhookHandler = async (req, res) => {
           data?.response.transaction_amount_refunded
         ),
       });
-      // let asunto = "";
-      // String(data?.response.status) === "approved"
-      //   ? (asunto = "Su transacción ha sido exitosa")
-      //   : (asunto = "Su transacción ha sido rechazada");
-      // const cuerpo = orderTemplate.replace('%STATUS%', data?.response.status);
+      let asunto = "";
+      String(data?.response.status) === "approved"
+        ? (asunto = "Su transacción ha sido exitosa")
+        : (asunto = "Su transacción ha sido rechazada");
+      const cuerpo = orderTemplate.replace('%STATUS%', data?.response.status);
 
-      // //NOTIFICACION POR MAIL
-      // await mailHandler(String(user?.dataValues.email), asunto, cuerpo);
+      //NOTIFICACION POR MAIL
+      await mailHandler(String(user?.dataValues.email), asunto, cuerpo);
 
       res.status(204).send("OK");
     }
