@@ -5,8 +5,11 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import { MinusIcon, PlusIcon } from "@heroicons/react/20/solid";
 import axios from "axios";
 import FilterCardContainer from "./FilterCardContainer";
+import { useLocalStorage } from 'react-use';
 
 export default function FilterComponent() {
+  const [filtersStorage, setFiltersStorage] = useLocalStorage('filtersStorage', {});
+
   const filterOperation = [
     {
       id: "Tipo de operacion",
@@ -17,14 +20,14 @@ export default function FilterComponent() {
       ],
     },
   ];
-  const filtersProps = [
+  let filtersProps = [
     {
-      id: "Tipo de propiedad",
-      name: "Tipo de propiedad",
+      id: 'Tipo de propiedad',
+      name: 'Tipo de propiedad',
       options: [
-        { value: "Casa", label: "Casa", checked: false },
-        { value: "Departamento", label: "Departamento", checked: false },
-        { value: "Oficina", label: "Oficina", checked: false },
+        { value: 'Casa', label: 'Casa', checked: false },
+        { value: 'Departamento', label: 'Departamento', checked: false },
+        { value: 'Oficina', label: 'Oficina', checked: false },
       ],
     },
   ];
@@ -38,30 +41,30 @@ export default function FilterComponent() {
   //     ],
   //   },
   // ];
-  const filterLocation = [
+  let filterLocation = [
     {
-      id: "ubicacion",
-      name: "Ubicacion",
+      id: 'ubicacion',
+      name: 'Ubicacion',
       options: [
-        { value: "Capital Federal", label: "Capital Federal", checked: false },
+        { value: 'Capital Federal', label: 'Capital Federal', checked: false },
         {
-          value: "G.B.A. Zona Norte",
-          label: "G.B.A. Zona Norte",
+          value: 'G.B.A. Zona Norte',
+          label: 'G.B.A. Zona Norte',
           checked: false,
         },
       ],
     },
   ];
-  const filterAmbientes = [
+  let filterAmbientes = [
     {
-      id: "Cantidad de Ambientes",
-      name: "Cantidad de Ambientes",
+      id: 'Cantidad de Ambientes',
+      name: 'Cantidad de Ambientes',
       options: [
-        { value: "1", label: "1", checked: false },
-        { value: "2", label: "2", checked: false },
-        { value: "3", label: "3", checked: false },
-        { value: "4", label: "4", checked: false },
-        { value: "5+", label: "5+", checked: false },
+        { value: '1', label: '1', checked: false },
+        { value: '2', label: '2', checked: false },
+        { value: '3', label: '3', checked: false },
+        { value: '4', label: '4', checked: false },
+        { value: '5+', label: '5+', checked: false },
       ],
     },
   ];
@@ -109,18 +112,42 @@ export default function FilterComponent() {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    // console.log(filters);
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      [name]: value,
-    }));
+  
+    // Si el valor es vacío, elimina la propiedad del estado
+    if (value === "") {
+      setFilters((prevFilters) => {
+        const { [name]: removedProperty, ...updatedFilters } = prevFilters;
+        return updatedFilters;
+      });
+    } else {
+      // Si el valor no es vacío, actualiza la propiedad en el estado
+      setFilters((prevFilters) => ({
+        ...prevFilters,
+        [name]: value,
+      }));
+    }
   };
+
+  useEffect(()=>{
+    if(filtersStorage) {
+      axios
+      .post(`http://localhost:3001/filter`, filters)
+      .then((res) => {
+        if (res.data && res.data.length > 1) {
+          setPropiedad(res.data);
+          setTotalItemsFilter(res.data.length);
+          setCurrentPage(1);
+          console.log('filtre por localStorage');
+        }})
+    }
+  }, [])
 
   const handleClick = () => {
     axios
       .post(`http://localhost:3001/filter`, filters)
       .then((res) => {
         if (res.data && res.data.length > 1) {
+          setFiltersStorage(filters)
           setPropiedad(res.data);
           setTotalItemsFilter(res.data.length);
           setCurrentPage(1); // Regresar a la primera página al obtener nuevos datos
@@ -163,12 +190,16 @@ export default function FilterComponent() {
     }
   };
 
+  function SearchLocalStorage() {
+    if (localStorage) setFilters(localStorage)
+  }
   // // funciones para mover el paginado.
 
   useEffect(() => {
     fetchData();
-  }, [currentPage]);
-
+    SearchLocalStorage();
+  }, [currentPage, localStorage]);
+console.log(filters);
   // //va a la pagina anterior a la actual
   const goToPreviousPage = () => {
     setCurrentPage((prevPage) => prevPage - 1);
@@ -184,6 +215,7 @@ export default function FilterComponent() {
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
   }
+  
 
   return (
     <div className="bg-white">
@@ -319,18 +351,6 @@ export default function FilterComponent() {
               {/* Filters */}
 
               <form className="hidden lg:block">
-                {/* <h3 className="sr-only">Categories</h3>
-                <ul
-                  role="list"
-                  className="space-y-4 border-b border-gray-200 pb-6 text-sm font-medium text-gray-900"
-                >
-                  {subCategories.map((category) => (
-                    <li key={category.name}>
-                      <a href={category.href}>{category.name}</a>
-                    </li>
-                  ))}
-                </ul> */}
-
                 {filterOperation.map((section) => (
                   <Disclosure
                     as="div"
@@ -375,7 +395,6 @@ export default function FilterComponent() {
                                   className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                                   name="operation_type"
                                   value={section.options.value}
-                                  onChange={handleChange}
                                 />
                                 <label
                                   htmlFor={`filter-${section.id}-${optionIdx}`}
@@ -450,65 +469,6 @@ export default function FilterComponent() {
                     )}
                   </Disclosure>
                 ))}
-                {/* {filterPrecio.map((section) => (
-                  <Disclosure
-                    as="div"
-                    key={section.id}
-                    className="border-b border-gray-200 py-6"
-                  >
-                    {({ open }) => (
-                      <>
-                        <h3 className="-my-3 flow-root">
-                          <Disclosure.Button className="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500">
-                            <span className="font-medium text-gray-900">
-                              {section.name}
-                            </span>
-                            <span className="ml-6 flex items-center">
-                              {open ? (
-                                <MinusIcon
-                                  className="h-5 w-5"
-                                  aria-hidden="true"
-                                />
-                              ) : (
-                                <PlusIcon
-                                  className="h-5 w-5"
-                                  aria-hidden="true"
-                                />
-                              )}
-                            </span>
-                          </Disclosure.Button>
-                        </h3>
-                        <Disclosure.Panel className="pt-6">
-                          <div className="space-y-4">
-                            {section.options.map((option, optionIdx) => (
-                              <div
-                                key={option.value}
-                                className="flex items-center"
-                              >
-                                <input
-                                  id={`filter-${section.id}-${optionIdx}`}
-                                  defaultValue={option.value}
-                                  type="radio"
-                                  defaultChecked={option.checked}
-                                  className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                                  name="currency"
-                                  value={section.options.value}
-                                  onChange={handleChange}
-                                />
-                                <label
-                                  htmlFor={`filter-${section.id}-${optionIdx}`}
-                                  className="ml-3 text-sm text-gray-600"
-                                >
-                                  {option.label}
-                                </label>
-                              </div>
-                            ))}
-                          </div>
-                        </Disclosure.Panel>
-                      </>
-                    )}
-                  </Disclosure>
-                ))} */}
                 {filterLocation.map((section) => (
                   <Disclosure
                     as="div"
@@ -627,68 +587,7 @@ export default function FilterComponent() {
                     )}
                   </Disclosure>
                 ))}
-                {/* {filterAntiguedad.map((section) => (
-                  <Disclosure
-                    as="div"
-                    key={section.id}
-                    className="border-b border-gray-200 py-6"
-                  >
-                    {({ open }) => (
-                      <>
-                        <h3 className="-my-3 flow-root">
-                          <Disclosure.Button className="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500">
-                            <span className="font-medium text-gray-900">
-                              {section.name}
-                            </span>
-                            <span className="ml-6 flex items-center">
-                              {open ? (
-                                <MinusIcon
-                                  className="h-5 w-5"
-                                  aria-hidden="true"
-                                />
-                              ) : (
-                                <PlusIcon
-                                  className="h-5 w-5"
-                                  aria-hidden="true"
-                                />
-                              )}
-                            </span>
-                          </Disclosure.Button>
-                        </h3>
-                        <Disclosure.Panel className="pt-6">
-                          <div className="space-y-4">
-                            {section.options.map((option, optionIdx) => (
-                              <div
-                                key={option.value}
-                                className="flex items-center"
-                              >
-                                <input
-                                  id={`filter-${section.id}-${optionIdx}`}
-                                  defaultValue={option.value}
-                                  type="radio"
-                                  defaultChecked={option.checked}
-                                  className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                                  name="antiguedad"
-                                  value={section.options.value}
-                                  onChange={handleChange}
-                                />
-                                <label
-                                  htmlFor={`filter-${section.id}-${optionIdx}`}
-                                  className="ml-3 text-sm text-gray-600"
-                                >
-                                  {option.label}
-                                </label>
-                              </div>
-                            ))}
-                          </div>
-                        </Disclosure.Panel>
-                      </>
-                    )}
-                  </Disclosure>
-                ))} */}
               </form>
-
-              {/* Product grid */}
               <div className="lg:col-span-3">
                 <div className="w-full bg-white text-black">
                   <div className="flex-1">

@@ -29,6 +29,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-redux": "^7.2.9",
+    "react-use": "^17.4.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "thunk": "^0.0.1",
