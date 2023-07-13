@@ -5,51 +5,57 @@ import Link from "next/link";
 import Image from "next/image";
 import { useSession, signOut } from "next-auth/react";
 import ProfileUser from "../../ProfileUser/ProfileUser";
+import { useLocalStorage } from 'react-use';
+
 
 const navigation = [
   {
-    label: "Inicio",
-    route: "/",
+    label: 'Inicio',
+    route: '/',
     current: true,
   },
   {
-    label: "Buscar Propiedades",
-    route: "/pruebafilter",
+    label: 'Buscar Propiedades',
+    route: '/pruebafilter',
     current: false,
   },
   {
-    label: "Nosotros",
-    route: "/About",
+    label: 'Nosotros',
+    route: '/About',
     current: false,
   },
   {
-    label: "Tasaciones",
-    route: "/Appraisals",
+    label: 'Tasaciones',
+    route: '/Appraisals',
     current: false,
   },
   {
-    label: "Contacto",
-    route: "/Contact",
+    label: 'Contacto',
+    route: '/Contact',
     current: false,
   },
 ];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
+  return classes.filter(Boolean).join(' ');
 }
 
 export default function Example() {
   const [showProfile, setShowProfile] = useState(false);
+  const [routeDashboard, setRouteDashboard] = useLocalStorage('routeDashboard', "1");
 
   const session = useSession();
 
   const autenticated = () => {
-    if (session.status === "authenticated") {
-      console.log(session, "soy la sesion nav");
+    if (session.status === 'authenticated') {
       return true;
-    } else session.status === "unauthenticated";
+    } else session.status === 'unauthenticated';
     return false;
   };
+
+  const handleChangeStorage = (page) => {
+    setRouteDashboard(page)
+  }
 
   return (
     <Disclosure
@@ -111,7 +117,7 @@ export default function Example() {
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
                   <div>
-                    <Menu.Button className="flex text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 z-50">
+                    <Menu.Button className="flex text-sm f">
                       <span className="sr-only">Open user menu</span>
 
                       <div className="hidden sm:ml-6 sm:block">
@@ -165,8 +171,13 @@ export default function Example() {
                       <Menu.Item>
                         {({ active }) => (
                           <Link
-                            href="/DashboardUser"
+                            href={
+                              session?.data?.user?.rol === 'usuario'
+                                ? '/DashboardUser'
+                                : '/Dashboard'
+                            }
                             class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                            onClick={() => handleChangeStorage("1")}
                           >
                             <svg
                               class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -180,16 +191,21 @@ export default function Example() {
                                 clip-rule="evenodd"
                               ></path>
                             </svg>
-                            <span class="ml-3">Mi perfil</span>
+                            {session?.data?.user?.rol === 'usuario' ? (
+                              <span class="ml-3">Mi perfil</span>
+                            ) : (
+                              <span class="ml-3">Panel de control</span>
+                            )}
                           </Link>
                         )}
                       </Menu.Item>
-                      <Menu.Item>
+                      {session?.data?.user?.rol === 'usuario' ?
+                      (<><Menu.Item>
                         {({ active }) => (
                           <Link
-                            href="/DashboardUser#3"
-                            target="_blank"
+                            href="/DashboardUser"
                             class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                            onClick={() => handleChangeStorage("3")}
                           >
                             <svg
                               class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -202,18 +218,15 @@ export default function Example() {
                             <span class="flex-1 ml-3 whitespace-nowrap">
                               Favoritos
                             </span>
-                            <span class="inline-flex items-center justify-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-200 rounded-full dark:bg-gray-700 dark:text-gray-300">
-                              Pro
-                            </span>
                           </Link>
                         )}
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
                           <Link
-                            href="/DashboardUser#2"
-                            target="_blank"
+                            href="/DashboardUser"
                             class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                            onClick={() => handleChangeStorage("2")}
                           >
                             <svg
                               class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -227,17 +240,15 @@ export default function Example() {
                             <span class="flex-1 ml-3 whitespace-nowrap">
                               Mensajes
                             </span>
-                            <span class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-600 bg-blue-200 rounded-full dark:bg-blue-900 dark:text-blue-200">
-                              3
-                            </span>
                           </Link>
                         )}
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
                           <Link
-                            href="/DashboardUser#4"
+                            href="/DashboardUser"
                             class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                            onClick={() => handleChangeStorage("4")}
                           >
                             <svg
                               class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -253,31 +264,7 @@ export default function Example() {
                             </span>
                           </Link>
                         )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <Link
-                            href="#"
-                            class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
-                          >
-                            <svg
-                              class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                              fill="currentColor"
-                              viewBox="0 0 20 20"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                fill-rule="evenodd"
-                                d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z"
-                                clip-rule="evenodd"
-                              ></path>
-                            </svg>
-                            <span class="flex-1 ml-3 whitespace-nowrap">
-                              Products
-                            </span>
-                          </Link>
-                        )}
-                      </Menu.Item>
+                      </Menu.Item></>) : "" }
                       <Menu.Item>
                         {({ active }) => (
                           <button
@@ -301,7 +288,7 @@ export default function Example() {
                             </span>
                           </button>
                         )}
-                      </Menu.Item>
+                      </Menu.Item> 
                     </Menu.Items>
                   </Transition>
                 </Menu>

@@ -1,19 +1,23 @@
-"use client";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
-import Image from "next/image";
-import PropiedadesDashboard from "./propiedades/propiedadesDashboard";
-import DashboardUser from "./users/DashboardUser";
-import DashboardContacts from "./contacts/DashboardContacts";
-import DashboardOrders from "./orders/DashboardOrders";
-import GeneralDashboard from "./general/GeneralDashboard";
+'use client';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useSession } from 'next-auth/react';
+import Image from 'next/image';
+import PropiedadesDashboard from './propiedades/propiedadesDashboard';
+import DashboardUser from './users/DashboardUser';
+import DashboardContacts from './contacts/DashboardContacts';
+import DashboardOrders from './orders/DashboardOrders';
+import GeneralDashboard from './general/GeneralDashboard';
+import { useRouter } from 'next/navigation';
 
 export default function Example() {
-  const [selectedMenu, setSelectedMenu] = useState("dashboard");
+  const router = useRouter();
+  const [selectedMenu, setSelectedMenu] = useState('dashboard');
   const session = useSession();
   const [viewUsers, setViewUsers] = useState([]);
   const [contacts, setContacts] = useState([]);
+
+  if (session?.data?.user?.rol !== 'admin') router.push('/');
 
   useEffect(() => {
     fetchDataUsers();
@@ -56,15 +60,15 @@ export default function Example() {
     0
   );
 
-  const formattedTotalAmount = new Intl.NumberFormat("es-AR", {
-    style: "currency",
-    currency: "ARS",
+  const formattedTotalAmount = new Intl.NumberFormat('es-AR', {
+    style: 'currency',
+    currency: 'ARS',
   }).format(totalAmount);
 
   const autenticated = () => {
-    if (session.status === "authenticated") {
+    if (session.status === 'authenticated') {
       return true;
-    } else session.status === "unauthenticated";
+    } else session.status === 'unauthenticated';
     return false;
   };
 
@@ -126,9 +130,9 @@ export default function Example() {
               <a
                 href="#"
                 className={`hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group ${
-                  selectedMenu === "dashboard" ? "bg-white/10" : ""
+                  selectedMenu === 'dashboard' ? 'bg-white/10' : ''
                 }`}
-                onClick={() => setSelectedMenu("dashboard")}
+                onClick={() => setSelectedMenu('dashboard')}
               >
                 <div className="flex flex-col space-y-2 md:flex-row md:space-y-0 space-x-2 items-center">
                   <div>
@@ -199,9 +203,9 @@ export default function Example() {
               <a
                 href="#"
                 className={`hover:bg-white/10 hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group ${
-                  selectedMenu === "dashboard" ? "bg-white/10" : ""
+                  selectedMenu === 'dashboard' ? 'bg-white/10' : ''
                 }`}
-                onClick={() => setSelectedMenu("orders")}
+                onClick={() => setSelectedMenu('orders')}
               >
                 <div className="relative flex flex-col space-y-2 md:flex-row md:space-y-0 space-x-2 items-center">
                   <div>
@@ -233,9 +237,9 @@ export default function Example() {
               <a
                 href="#"
                 className={`hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group ${
-                  selectedMenu === "dashboard" ? "bg-white/10" : ""
+                  selectedMenu === 'dashboard' ? 'bg-white/10' : ''
                 }`}
-                onClick={() => setSelectedMenu("users")}
+                onClick={() => setSelectedMenu('users')}
               >
                 <div className="flex flex-col space-y-2 md:flex-row md:space-y-0 space-x-2 items-center">
                   <div>
@@ -267,9 +271,9 @@ export default function Example() {
               <a
                 href="#"
                 className={`hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group ${
-                  selectedMenu === "dashboard" ? "bg-white/10" : ""
+                  selectedMenu === 'dashboard' ? 'bg-white/10' : ''
                 }`}
-                onClick={() => setSelectedMenu("contacts")}
+                onClick={() => setSelectedMenu('contacts')}
               >
                 <div className="flex flex-col space-y-2 md:flex-row md:space-y-0 space-x-2 items-center">
                   <div>
@@ -445,8 +449,8 @@ export default function Example() {
               </div>
             </div>
             <div id="content" className="bg-white/10 col-span-9 rounded-lg p-6">
-              {selectedMenu === "dashboard" && <GeneralDashboard />}
-              {selectedMenu === "users" && (
+              {selectedMenu === 'dashboard' && <GeneralDashboard />}
+              {selectedMenu === 'users' && (
                 <div id="last-users">
                   <h1 className="font-bold py-4 uppercase">Usuarios</h1>
                   <table className="w-full whitespace-nowrap">
@@ -478,7 +482,7 @@ export default function Example() {
                   </table>
                 </div>
               )}
-              {selectedMenu === "contacts" && (
+              {selectedMenu === 'contacts' && (
                 <div id="last-users">
                   <h1 className="font-bold py-4 uppercase">Mensajes</h1>
                   <table className="w-full whitespace-nowrap">
@@ -508,7 +512,7 @@ export default function Example() {
                 </div>
               )}
               {/* {selectedMenu === "propiedades" && <PropiedadesDashboard />} */}
-              {selectedMenu === "orders" && (
+              {selectedMenu === 'orders' && (
                 <div id="last-users">
                   <h1 className="font-bold py-4 uppercase">Reservas</h1>
                   <div

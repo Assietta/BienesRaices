@@ -8,7 +8,7 @@ import { useSession } from 'next-auth/react';
 
 export default function Example() {
   const session = useSession();
-  const id = session.data.user.id;
+  const id = session?.data?.user?.id;
 
   const [formData, setFormData] = useState({
     name: '',
@@ -78,7 +78,9 @@ export default function Example() {
                       value={formData.name}
                       onChange={handleInputChange}
                     />
-                    {errors.name && <p>{errors.name}</p>}
+                    {errors.name && (
+                      <p className="text-red-600">{errors.name}</p>
+                    )}
                   </div>
 
                   {/* input apellido */}
@@ -94,7 +96,9 @@ export default function Example() {
                       value={formData.lastName}
                       onChange={handleInputChange}
                     />
-                    {errors.lastName && <p>{errors.lastName}</p>}
+                    {errors.lastName && (
+                      <p className="text-red-600">{errors.lastName}</p>
+                    )}
                   </div>
 
                   {/* input mail */}
@@ -112,7 +116,9 @@ export default function Example() {
                       value={formData.email}
                       onChange={handleInputChange}
                     />
-                    {errors.email && <p>{errors.email}</p>}
+                    {errors.email && (
+                      <p className="text-red-600">{errors.email}</p>
+                    )}
                   </div>
 
                   {/* input telefono */}
@@ -129,7 +135,9 @@ export default function Example() {
                       value={formData.phone}
                       onChange={handleInputChange}
                     />
-                    {errors.phone && <p>{errors.phone}</p>}
+                    {errors.phone && (
+                      <p className="text-red-600">{errors.phone}</p>
+                    )}
                   </div>
 
                   {/* input celular */}
@@ -146,7 +154,9 @@ export default function Example() {
                       value={formData.mobile}
                       onChange={handleInputChange}
                     />
-                    {errors.mobile && <p>{errors.mobile}</p>}
+                    {errors.mobile && (
+                      <p className="text-red-600">{errors.mobile}</p>
+                    )}
                   </div>
 
                   {/* comentario input */}
@@ -164,7 +174,9 @@ export default function Example() {
                       value={formData.comment}
                       onChange={handleInputChange}
                     />
-                    {errors.comment && <p>{errors.comment}</p>}
+                    {errors.comment && (
+                      <p className="text-red-600">{errors.comment}</p>
+                    )}
                   </div>
 
                   <button
