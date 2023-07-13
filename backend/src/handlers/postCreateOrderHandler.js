@@ -126,7 +126,7 @@ const webhookHandler = async (req, res) => {
       res.status(204).send("OK");
     }
   } catch (error) {
-    return res.status(500).json({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 
