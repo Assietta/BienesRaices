@@ -9,7 +9,7 @@ import Configuration from "./configuration/configuration";
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import FavConteiner from "./Favorites/FavConteiner"
-import FormInfoP from "./configuration/prueba"
+
 
 export default function Example() {
 
