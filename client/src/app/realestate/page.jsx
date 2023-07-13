@@ -20,7 +20,7 @@ export default function RealStateForm() {
       fetchTags();
     }, []);
 
-    console.log(tags);
+
 
   const [formData, setFormData] = useState({
     address: '',
@@ -33,7 +33,7 @@ export default function RealStateForm() {
     has_temporary_rent: '',
     location: '',
     price: '',
-    period: '0',
+    period: '',
     currency: '',
     operation_type: '',
     orientation: '',
@@ -67,31 +67,62 @@ export default function RealStateForm() {
         ...prevFormData,
         [name]: value,
       }));
+      console.log(formData.photos, "soy el fomr data fotos del input change vieja");
   };
 
   const [photos, setPhotos] = useState([])
 
-  const handleEnterPress = (event) => {
-    if (event.key === 'Enter') {
-        if(photos.includes(event.target.value)) {
-            event.target.value = '';
-            return
-        }
-        else {
-           event.preventDefault();
-            setPhotos([...photos, event.target.value]);
-            event.target.value = ''; 
-        }
+  // const handleEnterPress = (event) => {
+  //   if (event.key === 'Enter') {
+  //       if(photos.includes(event.target.files)) {
+  //           event.target.files = '';
+  //           return
+  //       }
+  //       else {
+  //          event.preventDefault();
+  //           setPhotos([...photos, event.target.files]);
+  //           event.target.files = ''; 
+  //       }
       
-    }
-  };
+  //   }
+  // };
+
+  const handleEnterPress = (event) =>{
+   
+    if(event.target.files[0]){ setFormData((prevData)=>({
+      ...prevData, photos:[...prevData.photos, event.target.files[0]] 
+    }))}
+  }
+
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setFormData({...formData, tags: selectedTags})
-    setFormData({...formData, photos: photos})
+    // setFormData({...formData, tags: selectedTags})
+    // setFormData({...formData, photos: photos})
+    const formSub = new FormData()
+    for(let props in formData ){
+      console.log("entro al primer for: ", props);
+      console.log("esto estara en true?", props === "photos")
+      if(props === "photos" ){
+        console.log("soy el formdata padre", formData);
+
+        for(let element of formData["photos"]){
+          console.log("entre al 2do for");
+          formSub.append("photos", element)
+        }
+        
+      }
+      else if (props === "tags"){
+        for(let element of formData["tags"]){
+          formSub.append("tags", element)
+      }
+    }
+      else {formSub.append(props, formData[props])}
+    }
     try {
-      const response = await axios.post('http://localhost:3001/realState', formData);
+      console.log(formSub.get("photos"));
+      const response = await axios.post('http://localhost:3001/realState', formSub);
       console.log('RealState created:', response.data);
       // Aquí puedes realizar alguna acción adicional después de crear el RealState
     } catch (error) {
@@ -139,16 +170,17 @@ export default function RealStateForm() {
   };
 
   const handleTagsChange = (event) => {
-    if(!selectedTags.includes(event.target.value)) setSelectedTags([...selectedTags, event.target.value]);
+    if(!formData.tags.includes(event.target.value)) setFormData({...formData, tags: [...formData.tags, event.target.value]});
     else return
   };
 
   const handleRemoveTag = (tag) => {
-    setSelectedTags((prevSelectedTags) => prevSelectedTags.filter((t) => t !== tag));
+    setFormData((prevData) =>({...prevData, tags:prevData.tags.filter((t) => t !== tag)})) ;
   };
 
   const handleRemovePhoto = (photo) => {
-    setPhotos((prevPhotos) => prevPhotos.filter((p) => p !== photo));
+    const send = formData.photos.filter((p) => p.name !== photo.name)
+    setFormData((prevData) =>({...prevData, photos:send})) ;
   };
 
 
@@ -371,20 +403,21 @@ export default function RealStateForm() {
                     <div className="mb-3 space-y-2 w-full text-xs">
                         <label className="font-semibold text-gray-600 py-2">Fotos {'(Presione enter para subir foto)'}</label>
                         <input
-                            type="text"
+                            type="file"
                             name="photos"
-                            onKeyDown={handleEnterPress}
-                            placeholder="Ingresa las fotos"
+                            accept='.png, .jpg'
+                            onChange={handleEnterPress}
+                            placeholder="Ingresa las fotos en formato .jpg y/o .png"
                             className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
                         />
                     </div>
                     <div className="mb-3 space-y-2 w-full max-w-[80%] text-xs">
                         <p className="font-semibold text-gray-600 py-2">Fotos subidas:</p>
                         <div className="flex flex-wrap overflow-auto max-w-[80%]">
-                            {photos.map((photo) => (
-                            <p key={photo} className="inline-block bg-black text-white px-2 py-1 rounded-lg mr-2 mb-2">
-                                {photo} <button onClick={() => handleRemovePhoto(photo)} className="ml-2 text-white">&times;</button>
-                            </p>
+                            {formData.photos?.map((photo, i) => (
+                            <div key={photo.name} className="inline-block bg-black text-white px-2 py-1 rounded-lg mr-2 mb-2">
+                                {photo.name} <button onClick={() => handleRemovePhoto(photo)} className="ml-2 text-white">&times;</button>
+                            </div>
                             ))}
                         </div>
                     </div>
@@ -521,7 +554,7 @@ export default function RealStateForm() {
                     <div className="mb-3 space-y-2 w-full max-w-[80%] text-xs">
                         <p className="font-semibold text-gray-600 py-2">Tags seleccionados:</p>
                         <div className="flex flex-wrap overflow-auto">
-                            {selectedTags.map((tag) => (
+                            {formData.tags.map((tag) => (
                             <p key={tag} className="inline-block bg-black text-white px-2 py-1 rounded-lg mr-2 mb-2">
                                 {tag} <button onClick={() => handleRemoveTag(tag)} className="ml-2 text-white">&times;</button>
                             </p>
