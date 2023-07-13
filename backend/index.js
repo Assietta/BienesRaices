@@ -24,6 +24,7 @@ const createAdmin = require("./src/Helpers/createAdmin.js");
 require("dotenv").config();
 const { PORT } = process.env;
 
+
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
   server.listen(PORT, () => {

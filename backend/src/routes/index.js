@@ -1,5 +1,7 @@
 const { Router } = require('express');
 const router = Router();
+const multer = require("multer")
+
 const { getPropertyIdHandler } = require('../handlers/getPropertyIdHandler');
 const { putUsersHandler } = require('../handlers/putUsersHandler');
 const { realStateHandler }= require('../handlers/getAllHandler');
@@ -27,6 +29,9 @@ const { getAllAppraisalsHandler } = require('../handlers/getAllAppraisalsHandler
 const { getAllTagsHandler } = require('../handlers/getAllTagsHandler');
 const { getTestimonialsHandler } = require('../handlers/getTestimonialsHandler');
 const { postTestimonialHandler } = require('../handlers/postTestimonialHandler');
+
+const mul = multer()
+router.use(mul.fields([{name:"photos", maxCount:6}]))
 
 router.get('/realState', realStateHandler);
 router.get('/realState/:id', getPropertyIdHandler);

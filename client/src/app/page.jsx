@@ -7,6 +7,7 @@ import store from '../redux/store';
 import axios from "axios"
 import { ThemeProvider } from '@material-tailwind/react';
 import Testimonials from "./Components/Testimonials/testimonials"
+import SubirArchivo from "./subirArchivo/subirArchivo"
 
 export default function Home() {
   const images = [
@@ -21,6 +22,7 @@ export default function Home() {
       <ThemeProvider>
       <Provider store={store}>
         <Carrousel />
+        <SubirArchivo/>
         <CardConteiner />
         <Testimonials/>
       </Provider>
