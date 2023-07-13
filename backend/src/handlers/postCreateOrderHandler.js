@@ -6,11 +6,12 @@ const { User } = require("../db");
 const { Order } = require("../db");
 
 const { TOKEN_MP} = process.env;
+let propId;
 
 const createOrderHandler = async (req, res) => {
   const { id } = req.params;
   const userId = req.body.userId;
-  // console.log(userId)
+  propId = id;
 
   mercadopago.configure({
     access_token: TOKEN_MP,
@@ -86,7 +87,7 @@ const webhookHandler = async (req, res) => {
       const user = await User.findOne({ where: { id: data.response.external_reference } }); // Asegúrate de que el modelo User exista y esté configurado correctamente
 
       // BUSCAR PROPERTY EN DB
-      const property = await RealState.findOne({ where: { id: id } }); // Asegúrate de que el modelo RealState exista y esté configurado correctamente
+      const property = await RealState.findOne({ where: { id: propId } }); // Asegúrate de que el modelo RealState exista y esté configurado correctamente
 
       // console.log(data.response.description, "soy el id de propiedad!!!!");
       // console.log(data.response.external_reference ,"soy e id del cliente!!!!");
