@@ -199,7 +199,8 @@ export default function Example() {
                           </Link>
                         )}
                       </Menu.Item>
-                      <Menu.Item>
+                      {session?.data?.user?.rol === 'usuario' ?
+                      (<><Menu.Item>
                         {({ active }) => (
                           <Link
                             href="/DashboardUser"
@@ -263,7 +264,7 @@ export default function Example() {
                             </span>
                           </Link>
                         )}
-                      </Menu.Item>
+                      </Menu.Item></>) : "" }
                       <Menu.Item>
                         {({ active }) => (
                           <button
@@ -287,7 +288,7 @@ export default function Example() {
                             </span>
                           </button>
                         )}
-                      </Menu.Item>
+                      </Menu.Item> 
                     </Menu.Items>
                   </Transition>
                 </Menu>

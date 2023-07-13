@@ -49,7 +49,6 @@ export default function Login() {
   return (
     <div className=" min-h-screen flex items-center justify-center bg-center py-12 px-4 sm:px-6 lg:px-8 bg-black bg-no-repeat bg-cover ">
       <div className="flex flex-col items-center justify-center mx-auto md:max-w-35rem h-50 space-y-8 p-12 bg-white rounded-xl shadow-lg z-10">
-      <div className="flex flex-col items-center justify-center mx-auto md:max-w-35rem h-50 space-y-8 p-12 bg-white rounded-xl shadow-lg z-10">
         <div className="mx-auto max-w-2xl lg:text-center">
           <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             Iniciar sesión
@@ -154,5 +153,5 @@ export default function Login() {
         </div>
       </div>
     </div>
-  );
+  )
 }
