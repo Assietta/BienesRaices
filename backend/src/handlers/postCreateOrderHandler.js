@@ -59,10 +59,8 @@ const createOrderHandler = async (req, res) => {
     //   }
     // };
 
-    res.send({
-      preferenceId: preferenceId,
-      id: id,
-    });
+    res.send(
+      preferenceId);
     // const redirectUrl = `https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=${preferenceId}`;
     // res.send(redirectUrl);
   } catch (error) {
