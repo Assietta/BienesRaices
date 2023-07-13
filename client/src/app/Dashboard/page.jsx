@@ -56,6 +56,11 @@ export default function Example() {
     0
   );
 
+  const formattedTotalAmount = new Intl.NumberFormat('es-AR', {
+    style: 'currency',
+    currency: 'ARS',
+  }).format(totalAmount);
+
   const autenticated = () => {
     if (session.status === "authenticated") {
       return true;
@@ -372,7 +377,7 @@ export default function Example() {
                         Ingresos
                       </p>
                       <p className="text-white font-bold text-2xl inline-flex items-center space-x-2">
-                        <span>{totalAmount}</span>
+                        <span>{formattedTotalAmount}</span>
                         <span>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
