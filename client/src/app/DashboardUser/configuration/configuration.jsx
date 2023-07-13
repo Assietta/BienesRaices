@@ -214,7 +214,7 @@ export default function FormInfo () {
 
 
   return (
-    <div>
+    <div id="accordion-collapse" data-accordion="collapse">
 
 
 

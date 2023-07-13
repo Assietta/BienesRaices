@@ -9,6 +9,7 @@ import Configuration from "./configuration/configuration";
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import FavConteiner from "./Favorites/FavConteiner"
+import FormInfoP from "./configuration/prueba"
 
 export default function Example() {
 
@@ -18,7 +19,7 @@ export default function Example() {
   if (session.status === 'unauthenticated') router.push('/');
 
   const [showDashboard, setShowDashboard] = useState({
-    favorito: false,
+    Favorito: false,
     Perfil: true,
     Mensaje: false,
     Configuration: false,
@@ -26,7 +27,7 @@ export default function Example() {
 
   const showSection = (param) => {
     setShowDashboard((prevState) => ({
-      favorito: false,
+      Favorito: false,
       Perfil: false,
       Mensaje: false,
       Configuracion: false,
@@ -140,6 +141,7 @@ export default function Example() {
               <a
                 href="#3"
                 className="hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group"
+                onClick={() => showSection('Favorito')}
               >
                 <div className="flex flex-col space-y-2 md:flex-row md:space-y-0 space-x-2 items-center">
                   <div>
@@ -214,12 +216,12 @@ export default function Example() {
             {showDashboard.Perfil && (
               <>
                 <PropiedadesDashboard />
-                <Mensajes />      
+                <Mensajes />
               </>
             )}
             {showDashboard.Mensaje && <MensajesVista />}
-            {showDashboard.Configuration && <Configuration />}
-            {showDashboard.FavConteiner && <FavConteiner/>}
+            {showDashboard.Configuration && <FormInfoP />}
+            {showDashboard.Favorito && <FavConteiner />}
           </div>
         </div>
       </div>
