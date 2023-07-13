@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import UsersDashboard from "./MensajesContados/MensajesPerfil/Mensajes";
 import PropiedadesDashboard from "./propiedades/propiedadesDashboard";
@@ -10,20 +10,71 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import FavConteiner from "./Favorites/FavConteiner";
 import Testimonials from "./testimonials/Testimonials";
+//import { useLocalStorage } from 'react-use';
 
 export default function Example() {
   const router = useRouter();
   const session = useSession();
-
+  // const [routeDashboard, setRouteDashboard] = useLocalStorage('routeDashboard', "");
+  const routeDashboard = window.localStorage.getItem('routeDashboard')
   if (session.status === "unauthenticated") router.push("/");
 
   const [showDashboard, setShowDashboard] = useState({
     Favorito: false,
-    Perfil: true,
+    Perfil: false,
     Mensaje: false,
     Configuration: false,
     Testimonials: false,
   });
+
+  useEffect(()=>{
+    console.log(routeDashboard.replace(/"/g, '') == 2, routeDashboard.replace(/"/g, ''));
+    if (routeDashboard.replace(/"/g, '') == 1) {
+      setShowDashboard({
+        Favorito: false,
+        Perfil: true,
+        Mensaje: false,
+        Configuracion: false,
+        Testimonials: false,
+      })
+    }
+    else if (routeDashboard.replace(/"/g, '') == 2) {
+      setShowDashboard({
+        Favorito: false,
+        Perfil: false,
+        Mensaje: true,
+        Configuracion: false,
+        Testimonials: false,
+      })
+    }
+    else if (routeDashboard.replace(/"/g, '') == 3) {
+      setShowDashboard({
+        Favorito: true,
+        Perfil: false,
+        Mensaje: false,
+        Configuracion: false,
+        Testimonials: false,
+      })
+    }
+    else if (routeDashboard.replace(/"/g, '') == 4) {
+      setShowDashboard({
+        Favorito: false,
+        Perfil: false,
+        Mensaje: false,
+        Configuracion: true,
+        Testimonials: false,
+      })
+    }
+    else if (routeDashboard.replace(/"/g, '') == 5) {
+      setShowDashboard({
+        Favorito: false,
+        Perfil: false,
+        Mensaje: false,
+        Configuracion: false,
+        Testimonials: true,
+      })
+    }
+  }, [])
 
   const showSection = (param) => {
     setShowDashboard((prevState) => ({
@@ -35,6 +86,10 @@ export default function Example() {
       [param]: true,
     }));
   };
+
+
+
+  console.log(showDashboard);
 
   return (
     <div className="bg-white">
@@ -209,7 +264,7 @@ export default function Example() {
                 </div>
               </a>
               <a
-                href="#4"
+                href="#5"
                 className="hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group"
                 onClick={() => showSection("Testimonials")}
               >

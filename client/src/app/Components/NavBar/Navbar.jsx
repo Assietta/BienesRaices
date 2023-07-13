@@ -5,6 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { useSession, signOut } from "next-auth/react";
 import ProfileUser from "../../ProfileUser/ProfileUser";
+import { useLocalStorage } from 'react-use';
+
 
 const navigation = [
   {
@@ -40,6 +42,7 @@ function classNames(...classes) {
 
 export default function Example() {
   const [showProfile, setShowProfile] = useState(false);
+  const [routeDashboard, setRouteDashboard] = useLocalStorage('routeDashboard', "1");
 
   const session = useSession();
 
@@ -50,6 +53,10 @@ export default function Example() {
     } else session.status === "unauthenticated";
     return false;
   };
+
+  const handleChangeStorage = (page) => {
+    setRouteDashboard(page)
+  }
 
   return (
     <Disclosure
@@ -167,6 +174,7 @@ export default function Example() {
                           <Link
                             href="/DashboardUser"
                             class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                            onClick={() => handleChangeStorage("1")}
                           >
                             <svg
                               class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -187,9 +195,9 @@ export default function Example() {
                       <Menu.Item>
                         {({ active }) => (
                           <Link
-                            href="/DashboardUser#3"
-                            target="_blank"
+                            href="/DashboardUser"
                             class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                            onClick={() => handleChangeStorage("3")}
                           >
                             <svg
                               class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -211,9 +219,9 @@ export default function Example() {
                       <Menu.Item>
                         {({ active }) => (
                           <Link
-                            href="/DashboardUser#2"
-                            target="_blank"
+                            href="/DashboardUser"
                             class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                            onClick={() => handleChangeStorage("2")}
                           >
                             <svg
                               class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -236,8 +244,9 @@ export default function Example() {
                       <Menu.Item>
                         {({ active }) => (
                           <Link
-                            href="/DashboardUser#4"
+                            href="/DashboardUser"
                             class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                            onClick={() => handleChangeStorage("4")}
                           >
                             <svg
                               class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
