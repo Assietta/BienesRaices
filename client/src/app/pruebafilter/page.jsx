@@ -195,7 +195,7 @@ export default function FilterComponent() {
   useEffect(() => {
     fetchData();
   }, []);
-  };
+  
 
   // //va a la siguiente pagina
   const goToNextPage = () => {
@@ -731,4 +731,4 @@ export default function FilterComponent() {
       </div>
     </div>
   );
-                  
+                        }    
