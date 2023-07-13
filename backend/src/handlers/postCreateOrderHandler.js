@@ -1,8 +1,8 @@
-const { RealState } = require("../db");
+const { RealState, User, Order } = require("../db");
 const mercadopago = require("mercadopago");
 require("dotenv").config();
 const orderTemplate = require('../mailsTemplate/postOrder');
-const { TOKEN_MP, HOST } = process.env;
+const { TOKEN_MP } = process.env;
 
 const createOrderHandler = async (req, res) => {
   const { id } = req.params;
@@ -158,3 +158,12 @@ const approved = async (req, res) => {
       console.error(error);
     });
 };
+
+
+
+
+
+
+
+
+
