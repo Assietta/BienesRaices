@@ -112,7 +112,7 @@ export default function Example() {
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
                   <div>
-                    <Menu.Button className="flex text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 z-50">
+                    <Menu.Button className="flex text-sm f">
                       <span className="sr-only">Open user menu</span>
 
                       <div className="hidden sm:ml-6 sm:block">
@@ -167,7 +167,7 @@ export default function Example() {
                         {({ active }) => (
                           <Link
                             href={
-                              session?.data?.user?.rol === "usuario"
+                              session?.data?.user?.rol === 'usuario'
                                 ? '/DashboardUser'
                                 : '/Dashboard'
                             }
