@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
@@ -24,16 +24,13 @@ export default function FavConteiner() {
       console.error(error);
     }
   };
-console.log(fav);
-
-
-
+  console.log(fav);
 
   return (
     <div id="last-incomes">
       <h1 className="font-bold py-4 uppercase">Favoritos</h1>
       <div id="stats" className="flex-1 overflow-y-scroll h-60">
-        {fav.map((prop) => (
+        {fav?.map((prop) => (
           <FavCard
             key={prop.id}
             id={prop.id}

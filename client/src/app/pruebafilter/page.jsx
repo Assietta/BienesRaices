@@ -5,19 +5,12 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import { MinusIcon, PlusIcon } from "@heroicons/react/20/solid";
 import axios from "axios";
 import FilterCardContainer from "./FilterCardContainer";
-import SearchBar from "../Components/SearchBar/SearchBar"
 import { useLocalStorage } from 'react-use';
 
 export default function FilterComponent() {
+  const [filtersStorage, setFiltersStorage] = useLocalStorage('filtersStorage', {});
 
-  const [localStorage, setLocalStorage] = useLocalStorage("localStorage",{});
-  
-  // const handleInputChange = (event) => {
-  //   setName(event.target.value);
-  // };
-  
-  
-  let filterOperation = [
+  const filterOperation = [
     {
       id: "Tipo de operacion",
       name: "Tipo de operacion",
@@ -119,19 +112,42 @@ export default function FilterComponent() {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    // console.log(filters);
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      [name]: value,
-    }));
+  
+    // Si el valor es vacío, elimina la propiedad del estado
+    if (value === "") {
+      setFilters((prevFilters) => {
+        const { [name]: removedProperty, ...updatedFilters } = prevFilters;
+        return updatedFilters;
+      });
+    } else {
+      // Si el valor no es vacío, actualiza la propiedad en el estado
+      setFilters((prevFilters) => ({
+        ...prevFilters,
+        [name]: value,
+      }));
+    }
   };
+
+  useEffect(()=>{
+    if(filtersStorage) {
+      axios
+      .post(`http://localhost:3001/filter`, filters)
+      .then((res) => {
+        if (res.data && res.data.length > 1) {
+          setPropiedad(res.data);
+          setTotalItemsFilter(res.data.length);
+          setCurrentPage(1);
+          console.log('filtre por localStorage');
+        }})
+    }
+  }, [])
 
   const handleClick = () => {
     axios
       .post(`http://localhost:3001/filter`, filters)
       .then((res) => {
         if (res.data && res.data.length > 1) {
-          setLocalStorage(filters)
+          setFiltersStorage(filters)
           setPropiedad(res.data);
           setTotalItemsFilter(res.data.length);
           setCurrentPage(1); // Regresar a la primera página al obtener nuevos datos
@@ -199,6 +215,7 @@ console.log(filters);
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
   }
+  
 
   return (
     <div className="bg-white">
