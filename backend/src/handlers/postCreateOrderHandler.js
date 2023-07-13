@@ -59,7 +59,10 @@ const createOrderHandler = async (req, res) => {
     //   }
     // };
 
-    res.send(preferenceId);
+    res.send({
+      preferenceId: preferenceId,
+      id: id,
+    });
     // const redirectUrl = `https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=${preferenceId}`;
     // res.send(redirectUrl);
   } catch (error) {
@@ -71,6 +74,7 @@ const createOrderHandler = async (req, res) => {
 const webhookHandler = async (req, res) => {
   // const payment= req.query.payment_id;
   const payment = req.query;
+  const { id } = req.body;
   // console.log(payment);
   // console.log(payment);
   try {
@@ -84,7 +88,7 @@ const webhookHandler = async (req, res) => {
       const user = await User.findOne({ where: { id: data.response.external_reference } }); // Asegúrate de que el modelo User exista y esté configurado correctamente
 
       // BUSCAR PROPERTY EN DB
-      const property = await RealState.findOne({ where: { id: data.response.description } }); // Asegúrate de que el modelo RealState exista y esté configurado correctamente
+      const property = await RealState.findOne({ where: { id: id } }); // Asegúrate de que el modelo RealState exista y esté configurado correctamente
 
       // console.log(data.response.description, "soy el id de propiedad!!!!");
       // console.log(data.response.external_reference ,"soy e id del cliente!!!!");
@@ -92,7 +96,7 @@ const webhookHandler = async (req, res) => {
       const newOrder = await Order.create({
         client_idDB: String(data?.response.external_reference),
         usernameDB: String(user?.dataValues.username),
-        property_idDB: String(data?.response.description),
+        property_idDB: String(id),
         address_of_property_to_reserveDB: String(property?.dataValues.address),
         date_created: String(data?.response.date_created),
         chain: String(data?.response.currency_id),
