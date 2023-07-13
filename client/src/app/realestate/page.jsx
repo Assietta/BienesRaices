@@ -33,7 +33,7 @@ export default function RealStateForm() {
     has_temporary_rent: '',
     location: '',
     price: '',
-    period: '',
+    period: '0',
     currency: '',
     operation_type: '',
     orientation: '',
