@@ -1,6 +1,6 @@
 const { Order } = require("../db.js");
 
-getOrdersController = async(req) => {
+const getOrdersController = async(req) => {
     try {
       let orders;
       if (req.query.payment_id) {
