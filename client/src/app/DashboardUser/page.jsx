@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import UsersDashboard from "./MensajesContados/MensajesPerfil/Mensajes";
 import PropiedadesDashboard from "./propiedades/propiedadesDashboard";
@@ -10,20 +10,71 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import FavConteiner from "./Favorites/FavConteiner";
 import Testimonials from "./testimonials/Testimonials";
+//import { useLocalStorage } from 'react-use';
 
 export default function Example() {
   const router = useRouter();
   const session = useSession();
-
+  // const [routeDashboard, setRouteDashboard] = useLocalStorage('routeDashboard', "");
+  const routeDashboard = window.localStorage.getItem('routeDashboard')
   if (session.status === "unauthenticated") router.push("/");
 
   const [showDashboard, setShowDashboard] = useState({
     Favorito: false,
-    Perfil: true,
+    Perfil: false,
     Mensaje: false,
     Configuration: false,
     Testimonials: false,
   });
+
+  useEffect(()=>{
+    console.log(routeDashboard.replace(/"/g, '') == 2, routeDashboard.replace(/"/g, ''));
+    if (routeDashboard.replace(/"/g, '') == 1) {
+      setShowDashboard({
+        Favorito: false,
+        Perfil: true,
+        Mensaje: false,
+        Configuracion: false,
+        Testimonials: false,
+      })
+    }
+    else if (routeDashboard.replace(/"/g, '') == 2) {
+      setShowDashboard({
+        Favorito: false,
+        Perfil: false,
+        Mensaje: true,
+        Configuracion: false,
+        Testimonials: false,
+      })
+    }
+    else if (routeDashboard.replace(/"/g, '') == 3) {
+      setShowDashboard({
+        Favorito: true,
+        Perfil: false,
+        Mensaje: false,
+        Configuracion: false,
+        Testimonials: false,
+      })
+    }
+    else if (routeDashboard.replace(/"/g, '') == 4) {
+      setShowDashboard({
+        Favorito: false,
+        Perfil: false,
+        Mensaje: false,
+        Configuracion: true,
+        Testimonials: false,
+      })
+    }
+    else if (routeDashboard.replace(/"/g, '') == 5) {
+      setShowDashboard({
+        Favorito: false,
+        Perfil: false,
+        Mensaje: false,
+        Configuracion: false,
+        Testimonials: true,
+      })
+    }
+  }, [])
 
   const showSection = (param) => {
     setShowDashboard((prevState) => ({
@@ -35,6 +86,10 @@ export default function Example() {
       [param]: true,
     }));
   };
+
+
+
+  console.log(showDashboard);
 
   return (
     <div className="bg-white">
@@ -49,7 +104,7 @@ export default function Example() {
               className="flex flex-col space-y-2 md:space-y-0 md:flex-row mb-5 items-center md:space-x-2 hover:bg-white/10 group transition duration-150 ease-linear rounded-lg group w-full py-3 px-2"
             >
               <div>
-                {session.status === "authenticated" ? (
+                {session.status === 'authenticated' ? (
                   <Image
                     className="rounded-full w-10 h-10 relative object-cover"
                     src={session.data.user.image}
@@ -58,14 +113,14 @@ export default function Example() {
                     width={100}
                   />
                 ) : (
-                  ""
+                  ''
                 )}
               </div>
               <div>
                 <p className="font-medium group-hover:text-indigo-400 leading-4">
-                  {session.status === "authenticated"
+                  {session.status === 'authenticated'
                     ? session.data.user.username || session.data.user.name
-                    : ""}
+                    : ''}
                 </p>
                 <span className="text-xs text-slate-400">MR Inmobiliaria</span>
               </div>
@@ -75,7 +130,7 @@ export default function Example() {
               <a
                 href="#1"
                 className="hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group"
-                onClick={() => showSection("Perfil")}
+                onClick={() => showSection('Perfil')}
               >
                 <div className="flex flex-col space-y-2 md:flex-row md:space-y-0 space-x-2 items-center">
                   <div>
@@ -107,7 +162,7 @@ export default function Example() {
               <a
                 href="#2"
                 className="hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group"
-                onClick={() => showSection("Mensaje")}
+                onClick={() => showSection('Mensaje')}
               >
                 <div className="relative flex flex-col space-y-2 md:flex-row md:space-y-0 space-x-2 items-center">
                   <div>
@@ -134,15 +189,12 @@ export default function Example() {
                       Ver/Responder Mensajes
                     </p>
                   </div>
-                  <div className="absolute -top-3 -right-3 md:top-0 md:right-0 px-2 py-1.5 rounded-full bg-indigo-800 text-xs font-mono font-bold">
-                    23
-                  </div>
                 </div>
               </a>
               <a
                 href="#3"
                 className="hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group"
-                onClick={() => showSection("Favorito")}
+                onClick={() => showSection('Favorito')}
               >
                 <div className="flex flex-col space-y-2 md:flex-row md:space-y-0 space-x-2 items-center">
                   <div>
@@ -179,7 +231,7 @@ export default function Example() {
               <a
                 href="#4"
                 className="hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group"
-                onClick={() => showSection("Configuration")}
+                onClick={() => showSection('Configuration')}
               >
                 <div className="flex flex-col space-y-2 md:flex-row md:space-y-0 space-x-2 items-center">
                   <div>
@@ -209,9 +261,9 @@ export default function Example() {
                 </div>
               </a>
               <a
-                href="#4"
+                href="#5"
                 className="hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group"
-                onClick={() => showSection("Testimonials")}
+                onClick={() => showSection('Testimonials')}
               >
                 <div className="flex flex-col space-y-2 md:flex-row md:space-y-0 space-x-2 items-center">
                   <div>
@@ -245,7 +297,7 @@ export default function Example() {
           <div id="content" className="bg-white/10 col-span-9 rounded-lg p-6">
             {showDashboard.Perfil && (
               <>
-                <PropiedadesDashboard />
+                <FavConteiner />
                 <Mensajes />
               </>
             )}

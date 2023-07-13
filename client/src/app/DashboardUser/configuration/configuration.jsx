@@ -16,6 +16,7 @@ import {
 } from "@material-tailwind/react";
 
 export default function FormInfo() {
+  const[refresh,setRefresh] = useState(false)
   const [selectedForm, setSelectedForm] = useState(null);
   const [userPassword, setUserPassword] = useState();
   
@@ -39,8 +40,11 @@ export default function FormInfo() {
   };
 
   useEffect(() => {
-    fetchPassword(id);
+    fetchPassword(id)
+
   }, []);
+
+ 
 
   const handleFormClick = (formId) => {
     if (selectedForm === formId) {
@@ -138,10 +142,10 @@ export default function FormInfo() {
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-
-      await axios.put(`https://bienesraices-production-9eb3.up.railway.app/users/${id}`, formInfoData);
+      await axios.put(`https://bienesraices-production-9eb3.up.railway.app/users/${id}`, formInfoData).then(()=>{window.location.reload()})
       alert("Informacion Actualizada");
       clearFormInfo();
+
     }
   };
 
