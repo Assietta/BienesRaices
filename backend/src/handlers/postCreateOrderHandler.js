@@ -1,4 +1,4 @@
-const { RealState } = require("../db");
+const { RealState, Order, User } = require("../db");
 const mercadopago = require("mercadopago");
 require("dotenv").config();
 
@@ -19,7 +19,7 @@ const createOrderHandler = async (req, res) => {
     // const price= parseFloat(property?.operations[0]?.prices[0]?.price) * 0.000001
 
     const price = parseFloat(property?.price) * 0.001;
-    const address = property?.address
+    const address = property?.address;
 
     const result = await mercadopago.preferences.create({
       items: [
@@ -38,7 +38,7 @@ const createOrderHandler = async (req, res) => {
       },
       auto_return: "approved",
       external_reference: userId,
-      notification_url: "https://984b-190-174-229-190.ngrok-free.app/webhook",
+      notification_url: "https://7fc8-181-165-110-105.ngrok-free.app",
     });
 
     const preferenceId = result.response.id;
@@ -128,7 +128,10 @@ const webhookHandler = async (req, res) => {
   }
 };
 
-module.exports = { createOrderHandler, webhookHandler };
+module.exports = {
+  createOrderHandler,
+  webhookHandler,
+};
 
 // try {
 //   const response = await axios.get(`https://api.mercadopago.com/v1/payments/${payment}`, {

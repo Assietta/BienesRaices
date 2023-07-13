@@ -8,13 +8,29 @@ import DashboardUser from "./users/DashboardUser";
 import DashboardContacts from "./contacts/DashboardContacts";
 import DashboardOrders from "./orders/DashboardOrders";
 import GeneralDashboard from "./general/GeneralDashboard";
+import DashboardTestimonials from "./testimonials/DashboardTestimonials";
 
 export default function Example() {
   const [selectedMenu, setSelectedMenu] = useState("dashboard");
   const session = useSession();
   const [viewUsers, setViewUsers] = useState([]);
   const [contacts, setContacts] = useState([]);
+  const [testimonials, setTestimonials] = useState([]);
 
+  useEffect(() => {
+    fetchTestimonials();
+  }, []);
+
+  const fetchTestimonials = async () => {
+    try {
+      const response = await axios.get(`http://localhost:3001/testimonials/`);
+      const data = response.data;
+      setTestimonials(data);
+    } catch (error) {
+      // Manejar el error de la solicitud
+      console.error(error);
+    }
+  };
   useEffect(() => {
     fetchDataUsers();
   }, []);
@@ -260,6 +276,40 @@ export default function Example() {
                     </p>
                     <p className="text-slate-400 text-sm hidden md:block">
                       Opciones de usuarios
+                    </p>
+                  </div>
+                </div>
+              </a>
+              <a
+                href="#"
+                className={`hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group ${
+                  selectedMenu === "dashboard" ? "bg-white/10" : ""
+                }`}
+                onClick={() => setSelectedMenu("reviews")}
+              >
+                <div className="flex flex-col space-y-2 md:flex-row md:space-y-0 space-x-2 items-center">
+                  <div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="w-6 h-6 group-hover:text-indigo-400"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"
+                      />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="font-bold text-base lg:text-lg text-slate-200 leading-4 group-hover:text-indigo-400">
+                      Reviews
+                    </p>
+                    <p className="text-slate-400 text-sm hidden md:block">
+                      Reviews de usuarios
                     </p>
                   </div>
                 </div>
@@ -530,6 +580,63 @@ export default function Example() {
                       />
                     ))}
                   </div>
+                </div>
+              )}
+              {selectedMenu === "orders" && (
+                <div id="last-users">
+                  <h1 className="font-bold py-4 uppercase">Reservas</h1>
+                  <div
+                    id="stats"
+                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+                  >
+                    {filteredOrders.map((order) => (
+                      <DashboardOrders
+                        key={order.id}
+                        id={order.id}
+                        paymentId={order.payment_id}
+                        address={order.address_of_property_to_reserveDB}
+                        monto={order.transaction_amount}
+                        username={order.usernameDB}
+                        email={order.payer_emailDB}
+                        status={order.status_approved_rejected}
+                        acreditacion={order.status_detail_accredited}
+                        date={order.date_approved}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+              {selectedMenu === "reviews" && (
+                <div id="last-users">
+                  <h1 className="font-bold py-4 uppercase">
+                    Reviews de usuarios
+                  </h1>
+                  <table className="w-full whitespace-nowrap">
+                    <thead className="bg-black/60">
+                      <tr>
+                        <th className="text-left py-3 px-2 rounded-l-lg">
+                          Usuario
+                        </th>
+                        <th className="text-left py-3 px-2">Rating</th>
+                        <th className="text-left py-3 px-2">Mensaje</th>
+                        <th className="text-left py-3 px-2 rounded-r-lg">
+                          Mostrar review
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {testimonials.map((testimonial) => (
+                        <DashboardTestimonials
+                          id={testimonial.id}
+                          userId={testimonial.userId}
+                          username={testimonial.username}
+                          rating={testimonial.rating}
+                          text={testimonial.text}
+                          disabled={testimonial.disabled}
+                        />
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
               )}
             </div>
