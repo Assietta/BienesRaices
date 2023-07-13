@@ -1,3 +1,4 @@
+"use client";
 // import { useState, useEffect } from "react";
 import Gallery from "./gallery";
 import Map from "./map";

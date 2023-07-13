@@ -1,17 +1,13 @@
 "use client";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
-
-import UsersDashboard from "./users/usersDashboard";
 import PropiedadesDashboard from "./propiedades/propiedadesDashboard";
-import OrdersDashboard from "./orders/ordersDashboard";
-
 import DashboardUser from "./users/DashboardUser";
 import DashboardContacts from "./contacts/DashboardContacts";
 import DashboardOrders from "./orders/DashboardOrders";
 import GeneralDashboard from "./general/GeneralDashboard";
-import axios from "axios";
-import { useSession } from "next-auth/react";
 
 export default function Example() {
   const [selectedMenu, setSelectedMenu] = useState("dashboard");
@@ -60,12 +56,21 @@ export default function Example() {
     0
   );
 
+  const formattedTotalAmount = new Intl.NumberFormat("es-AR", {
+    style: "currency",
+    currency: "ARS",
+  }).format(totalAmount);
+
   const autenticated = () => {
     if (session.status === "authenticated") {
       return true;
     } else session.status === "unauthenticated";
     return false;
   };
+
+  useEffect(() => {
+    fetchDataContacts();
+  }, []);
 
   const fetchDataContacts = async () => {
     try {
@@ -77,9 +82,6 @@ export default function Example() {
       console.error(error);
     }
   };
-  useEffect(() => {
-    fetchDataContacts();
-  }, []);
 
   return (
     <div className="bg-white">
@@ -160,7 +162,7 @@ export default function Example() {
                   </div>
                 </div>
               </a>
-              <a
+              {/* <a
                 href="#"
                 className={`hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group ${
                   selectedMenu === "dashboard" ? "bg-white/10" : ""
@@ -193,7 +195,7 @@ export default function Example() {
                     </p>
                   </div>
                 </div>
-              </a>
+              </a> */}
               <a
                 href="#"
                 className={`hover:bg-white/10 hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group ${
@@ -375,7 +377,7 @@ export default function Example() {
                         Ingresos
                       </p>
                       <p className="text-white font-bold text-2xl inline-flex items-center space-x-2">
-                        <span>{totalAmount}</span>
+                        <span>{formattedTotalAmount}</span>
                         <span>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -443,10 +445,6 @@ export default function Example() {
               </div>
             </div>
             <div id="content" className="bg-white/10 col-span-9 rounded-lg p-6">
-              {selectedMenu === "dashboard" && (
-                <div id="24h">{/* <PropiedadesDashboard /> */}</div>
-              )}
-
               {selectedMenu === "dashboard" && <GeneralDashboard />}
               {selectedMenu === "users" && (
                 <div id="last-users">
@@ -460,7 +458,7 @@ export default function Example() {
                         <th className="text-left py-3 px-2">Email</th>
                         <th className="text-left py-3 px-2">Rol</th>
                         <th className="text-left py-3 px-2 rounded-r-lg">
-                          Actions
+                          Deshabilitar
                         </th>
                       </tr>
                     </thead>
@@ -509,7 +507,7 @@ export default function Example() {
                   </table>
                 </div>
               )}
-              {selectedMenu === "propiedades" && <PropiedadesDashboard />}
+              {/* {selectedMenu === "propiedades" && <PropiedadesDashboard />} */}
               {selectedMenu === "orders" && (
                 <div id="last-users">
                   <h1 className="font-bold py-4 uppercase">Reservas</h1>

@@ -19,11 +19,12 @@ const createOrderHandler = async (req, res) => {
     // const price= parseFloat(property?.operations[0]?.prices[0]?.price) * 0.000001
 
     const price = parseFloat(property?.price) * 0.001;
+    const address = property?.address
 
     const result = await mercadopago.preferences.create({
       items: [
         {
-          title: id,
+          title: `${address} 1% del valor total`,
           quantity: 1,
           currency_id: property?.currency,
           unit_price: price,
@@ -31,9 +32,9 @@ const createOrderHandler = async (req, res) => {
       ],
 
       back_urls: {
-        success: `http://localhost:3001/success`,
-        failure: `http://localhost:3001/failure`,
-        pending: `http://localhost:3001/pending`,
+        success: `http://localhost:3000/Success`,
+        failure: `http://localhost:3000/Failure`,
+        pending: `http://localhost:3000/Pending`,
       },
       auto_return: "approved",
       external_reference: userId,
