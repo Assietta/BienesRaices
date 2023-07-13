@@ -36,9 +36,9 @@ const createOrderHandler = async (req, res) => {
 
 
       back_urls: {
-        success: "https://bienesraices-production-888d.up.railway.app/Success",
-        failure: "https://bienesraices-production-888d.up.railway.app/Failure",
-        pending: "https://bienesraices-production-888d.up.railway.app/Pending",
+        success: "https://bienesraices-production-9eb3.up.railway.app/success",
+        failure: "https://bienesraices-production-9eb3.up.railway.app/failure",
+        pending: "https://bienesraices-production-9eb3.up.railway.app/pending",
       },
       auto_return: "approved",
       external_reference: userId,
