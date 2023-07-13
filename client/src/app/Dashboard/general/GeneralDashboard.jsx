@@ -54,9 +54,6 @@ export default function GeneralDashboard() {
               Crear Propiedad
             </button>
           </Link>
-          <button className="bg-red-600 text-black rounded-xl w-auto p-3 m-2">
-            Eliminar Propiedad
-          </button>
         </div>
       </div>
     </>
