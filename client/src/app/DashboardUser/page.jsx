@@ -104,7 +104,7 @@ export default function Example() {
               className="flex flex-col space-y-2 md:space-y-0 md:flex-row mb-5 items-center md:space-x-2 hover:bg-white/10 group transition duration-150 ease-linear rounded-lg group w-full py-3 px-2"
             >
               <div>
-                {session.status === "authenticated" ? (
+                {session.status === 'authenticated' ? (
                   <Image
                     className="rounded-full w-10 h-10 relative object-cover"
                     src={session.data.user.image}
@@ -113,14 +113,14 @@ export default function Example() {
                     width={100}
                   />
                 ) : (
-                  ""
+                  ''
                 )}
               </div>
               <div>
                 <p className="font-medium group-hover:text-indigo-400 leading-4">
-                  {session.status === "authenticated"
+                  {session.status === 'authenticated'
                     ? session.data.user.username || session.data.user.name
-                    : ""}
+                    : ''}
                 </p>
                 <span className="text-xs text-slate-400">MR Inmobiliaria</span>
               </div>
@@ -130,7 +130,7 @@ export default function Example() {
               <a
                 href="#1"
                 className="hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group"
-                onClick={() => showSection("Perfil")}
+                onClick={() => showSection('Perfil')}
               >
                 <div className="flex flex-col space-y-2 md:flex-row md:space-y-0 space-x-2 items-center">
                   <div>
@@ -162,7 +162,7 @@ export default function Example() {
               <a
                 href="#2"
                 className="hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group"
-                onClick={() => showSection("Mensaje")}
+                onClick={() => showSection('Mensaje')}
               >
                 <div className="relative flex flex-col space-y-2 md:flex-row md:space-y-0 space-x-2 items-center">
                   <div>
@@ -189,15 +189,12 @@ export default function Example() {
                       Ver/Responder Mensajes
                     </p>
                   </div>
-                  <div className="absolute -top-3 -right-3 md:top-0 md:right-0 px-2 py-1.5 rounded-full bg-indigo-800 text-xs font-mono font-bold">
-                    23
-                  </div>
                 </div>
               </a>
               <a
                 href="#3"
                 className="hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group"
-                onClick={() => showSection("Favorito")}
+                onClick={() => showSection('Favorito')}
               >
                 <div className="flex flex-col space-y-2 md:flex-row md:space-y-0 space-x-2 items-center">
                   <div>
@@ -234,7 +231,7 @@ export default function Example() {
               <a
                 href="#4"
                 className="hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group"
-                onClick={() => showSection("Configuration")}
+                onClick={() => showSection('Configuration')}
               >
                 <div className="flex flex-col space-y-2 md:flex-row md:space-y-0 space-x-2 items-center">
                   <div>
@@ -266,7 +263,7 @@ export default function Example() {
               <a
                 href="#5"
                 className="hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group"
-                onClick={() => showSection("Testimonials")}
+                onClick={() => showSection('Testimonials')}
               >
                 <div className="flex flex-col space-y-2 md:flex-row md:space-y-0 space-x-2 items-center">
                   <div>
@@ -300,7 +297,7 @@ export default function Example() {
           <div id="content" className="bg-white/10 col-span-9 rounded-lg p-6">
             {showDashboard.Perfil && (
               <>
-                <PropiedadesDashboard />
+                <FavConteiner />
                 <Mensajes />
               </>
             )}
