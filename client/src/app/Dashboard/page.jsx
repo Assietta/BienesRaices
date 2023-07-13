@@ -157,7 +157,7 @@ export default function Example() {
                   </div>
                 </div>
               </a>
-              <a
+              {/* <a
                 href="#"
                 className={`hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group ${
                   selectedMenu === "dashboard" ? "bg-white/10" : ""
@@ -190,7 +190,7 @@ export default function Example() {
                     </p>
                   </div>
                 </div>
-              </a>
+              </a> */}
               <a
                 href="#"
                 className={`hover:bg-white/10 hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group ${
@@ -440,10 +440,6 @@ export default function Example() {
               </div>
             </div>
             <div id="content" className="bg-white/10 col-span-9 rounded-lg p-6">
-              {selectedMenu === "dashboard" && (
-                <div id="24h">{/* <PropiedadesDashboard /> */}</div>
-              )}
-
               {selectedMenu === "dashboard" && <GeneralDashboard />}
               {selectedMenu === "users" && (
                 <div id="last-users">
@@ -506,7 +502,7 @@ export default function Example() {
                   </table>
                 </div>
               )}
-              {selectedMenu === "propiedades" && <PropiedadesDashboard />}
+              {/* {selectedMenu === "propiedades" && <PropiedadesDashboard />} */}
               {selectedMenu === "orders" && (
                 <div id="last-users">
                   <h1 className="font-bold py-4 uppercase">Reservas</h1>
