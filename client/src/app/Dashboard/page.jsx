@@ -56,9 +56,9 @@ export default function Example() {
     0
   );
 
-  const formattedTotalAmount = new Intl.NumberFormat('es-AR', {
-    style: 'currency',
-    currency: 'ARS',
+  const formattedTotalAmount = new Intl.NumberFormat("es-AR", {
+    style: "currency",
+    currency: "ARS",
   }).format(totalAmount);
 
   const autenticated = () => {

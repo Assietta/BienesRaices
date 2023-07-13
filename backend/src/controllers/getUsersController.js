@@ -1,6 +1,6 @@
 const { User } = require("../db.js");
 
-getUsersController = async(req) => {
+const getUsersController = async(req) => {
     try {
       let users;
       if (req.query.id) {
