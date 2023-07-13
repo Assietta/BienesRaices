@@ -76,7 +76,6 @@ const webhookHandler = async (req, res) => {
   try {
     if (payment.type === "payment") {
       const data = await mercadopago.payment.findById(payment["data.id"]);
-      console.log(data);
       // console.log(data);
 
       // BUSCAR USER EN DB
@@ -90,12 +89,12 @@ const webhookHandler = async (req, res) => {
       // GUARDAR REGISTRO EN ORDERS
       const newOrder = await Order.create({
         client_idDB: String(data?.response.external_reference),
-        usernameDB: String(user.dataValues.username),
-        property_idDB: String(data.response.description),
-        address_of_property_to_reserveDB: String(property.dataValues.address),
-        date_created: String(data.response.date_created),
-        chain: String(data.response.currency_id),
-        transaction_amount: String(data.response.transaction_amount),
+        usernameDB: String(user?.dataValues.username),
+        property_idDB: String(data?.response.description),
+        address_of_property_to_reserveDB: String(property?.dataValues.address),
+        date_created: String(data?.response.date_created),
+        chain: String(data?.response.currency_id),
+        transaction_amount: String(data?.response.transaction_amount),
         date_approved: String(data?.response.date_approved),
         payment_id: String(data?.response.id),
         payer_first_nameMP: String(data?.response.payer["first_name"]),
