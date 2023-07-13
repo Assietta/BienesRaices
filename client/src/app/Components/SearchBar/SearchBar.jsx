@@ -1,6 +1,9 @@
 import styles from './SearchBar.module.css';
+import { useState } from 'react';
 
-export const SearchBar = ({ searchCountry }) => {
+export default function SearchBar ({ searchCountry }) {
+
+
   const handleChange = (e) => {
     searchCountry(e.target.value);
   };
