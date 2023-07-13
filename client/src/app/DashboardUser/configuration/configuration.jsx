@@ -142,7 +142,7 @@ export default function FormInfo() {
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      await axios.put(`https://bienesraices-production-9eb3.up.railway.app/users/${id}`, formInfoData).then(()=>{window.location.reload()})
+      await axios.put(`https://bienesraices-production-9eb3.up.railway.app/users/${id}`, formInfoData)
       alert("Informacion Actualizada");
       clearFormInfo();
 
