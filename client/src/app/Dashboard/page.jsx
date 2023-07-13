@@ -52,7 +52,7 @@ export default function Example() {
   });
   // Calcula la suma de los montos de cada orden
   const totalAmount = filteredOrders.reduce(
-    (sum, order) => sum + order.transaction_amount,
+    (sum, order) => sum + Number(order.transaction_amount),
     0
   );
 
