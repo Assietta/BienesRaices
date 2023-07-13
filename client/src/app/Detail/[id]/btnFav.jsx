@@ -17,7 +17,7 @@ export default function BtnFav(props) {
   })
 
   useEffect(() => {
-    if (status === "authenticated" && session?.user?.favorites?.includes(id)) {
+    if (status === "authenticated" && session?.user?.favorites?.some(favorite => favorite.id === id)) {
       setIsFavorite(true);
     } else {
       setIsFavorite(false);

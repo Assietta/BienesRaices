@@ -79,23 +79,17 @@ const webhookHandler = async (req, res) => {
   try {
     if (payment.type === "payment") {
       const data = await mercadopago.payment.findById(payment["data.id"]);
-      // console.log(data);
-      console.log(data?.response, "JAJAJAJAJAJA");
-      console.log(data.response.description, "soy el id de propiedad!!!!");
-      console.log(data.response.external_reference ,"soy e id del cliente!!!!");
       // BUSCAR USER EN DB
       const user = await User.findOne({ where: { id: data.response.external_reference } }); // Asegúrate de que el modelo User exista y esté configurado correctamente
 
       // BUSCAR PROPERTY EN DB
       const property = await RealState.findOne({ where: { id: propId } }); // Asegúrate de que el modelo RealState exista y esté configurado correctamente
 
-      // console.log(data.response.description, "soy el id de propiedad!!!!");
-      // console.log(data.response.external_reference ,"soy e id del cliente!!!!");
       // GUARDAR REGISTRO EN ORDERS
       const newOrder = await Order.create({
         client_idDB: String(data?.response.external_reference),
         usernameDB: String(user?.dataValues.username),
-        property_idDB: String(id),
+        property_idDB: String(propId),
         address_of_property_to_reserveDB: String(property?.dataValues.address),
         date_created: String(data?.response.date_created),
         chain: String(data?.response.currency_id),
