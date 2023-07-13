@@ -72,24 +72,24 @@ export default function Example() {
                 </Disclosure.Button>
               </div>
               <Link key="/" href="/">
-              <div className="flex items-center justify-center sm:items-stretch sm:justify-start">
-                <div className="flex flex-shrink-0 items-center">
-                  {/* <Image
+                <div className="flex items-center justify-center sm:items-stretch sm:justify-start">
+                  <div className="flex flex-shrink-0 items-center">
+                    {/* <Image
                     className="block h-16 w-auto lg:hidden"
                     src="https://i.ibb.co/pzFrvn1/logo-png-white.png"
                     alt="Your Company"
                     width={100}
                     height={100}
                   /> */}
-                  <Image
-                    className="hidden h-16 w-auto lg:block"
-                    src="https://i.ibb.co/pzFrvn1/logo-png-white.png"
-                    alt="Your Company"
-                    width={100}
-                    height={100}
-                  />
+                    <Image
+                      className="hidden h-16 w-auto lg:block"
+                      src="https://i.ibb.co/pzFrvn1/logo-png-white.png"
+                      alt="Your Company"
+                      width={100}
+                      height={100}
+                    />
+                  </div>
                 </div>
-              </div>
               </Link>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="hidden sm:ml-6 sm:block justify-center align-center">
@@ -125,7 +125,7 @@ export default function Example() {
                               Iniciar sesión
                             </Link>
                           ) : (
-                            <div  className="flex rounded-full bg-gray-800">
+                            <div className="flex rounded-full bg-gray-800">
                               <button
                                 onClick={() => setShowProfile(!showProfile)}
                               >
