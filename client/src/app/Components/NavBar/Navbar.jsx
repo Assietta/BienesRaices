@@ -185,7 +185,11 @@ export default function Example() {
                                 clip-rule="evenodd"
                               ></path>
                             </svg>
-                            <span class="ml-3">Mi perfil</span>
+                            {session?.data?.user?.rol === 'usuario' ? (
+                              <span class="ml-3">Mi perfil</span>
+                            ) : (
+                              <span class="ml-3">Panel de control</span>
+                            )}
                           </Link>
                         )}
                       </Menu.Item>

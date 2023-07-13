@@ -1,13 +1,13 @@
-"use client";
-import axios from "axios";
-import { useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
-import FavCard from "./FavCard";
+'use client';
+import axios from 'axios';
+import { useSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
+import FavCard from './FavCard';
 
 export default function FavConteiner() {
   const [fav, setFav] = useState([]);
   const session = useSession();
-  const { id } = session.data.user;
+  const id = session?.data?.user?.id;
 
   useEffect(() => {
     fetchFav(id);
@@ -18,13 +18,13 @@ export default function FavConteiner() {
       const response = await axios.get(`http://localhost:3001/users/${id}`);
       const listFav = response.data.favorites;
       setFav(listFav);
-      console.log(listFav, "esto es list fav");
+      console.log(listFav, 'esto es list fav');
     } catch (error) {
       // Manejar el error de la solicitud
       console.error(error);
     }
   };
-  console.log(fav);
+  console.log(id);
 
   return (
     <div id="last-incomes">
