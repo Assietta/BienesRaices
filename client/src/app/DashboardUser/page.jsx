@@ -208,9 +208,7 @@ export default function Example() {
                 </div>
               </a>
             </div>
-            <p className="text-sm text-center text-gray-600">
-              v2.0.0.3 | &copy; 2023
-            </p>
+
           </div>
           <div id="content" className="bg-white/10 col-span-9 rounded-lg p-6">
             {showDashboard.Perfil && (
