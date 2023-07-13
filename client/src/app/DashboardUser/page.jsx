@@ -220,7 +220,7 @@ export default function Example() {
               </>
             )}
             {showDashboard.Mensaje && <MensajesVista />}
-            {showDashboard.Configuration && <FormInfoP />}
+            {showDashboard.Configuration && <Configuration />}
             {showDashboard.Favorito && <FavConteiner />}
           </div>
         </div>

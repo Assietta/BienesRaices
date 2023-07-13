@@ -1,150 +1,133 @@
-"use client"
 import { useState } from "react";
 import Title from "./title";
-import validateForm  from "./validates";
+import validateForm from "./validates";
 import axios from "axios";
 import { useSession } from "next-auth/react";
-import validatePassword from "./validatesPassword"
-import bcrypt from 'bcryptjs'
+import validatePassword from "./validatesPassword";
+import bcrypt from "bcryptjs";
 import { useEffect } from "react";
-import validateDelete from "./validatesDelete"
-import validateEmail from "./validatesEmail"
+import validateDelete from "./validatesDelete";
+import validateEmail from "./validatesEmail";
+import { Fragment } from "react";
+import {
+  Accordion,
+  AccordionHeader,
+  AccordionBody,
+} from "@material-tailwind/react";
 
-
-
-export default function FormInfo () {
+export default function FormInfo() {
   const [selectedForm, setSelectedForm] = useState(null);
   const [userPassword, setUserPassword] = useState();
-
+  
+  const [open, setOpen] = useState(1);
+ 
+  const handleOpen = (value) => {
+    setOpen(open === value ? 0 : value);
+  };
   const session = useSession();
-  const { id, username,} = session.data.user
-
+  const { id, username } = session.data.user;
 
   const fetchPassword = async (id) => {
-
     try {
       const response = await axios.get(`http://localhost:3001/users/${id}`);
-
       const password = response.data.password;
-
- 
       setUserPassword(password);
     } catch (error) {
-      // Manejar el error de la solicitud
       console.error(error);
     }
   };
+
   useEffect(() => {
     fetchPassword(id);
-  }, )
-
-
-
-
-
-
+  }, []);
 
   const handleFormClick = (formId) => {
-    setSelectedForm(formId);
+    if (selectedForm === formId) {
+      setSelectedForm(null); // Cierra el formulario si se hace clic en el mismo elemento
+    } else {
+      setSelectedForm(formId);
+    }
   };
 
   const [formInfoData, setFormInfoData] = useState({
-   username:""
-
+    username: ""
   });
+
   const [formPasswordData, setFormPasswordData] = useState({
     password: "",
     newPassword: "",
-    repeatNewPassword: "",
-
+    repeatNewPassword: ""
   });
 
   const [formEmailData, setFormEmailData] = useState({
-    password:"",
+    password: "",
     newEmail: "",
-    repeatNewEmail: "",
-
+    repeatNewEmail: ""
   });
 
   const [formDeleteData, setFormDeleteData] = useState({
-    deleteAccountPassword: "",
+    deleteAccountPassword: ""
   });
-
-
-
 
   const [errors, setErrors] = useState({});
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-
     setFormInfoData((prevFormData) => ({
-
       ...prevFormData,
-      [name]: value,
+      [name]: value
     }));
   };
-
 
   const handleInputChangeP = (event) => {
     const { name, value } = event.target;
     setFormPasswordData((prevFormData) => ({
       ...prevFormData,
-      [name]: value,
+      [name]: value
     }));
   };
 
   const handleInputChangeEmail = (event) => {
     const { name, value } = event.target;
-
     setFormEmailData((prevFormData) => ({
       ...prevFormData,
-      [name]: value,
+      [name]: value
     }));
   };
-
-
 
   const handleInputChangeD = (event) => {
     const { name, value } = event.target;
     setFormDeleteData((prevFormData) => ({
       ...prevFormData,
-      [name]: value,
+      [name]: value
     }));
   };
 
-
   const clearFormInfo = () => {
     setFormInfoData({
-      username:""
-
-
+      username: ""
     });
   };
+
   const clearFormPassword = () => {
     setFormPasswordData({
       password: "",
       newPassword: "",
-      repeatNewPassword: "",
-
-
+      repeatNewPassword: ""
     });
   };
-  
+
   const clearFormInfoD = () => {
     setFormDeleteData({
-      deleteAccountPassword: "",
-
-
+      deleteAccountPassword: ""
     });
   };
+
   const clearFormInfoEmail = () => {
-    setFormDeleteData({
-      password:"",
+    setFormEmailData({
+      password: "",
       newEmail: "",
       repeatNewEmail: ""
-
-
     });
   };
 
@@ -154,31 +137,24 @@ export default function FormInfo () {
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-
       await axios.put(`http://localhost:3001/users/${id}`, formInfoData);
       alert("Informacion Actualizada");
-
       clearFormInfo();
     }
   };
+
   const handleSubmitInfoEmail = async (event) => {
     event.preventDefault();
     const validationErrors = await validateEmail(formEmailData, userPassword);
     setErrors(validationErrors);
 
-
     if (Object.keys(validationErrors).length === 0) {
-      let send = {email:formEmailData.repeatNewEmail};
-
+      let send = { email: formEmailData.repeatNewEmail };
       await axios.put(`http://localhost:3001/users/${id}`, send);
       alert("Informacion Actualizada");
-
       clearFormInfoEmail();
     }
   };
-
-
-
 
   const handleSubmitPassword = async (event) => {
     event.preventDefault();
@@ -186,11 +162,9 @@ export default function FormInfo () {
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      let send = {password:formPasswordData.repeatNewPassword};
-    
+      let send = { password: formPasswordData.repeatNewPassword };
       await axios.put(`http://localhost:3001/users/${id}`, send);
       alert("Informacion Actualizada");
-
       clearFormPassword();
     }
   };
@@ -201,27 +175,24 @@ export default function FormInfo () {
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      let send= {disabled:true}
-
-    
-      await axios.put(`http://localhost:3001/users/${id}`, send );
+      let send = { disabled: true };
+      await axios.put(`http://localhost:3001/users/${id}`, send);
       alert("Informacion Actualizada");
-
       clearFormInfoD();
     }
   };
 
-
-
   return (
-    <div id="accordion-collapse" data-accordion="collapse">
-
-
-
-      <h2 onClick={() => handleFormClick('form1')}>Datos Personales</h2>
-      {selectedForm === 'form1' && (
-      <div id = "form1" className="border-b border-gray-700 mt-16">
-      <Title tit="Datos Personales" sub="Completa tus datos personales." />
+    <div>
+            <Title tit="Configuracion" sub="   " />
+       <Fragment>
+      <Accordion open={open === 1}>
+        <AccordionHeader onClick={() => handleOpen(1)}>
+Datos Personales
+        </AccordionHeader>
+        <AccordionBody>
+        <div id = "form1" className="border-b border-gray-700 mt-16">
+      <Title tit=" " sub="Completa tus datos personales." />
       {/* datos personales */}
       <form onSubmit={handleSubmitInfo} className="mb-8">
         {/* input Name */}
@@ -239,21 +210,7 @@ export default function FormInfo () {
           />
           {errors.username && <p>{errors.username}</p>}
         </div>
-        {/* input apellido */}
-        {/* <div className="mb-3 space-y-2 w-full text-xs ">
-          <label className="font-semibold text-gray-600 py-2">
-            Apellido  
-          </label>
-          <input
-            className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
-            type="text"
-            name="lastName"
-            placeholder={username.split(" ")[1]}
-            value={formInfoData.lastName}
-            onChange={handleInputChange}
-          />
-          {errors.lastName && <p>{errors.lastName}</p>}
-        </div>*/}
+
         <button
                   className="mb-2 md:mb-0 bg-green-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500"
                   type="submit"
@@ -262,16 +219,16 @@ export default function FormInfo () {
                 </button> 
       </form>
     </div>
-      )}
-
-
-
-
- <h2 onClick={() => handleFormClick('form2')}>Cambiar contraseña</h2>
-      {selectedForm === 'form2' && (
-           <div id ="form 2" className="border-b border-gray-700 mt-16">
+        </AccordionBody>
+      </Accordion>
+      <Accordion open={open === 2}>
+        <AccordionHeader onClick={() => handleOpen(2)}>
+          Cambiar Contraseña
+        </AccordionHeader>
+        <AccordionBody>
+        <div id ="form 2" className="border-b border-gray-700 mt-16">
            <Title
-             tit="Cambiar contraseña"
+             tit=" "
              sub="Modfica la contraseña de tu cuenta"
           />
 
@@ -345,12 +302,14 @@ export default function FormInfo () {
              </button>
            </form>
          </div>
-      )} 
-
-
-<h2 onClick={() => handleFormClick('form3')}>Cambiar email</h2>
-      {selectedForm === 'form3' && (
-             <div id="form3"  className="border-b border-gray-700 mt-16">
+        </AccordionBody>
+      </Accordion>
+      <Accordion open={open === 3}>
+        <AccordionHeader onClick={() => handleOpen(3)}>
+          Cambiar Email
+        </AccordionHeader>
+        <AccordionBody>
+        <div id="form3"  className="border-b border-gray-700 mt-16">
              <Title
                tit="Cambiar email"
                sub="Modfica el correo electronico de tu cuenta"
@@ -410,15 +369,16 @@ export default function FormInfo () {
                </button>
              </form>
            </div>
-      )}
-
-
-
-<h2 onClick={() => handleFormClick('form4')}>Eliminar cuenta</h2>
-      {selectedForm === 'form4' && (
-             <div id="form4"  className="border-b border-gray-700 mt-16">
+        </AccordionBody>
+      </Accordion>
+      <Accordion open={open === 4}>
+        <AccordionHeader onClick={() => handleOpen(4)}>
+          Eliminar Cuenta
+        </AccordionHeader>
+        <AccordionBody>
+        <div id="form4"  className="border-b border-gray-700 mt-16">
              <Title
-               t tit="Eliminar mi cuenta"
+               t tit="  "
                sub="Eliminar tu cuenta de MR propiedades, eliminara tu perfil y todos los datos de tu actividad"
              />
              {/* Eliminar cuenta */}
@@ -447,14 +407,14 @@ export default function FormInfo () {
                </button>
              </form>
            </div>
-             )} 
-
-
-    </div>
+        </AccordionBody>
+      </Accordion>
+    </Fragment>
     
+    </div>
+   
   );
-};
-
+}
 
 
 
