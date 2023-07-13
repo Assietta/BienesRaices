@@ -4,6 +4,7 @@ require("dotenv").config();
 const orderTemplate = require('../mailsTemplate/postOrder');
 const { User } = require("../db");
 const { Order } = require("../db");
+const { mailHandler } = require('./postMailHandler');
 
 const { TOKEN_MP} = process.env;
 let propId;

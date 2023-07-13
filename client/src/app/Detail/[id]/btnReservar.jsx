@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useSession } from "next-auth/react";
 import axios from "axios";
 
-export default async function BtnReservar(props) {
+export default function BtnReservar(props) {
   const { id } = props;
   const session = useSession();
   const [buttonText, setButtonText] = useState("Reservar");
