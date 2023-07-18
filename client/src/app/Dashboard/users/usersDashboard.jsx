@@ -25,22 +25,26 @@ export default function UsersDashboard() {
       <h1 className="font-bold py-4 uppercase">Usuarios</h1>
       <table className="w-full whitespace-nowrap">
         <thead className="bg-black/60">
-          <th className="text-left py-3 px-2 rounded-l-lg">Nombre</th>
-          <th className="text-left py-3 px-2">Email</th>
-          <th className="text-left py-3 px-2">Rol</th>
-          <th className="text-left py-3 px-2 rounded-r-lg">Actions</th>
+          <tr>
+            <th className="text-left py-3 px-2 rounded-l-lg">Nombre</th>
+            <th className="text-left py-3 px-2">Email</th>
+            <th className="text-left py-3 px-2">Rol</th>
+            <th className="text-left py-3 px-2 rounded-r-lg">Actions</th>
+          </tr>
         </thead>
-        {viewUsers.map((user) => (
-          <DashboardUser
-            key={user.id}
-            id={user.id}
-            provider={user.provider}
-            image={user.image}
-            username={user.username}
-            email={user.email}
-            rol={user.rol}
-          />
-        ))}
+        <tbody>
+          {viewUsers.map((user) => (
+            <DashboardUser
+              key={user.id}
+              id={user.id}
+              provider={user.provider}
+              image={user.image}
+              username={user.username}
+              email={user.email}
+              rol={user.rol}
+            />
+          ))}
+        </tbody>
       </table>
     </div>
   );

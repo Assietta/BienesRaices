@@ -7,7 +7,7 @@ const DashboardCard = (props) => {
     id,
     address,
     bathrooms,
-    Image,
+    Imagep,
     suite_amount,
     room_amount,
     parking_lot_amount,
@@ -30,7 +30,7 @@ const DashboardCard = (props) => {
           href={`/Detail/${id}`}
           className={styles.card}
         >
-          {Image && (
+          {Imagep && (
             <div
               style={{
                 position: "relative",
@@ -38,13 +38,14 @@ const DashboardCard = (props) => {
                 justifyContent: "center",
               }}
             >
-              <img
+              <Image
                 className={styles.cardImg}
-                src={Image}
+                src={Imagep}
                 width={500}
                 height={300}
                 alt="Property"
-              />
+              ></Image>
+
               <div
                 className="flex bg-white px-4 py-1 space-x-5 rounded-lg shadow"
                 style={{

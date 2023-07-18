@@ -21,7 +21,6 @@ module.exports = (sequelize) => {
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true
     },
     phone: {
       type: DataTypes.STRING,
@@ -34,6 +33,10 @@ module.exports = (sequelize) => {
     comment: {
       type: DataTypes.STRING,
       allowNull: false
+  },
+    userId: {
+      type: DataTypes.STRING,
+      allowNull: true
   }
   });
 };

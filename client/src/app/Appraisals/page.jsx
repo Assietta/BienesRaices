@@ -8,6 +8,7 @@ import { useSession } from 'next-auth/react'
 
 export default function Example() {
   const session = useSession()
+  const id = session.data.user.id;
 
   const [formData, setFormData] = useState({
     name: '',
@@ -18,6 +19,7 @@ export default function Example() {
     comment: '',
     address: '',
     callTime: '',
+    userId: `${id}`
   });
 
   const [errors, setErrors] = useState({});
@@ -60,7 +62,7 @@ export default function Example() {
   return (
     <div class=" min-h-screen flex items-center justify-center bg-center py-12 px-4 sm:px-6 lg:px-8 bg-black bg-no-repeat bg-cover ">
       <div className=" mx-auto md:max-w-35rem h-50 space-y-8 p-10 bg-white rounded-xl shadow-lg z-10">
-        <Title/>
+        <Title />
         <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
           <dl className="max-w-xl mr-12 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
             <div className="relative pl-16">
@@ -80,7 +82,9 @@ export default function Example() {
                       value={formData.name}
                       onChange={handleInputChange}
                     />
-                    {errors.name && <p>{errors.name}</p>}
+                    {errors.name && (
+                      <p className="text-red-600">{errors.name}</p>
+                    )}
                   </div>
 
                   {/* input apellido */}
@@ -96,7 +100,9 @@ export default function Example() {
                       value={formData.lastName}
                       onChange={handleInputChange}
                     />
-                    {errors.lastName && <p>{errors.lastName}</p>}
+                    {errors.lastName && (
+                      <p className="text-red-600">{errors.lastName}</p>
+                    )}
                   </div>
 
                   {/* input mail */}
@@ -114,7 +120,9 @@ export default function Example() {
                       value={formData.email}
                       onChange={handleInputChange}
                     />
-                    {errors.email && <p>{errors.email}</p>}
+                    {errors.email && (
+                      <p className="text-red-600">{errors.email}</p>
+                    )}
                   </div>
 
                   {/* input telefono */}
@@ -131,7 +139,9 @@ export default function Example() {
                       value={formData.phone}
                       onChange={handleInputChange}
                     />
-                    {errors.phone && <p>{errors.phone}</p>}
+                    {errors.phone && (
+                      <p className="text-red-600">{errors.phone}</p>
+                    )}
                   </div>
 
                   {/* input celular */}
@@ -148,7 +158,9 @@ export default function Example() {
                       value={formData.mobile}
                       onChange={handleInputChange}
                     />
-                    {errors.mobile && <p>{errors.mobile}</p>}
+                    {errors.mobile && (
+                      <p className="text-red-600">{errors.mobile}</p>
+                    )}
                   </div>
 
                   {/* direccion input */}
@@ -165,7 +177,9 @@ export default function Example() {
                       value={formData.address}
                       onChange={handleInputChange}
                     />
-                    {errors.address && <p>{errors.address}</p>}
+                    {errors.address && (
+                      <p className="text-red-600">{errors.address}</p>
+                    )}
                   </div>
 
                   <div className="mb-3 space-y-2 w-full text-xs">
@@ -183,7 +197,9 @@ export default function Example() {
                       <option value="Tarde">Tarde</option>
                       <option value="Noche">Noche</option>
                     </select>
-                    {errors.callTime && <p>{errors.callTime}</p>}
+                    {errors.callTime && (
+                      <p className="text-red-600">{errors.callTime}</p>
+                    )}
                   </div>
 
                   <div className="mb-3 space-y-2 w-full text-xs">
@@ -197,7 +213,9 @@ export default function Example() {
                       value={formData.comment}
                       onChange={handleInputChange}
                     />
-                    {errors.comment && <p>{errors.comment}</p>}
+                    {errors.comment && (
+                      <p className="text-red-600">{errors.comment}</p>
+                    )}
                   </div>
 
                   <div className="mb-6 text-center">

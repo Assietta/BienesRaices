@@ -1,18 +1,42 @@
 import Image from "next/image";
+import { Carousel } from "@material-tailwind/react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 const testimonioText = [
   { text: "hola soy un tesmonio", user: "juan pedro" },
   { text: "hola soy un tesmonio", user: "juan pedro" },
-  { text: "hola soy un tesmonio", user: "juan pedro" },
+  { text: "hola", user: "juan pedro" },
   { text: "hola soy un tesmonio", user: "juan pedro" },
 ];
 
 export default function Testimonials() {
+  const [reviews, setReviews] = useState([]);
+  useEffect(() => {
+    fetchReviews();
+  }, []);
+
+  const fetchReviews = async () => {
+    try {
+      const response = await axios.get(`http://localhost:3001/testimonials/`);
+      const data = response.data;
+      setReviews(data);
+      console.log(reviews);
+    } catch (error) {
+      // Manejar el error de la solicitud
+      console.error(error);
+    }
+  };
   return (
-    <div>
-      <div>
-        {testimonioText.map((testimonial) => (
-          <section class="bg-white dark:bg-gray-900">
+    <Carousel
+      className="max-h-screen overflow-hidden"
+      slides={testimonioText.length}
+      outline="none"
+      fade={false}
+    >
+      {reviews.map((testimonial) => (
+        <div>
+          <section class="bg-black dark:bg-gray-900">
             <div class="max-w-screen-xl px-4 py-8 mx-auto text-center lg:py-16 lg:px-6">
               <figure class="max-w-screen-md mx-auto">
                 <svg
@@ -28,32 +52,30 @@ export default function Testimonials() {
                 </svg>
                 <blockquote>
                   <div>
-                    <p class="text-2xl font-medium text-gray-900 dark:text-white">
+                    <p class="text-2xl font-medium text-white">
                       {testimonial.text}
                     </p>
                   </div>
                 </blockquote>
                 <figcaption class="flex items-center justify-center mt-6 space-x-3">
-                  <Image
-                    class="w-6 h-6 rounded-full"
-                    src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gouch.png"
-                    alt="profile picture"
-                    width={100}
-                    height={100}
-                  />
                   <div class="flex items-center divide-x-2 divide-gray-500 dark:divide-gray-700">
-                    <div class="pr-3 font-medium text-gray-900 dark:text-white">{testimonial.user}
+                    <div class="pr-3 font-medium text-white">
+                      Calificación: {testimonial.rating}/5
                     </div>
-                    <div class="pl-3 text-sm font-light text-gray-500 dark:text-gray-400">
-                      CEO at Google
+                  </div>
+                </figcaption>
+                <figcaption class="flex items-center justify-center mt-6 space-x-3">
+                  <div class="flex items-center divide-x-2 divide-gray-500 dark:divide-gray-700">
+                    <div class="pr-3 font-medium text-white">
+                      {testimonial.username}
                     </div>
                   </div>
                 </figcaption>
               </figure>
             </div>
           </section>
-        ))}
-      </div>
-    </div>
+        </div>
+      ))}
+    </Carousel>
   );
 }
