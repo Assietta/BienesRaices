@@ -121,7 +121,7 @@ export default function RealStateForm() {
     }
     try {
 
-      const response = await axios.post('http://localhost:3001/realState', formSub);
+      const response = await axios.post('https://bienesraices-production-9eb3.up.railway.app/realState', formSub);
 
       // Aquí puedes realizar alguna acción adicional después de crear el RealState
     } catch (error) {
