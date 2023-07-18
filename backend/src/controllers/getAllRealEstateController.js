@@ -13,7 +13,8 @@ const getAllApi = async () => {
 
 
   for (const property of apiInfo) {
-    const realState = await RealState.findOrCreate({ where: property });
+    const realState = await RealState.findOrCreate({ where: property,
+      defaults: { ...property, id: undefined } });
     const tags = property.tags || [];
 
     const promises = tags.map(async tag => {
