@@ -11,7 +11,7 @@ module.exports = (sequelize) => {
       primaryKey: true,
     },
     address: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(3000),
       allowNull: false,
     },
     bathroom_amount: {
