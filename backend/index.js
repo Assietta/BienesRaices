@@ -26,7 +26,7 @@ const { PORT } = process.env;
 
 
 // Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
+conn.sync({ alter: true }).then(() => {
   server.listen(PORT, () => {
     createAdmin();
     getAllApi();
