@@ -21,6 +21,10 @@ export default function Example() {
 
   useEffect(() => {
     fetchDataUsers();
+    if (typeof window !== 'undefined') {
+      const { location } = window;
+      console.log(location);
+    }
   }, []);
 
   const fetchDataUsers = async () => {
