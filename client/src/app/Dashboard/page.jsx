@@ -99,34 +99,36 @@ export default function Example() {
             </h1>
             <p className="text-slate-400 text-sm mb-2">Bienvenido,</p>
             <a
-              href="#"
-              className="flex flex-col space-y-2 md:space-y-0 md:flex-row mb-5 items-center md:space-x-2 hover:bg-white/10 group transition duration-150 ease-linear rounded-lg group w-full py-3 px-2"
-            >
-              <div>
-                <div className="flex space-x-4">
-                  {!autenticated() ? (
-                    <p></p>
-                  ) : (
-                    <>
-                      {session.data.user?.image && (
-                        <Image
-                          className="hidden h-10 w-auto lg:block rounded-full"
-                          src={session.data.user.image}
-                          alt="image"
-                          width={100}
-                          height={100}
-                        />
-                      )}
-                      <h3 className="text-gray-300 rounded-md px-3 py-2 -sm font-medium">
-                        {`${
-                          session.data.user.name || session.data.user.username
-                        }`}
-                      </h3>
-                    </>
-                  )}
-                </div>
-              </div>
+  href="#"
+  className="flex flex-col space-y-2 md:space-y-0 md:flex-row mb-5 items-center md:space-x-2 hover:bg-white/10 group transition duration-150 ease-linear rounded-lg group w-full py-3 px-2"
+>
+  <div>
+    <div className="flex space-x-4">
+      {!autenticated() ? (
+        <p></p>
+      ) : (
+        <>
+          {session.data.user?.image && (
+            <Image
+              className="hidden h-10 w-auto lg:block rounded-full"
+              src={session.data.user.image}
+              alt="image"
+              width={100}
+              height={100}
+            />
+          )}
+          <Link href="/DashboardUser"> 
+            <a className="text-gray-300 rounded-md px-3 py-2 -sm font-medium">
+              {`${
+                session.data.user.name || session.data.user.username
+              }`}
             </a>
+          </Link>
+        </>
+      )}
+    </div>
+  </div>
+</a>
             <hr className="my-2 border-slate-700"></hr>
             <div id="menu" className="flex flex-col space-y-2 my-5">
               <a
