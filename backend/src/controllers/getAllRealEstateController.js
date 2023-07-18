@@ -13,7 +13,7 @@ const getAllApi = async () => {
 
 
   for (const property of apiInfo) {
-    const realState = await RealState.findOrCreate({ where: { address: property.address, price: property.price }});
+    await RealState.findOrCreate({ where: property});
     const tags = property.tags || [];
 
     const promises = tags.map(async tag => {
