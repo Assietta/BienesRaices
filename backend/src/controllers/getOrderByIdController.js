@@ -5,6 +5,8 @@ const getOrderByIdController = async(userId) => {
     const order = await Order.findAll({ where: { client_idDB } })
 
     return order;
-}
+};
 
-module.exports = getOrderByIdController
+module.exports = {
+    getOrderByIdController
+};
