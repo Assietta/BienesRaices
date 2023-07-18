@@ -67,7 +67,7 @@ export default function RealStateForm() {
         ...prevFormData,
         [name]: value,
       }));
-      console.log(formData.photos, "soy el fomr data fotos del input change vieja");
+     
   };
 
   const [photos, setPhotos] = useState([])
@@ -102,13 +102,12 @@ export default function RealStateForm() {
     // setFormData({...formData, photos: photos})
     const formSub = new FormData()
     for(let props in formData ){
-      console.log("entro al primer for: ", props);
-      console.log("esto estara en true?", props === "photos")
+
       if(props === "photos" ){
-        console.log("soy el formdata padre", formData);
+  
 
         for(let element of formData["photos"]){
-          console.log("entre al 2do for");
+
           formSub.append("photos", element)
         }
         
@@ -121,9 +120,9 @@ export default function RealStateForm() {
       else {formSub.append(props, formData[props])}
     }
     try {
-      console.log(formSub.get("photos"));
+
       const response = await axios.post('http://localhost:3001/realState', formSub);
-      console.log('RealState created:', response.data);
+
       // Aquí puedes realizar alguna acción adicional después de crear el RealState
     } catch (error) {
       console.error('Error creating RealState:', error);
