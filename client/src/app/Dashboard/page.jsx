@@ -68,8 +68,10 @@ export default function Example() {
   const autenticated = () => {
     if (session.status === 'authenticated') {
       return true;
-    } else session.status === 'unauthenticated';
-    return false;
+    } else session.status === 'unauthenticated';{
+      router.push('/login'); 
+      return false;
+    }
   };
 
   useEffect(() => {
