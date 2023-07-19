@@ -17,10 +17,9 @@ export default function Example() {
   const [viewUsers, setViewUsers] = useState([]);
   const [contacts, setContacts] = useState([]);
 
-  if (session?.data?.user?.rol !== 'admin') router.push('/');
-
   useEffect(() => {
     fetchDataUsers();
+    if (session?.data?.user?.rol !== 'admin') router.push('/');
   }, []);
 
   const fetchDataUsers = async () => {
