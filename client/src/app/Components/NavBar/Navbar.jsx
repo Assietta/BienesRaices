@@ -45,6 +45,8 @@ export default function Example() {
   const [routeDashboard, setRouteDashboard] = useLocalStorage('routeDashboard', "1");
 
   const session = useSession();
+  console.log(session);
+
 
   const autenticated = () => {
     if (session.status === 'authenticated') {
