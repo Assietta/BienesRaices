@@ -9,6 +9,8 @@ export default function Login() {
   const router = useRouter();
   const session = useSession();
 
+  console.log(session);
+
   if (session.status === 'authenticated') router.push('/');
 
   const [formData, setFormData] = useState({
@@ -35,19 +37,30 @@ export default function Login() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const validationErrors = validateForm(formData);
+    const validationErrors = await validateForm(formData);
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      const res = await signIn('credentials', { ...formData, redirect: false})
+      const res = await signIn('credentials', { ...formData, redirect: false });
       console.log(res);
-      if(res?.error) setErrors({email : 'Correo o contraseña invalidos'})
+      if (res?.error) setErrors({ email: 'Correo o contraseña invalidos' });
       clearForm();
     }
   };
 
+  // async function getUsers() {
+  //   const response = await fetch('https://bienesraices-production-9eb3.up.railway.app/users');
+  //   const data = await response.json();
+  //   const users = data.users;
+
+  //   const user = users.find((user) => user.email === formData.email)
+  //   if (user && user.disabled) {
+  //     alert('El email está registrado pero está deshabilitado')
+  //   }
+  // }
+
   return (
-    <div className=" min-h-screen flex items-center justify-center bg-center py-12 px-4 sm:px-6 lg:px-8 bg-black bg-no-repeat bg-cover ">
+    <div className=" min-h-screen flex items-center justify-center bg-center py-12 px-4 sm:px-6 lg:px-8 bg-gray-200 bg-no-repeat bg-cover mt-12">
       <div className="flex flex-col items-center justify-center mx-auto md:max-w-35rem h-50 space-y-8 p-12 bg-white rounded-xl shadow-lg z-10">
         <div className="mx-auto max-w-2xl lg:text-center">
           <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
@@ -63,7 +76,7 @@ export default function Login() {
                   {/* input mail */}
                   <div className="mb-3 space-y-2 w-full text-xs">
                     <label className="font-semibold text-gray-600 py-2">
-                      {" "}
+                      {' '}
                       Correo electrónico <abbr title="required">*</abbr>
                     </label>
                     <input
@@ -83,7 +96,7 @@ export default function Login() {
                   {/* input password */}
                   <div className="mb-3 space-y-2 w-full text-xs">
                     <label className="font-semibold text-gray-600 py-2">
-                      {" "}
+                      {' '}
                       Contraseña <abbr title="required">*</abbr>
                     </label>
                     <input
@@ -107,12 +120,12 @@ export default function Login() {
                     Ingresar
                   </button>
 
-                  <p style={{ fontSize: "11px", textAlign: "center" }}></p>
+                  <p style={{ fontSize: '11px', textAlign: 'center' }}></p>
                   <p className="text-center mt-2">o ingresa con</p>
                 </form>
                 <div className="flex justify-center space-x-4">
                   <button
-                    onClick={() => signIn("google")}
+                    onClick={() => signIn('google')}
                     className="flex items-center justify-center w-11 h-11 shadow-sm rounded-full hover:shadow-lg"
                   >
                     <img
@@ -123,7 +136,7 @@ export default function Login() {
                   </button>
 
                   <button
-                    onClick={() => signIn("github")}
+                    onClick={() => signIn('github')}
                     className="flex items-center justify-center bg-gray-800 text-white w-11 h-11 rounded-full hover:bg-gray-900"
                   >
                     <svg
@@ -138,11 +151,11 @@ export default function Login() {
                     </svg>
                   </button>
                 </div>
-                <p style={{ fontSize: "11px", textAlign: "center" }}>
+                <p style={{ fontSize: '11px', textAlign: 'center' }}>
                   ¿No tienes cuenta?
                 </p>
 
-                <Link href={"/SignIn"}>
+                <Link href={'/SignIn'}>
                   <button className="mx-auto block mb-2 md:mb-0 bg-blue-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-blue-500">
                     Registrarse
                   </button>
@@ -153,5 +166,5 @@ export default function Login() {
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -50,8 +50,6 @@ export default function Mensajes() {
     fetchContacts(id);
   }, []);
 
-  console.log(appraisals);
-
   return (
     <div id="last-users">
       <h1 className="font-bold py-4 uppercase">Mensajes contactados</h1>

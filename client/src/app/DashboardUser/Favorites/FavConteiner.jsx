@@ -18,13 +18,11 @@ export default function FavConteiner() {
       const response = await axios.get(`https://bienesraices-production-9eb3.up.railway.app/users/${id}`);
       const listFav = response.data.favorites;
       setFav(listFav);
-      console.log(listFav, 'esto es list fav');
     } catch (error) {
       // Manejar el error de la solicitud
       console.error(error);
     }
   };
-  console.log(id);
 
   return (
     <div id="last-incomes">

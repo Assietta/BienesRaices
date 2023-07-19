@@ -1,26 +1,21 @@
-"use client";
-import { useState } from "react";
-import styles from "./contact.module.css";
-import { validateForm } from "./validates";
-import axios from "axios";
-import Title from "./title";
-import { useSession } from "next-auth/react";
+'use client';
+import { useState } from 'react';
+import { validateForm } from './validates';
+import axios from 'axios';
+import Login from '../Login/page';
 
-export default function Example() {
-  const session = useSession();
-  const id = session?.data?.user?.id;
-
+export default function SignUp() {
   const [formData, setFormData] = useState({
-    name: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    mobile: "",
-    comment: "",
-    userId: `${id}`,
+    username: '',
+    lastName: '',
+    email: '',
+    mobile: '',
+    password: '',
+    confirmPassword: '',
   });
 
   const [errors, setErrors] = useState({});
+  const [showLogin, setShowLogin] = useState(false);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -32,12 +27,12 @@ export default function Example() {
 
   const clearForm = () => {
     setFormData({
-      name: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      mobile: "",
-      comment: "",
+      username: '',
+      lastName: '',
+      email: '',
+      mobile: '',
+      password: '',
+      confirmPassword: '',
     });
   };
 
@@ -48,37 +43,26 @@ export default function Example() {
 
     if (Object.keys(validationErrors).length === 0) {
       console.log(formData);
-      await axios.post("https://bienesraices-production-9eb3.up.railway.app/contact", formData);
-      alert("Contacto enviado");
-      console.log("Contact successfully send");
+      await axios.post('https://bienesraices-production-9eb3.up.railway.app/users', formData);
+      console.log('Signup successfully send');
+      alert('Registro exitoso');
+      setShowLogin(true);
       clearForm();
     }
   };
 
   return (
-    <div className="overflow-x-hidden">
-      <div className="relative h-96 w-screen">
-        <img
-          src="https://i.ibb.co/dgTs9jL/bgn02.jpg"
-          alt="image 1"
-          className="w-screen h-full object-cover"
-        />
-        <div className="absolute inset-0 grid h-full w-screen place-items-center bg-black/75">
-          <div className="w-3/4 text-center md:w-2/4">
-            <h4 className="mt-2 text-1xl tracking-tight text-white">
-              Fomulario
-            </h4>
-            <h1 className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              Contacto
-            </h1>
+    <div className=" min-h-screen flex items-center justify-center bg-center py-12 px-4 sm:px-6 lg:px-8 bg-black bg-no-repeat bg-cover ">
+      {!showLogin && (
+        <div className=" mx-auto md:max-w-35rem h-50 space-y-8 p-10 bg-white rounded-xl shadow-lg z-10">
+          <div className="mx-auto max-w-2xl lg:text-center">
+            <h2 className="text-base font-semibold leading-7 text-indigo-600"></h2>
+            <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              Registrarse
+            </p>
           </div>
-        </div>
-      </div>
-      <div className="min-h-screen flex items-center justify-center bg-center py-12 px-4 sm:px-6 lg:px-8 bg-white bg-no-repeat bg-cover">
-        <div className="mx-auto md:max-w-35rem h-50 space-y-8 p-10 bg-white rounded-xl shadow-lg z-10">
-          <Title />
           <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
-            <dl className="max-w-xl mr-12 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
+            <dl className=" max-w-xl mr-12 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
               <div className="relative pl-16">
                 <dt className="text-base font-semibold leading-7 text-gray-900"></dt>
                 <dd className="mt-2 text-base leading-7 text-gray-600">
@@ -86,24 +70,23 @@ export default function Example() {
                     {/* input Name */}
                     <div className="mb-3 space-y-2 w-full text-xs">
                       <label className="font-semibold text-gray-600 py-2">
-                        Nombre <abbr title="required">*</abbr>
+                        {' '}
+                        Usuario <abbr title="required">*</abbr>
                       </label>
                       <input
+                        placeholder="Ingresa tu nombre"
                         className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
                         type="text"
-                        name="name"
-                        placeholder="Ingrese su nombre"
-                        value={formData.name}
+                        name="username"
+                        value={formData.username}
                         onChange={handleInputChange}
                       />
-                      {errors.name && (
-                        <p className="text-red-600">{errors.name}</p>
-                      )}
+                      {errors.username && <p>{errors.username}</p>}
                     </div>
-
                     {/* input apellido */}
                     <div className="mb-3 space-y-2 w-full text-xs">
                       <label className="font-semibold text-gray-600 py-2">
+                        {' '}
                         Apellido <abbr title="required">*</abbr>
                       </label>
                       <input
@@ -114,15 +97,13 @@ export default function Example() {
                         value={formData.lastName}
                         onChange={handleInputChange}
                       />
-                      {errors.lastName && (
-                        <p className="text-red-600">{errors.lastName}</p>
-                      )}
+                      {errors.lastName && <p>{errors.lastName}</p>}
                     </div>
-
                     {/* input mail */}
                     <div className="mb-3 space-y-2 w-full text-xs">
                       <label className="font-semibold text-gray-600 py-2">
-                        Correo electronico <abbr title="required">*</abbr>
+                        {' '}
+                        correo electronico <abbr title="required">*</abbr>
                       </label>
                       <input
                         placeholder="nombre@dominio.com"
@@ -134,33 +115,13 @@ export default function Example() {
                         value={formData.email}
                         onChange={handleInputChange}
                       />
-                      {errors.email && (
-                        <p className="text-red-600">{errors.email}</p>
-                      )}
-                    </div>
-
-                    {/* input telefono */}
-                    <div className="mb-3 space-y-2 w-full text-xs">
-                      <label className="font-semibold text-gray-600 py-2">
-                        Telefono <abbr title="required">*</abbr>
-                      </label>
-                      <input
-                        placeholder="ingrese su numero de telefono"
-                        className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
-                        required="required"
-                        type="number"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleInputChange}
-                      />
-                      {errors.phone && (
-                        <p className="text-red-600">{errors.phone}</p>
-                      )}
+                      {errors.email && <p>{errors.email}</p>}
                     </div>
 
                     {/* input celular */}
                     <div className="mb-3 space-y-2 w-full text-xs">
                       <label className="font-semibold text-gray-600 py-2">
+                        {' '}
                         Celular <abbr title="required">*</abbr>
                       </label>
                       <input
@@ -172,36 +133,52 @@ export default function Example() {
                         value={formData.mobile}
                         onChange={handleInputChange}
                       />
-                      {errors.mobile && (
-                        <p className="text-red-600">{errors.mobile}</p>
-                      )}
+                      {errors.mobile && <p>{errors.mobile}</p>}
                     </div>
 
-                    {/* comentario input */}
-                    <div className="flex-auto w-full mb-1 text-xs space-y-2">
+                    {/* input password */}
+                    <div className="mb-3 space-y-2 w-full text-xs">
                       <label className="font-semibold text-gray-600 py-2">
-                        Mensaje
+                        {' '}
+                        Contraseña <abbr title="required">*</abbr>
                       </label>
-                      <textarea
-                        required=""
-                        name="comment"
-                        id=""
-                        className="min-h-[100px] max-h-[300px] h-28 appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg py-4 px-4"
-                        placeholder="Ingrese su mensaje aquí"
-                        spellCheck="false"
-                        value={formData.comment}
+                      <input
+                        placeholder="ingrese contraseña"
+                        className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
+                        required="required"
+                        type="password"
+                        name="password"
+                        value={formData.password}
                         onChange={handleInputChange}
                       />
-                      {errors.comment && (
-                        <p className="text-red-600">{errors.comment}</p>
+                      {errors.password && <p>{errors.password}</p>}
+                    </div>
+
+                    {/* input password confirm */}
+                    <div className="mb-3 space-y-2 w-full text-xs">
+                      <label className="font-semibold text-gray-600 py-2">
+                        {' '}
+                        Confirmar Contraseña <abbr title="required">*</abbr>
+                      </label>
+                      <input
+                        placeholder="confirmar contraseña"
+                        className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
+                        required="required"
+                        type="password"
+                        name="confirmPassword"
+                        value={formData.confirmPassword}
+                        onChange={handleInputChange}
+                      />
+                      {errors.confirmPassword && (
+                        <p>{errors.confirmPassword}</p>
                       )}
                     </div>
 
                     <button
-                      className="mb-2 md:mb-0 bg-green-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500"
+                      className="mx-auto block mb-2 md:mb-0 bg-green-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500"
                       type="submit"
                     >
-                      Enviar
+                      Enviar{' '}
                     </button>
                   </form>
                 </dd>
@@ -209,7 +186,8 @@ export default function Example() {
             </dl>
           </div>
         </div>
-      </div>
+      )}
+      {showLogin && <Login />}
     </div>
   );
 }

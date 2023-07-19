@@ -189,13 +189,13 @@ export default function FilterComponent() {
       console.error(error);
     }
   };
-
   // // funciones para mover el paginado.
 
   useEffect(() => {
     fetchData();
-  }, []);
-  
+  }, [currentPage]);
+
+  // //va a la pagina anterior a la actual
   const goToPreviousPage = () => {
     setCurrentPage((prevPage) => prevPage - 1);
   };

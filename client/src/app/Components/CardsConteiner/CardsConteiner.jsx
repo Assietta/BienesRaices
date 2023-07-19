@@ -15,7 +15,6 @@ const CardsConteiner = () => {
     try {
       const response = await axios.get(`https://bienesraices-production-9eb3.up.railway.app/realstate?page=${currentPage}&limit=5`);
       const data = response.data;
-      console.log(data);
       setViewProps(data);
     } catch (error) {
       // Manejar el error de la solicitud
@@ -26,12 +25,10 @@ const CardsConteiner = () => {
   const randomImageIndex = Math.floor(Math.random() * 5);
 
   const handleNextPage = () => {
-    console.log(currentPage);
     setCurrentPage((currentPage) => currentPage + 1)
   }
 
   const handlePreviousPage = () => {
-    console.log(currentPage);
     if (currentPage > 1) {
       setCurrentPage((currentPage) => currentPage - 1)
     }

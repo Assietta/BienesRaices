@@ -16,65 +16,68 @@ export default function Example() {
   const router = useRouter();
   const session = useSession();
   // const [routeDashboard, setRouteDashboard] = useLocalStorage('routeDashboard', "");
-  // const routeDashboard = window.localStorage.getItem('routeDashboard')
-  if (session.status === "unauthenticated") router.push("/");
 
+  if (session.status === "unauthenticated") router.push("/");
   const [showDashboard, setShowDashboard] = useState({
     Favorito: false,
-    Perfil: false,
+    Perfil: true,
     Mensaje: false,
     Configuration: false,
     Testimonials: false,
   });
 
-  // useEffect(()=>{
-  //   console.log(routeDashboard.replace(/"/g, '') == 2, routeDashboard.replace(/"/g, ''));
-  //   if (routeDashboard.replace(/"/g, '') == 1) {
-  //     setShowDashboard({
-  //       Favorito: false,
-  //       Perfil: true,
-  //       Mensaje: false,
-  //       Configuracion: false,
-  //       Testimonials: false,
-  //     })
-  //   }
-  //   else if (routeDashboard.replace(/"/g, '') == 2) {
-  //     setShowDashboard({
-  //       Favorito: false,
-  //       Perfil: false,
-  //       Mensaje: true,
-  //       Configuracion: false,
-  //       Testimonials: false,
-  //     })
-  //   }
-  //   else if (routeDashboard.replace(/"/g, '') == 3) {
-  //     setShowDashboard({
-  //       Favorito: true,
-  //       Perfil: false,
-  //       Mensaje: false,
-  //       Configuracion: false,
-  //       Testimonials: false,
-  //     })
-  //   }
-  //   else if (routeDashboard.replace(/"/g, '') == 4) {
-  //     setShowDashboard({
-  //       Favorito: false,
-  //       Perfil: false,
-  //       Mensaje: false,
-  //       Configuracion: true,
-  //       Testimonials: false,
-  //     })
-  //   }
-  //   else if (routeDashboard.replace(/"/g, '') == 5) {
-  //     setShowDashboard({
-  //       Favorito: false,
-  //       Perfil: false,
-  //       Mensaje: false,
-  //       Configuracion: false,
-  //       Testimonials: true,
-  //     })
-  //   }
-  // }, [])
+  useEffect(()=>{
+    console.log(routeDashboard.replace(/"/g, '') == 2, routeDashboard.replace(/"/g, ''));
+    if(typeof window !== 'undefined'){
+      const routeDashboard = window.localStorage.getItem('routeDashboard')
+      if (routeDashboard.replace(/"/g, '') == 1) {
+      setShowDashboard({
+        Favorito: false,
+        Perfil: true,
+        Mensaje: false,
+        Configuracion: false,
+        Testimonials: false,
+      })
+    }
+    else if (routeDashboard.replace(/"/g, '') == 2) {
+      setShowDashboard({
+        Favorito: false,
+        Perfil: false,
+        Mensaje: true,
+        Configuracion: false,
+        Testimonials: false,
+      })
+    }
+    else if (routeDashboard.replace(/"/g, '') == 3) {
+      setShowDashboard({
+        Favorito: true,
+        Perfil: false,
+        Mensaje: false,
+        Configuracion: false,
+        Testimonials: false,
+      })
+    }
+    else if (routeDashboard.replace(/"/g, '') == 4) {
+      setShowDashboard({
+        Favorito: false,
+        Perfil: false,
+        Mensaje: false,
+        Configuracion: true,
+        Testimonials: false,
+      })
+    }
+    else if (routeDashboard.replace(/"/g, '') == 5) {
+      setShowDashboard({
+        Favorito: false,
+        Perfil: false,
+        Mensaje: false,
+        Configuracion: false,
+        Testimonials: true,
+      })
+    }
+    }
+    
+  }, [])
 
   // const showSection = (param) => {
   //   setShowDashboard((prevState) => ({
@@ -89,7 +92,6 @@ export default function Example() {
 
 
 
-  // console.log(showDashboard);
 
   return (
     <div className="bg-white">
