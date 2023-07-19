@@ -47,6 +47,8 @@ export default function Example() {
   );
 
   const session = useSession();
+  console.log(session);
+
 
   const autenticated = () => {
     if (session.status === "authenticated") {

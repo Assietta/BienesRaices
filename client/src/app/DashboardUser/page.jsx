@@ -28,7 +28,6 @@ export default function Example() {
   });
 
   useEffect(()=>{
-    console.log(routeDashboard.replace(/"/g, '') == 2, routeDashboard.replace(/"/g, ''));
     if (routeDashboard.replace(/"/g, '') == 1) {
       setShowDashboard({
         Favorito: false,
@@ -89,7 +88,6 @@ export default function Example() {
 
 
 
-  console.log(showDashboard);
 
   return (
     <div className="bg-white">

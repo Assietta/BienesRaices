@@ -23,7 +23,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     description: {
-      type: DataTypes.STRING(3000),
+      type: DataTypes.STRING(10000),
       allowNull: false,
     },
     disposition: {
