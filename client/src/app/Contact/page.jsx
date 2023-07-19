@@ -1,22 +1,22 @@
-'use client';
-import { useState } from 'react';
-import styles from './contact.module.css';
-import { validateForm } from './validates';
-import axios from 'axios';
-import Title from './title';
-import { useSession } from 'next-auth/react';
+"use client";
+import { useState } from "react";
+import styles from "./contact.module.css";
+import { validateForm } from "./validates";
+import axios from "axios";
+import Title from "./title";
+import { useSession } from "next-auth/react";
 
 export default function Example() {
   const session = useSession();
   const id = session?.data?.user?.id;
 
   const [formData, setFormData] = useState({
-    name: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    mobile: '',
-    comment: '',
+    name: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    mobile: "",
+    comment: "",
     userId: `${id}`,
   });
 
@@ -32,12 +32,12 @@ export default function Example() {
 
   const clearForm = () => {
     setFormData({
-      name: '',
-      lastName: '',
-      email: '',
-      phone: '',
-      mobile: '',
-      comment: '',
+      name: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      mobile: "",
+      comment: "",
     });
   };
 
@@ -48,147 +48,166 @@ export default function Example() {
 
     if (Object.keys(validationErrors).length === 0) {
       console.log(formData);
-      await axios.post('http://localhost:3001/contact', formData);
-      alert('Contacto enviado');
-      console.log('Contact successfully send');
+      await axios.post("http://localhost:3001/contact", formData);
+      alert("Contacto enviado");
+      console.log("Contact successfully send");
       clearForm();
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-center py-12 px-4 sm:px-6 lg:px-8 bg-black bg-no-repeat bg-cover">
-      <div className="mx-auto md:max-w-35rem h-50 space-y-8 p-10 bg-white rounded-xl shadow-lg z-10">
-        <Title />
-        <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
-          <dl className="max-w-xl mr-12 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
-            <div className="relative pl-16">
-              <dt className="text-base font-semibold leading-7 text-gray-900"></dt>
-              <dd className="mt-2 text-base leading-7 text-gray-600">
-                <form onSubmit={handleSubmit}>
-                  {/* input Name */}
-                  <div className="mb-3 space-y-2 w-full text-xs">
-                    <label className="font-semibold text-gray-600 py-2">
-                      Nombre <abbr title="required">*</abbr>
-                    </label>
-                    <input
-                      className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
-                      type="text"
-                      name="name"
-                      placeholder="Ingrese su nombre"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                    />
-                    {errors.name && (
-                      <p className="text-red-600">{errors.name}</p>
-                    )}
-                  </div>
+    <div className="overflow-x-hidden">
+      <div className="relative h-96 w-screen">
+        <img
+          src="https://i.ibb.co/dgTs9jL/bgn02.jpg"
+          alt="image 1"
+          className="w-screen h-full object-cover"
+        />
+        <div className="absolute inset-0 grid h-full w-screen place-items-center bg-black/75">
+          <div className="w-3/4 text-center md:w-2/4">
+            <h4 className="mt-2 text-1xl tracking-tight text-white">
+              Fomulario
+            </h4>
+            <h1 className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+              Contacto
+            </h1>
+          </div>
+        </div>
+      </div>
+      <div className="min-h-screen flex items-center justify-center bg-center py-12 px-4 sm:px-6 lg:px-8 bg-white bg-no-repeat bg-cover">
+        <div className="mx-auto md:max-w-35rem h-50 space-y-8 p-10 bg-white rounded-xl shadow-lg z-10">
+          <Title />
+          <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
+            <dl className="max-w-xl mr-12 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
+              <div className="relative pl-16">
+                <dt className="text-base font-semibold leading-7 text-gray-900"></dt>
+                <dd className="mt-2 text-base leading-7 text-gray-600">
+                  <form onSubmit={handleSubmit}>
+                    {/* input Name */}
+                    <div className="mb-3 space-y-2 w-full text-xs">
+                      <label className="font-semibold text-gray-600 py-2">
+                        Nombre <abbr title="required">*</abbr>
+                      </label>
+                      <input
+                        className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
+                        type="text"
+                        name="name"
+                        placeholder="Ingrese su nombre"
+                        value={formData.name}
+                        onChange={handleInputChange}
+                      />
+                      {errors.name && (
+                        <p className="text-red-600">{errors.name}</p>
+                      )}
+                    </div>
 
-                  {/* input apellido */}
-                  <div className="mb-3 space-y-2 w-full text-xs">
-                    <label className="font-semibold text-gray-600 py-2">
-                      Apellido <abbr title="required">*</abbr>
-                    </label>
-                    <input
-                      className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
-                      type="text"
-                      name="lastName"
-                      placeholder="Ingrese su apellido"
-                      value={formData.lastName}
-                      onChange={handleInputChange}
-                    />
-                    {errors.lastName && (
-                      <p className="text-red-600">{errors.lastName}</p>
-                    )}
-                  </div>
+                    {/* input apellido */}
+                    <div className="mb-3 space-y-2 w-full text-xs">
+                      <label className="font-semibold text-gray-600 py-2">
+                        Apellido <abbr title="required">*</abbr>
+                      </label>
+                      <input
+                        className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
+                        type="text"
+                        name="lastName"
+                        placeholder="Ingrese su apellido"
+                        value={formData.lastName}
+                        onChange={handleInputChange}
+                      />
+                      {errors.lastName && (
+                        <p className="text-red-600">{errors.lastName}</p>
+                      )}
+                    </div>
 
-                  {/* input mail */}
-                  <div className="mb-3 space-y-2 w-full text-xs">
-                    <label className="font-semibold text-gray-600 py-2">
-                      Correo electronico <abbr title="required">*</abbr>
-                    </label>
-                    <input
-                      placeholder="nombre@dominio.com"
-                      className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
-                      required="required"
-                      type="text"
-                      name="email"
-                      id="integration_shop_name"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                    />
-                    {errors.email && (
-                      <p className="text-red-600">{errors.email}</p>
-                    )}
-                  </div>
+                    {/* input mail */}
+                    <div className="mb-3 space-y-2 w-full text-xs">
+                      <label className="font-semibold text-gray-600 py-2">
+                        Correo electronico <abbr title="required">*</abbr>
+                      </label>
+                      <input
+                        placeholder="nombre@dominio.com"
+                        className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
+                        required="required"
+                        type="text"
+                        name="email"
+                        id="integration_shop_name"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                      />
+                      {errors.email && (
+                        <p className="text-red-600">{errors.email}</p>
+                      )}
+                    </div>
 
-                  {/* input telefono */}
-                  <div className="mb-3 space-y-2 w-full text-xs">
-                    <label className="font-semibold text-gray-600 py-2">
-                      Telefono <abbr title="required">*</abbr>
-                    </label>
-                    <input
-                      placeholder="ingrese su numero de telefono"
-                      className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
-                      required="required"
-                      type="number"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                    />
-                    {errors.phone && (
-                      <p className="text-red-600">{errors.phone}</p>
-                    )}
-                  </div>
+                    {/* input telefono */}
+                    <div className="mb-3 space-y-2 w-full text-xs">
+                      <label className="font-semibold text-gray-600 py-2">
+                        Telefono <abbr title="required">*</abbr>
+                      </label>
+                      <input
+                        placeholder="ingrese su numero de telefono"
+                        className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
+                        required="required"
+                        type="number"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleInputChange}
+                      />
+                      {errors.phone && (
+                        <p className="text-red-600">{errors.phone}</p>
+                      )}
+                    </div>
 
-                  {/* input celular */}
-                  <div className="mb-3 space-y-2 w-full text-xs">
-                    <label className="font-semibold text-gray-600 py-2">
-                      Celular <abbr title="required">*</abbr>
-                    </label>
-                    <input
-                      placeholder="ingrese su numero de celular"
-                      className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
-                      required="required"
-                      type="number"
-                      name="mobile"
-                      value={formData.mobile}
-                      onChange={handleInputChange}
-                    />
-                    {errors.mobile && (
-                      <p className="text-red-600">{errors.mobile}</p>
-                    )}
-                  </div>
+                    {/* input celular */}
+                    <div className="mb-3 space-y-2 w-full text-xs">
+                      <label className="font-semibold text-gray-600 py-2">
+                        Celular <abbr title="required">*</abbr>
+                      </label>
+                      <input
+                        placeholder="ingrese su numero de celular"
+                        className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
+                        required="required"
+                        type="number"
+                        name="mobile"
+                        value={formData.mobile}
+                        onChange={handleInputChange}
+                      />
+                      {errors.mobile && (
+                        <p className="text-red-600">{errors.mobile}</p>
+                      )}
+                    </div>
 
-                  {/* comentario input */}
-                  <div className="flex-auto w-full mb-1 text-xs space-y-2">
-                    <label className="font-semibold text-gray-600 py-2">
-                      Mensaje
-                    </label>
-                    <textarea
-                      required=""
-                      name="comment"
-                      id=""
-                      className="min-h-[100px] max-h-[300px] h-28 appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg py-4 px-4"
-                      placeholder="Ingrese su mensaje aquí"
-                      spellCheck="false"
-                      value={formData.comment}
-                      onChange={handleInputChange}
-                    />
-                    {errors.comment && (
-                      <p className="text-red-600">{errors.comment}</p>
-                    )}
-                  </div>
+                    {/* comentario input */}
+                    <div className="flex-auto w-full mb-1 text-xs space-y-2">
+                      <label className="font-semibold text-gray-600 py-2">
+                        Mensaje
+                      </label>
+                      <textarea
+                        required=""
+                        name="comment"
+                        id=""
+                        className="min-h-[100px] max-h-[300px] h-28 appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg py-4 px-4"
+                        placeholder="Ingrese su mensaje aquí"
+                        spellCheck="false"
+                        value={formData.comment}
+                        onChange={handleInputChange}
+                      />
+                      {errors.comment && (
+                        <p className="text-red-600">{errors.comment}</p>
+                      )}
+                    </div>
 
-                  <button
-                    className="mb-2 md:mb-0 bg-green-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500"
-                    type="submit"
-                  >
-                    Enviar
-                  </button>
-                </form>
-              </dd>
-            </div>
-          </dl>
+                    <button
+                      className="mb-2 md:mb-0 bg-green-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500"
+                      type="submit"
+                    >
+                      Enviar
+                    </button>
+                  </form>
+                </dd>
+              </div>
+            </dl>
+          </div>
         </div>
       </div>
     </div>
