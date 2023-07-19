@@ -16,9 +16,8 @@ export default function Example() {
   const router = useRouter();
   const session = useSession();
   // const [routeDashboard, setRouteDashboard] = useLocalStorage('routeDashboard', "");
-  const routeDashboard = window.localStorage.getItem('routeDashboard')
-  if (session.status === "unauthenticated") router.push("/");
 
+  if (session.status === "unauthenticated") router.push("/");
   const [showDashboard, setShowDashboard] = useState({
     Favorito: false,
     Perfil: true,
@@ -30,6 +29,7 @@ export default function Example() {
   useEffect(()=>{
     console.log(routeDashboard.replace(/"/g, '') == 2, routeDashboard.replace(/"/g, ''));
     if(typeof window !== 'undefined'){
+      const routeDashboard = window.localStorage.getItem('routeDashboard')
       if (routeDashboard.replace(/"/g, '') == 1) {
       setShowDashboard({
         Favorito: false,
