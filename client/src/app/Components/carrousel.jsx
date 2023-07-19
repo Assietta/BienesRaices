@@ -7,7 +7,7 @@ import styles from "./carrousel.module.css";
 export default function Carrousel() {
   return (
     <Carousel className={`max-h-screen overflow-hidden ${styles.bgn}`}>
-      <div className="relative  w-full ">
+      <div className="relative w-full">
         <img
           src="https://i.ibb.co/DLmNsgx/bgn-home-01.jpg"
           alt="image 1"

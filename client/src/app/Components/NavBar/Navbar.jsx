@@ -5,57 +5,59 @@ import Link from "next/link";
 import Image from "next/image";
 import { useSession, signOut } from "next-auth/react";
 import ProfileUser from "../../ProfileUser/ProfileUser";
-import { useLocalStorage } from 'react-use';
-
+import { useLocalStorage } from "react-use";
 
 const navigation = [
   {
-    label: 'Inicio',
-    route: '/',
+    label: "Inicio",
+    route: "/",
     current: true,
   },
   {
-    label: 'Buscar Propiedades',
-    route: '/pruebafilter',
+    label: "Buscar Propiedades",
+    route: "/pruebafilter",
     current: false,
   },
   {
-    label: 'Nosotros',
-    route: '/About',
+    label: "Nosotros",
+    route: "/About",
     current: false,
   },
   {
-    label: 'Tasaciones',
-    route: '/Appraisals',
+    label: "Tasaciones",
+    route: "/Appraisals",
     current: false,
   },
   {
-    label: 'Contacto',
-    route: '/Contact',
+    label: "Contacto",
+    route: "/Contact",
     current: false,
   },
 ];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ');
+  return classes.filter(Boolean).join(" ");
 }
 
 export default function Example() {
   const [showProfile, setShowProfile] = useState(false);
-  const [routeDashboard, setRouteDashboard] = useLocalStorage('routeDashboard', "1");
+  const [routeDashboard, setRouteDashboard] = useLocalStorage(
+    "routeDashboard",
+    "1"
+  );
 
   const session = useSession();
 
   const autenticated = () => {
-    if (session.status === 'authenticated') {
+    if (session.status === "authenticated") {
       return true;
-    } else session.status === 'unauthenticated';
+    } else session.status === "unauthenticated";
     return false;
   };
 
   const handleChangeStorage = (page) => {
-    setRouteDashboard(page)
-  }
+    setRouteDashboard(page);
+  };
 
   return (
     <Disclosure
@@ -88,11 +90,11 @@ export default function Example() {
                     height={100}
                   /> */}
                     <Image
-                      className="hidden h-16 w-auto lg:block"
-                      src="https://i.ibb.co/pzFrvn1/logo-png-white.png"
+                      className="hidden h-16 w-auto lg:block p-2"
+                      src="https://i.ibb.co/ccTJQjw/logo-png-white-cut.png"
                       alt="Your Company"
-                      width={100}
-                      height={100}
+                      width={300}
+                      height={300}
                     />
                   </div>
                 </div>
@@ -172,9 +174,9 @@ export default function Example() {
                         {({ active }) => (
                           <Link
                             href={
-                              session?.data?.user?.rol === 'usuario'
-                                ? '/DashboardUser'
-                                : '/Dashboard'
+                              session?.data?.user?.rol === "usuario"
+                                ? "/DashboardUser"
+                                : "/Dashboard"
                             }
                             class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
                             onClick={() => handleChangeStorage("1")}
@@ -191,7 +193,7 @@ export default function Example() {
                                 clip-rule="evenodd"
                               ></path>
                             </svg>
-                            {session?.data?.user?.rol === 'usuario' ? (
+                            {session?.data?.user?.rol === "usuario" ? (
                               <span class="ml-3">Mi perfil</span>
                             ) : (
                               <span class="ml-3">Panel de control</span>
@@ -199,72 +201,77 @@ export default function Example() {
                           </Link>
                         )}
                       </Menu.Item>
-                      {session?.data?.user?.rol === 'usuario' ?
-                      (<><Menu.Item>
-                        {({ active }) => (
-                          <Link
-                            href="/DashboardUser"
-                            class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
-                            onClick={() => handleChangeStorage("3")}
-                          >
-                            <svg
-                              class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                              fill="currentColor"
-                              viewBox="0 0 20 20"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
-                            </svg>
-                            <span class="flex-1 ml-3 whitespace-nowrap">
-                              Favoritos
-                            </span>
-                          </Link>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <Link
-                            href="/DashboardUser"
-                            class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
-                            onClick={() => handleChangeStorage("2")}
-                          >
-                            <svg
-                              class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                              fill="currentColor"
-                              viewBox="0 0 20 20"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path d="M8.707 7.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l2-2a1 1 0 00-1.414-1.414L11 7.586V3a1 1 0 10-2 0v4.586l-.293-.293z"></path>
-                              <path d="M3 5a2 2 0 012-2h1a1 1 0 010 2H5v7h2l1 2h4l1-2h2V5h-1a1 1 0 110-2h1a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"></path>
-                            </svg>
-                            <span class="flex-1 ml-3 whitespace-nowrap">
-                              Mensajes
-                            </span>
-                          </Link>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <Link
-                            href="/DashboardUser"
-                            class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
-                            onClick={() => handleChangeStorage("4")}
-                          >
-                            <svg
-                              class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                              fill="currentColor"
-                              viewBox="0 0 20 20"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
-                              <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
-                            </svg>
-                            <span class="flex-1 ml-3 whitespace-nowrap">
-                              Configuracion
-                            </span>
-                          </Link>
-                        )}
-                      </Menu.Item></>) : "" }
+                      {session?.data?.user?.rol === "usuario" ? (
+                        <>
+                          <Menu.Item>
+                            {({ active }) => (
+                              <Link
+                                href="/DashboardUser"
+                                class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                                onClick={() => handleChangeStorage("3")}
+                              >
+                                <svg
+                                  class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                                  fill="currentColor"
+                                  viewBox="0 0 20 20"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
+                                </svg>
+                                <span class="flex-1 ml-3 whitespace-nowrap">
+                                  Favoritos
+                                </span>
+                              </Link>
+                            )}
+                          </Menu.Item>
+                          <Menu.Item>
+                            {({ active }) => (
+                              <Link
+                                href="/DashboardUser"
+                                class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                                onClick={() => handleChangeStorage("2")}
+                              >
+                                <svg
+                                  class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                                  fill="currentColor"
+                                  viewBox="0 0 20 20"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path d="M8.707 7.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l2-2a1 1 0 00-1.414-1.414L11 7.586V3a1 1 0 10-2 0v4.586l-.293-.293z"></path>
+                                  <path d="M3 5a2 2 0 012-2h1a1 1 0 010 2H5v7h2l1 2h4l1-2h2V5h-1a1 1 0 110-2h1a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"></path>
+                                </svg>
+                                <span class="flex-1 ml-3 whitespace-nowrap">
+                                  Mensajes
+                                </span>
+                              </Link>
+                            )}
+                          </Menu.Item>
+                          <Menu.Item>
+                            {({ active }) => (
+                              <Link
+                                href="/DashboardUser"
+                                class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                                onClick={() => handleChangeStorage("4")}
+                              >
+                                <svg
+                                  class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                                  fill="currentColor"
+                                  viewBox="0 0 20 20"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
+                                  <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
+                                </svg>
+                                <span class="flex-1 ml-3 whitespace-nowrap">
+                                  Configuracion
+                                </span>
+                              </Link>
+                            )}
+                          </Menu.Item>
+                        </>
+                      ) : (
+                        ""
+                      )}
                       <Menu.Item>
                         {({ active }) => (
                           <button
@@ -288,7 +295,7 @@ export default function Example() {
                             </span>
                           </button>
                         )}
-                      </Menu.Item> 
+                      </Menu.Item>
                     </Menu.Items>
                   </Transition>
                 </Menu>
