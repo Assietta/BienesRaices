@@ -49,8 +49,6 @@ export default function MensajesVista() {
     fetchContacts(id);
   }, []);
 
-  console.log(appraisals);
-
   return (
     <>
       <ol class="relative border-l border-gray-200 dark:border-gray-700">
