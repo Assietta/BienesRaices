@@ -22,7 +22,7 @@ export default function Home() {
       <ThemeProvider>
       <Provider store={store}>
         <Carrousel />
-        <SubirArchivo/>
+        {/* <SubirArchivo/> */}
         <CardConteiner />
         <Testimonials/>
       </Provider>
