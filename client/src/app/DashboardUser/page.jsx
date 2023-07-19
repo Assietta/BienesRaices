@@ -92,7 +92,6 @@ export default function Example() {
 
 
 
-  console.log(showDashboard);
 
   return (
     <div className="bg-white">

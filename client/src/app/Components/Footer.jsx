@@ -8,9 +8,9 @@ export default function Footer() {
         <div className="sm:flex sm:items-center sm:justify-between">
           <a href="" className="flex items-center mb-4 sm:mb-0">
             <Image
-              src="https://i.ibb.co/pzFrvn1/logo-png-white.png"
-              width={100}
-              height={100}
+              src="https://i.ibb.co/ccTJQjw/logo-png-white-cut.png"
+              width={500}
+              height={500}
               className="h-24 w-auto mr-3"
               alt="Inmobiliaria Logo"
             />

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -16,7 +17,12 @@
   }
 } 
 
+html {
+  font-family: 'Open Sans', sans-serif;
+}
+
 body {
+  font-family: 'Open Sans', sans-serif;
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
@@ -24,4 +30,5 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+    
 }
