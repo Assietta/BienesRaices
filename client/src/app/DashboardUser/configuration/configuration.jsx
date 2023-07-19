@@ -141,7 +141,7 @@ export default function FormInfo() {
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      await axios.put(`http://localhost:3001/users/${id}`, formInfoData).then(()=>{window.location.reload()})
+      await axios.put(`http://localhost:3001/users/${id}`, formInfoData).then(()=>{window?.location?.reload()})
       alert("Informacion Actualizada");
       clearFormInfo();
 

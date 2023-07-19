@@ -21,7 +21,7 @@ export default function Example() {
 
   const [showDashboard, setShowDashboard] = useState({
     Favorito: false,
-    Perfil: false,
+    Perfil: true,
     Mensaje: false,
     Configuration: false,
     Testimonials: false,
@@ -29,7 +29,8 @@ export default function Example() {
 
   useEffect(()=>{
     console.log(routeDashboard.replace(/"/g, '') == 2, routeDashboard.replace(/"/g, ''));
-    if (routeDashboard.replace(/"/g, '') == 1) {
+    if(typeof window !== 'undefined'){
+      if (routeDashboard.replace(/"/g, '') == 1) {
       setShowDashboard({
         Favorito: false,
         Perfil: true,
@@ -74,6 +75,8 @@ export default function Example() {
         Testimonials: true,
       })
     }
+    }
+    
   }, [])
 
   const showSection = (param) => {

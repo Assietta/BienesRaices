@@ -189,16 +189,11 @@ export default function FilterComponent() {
       console.error(error);
     }
   };
-
-  function SearchLocalStorage() {
-    if (localStorage) setFilters(localStorage)
-  }
   // // funciones para mover el paginado.
 
   useEffect(() => {
     fetchData();
-    SearchLocalStorage();
-  }, [currentPage, localStorage]);
+  }, [currentPage]);
 console.log(filters);
   // //va a la pagina anterior a la actual
   const goToPreviousPage = () => {
